@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.0</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Management</interface> 
+    <entryPoint>test_cases/driver.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+        <property optional="false">
+            <name>Username</name>
+            <description>User Name</description>
+        </property>
+        <property optional="false">
+            <name>Password</name>
+            <description>Password</description>
+        </property>
+    </resourceProperties>
+</resourceDriver>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <responseStructure>text/html</responseStructure>
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="POST" description="user/v1/group/343282eb-a7f7-4dbe-ab2f-b1d25cf86d79/user/33f1e4c7-3353-4cab-83e8-7a941392a6d8">
+                <command>
+                    <body>user/v1/group/343282eb-a7f7-4dbe-ab2f-b1d25cf86d79/user/33f1e4c7-3353-4cab-83e8-7a941392a6d8</body>
+                </command>
+            </action>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;statusCode value=&quot;200&quot;/&gt;
+    &lt;responseHTTPHeaders map:nodetype=&quot;token&quot;&gt;
+        &lt;Date map:nodetype=&quot;token&quot;&gt;Fri, 24 Jul 2015 21:31:25 GMT&lt;/Date&gt;
+        &lt;Content_Length map:nodetype=&quot;token&quot;&gt;0&lt;/Content_Length&gt;
+        &lt;Expires map:nodetype=&quot;token&quot;&gt;0&lt;/Expires&gt;
+        &lt;Keep_Alive map:nodetype=&quot;token&quot;&gt;timeout=5, max=100&lt;/Keep_Alive&gt;
+        &lt;Connection map:nodetype=&quot;token&quot;&gt;Keep-Alive&lt;/Connection&gt;
+        &lt;X_Powered_By map:nodetype=&quot;token&quot;&gt;Undertow 1&lt;/X_Powered_By&gt;
+        &lt;Server map:nodetype=&quot;token&quot;&gt;Wildfly 8&lt;/Server&gt;
+        &lt;Pragma map:nodetype=&quot;token&quot;&gt;no-cache&lt;/Pragma&gt;
+        &lt;Cache_Control map:nodetype=&quot;token&quot;&gt;no-cache, no-store, must-revalidate&lt;/Cache_Control&gt;
+    &lt;/responseHTTPHeaders&gt;
+    &lt;responseRawText map:nodetype=&quot;token&quot;/&gt;
+&lt;/structure&gt;
+</structuredData>
+            <duration>0.4</duration>
+        </item>
+    </sampleDictionary>
+    <applicabilityProperties actionType="POST" command="user/v1/group/*/user/*">
+        <application>
+            <item>com.fnfr.itest.applications.webservices.restful</item>
+        </application>
+    </applicabilityProperties>
+    <aliases>
+        <item name="statusCode">
+            <queryFormatString>statusCode/@value</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>

@@ -1,0 +1,420 @@
+<?xml version="1.0"?>
+<testCase version="6.0.0.18638fa">
+    <general>
+        <isProcedureLibrary>true</isProcedureLibrary>
+        <emulation enable="true"/>
+    </general>
+    <execution>
+        <parameters version="6.0.0.18638fa">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <property_ipAddress>192.168.0.82</property_ipAddress>
+                    <ports>false</ports>
+                    <call_0>getProperties blah blah blah</call_0>
+                    <call_1>getPorts</call_1>
+                    <call_count>2</call_count>
+                    <property_username>remch</property_username>
+                    <property_password pt:mask="true">EmyZsqiv2WwJor6ZZIWzzg==</property_password>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="6cb04d68-39a5-4828-9524-21edc6744f5b" action="comment">
+                    <command>
+                        <body>The main procedure for a driver is always called by Velocity. The driver does not call individual procedures directly. The procedures to be called are specified via parameters.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="aa59007a-1dd4-4e1e-a159-706e6160a6bb" action="comment">
+                    <command>
+                        <body>The call_count parameter specifies the number of procedures to be called.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="b18685a2-f7d6-4394-a652-1a4e4293c550" action="comment">
+                    <command>
+                        <body>The call_X parameters specify the procedure and any additional arguments to be called. Numbering starts at 0 and should end at call_count - 1.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="3e10b1e4-3075-4023-84b6-ff5fe065893a" action="comment">
+                    <command>
+                        <body>Parameters are typically overridden by Velocity. Parameters entered on the &quot;Parameters&quot; tab are typically used for local driver testing only and replaced by Velocity.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="efdffe8a-d25a-447c-822b-d0a63417e095" action="comment">
+                    <command>
+                        <body>The managment driver only calls 2 procedures: getProperties and getPorts</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a1b70e89-8ab0-49da-8203-6d3372d9f144" action="comment">
+                    <command>
+                        <body>The getPorts procedure does double duty: it is used to return port status but also returns the management interface status (connected) which is typically found via ping.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="97ee08f5-89de-46c7-8500-863c4a196302" action="comment">
+                    <command>
+                        <body>This is the core set of steps that Velocity uses to call the procedures set by its parameter passing.</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d2da0387-a488-44ba-a65c-55e4924aa645" action="eval">
+                            <command>
+                                <body>set returnValue &quot;&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="74aa63e8-e0b7-49f6-9cf5-3a076f3a83ba" action="for">
+                            <command>
+                                <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="0c183f1b-0afa-4650-80bb-844040976628" action="comment">
+                                    <command>
+                                        <body>split the procedure name and the arguments apart</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="4c372e3a-f124-48ff-af4d-d6a3fdcbc4e4" action="eval">
+                                            <command>
+                                                <body>set  commandLine [split [param call_$i]]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="d089a43f-97b9-45ab-8058-889a0f5e8e90" action="comment">
+                                    <command>
+                                        <body>This line sets the arguments to the procedure. Additional arguments can be added as needed by appending to this list.</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="6017cc4a-20a1-4b3e-b010-7a4b99ae1cfc" action="eval">
+                                            <command>
+                                                <body>set procedureArguments [lassign $commandLine procedureToCall]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="389c3fb2-b0f8-4eea-900f-e037fb580b79" action="call">
+                                    <command>
+                                        <body>$procedureToCall $procedureArguments</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>returnValue</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="1108b0c6-6efa-4f63-81cb-36c521b1f9ae" action="return">
+                            <command>
+                                <body>$returnValue</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="getProperties" isVBlock="true">
+            <steps>
+                <item guid="ec53ae7f-09cc-41c2-882c-c8cf003ad25d" action="comment">
+                    <command>
+                        <body>The getProperties procedure is called when the &quot;Discover&quot; button is pressed for a resource in Velocity. Properties must exist in the template for this resource and will be overwritten by what is sent via this driver</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c3358a86-867a-4088-a329-8fd003b9456b" action="comment">
+                            <command>
+                                <body>Default this procedure to pass</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="none">
+                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>getProperties has completed.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <response>{&quot;properties&quot;:{&quot;OS_Type&quot;:null,&quot;SW_Version&quot;:null}}</response>
+        </item>
+        <item name="getPorts" isVBlock="true">
+            <steps>
+                <item guid="724af7bc-c0ae-41a7-953c-8e1823cc6b45" action="comment">
+                    <command>
+                        <body>The getPorts procedure does double duty: it is used to return port status but also returns the management interface status (connected) which is typically found via ping.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="541c0270-c3f9-4369-b1ba-851d3d41e417" action="if">
+                    <command>
+                        <body>[info platform] == &quot;linux&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="3372fe2b-4ba2-46b3-9044-034f9dcd1929" action="then">
+                            <nestedSteps>
+                                <item guid="e9dad32a-0098-494b-9f2d-541e4badce0b" action="comment">
+                                    <command>
+                                        <body>The agent is running on an Linux system (usually ITE); do a linux-style of ping</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="6d43205e-496a-40aa-b31e-4ba149eadbd4" action="open" session="s3">
+                                            <command>
+                                                <body>application:com.fnfr.svt.applications.process</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                <sessionProperties type="com.fnfr.svt.applications.process.ProcessSessionProperties"/>
+                                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="278529fa-d96e-4fb9-8534-9e8129da28e3" action="command" session="s3" normalOffset="12.923" estimatedStepExecutionTime="3.023">
+                                            <command>
+                                                <body>run ping -c 1 [param property_ipAddress]</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>packet_loss()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="assert">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                <expression>$value == 0</expression>
+                                                                <actionsWhenTrue>
+                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                            <message>The device [param property_ipAddress] responds to ping.</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="Eval">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                            <statement>set status connected</statement>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenTrue>
+                                                                <actionsWhenFalse>
+                                                                    <item actionId="FailTest">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                            <message>The device [param property_ipAddress] does not respond to ping.</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="Eval">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                            <statement>set status &quot;not connected&quot;</statement>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenFalse>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <emulation useExternalSource="false">
+                                                <behavior>
+                                                    <response>Pinging 192.168.0.82 with 32 bytes of data:
+Reply from 192.168.0.82: bytes=32 time=1ms TTL=64
+
+Ping statistics for 192.168.0.82:
+    Packets: Sent = 1, Received = 1, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 1ms, Average = 1ms</response>
+                                                </behavior>
+                                            </emulation>
+                                        </item>
+                                        <item guid="00df586f-b5cf-4345-a6fb-9c84b409474e" action="close" session="s3">
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="8629e2b8-2e0c-4c07-8d2e-e5515ba44ed9" action="else">
+                            <nestedSteps>
+                                <item guid="c7d83c57-826a-4760-8cd1-8d3a2ff77a91" action="comment">
+                                    <command>
+                                        <body>Otherwise, assume a windows-style of ping</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="e081126b-6ff2-4f72-89f2-47bf6759c71c" action="open" session="s4">
+                                            <command>
+                                                <body>application:com.fnfr.svt.applications.cmd</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                                <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                <sessionProperties type="com.fnfr.svt.applications.cmd.CmdSessionProperties"/>
+                                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="89650a17-8211-48b8-a9b8-6c809b8b845b" action="command" session="s4" normalOffset="5.07" estimatedStepExecutionTime="3.106">
+                                            <command>
+                                                <body>ping -n 1 [param property_ipAddress]</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="contains">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                                <searchString>0% loss</searchString>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="assert">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                <expression>$value == 1</expression>
+                                                                <actionsWhenTrue>
+                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                            <message>The device [param property_ipAddress] responds to ping.</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="Eval">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                            <statement>set status connected</statement>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenTrue>
+                                                                <actionsWhenFalse>
+                                                                    <item actionId="FailTest">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                            <message>The device [param property_ipAddress] does not respond to ping.</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="Eval">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                            <statement>set status &quot;not connected&quot;</statement>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenFalse>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                            <responseMap>ping.ffrm</responseMap>
+                                            <emulation useExternalSource="false">
+                                                <behavior>
+                                                    <response>Pinging 192.168.0.82 with 32 bytes of data:
+Reply from 192.168.0.82: bytes=32 time=1ms TTL=64
+
+Ping statistics for 192.168.0.82:
+    Packets: Sent = 1, Received = 1, Lost = 0 (0% loss),
+Approximate round trip times in milli-seconds:
+    Minimum = 1ms, Maximum = 1ms, Average = 1ms</response>
+                                                </behavior>
+                                            </emulation>
+                                        </item>
+                                        <item guid="a5f92541-cd51-4db6-9a9c-968f38655981" action="close" session="s4">
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="30153cfe-e633-48b7-959a-218534d29126" action="eval">
+                    <command>
+                        <body>puts $status</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>([^\\r\\n]+)</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>[return ports/status]</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <response>{&quot;ports&quot;:[{&quot;name&quot;:&quot;mgmt&quot;,&quot;status&quot;:&quot;not connected&quot;}]}</response>
+        </item>
+    </procedures>
+</testCase>

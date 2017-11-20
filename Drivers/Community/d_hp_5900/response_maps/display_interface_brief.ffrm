@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<ResponseMap version="6.1.0.e2e4ec0">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command"/>
+            <responseBody>Brief information on interfaces in route mode:
+Link: ADM - administratively down; Stby - standby
+Protocol: (s) - spoofing
+Interface            Link Protocol Primary IP      Description                
+InLoop0              UP   UP(s)    --              
+MGE0/0/0             DOWN DOWN     --              
+MGE0/0/1             DOWN DOWN     --              
+NULL0                UP   UP(s)    --              
+REG0                 UP   --       --              
+Vlan2                UP   UP       0.0.0.0      
+Vlan5                UP   UP       0.0.0.0       
+
+Brief information on interfaces in bridge mode:
+Link: ADM - administratively down; Stby - standby
+Speed: (a) - auto
+Duplex: (a)/A - auto; H - half; F - full
+Type: A - access; T - trunk; H - hybrid
+Interface            Link Speed   Duplex Type PVID Description                
+BAGG1                UP   80G(a)  F(a)   T    1    Uplink to 7904 EOR
+HGE1/0/1             DOWN auto    A      A    1    
+HGE1/0/2             DOWN auto    A      A    1    
+HGE1/0/3             DOWN auto    A      A    1    
+HGE1/0/4             DOWN auto    A      A    1    
+HGE1/0/5             DOWN auto    A      A    1    
+HGE1/0/6             DOWN auto    A      A    1    
+HGE1/0/7             DOWN auto    A      A    1    
+HGE1/0/8             DOWN auto    A      A    1    
+HGE1/0/9             DOWN auto    A      A    1    
+HGE1/0/10            DOWN auto    A      A    1    
+HGE1/0/11            DOWN auto    A      A    1    
+HGE1/0/12            DOWN auto    A      A    1    
+HGE1/0/13            DOWN auto    A      A    1    
+HGE1/0/14            DOWN auto    A      A    1    
+HGE1/0/15            DOWN auto    A      A    1    
+HGE1/0/16            DOWN auto    A      A    1    
+HGE1/0/17            DOWN auto    A      A    1    
+HGE1/0/18            DOWN auto    A      A    1    
+HGE1/0/19            DOWN auto    A      A    1    
+HGE1/0/20            DOWN auto    A      A    1    
+HGE1/0/21            DOWN auto    A      A    1    
+HGE1/0/22            DOWN auto    A      A    1    
+HGE1/0/23            DOWN auto    A      A    1    
+HGE1/0/24            DOWN auto    A      A    1    
+HGE1/0/25            DOWN auto    A      A    1    
+HGE1/0/26            DOWN auto    A      A    1    
+HGE1/0/27            DOWN auto    A      A    1    
+HGE1/0/28            DOWN auto    A      A    1    
+HGE1/0/29            UP   40G(a)  F(a)   --   --   
+HGE1/0/30            UP   40G(a)  F(a)   --   --   
+HGE1/0/31            DOWN auto    A      A    1    
+HGE1/0/32            UP   40G(a)  F(a)   T    1    Uplink to 7904 EOR
+HGE2/0/1             DOWN auto    A      A    1    
+HGE2/0/2             DOWN auto    A      A    1    
+HGE2/0/3             DOWN auto    A      A    1    
+HGE2/0/4             DOWN auto    A      A    1    
+HGE2/0/5             DOWN auto    A      A    1    
+HGE2/0/6             DOWN auto    A      A    1    
+HGE2/0/7             DOWN auto    A      A    1    
+HGE2/0/8             DOWN auto    A      A    1    
+HGE2/0/9             DOWN auto    A      A    1    
+HGE2/0/10            DOWN auto    A      A    1    
+HGE2/0/11            DOWN auto    A      A    1    
+HGE2/0/12            DOWN auto    A      A    1    
+HGE2/0/13            DOWN auto    A      A    1    
+HGE2/0/14            DOWN auto    A      A    1    
+HGE2/0/15            DOWN auto    A      A    1    
+HGE2/0/16            DOWN auto    A      A    1    
+HGE2/0/17            DOWN auto    A      A    1    
+HGE2/0/18            DOWN auto    A      A    1    
+HGE2/0/19            DOWN auto    A      A    1    
+HGE2/0/20            DOWN auto    A      A    1    
+HGE2/0/21            DOWN auto    A      A    1    
+HGE2/0/22            DOWN auto    A      A    1    
+HGE2/0/23            DOWN auto    A      A    1    
+HGE2/0/24            DOWN auto    A      A    1    
+HGE2/0/25            DOWN auto    A      A    1    
+HGE2/0/26            DOWN auto    A      A    1    
+HGE2/0/27            DOWN auto    A      A    1    
+HGE2/0/28            DOWN auto    A      A    1    
+HGE2/0/29            UP   40G(a)  F(a)   --   --   
+HGE2/0/30            UP   40G(a)  F(a)   --   --   
+HGE2/0/31            DOWN auto    A      A    1    
+HGE2/0/32            UP   40G(a)  F(a)   T    1    Uplink to 7904 EOR
+XGE1/0/33            DOWN auto    A      A    1    
+XGE1/0/34            DOWN auto    A      A    1    
+XGE2/0/33            DOWN auto    A      A    1    
+XGE2/0/34            DOWN auto    A      A    1    
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;&amp;lt;FTC-R19-S-2551-5950-IRF&amp;gt;&lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo/&gt;
+        &lt;idleTime&gt;7.262&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+            <duration>9.7</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="routeModeTable">
+                    <banner>Interface            Link Protocol Primary IP      Description                </banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="interface">
+                            <lastFullCell></lastFullCell>
+                            <uid>e7d88c8f-fd25-4769-9bc1-abd4b0702e43</uid>
+                        </item>
+                        <item name="link">
+                            <lastFullCell></lastFullCell>
+                            <uid>d8549390-63b3-4b09-b706-9ca6ba350dcf</uid>
+                        </item>
+                        <item name="protocol">
+                            <lastFullCell></lastFullCell>
+                            <uid>3419e4b9-f862-41a1-b4f2-ae393057ac26</uid>
+                        </item>
+                        <item name="primaryIp">
+                            <lastFullCell></lastFullCell>
+                            <uid>8a2f4876-43bb-497a-b5de-a72ff4cc59e8</uid>
+                        </item>
+                        <item name="description">
+                            <width>0</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>0b520347-5862-482a-aa10-fe9d4e98854a</uid>
+                        </item>
+                    </columns>
+                </item>
+                <item name="bridgeModeTable">
+                    <banner>Interface            Link Speed   Duplex Type PVID Description                </banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <columnBoundaries>Positional</columnBoundaries>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="interface">
+                            <width>21</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>62b78f4a-ce57-408c-a3bc-722986e17cc0</uid>
+                        </item>
+                        <item name="link">
+                            <width>5</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>478e8af2-f86d-4b66-bc0c-1eac8aaaedcd</uid>
+                        </item>
+                        <item name="speed">
+                            <width>8</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>e9c056f9-7861-4229-a772-391f211d6a7d</uid>
+                        </item>
+                        <item name="duplex">
+                            <width>7</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>df750ffd-b5dd-4fb8-87f9-2109fc2e4854</uid>
+                        </item>
+                        <item name="type">
+                            <width>5</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>ee4d97e2-4637-471b-81e5-6a246fe697ff</uid>
+                        </item>
+                        <item name="pvid">
+                            <width>5</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>f02df7e7-f994-45ef-8fb9-826afab74534</uid>
+                        </item>
+                        <item name="description">
+                            <width>0</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>b88bab04-cdba-46da-bebe-0f2e26591b1b</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="display interface brief">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

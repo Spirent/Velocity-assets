@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.4.1.be355a6">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>display interface Bridge-Aggregation brief</body>
+                </command>
+            </action>
+            <responseBody>Brief information on interfaces in bridge mode:
+Link: ADM - administratively down; Stby - standby
+Speed: (a) - auto
+Duplex: (a)/A - auto; H - half; F - full
+Type: A - access; T - trunk; H - hybrid
+Interface            Link Speed   Duplex Type PVID Description                
+BAGG1                UP   80G(a)  F(a)   T    1    Uplink to 7904 EOR
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;&amp;lt;FTC-R19-S-2551-5950-IRF&amp;gt;&lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;display interface Bridge-Aggregation brief&lt;/echo&gt;
+        &lt;connClosed/&gt;
+        &lt;idleTime&gt;0.661&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="bridgeAggTable">
+                    <banner>Interface            Link Speed   Duplex Type PVID Description                </banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="interface">
+                            <lastFullCell></lastFullCell>
+                            <uid>f266d926-e514-4da5-b143-816ada46c46e</uid>
+                        </item>
+                        <item name="linkState">
+                            <lastFullCell></lastFullCell>
+                            <uid>5342cb48-0cc5-412e-8798-d3efeffb6437</uid>
+                        </item>
+                        <item name="speed">
+                            <lastFullCell></lastFullCell>
+                            <uid>3758123d-4668-4bd4-8176-174e52a3be14</uid>
+                        </item>
+                        <item name="duplex">
+                            <lastFullCell></lastFullCell>
+                            <uid>ad13ddac-a2be-45bb-9b82-1efabaacc8aa</uid>
+                        </item>
+                        <item name="type">
+                            <lastFullCell></lastFullCell>
+                            <uid>2a61af81-96e9-403e-b6ba-752b8638a0d0</uid>
+                        </item>
+                        <item name="pvid">
+                            <lastFullCell></lastFullCell>
+                            <uid>6348ac62-471f-45cc-b9ef-e89de1722b9f</uid>
+                        </item>
+                        <item name="description">
+                            <lastFullCell></lastFullCell>
+                            <uid>af2d34fc-0c85-483f-847a-454a3364e2b6</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="display interface Bridge-Aggregation brief">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

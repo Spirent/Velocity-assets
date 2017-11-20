@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>clsh tmsh show net interface</body>
+                </command>
+            </action>
+            <responseBody>=== slot local ===
+
+Net::Interface
+Name  Status   Bits    Bits  Errs  Errs  Drops  Drops  Colli
+                 In     Out    In   Out     In    Out  sions
+------------------------------------------------------------
+1.1       up  29.6G       0     0     0   9.7M      0      0
+1.2     down      0       0     0     0      0      0      0
+1.3     down      0       0     0     0      0      0      0
+1.4     down      0       0     0     0      0      0      0
+1.5     down      0       0     0     0      0      0      0
+1.6     down      0       0     0     0      0      0      0
+1.7     down      0       0     0     0      0      0      0
+1.8     down      0       0     0     0      0      0      0
+2.1     miss      0       0     0     0      0      0      0
+2.2     miss      0       0     0     0      0      0      0
+2.3     miss      0       0     0     0      0      0      0
+2.4     miss      0       0     0     0      0      0      0
+mgmt      up   1.4T  175.1G     0     0      0      0      0
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;prompt&gt;[root@localhost:Active] config # &lt;/prompt&gt;
+    &lt;echo&gt;clsh tmsh show net interface&lt;/echo&gt;
+    &lt;promptName&gt;Base&lt;/promptName&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.4</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="interface_10_2_4_table">
+                    <additionalBannerLineCount>3</additionalBannerLineCount>
+                    <banner>Net::Interface</banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="Name">
+                            <isKey>true</isKey>
+                        </item>
+                        <item name="Status">
+                            <isKey>true</isKey>
+                        </item>
+                        <item name="BitsIn"/>
+                        <item name="BitsOut"/>
+                        <item name="ErrorsIn"/>
+                        <item name="ErrorsOut"/>
+                        <item name="DropsIn"/>
+                        <item name="DropsOut"/>
+                        <item name="Collisions"/>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="*tmsh show net interface" priority="49">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.1.0.77511">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <ipAddress inherit="false">[get scrubbedIp 172.27.76.44]</ipAddress>
+        <port inherit="false">[param property_SSH_Port 22]</port>
+        <user inherit="false">[param property_username root]</user>
+        <password inherit="false">Hu62+w4ez8VRjpeoxPozxOrYANzZETwj1EWbsnMgCy5IHNAaGBit5A==</password>
+    </sessionProperties>
+    <nickName>big_ip</nickName>
+    <baseProfile>big_ip_base.ffsp</baseProfile>
+    <standalone>false</standalone>
+    <Overview>BigIP Velocity device driver</Overview>
+    <Description>This session profile is used to connect to BigIP devices via Velocity.  The connection information is passed via the calling test case</Description>
+</SessionTemplate>

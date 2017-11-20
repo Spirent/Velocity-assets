@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>5.0.0</version>     
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Management</interface> 
+    <entryPoint>test_cases/driver.fftc</entryPoint>
+    <resourceProperties>
+        <property>
+            <name>IGNORE_LIST</name>
+            <description>space-separated list of usernames to ignore</description>
+        </property>    
+    </resourceProperties>
+</resourceDriver>

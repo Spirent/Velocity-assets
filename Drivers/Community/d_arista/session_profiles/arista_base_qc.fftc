@@ -1,0 +1,440 @@
+<?xml version="1.0"?>
+<testCase version="5.1.0.77511">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="arista_base.ffsp"/>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="bdae6faa-1d4d-432d-b4bc-c0543442fffb" action="call">
+                    <command>
+                        <body>project://d_arista/test_cases/unit_test.fftc#main</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="getInterfaces" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="4c04980c-25e3-4ae0-9795-d13cdd5e3c73" action="command" session="$session" estimatedStepExecutionTime="5.349">
+                    <command>
+                        <body>show interfaces description</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>Interface()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>names</storageLocation>
+                                        <storeInAList>true</storeInAList>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>Status_all()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>statuses</storageLocation>
+                                        <storeInAList>true</storeInAList>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="8b7a5c19-577f-4b7a-ac1e-a1cbedff4190" action="foreach">
+                    <command>
+                        <body>name $names status $statuses</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c76cb90c-29aa-473c-b859-98dd738d6ff3" action="comment">
+                            <command>
+                                <body>We want to ignore VLAN interfaces</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="9ea88b18-62e9-40c0-9360-854e5a723836" action="if">
+                            <command>
+                                <body>[string match -nocase &quot;vl*&quot; $name] != 1</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="23248e4a-2753-4c3d-b057-d95407bac85a" action="then">
+                                    <nestedSteps>
+                                        <item guid="d6c6d961-14b7-4084-85b5-c4162f553090" action="eval">
+                                            <command>
+                                                <body>lappend portList &quot;\\&quot;name\\&quot;: \\&quot;$name\\&quot;, \\&quot;status\\&quot;: \\&quot;$status\\&quot;&quot;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="7ee7484b-118f-492f-a80f-532c95000fe4" action="else">
+                                    <nestedSteps>
+                                        <item guid="8c87f975-36db-4cb0-8a80-260bb487122d" action="comment">
+                                            <command>
+                                                <body>Insert steps here for when the expression evaluates to false</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="dee09dd9-cd57-4ff3-832e-fc0fb9238cb9" action="eval">
+                    <command>
+                        <body>set portList &quot;\\[\\{[join $portList &quot;},{&quot;]\\}\\]&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>ports</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <response>{&quot;ports&quot;:null}</response>
+        </item>
+        <item name="addPortToVlan" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="f5ef6e35-4f50-4566-91b3-20e5fd4423cc" action="comment">
+                    <command>
+                        <body>Derive the port type and number from the name</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="38299689-d4d5-48c3-aa6c-9a7e8a4b453e" action="eval">
+                    <command>
+                        <body>set portType [string trim $portName {0 1 2 3 4 5 6 7 8 9}]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="63700008-620b-40a3-9c20-796516f7d084" action="eval">
+                    <command>
+                        <body>set portNum [string trimleft $portName {eEtpPo}]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7137bfac-8c1b-4e54-9019-35113c976b4b" action="if">
+                    <command>
+                        <body>[string tolower $portType] eq &quot;et&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b4e07510-05a9-4ecb-9335-3d0a22da3e12" action="then">
+                            <nestedSteps>
+                                <item guid="71efbf1f-6983-4c69-accf-6a5d0d5141d7" action="eval">
+                                    <command>
+                                        <body>set portType &quot;ethernet&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="af55a0ea-1278-45c3-83dc-8a3ff7d2ffdf" action="else">
+                            <nestedSteps>
+                                <item guid="ec3f9881-f2b5-4733-8abd-196814b61a1d" action="eval">
+                                    <command>
+                                        <body>set portType &quot;port-Channel&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a13bf30a-6591-4e38-867c-a3167b9297d7" action="command" session="$session" normalOffset="19.583" estimatedStepExecutionTime="0.109">
+                    <command>
+                        <body>enable</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.125" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="1f5ba53a-8f53-4769-8d5b-b8beb0ec433b" action="command" session="$session" normalOffset="1.927" estimatedStepExecutionTime="0.064">
+                    <command>
+                        <body>config</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.187" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="0f843be2-0129-451e-8801-b146be92b604" action="command" session="$session" normalOffset="14.998" estimatedStepExecutionTime="1.188">
+                    <command>
+                        <body>interface $portType $portNum</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="4.43" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="bf584071-34c9-4fcb-99ec-ff9cb1b02aa4" action="command" session="$session" normalOffset="8.011" estimatedStepExecutionTime="0.266">
+                    <command>
+                        <body>switchport mode trunk</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.471" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="6f23dfbb-6dde-48ec-8569-9c0c4ac22fc0" action="command" session="$session" normalOffset="14.692" estimatedStepExecutionTime="0.015">
+                    <command>
+                        <body>switchport trunk allowed vlan add $vlanId</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.187" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="1d49dc7e-8129-47d6-86ae-35d8022ef781" action="eval">
+                    <command>
+                        <body>set vlanAddStatus &quot;OK&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>vlanAddStatus</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="83853d43-232a-489d-a993-3a7453401909" action="command" session="$session" normalOffset="11.837" estimatedStepExecutionTime="0.117">
+                    <command>
+                        <body>exit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.125" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="e14f58af-86b3-406a-84fd-c15951d33b6d" action="command" session="$session" normalOffset="1.601" estimatedStepExecutionTime="0.356">
+                    <command>
+                        <body>exit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.341" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+            </steps>
+            <arguments>
+                <item name="vlanId">
+                    <description>can be a single number, a range delimited by &quot;-&quot; or a set of numbers delimited by &quot;,&quot;
+e.g.
+    900
+    900-905
+    900,902,905</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="portName">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;vlanAddStatus&quot;:null}</response>
+        </item>
+        <item name="removePortFromVlan" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="dd6fcf2b-7b99-4aee-b469-ed5138d997d3" action="eval">
+                    <command>
+                        <body>set portType [string trim $portName {0 1 2 3 4 5 6 7 8 9}]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c1f78283-70b8-4090-8849-af372d9ee02b" action="eval">
+                    <command>
+                        <body>set portNum [string trimleft $portName {eEtpPo}]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="dce38fc9-1eb0-46ba-a7f9-a01e13643b86" action="if">
+                    <command>
+                        <body>[string tolower $portType] eq &quot;et&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2ca06dec-b42f-47ca-b1d5-a1da26ba613f" action="then">
+                            <nestedSteps>
+                                <item guid="071d3d1c-b9e1-48f0-9ae5-f637ab673b1f" action="eval">
+                                    <command>
+                                        <body>set portType &quot;ethernet&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="04ebc4d9-ad81-4b4a-a50c-fbe60289ea41" action="else">
+                            <nestedSteps>
+                                <item guid="5bee4b1c-98ef-4565-a6af-fed42f8ace6d" action="eval">
+                                    <command>
+                                        <body>set portType &quot;port-Channel&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="18eb7373-05b6-47d0-b3ec-c83bf7c57020" action="command" session="$session" normalOffset="19.583" estimatedStepExecutionTime="0.109">
+                    <command>
+                        <body>enable</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.125" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="b3cec492-1e5a-47a8-8abc-26f641b29d83" action="command" session="$session" normalOffset="1.927" estimatedStepExecutionTime="0.064">
+                    <command>
+                        <body>config</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.187" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="c582b502-0d23-4fda-8b79-d31cd8babea4" action="command" session="$session" normalOffset="14.998" estimatedStepExecutionTime="1.188">
+                    <command>
+                        <body>interface $portType $portName</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="4.43" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="d17e6bab-28a8-4835-a1d0-5ec387865ecc" action="command" session="$session" normalOffset="10.33" estimatedStepExecutionTime="0.44">
+                    <command>
+                        <body>no switchport trunk allowed vlan $vlanId</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.409" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="ae7e6f59-444e-41ee-8960-969b8aed43a9" action="comment">
+                    <command>
+                        <body>leave it in trunk mode</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="09155065-3857-48e8-8eff-406b1bd2721f" action="command" session="$session" skip="true" normalOffset="8.01" estimatedStepExecutionTime="0.266">
+                    <command>
+                        <body>no switchport mode trunk</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.471" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="3653d2a5-6e19-45df-bcb9-2d62bb1b99ee" action="eval">
+                    <command>
+                        <body>set vlanRemoveStatus &quot;OK&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>vlanRemoveStatus</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a29216fe-a498-46cf-9292-a426ac0e1ee9" action="command" session="$session" normalOffset="11.837" estimatedStepExecutionTime="0.117">
+                    <command>
+                        <body>exit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.125" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="9a6cf481-90ac-439e-97c7-59eb30e88ad3" action="command" session="$session" normalOffset="1.601" estimatedStepExecutionTime="0.356">
+                    <command>
+                        <body>exit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.341" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+            </steps>
+            <arguments>
+                <item name="vlanId">
+                    <description>can be a single number, a range delimited by &quot;-&quot; or a set of numbers delimited by &quot;,&quot;
+e.g.
+    900
+    900-905
+    900,902,905</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="portName">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;vlanRemoveStatus&quot;:null}</response>
+        </item>
+    </procedures>
+</testCase>

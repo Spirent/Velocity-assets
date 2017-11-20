@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.3.0.338ed32">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show switch all interfaces</body>
+                </command>
+            </action>
+            <responseBody>#  Switch DPID             IF Name    OF Port MAC Address       Config State Runtime State Advertised Features  Current Features     Supported Features   Peer Features
+--|-----------------------|----------|-------|-----------------|------|-----|-------------|--------------------|--------------------|--------------------|-------------|
+1  00:00:cc:37:ab:bd:ed:85 ethernet1  1       5c:16:c7:1e:12:42        up    up            10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+2  00:00:cc:37:ab:bd:ed:85 ethernet2  2       5c:16:c7:1e:12:43        up    up            10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+3  00:00:cc:37:ab:bd:ed:85 ethernet3  3       5c:16:c7:1e:12:44        up    up            10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+4  00:00:cc:37:ab:bd:ed:85 ethernet4  4       5c:16:c7:1e:12:45        up    up            10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+5  00:00:cc:37:ab:bd:ed:85 ethernet5  5       5c:16:c7:1e:12:46        up    up            10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+6  00:00:cc:37:ab:bd:ed:85 ethernet6  6       5c:16:c7:1e:12:47        up    up            10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+7  00:00:cc:37:ab:bd:ed:85 ethernet7  7       5c:16:c7:1e:12:48        up    up            10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+8  00:00:cc:37:ab:bd:ed:85 ethernet8  8       5c:16:c7:1e:12:49        up    up            10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+9  00:00:cc:37:ab:bd:ed:85 ethernet9  9       5c:16:c7:1e:12:4a        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+10 00:00:cc:37:ab:bd:ed:85 ethernet10 10      5c:16:c7:1e:12:4b        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+11 00:00:cc:37:ab:bd:ed:85 ethernet11 11      5c:16:c7:1e:12:4c        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+12 00:00:cc:37:ab:bd:ed:85 ethernet12 12      5c:16:c7:1e:12:4d        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+13 00:00:cc:37:ab:bd:ed:85 ethernet13 13      5c:16:c7:1e:12:4e        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+14 00:00:cc:37:ab:bd:ed:85 ethernet14 14      5c:16:c7:1e:12:4f        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+15 00:00:cc:37:ab:bd:ed:85 ethernet15 15      5c:16:c7:1e:12:50        down  down          -                    -                    -                    -
+16 00:00:cc:37:ab:bd:ed:85 ethernet16 16      5c:16:c7:1e:12:51        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+17 00:00:cc:37:ab:bd:ed:85 ethernet17 17      5c:16:c7:1e:12:52        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+18 00:00:cc:37:ab:bd:ed:85 ethernet18 18      5c:16:c7:1e:12:53        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+19 00:00:cc:37:ab:bd:ed:85 ethernet19 19      5c:16:c7:1e:12:54        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+20 00:00:cc:37:ab:bd:ed:85 ethernet20 20      5c:16:c7:1e:12:55        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+21 00:00:cc:37:ab:bd:ed:85 ethernet21 21      5c:16:c7:1e:12:56        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+22 00:00:cc:37:ab:bd:ed:85 ethernet22 22      5c:16:c7:1e:12:57        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+23 00:00:cc:37:ab:bd:ed:85 ethernet23 23      5c:16:c7:1e:12:58        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+24 00:00:cc:37:ab:bd:ed:85 ethernet24 24      5c:16:c7:1e:12:59        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+25 00:00:cc:37:ab:bd:ed:85 ethernet25 25      5c:16:c7:1e:12:5a        down  down          -                    -                    -                    -
+26 00:00:cc:37:ab:bd:ed:85 ethernet26 26      5c:16:c7:1e:12:5b        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+27 00:00:cc:37:ab:bd:ed:85 ethernet27 27      5c:16:c7:1e:12:5c        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+28 00:00:cc:37:ab:bd:ed:85 ethernet28 28      5c:16:c7:1e:12:5d        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+29 00:00:cc:37:ab:bd:ed:85 ethernet29 29      5c:16:c7:1e:12:5e        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+30 00:00:cc:37:ab:bd:ed:85 ethernet30 30      5c:16:c7:1e:12:5f        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+31 00:00:cc:37:ab:bd:ed:85 ethernet31 31      5c:16:c7:1e:12:60        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+32 00:00:cc:37:ab:bd:ed:85 ethernet32 32      5c:16:c7:1e:12:61        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+33 00:00:cc:37:ab:bd:ed:85 ethernet33 33      5c:16:c7:1e:12:62        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+34 00:00:cc:37:ab:bd:ed:85 ethernet34 34      5c:16:c7:1e:12:63        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+35 00:00:cc:37:ab:bd:ed:85 ethernet35 35      5c:16:c7:1e:12:64        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+36 00:00:cc:37:ab:bd:ed:85 ethernet36 36      5c:16:c7:1e:12:65        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+37 00:00:cc:37:ab:bd:ed:85 ethernet37 37      5c:16:c7:1e:12:66        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+38 00:00:cc:37:ab:bd:ed:85 ethernet38 38      5c:16:c7:1e:12:67        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+39 00:00:cc:37:ab:bd:ed:85 ethernet39 39      5c:16:c7:1e:12:68        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+40 00:00:cc:37:ab:bd:ed:85 ethernet40 40      5c:16:c7:1e:12:69        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+41 00:00:cc:37:ab:bd:ed:85 ethernet41 41      5c:16:c7:1e:12:6a        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+42 00:00:cc:37:ab:bd:ed:85 ethernet42 42      5c:16:c7:1e:12:6b        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+43 00:00:cc:37:ab:bd:ed:85 ethernet43 43      5c:16:c7:1e:12:6c        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+44 00:00:cc:37:ab:bd:ed:85 ethernet44 44      5c:16:c7:1e:12:6d        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+45 00:00:cc:37:ab:bd:ed:85 ethernet45 45      5c:16:c7:1e:12:6e        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+46 00:00:cc:37:ab:bd:ed:85 ethernet46 46      5c:16:c7:1e:12:6f        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+47 00:00:cc:37:ab:bd:ed:85 ethernet47 47      5c:16:c7:1e:12:70        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+48 00:00:cc:37:ab:bd:ed:85 ethernet48 48      5c:16:c7:1e:12:71        down  down          10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) 10gb-fd,fiber(0x140) -
+49 00:00:cc:37:ab:bd:ed:85 ethernet49 49      5c:16:c7:1e:12:72        down  down          -                    -                    0x80000000L          -
+50 00:00:cc:37:ab:bd:ed:85 ethernet50 50      5c:16:c7:1e:12:73        down  down          -                    -                    0x80000000L          -
+51 00:00:cc:37:ab:bd:ed:85 ethernet51 51      5c:16:c7:1e:12:74        down  down          -                    -                    0x80000000L          -
+52 00:00:cc:37:ab:bd:ed:85 ethernet52 52      5c:16:c7:1e:12:75        down  down          -                    -                    0x80000000L          -
+53 00:00:cc:37:ab:bd:ed:85 ethernet53 53      5c:16:c7:1e:12:76        down  down          -                    -                    0x80000000L          -
+54 00:00:cc:37:ab:bd:ed:85 ethernet54 54      5c:16:c7:1e:12:77        down  down          -                    -                    0x80000000L          -
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;show switch all interfaces&lt;/echo&gt;
+    &lt;prompt&gt;bigswitch&amp;gt; &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.5</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <additionalBannerLineCount>1</additionalBannerLineCount>
+                    <banner>#  Switch DPID             IF Name    OF Port MAC Address       Config State Runtime State Advertised Features  Current Features     Supported Features   Peer Features</banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="index">
+                            <width>2</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>54fe6977-8613-4ac3-9b96-2a201e7c61cf</uid>
+                        </item>
+                        <item name="switch_id">
+                            <isKey>true</isKey>
+                            <width>24</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>c3903d72-5313-4642-aedc-82456d8eec9c</uid>
+                        </item>
+                        <item name="interface_name">
+                            <width>11</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>be291a29-23fe-4748-b639-62721e2f1b43</uid>
+                        </item>
+                        <item name="interface_number">
+                            <width>8</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>c460cf57-449e-4172-8c8f-5e31eec92f22</uid>
+                        </item>
+                        <item name="mac">
+                            <width>18</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>8245b44e-e484-48da-ba83-667f48d0f362</uid>
+                        </item>
+                        <item name="state">
+                            <width>6</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>8048231d-2ef2-4fbf-bd24-69f8dbe7b4c0</uid>
+                        </item>
+                        <item name="runtime_state">
+                            <width>14</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>004225c5-6948-40ac-978e-fe91173ac549</uid>
+                        </item>
+                        <item name="advertised_features">
+                            <width>21</width>
+                            <lastFullCell></lastFullCell>
+                            <translateValueFrom>-</translateValueFrom>
+                            <uid>ddbc0094-5c14-4296-9c9d-9803bb2d0b01</uid>
+                        </item>
+                        <item name="current_feature">
+                            <width>21</width>
+                            <lastFullCell></lastFullCell>
+                            <translateValueFrom>-</translateValueFrom>
+                            <uid>6066e001-d53f-4d05-9f59-ee50105501e5</uid>
+                        </item>
+                        <item name="supported_features">
+                            <width>21</width>
+                            <lastFullCell></lastFullCell>
+                            <translateValueFrom>-</translateValueFrom>
+                            <uid>5863a4e4-a512-463a-966f-9814ed82c67a</uid>
+                        </item>
+                        <item name="peer_features">
+                            <width>14</width>
+                            <lastFullCell></lastFullCell>
+                            <translateValueFrom>-</translateValueFrom>
+                            <uid>9884ef8e-e543-403b-9198-06c9d994c048</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show switch all interfaces"/>
+</ResponseMap>

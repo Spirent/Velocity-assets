@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>tmsh show sys software</body>
+                </command>
+            </action>
+            <responseBody>
+----------------------------------------------------
+Sys::Software Status
+Volume  Product  Version     Build  Active    Status
+----------------------------------------------------
+HD1.1    BIG-IP   12.0.0   0.0.570      no  complete
+HD1.2    BIG-IP   12.0.0  0.0.2097      no  complete
+HD1.3    BIG-IP   11.6.0   0.0.401     yes  complete
+HD1.4    BIG-IP   11.5.3   0.0.163      no  complete
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;prompt&gt;[root@localhost:Active:Standalone] config # &lt;/prompt&gt;
+    &lt;echo&gt;tmsh show sys software&lt;/echo&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.2</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="software_status_table">
+                    <additionalBannerLineCount>3</additionalBannerLineCount>
+                    <banner>------------------------*</banner>
+                    <bannerStructure>Wildcard</bannerStructure>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="volume"/>
+                        <item name="product"/>
+                        <item name="version"/>
+                        <item name="build"/>
+                        <item name="active">
+                            <isKey>true</isKey>
+                        </item>
+                        <item name="status"/>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="tmsh show sys software">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

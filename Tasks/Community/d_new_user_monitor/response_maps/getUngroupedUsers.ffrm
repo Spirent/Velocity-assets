@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<ResponseMap version="6.1.0.e2e4ec0">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="getUngroupedUsers">
+                <command>
+                    <body>-ignoredUsers [param IGNORE_LIST]</body>
+                </command>
+            </action>
+            <responseBody>userId = 33f1e4c7-3353-4cab-83e8-7a941392a6d8 username = foo
+userId = 1798a767-326a-4243-a69f-16221906968e username = foo
+userId = 5ebedc83-36fd-436f-a390-f03fa5673419 username = foo
+userId = 1dbce99f-0d12-4a8d-89a6-2c1333b4189b username = foo
+userId = 15fd9383-0086-4c4f-8dd3-92d072f22451 username = foo
+userId = 57b37090-557d-4a59-8dc8-e39d194baa6b username = foo
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;definedIn&gt;project://d_new_user_monitor/session_profiles/velocity_rest_qc.fftc&lt;/definedIn&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="definedIn">
+                    <queryFormatString>.//definedIn</queryFormatString>
+                    <source>Kernel</source>
+                </item>
+            </aliases>
+            <duration>0.4</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="userinfo_line">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>userId =\\s+</regex>
+                            <start>0</start>
+                            <end>9</end>
+                        </item>
+                        <item name="userId">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>9</start>
+                            <end>45</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\s+username =\\s+</regex>
+                            <start>45</start>
+                            <end>57</end>
+                        </item>
+                        <item name="username">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>57</start>
+                            <end>66</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>userId = 33f1e4c7-3353-4cab-83e8-7a941392a6d8 username = amichaels</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="getUngroupedUsers"/>
+</ResponseMap>

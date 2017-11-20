@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.4.1.be355a6">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <terminalSizeProperties>
+                <widthSizing inherit="false" defaultValue=""/>
+            </terminalSizeProperties>
+        </TerminalProperties>
+        <ipAddress inherit="false">10.1.2.137</ipAddress>
+        <user inherit="false">andy</user>
+        <password inherit="false">Dh+SkgJzaKoJor6ZZIWzzg==</password>
+    </sessionProperties>
+    <baseProfile>hp_5900_ssh.ffsp</baseProfile>
+    <standalone>false</standalone>
+</SessionTemplate>

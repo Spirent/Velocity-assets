@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <responseStructure>application/json</responseStructure>
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="getInterfaces"/>
+            <responseBody>{&quot;ports&quot;:[{&quot;name&quot;:&quot;1.1&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.2&quot;,&quot;status&quot;:&quot;up&quot;},{&quot;name&quot;:&quot;1.3&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.4&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.5&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;1.6&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.7&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.8&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.9&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.10&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.11&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.12&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.13&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.14&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.15&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.16&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;1.17&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;1.18&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;1.19&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;1.20&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;1.21&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;1.22&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;1.23&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;1.24&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;2.1&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;2.2&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;2.3&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;2.4&quot;,&quot;status&quot;:&quot;uninit&quot;},{&quot;name&quot;:&quot;2.5&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;2.6&quot;,&quot;status&quot;:&quot;miss&quot;},{&quot;name&quot;:&quot;mgmt&quot;,&quot;status&quot;:&quot;up&quot;}]}</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;definedIn&gt;project://d_f5/session_profiles/big_ip_base_qc.fftc&lt;/definedIn&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="definedIn">
+                    <queryFormatString>.//definedIn</queryFormatString>
+                    <source>Kernel</source>
+                </item>
+            </aliases>
+            <duration>0.6</duration>
+        </item>
+    </sampleDictionary>
+    <applicabilityProperties actionType="getInterfaces">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+    <aliases>
+        <item name="portName">
+            <queryFormatString>mapped/Json/ports/item/name</queryFormatString>
+        </item>
+        <item name="portStatus">
+            <queryFormatString>mapped/Json/ports/item/status</queryFormatString>
+        </item>
+        <item name="upPorts">
+            <queryFormatString>mapped/Json/ports/item/status[text()=&quot;up&quot;]/../name</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>

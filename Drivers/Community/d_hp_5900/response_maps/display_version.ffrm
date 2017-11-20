@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.4.1.be355a6">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>display version</body>
+                </command>
+            </action>
+            <responseBody>HPE Comware Software, Version 7.1.070, Release 6106
+Copyright (c) 2010-2016 Hewlett Packard Enterprise Development LP
+HPE FF 5950 32Q28 Switch uptime is 3 weeks, 3 days, 12 hours, 18 minutes
+Last reboot reason : User reboot
+
+Boot image: flash:/5950-cmw710-boot-r6106.bin
+Boot image version: 7.1.070, Release 6106
+  Compiled May 19 2016 11:00:00
+System image: flash:/5950-cmw710-system-r6106.bin
+System image version: 7.1.070, Release 6106
+  Compiled May 19 2016 11:00:00
+
+
+Slot 1:
+Uptime is 3 weeks,3 days,12 hours,18 minutes
+FF 5950 32Q28 Switch with 2 Processor
+BOARD TYPE:         FF 5950 32Q28 Switch
+DRAM:               3584M bytes
+FLASH:              1024M bytes
+PCB 1 Version:      VER.B
+PCB 2 Version:      VER.B
+FPGA Version:       NONE
+Bootrom Version:    102
+CPLD 1 Version:     001
+CPLD 2 Version:     001
+Release Version:    HPE FF 5950 32Q28 Switch-6106
+Patch Version  :    None
+Reboot Cause  :     UserReboot
+[SubSlot 0] 32QSFP28 + 2SFP PLUS
+
+Slot 2:
+Uptime is 3 weeks,3 days,12 hours,10 minutes
+FF 5950 32Q28 Switch with 2 Processor
+BOARD TYPE:         FF 5950 32Q28 Switch
+DRAM:               3584M bytes
+FLASH:              1024M bytes
+PCB 1 Version:      VER.B
+PCB 2 Version:      VER.B
+FPGA Version:       NONE
+Bootrom Version:    102
+CPLD 1 Version:     001
+CPLD 2 Version:     001
+Release Version:    HPE FF 5950 32Q28 Switch-6106
+Patch Version  :    None
+Reboot Cause  :     IRFMergeReboot
+[SubSlot 0] 32QSFP28 + 2SFP PLUS
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;&amp;lt;FTC-R19-S-2551-5950-IRF&amp;gt;&lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;version&lt;/echo&gt;
+        &lt;idleTime&gt;2.135&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+            <duration>3.9</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="softwareVersionPattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>HPE Comware Software, Version\\s+</regex>
+                            <start>0</start>
+                            <end>30</end>
+                        </item>
+                        <item name="version">
+                            <regex>((\\d+\\.)+\\d+)</regex>
+                            <named>true</named>
+                            <start>30</start>
+                            <end>37</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="((\d+\.)+\d+)">one or more of digit and dots</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>, Release\\s+</regex>
+                            <start>37</start>
+                            <end>47</end>
+                        </item>
+                        <item name="release">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>47</start>
+                            <end>51</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>HPE Comware Software, Version 7.1.070, Release 6106</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="display version">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

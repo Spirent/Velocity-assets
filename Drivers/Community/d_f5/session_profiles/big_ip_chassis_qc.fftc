@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<testCase version="6.1.0.e2e4ec0">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="big_ip_chassis.ffsp"/>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="b8fea681-8ace-4dbf-8a59-a10c7f96f0c3" action="call">
+                    <command>
+                        <body>../test_cases/unit_test.fftc#main</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="setVlan" isPublic="true" isVBlock="true">
+            <description>setVlan</description>
+            <steps>
+                <item guid="d44201f0-6825-4752-ae4d-4c56a47c5cc1" action="command" session="$session" estimatedStepExecutionTime="14.176">
+                    <command>
+                        <body>tmsh modify sys dns name-servers add \\{ $dnsServers \\}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="128674f3-976e-4e60-931c-cfbbb3b3d49b" action="command" session="$session">
+                    <command>
+                        <body>tmsh modify sys db hostname value $hostname.$fqdn</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="35fc55a1-8d10-43c0-a101-9aab46617cdd" action="command" session="$session" normalOffset="11.42" estimatedStepExecutionTime="0.643">
+                    <command>
+                        <body>tmsh modify sys ntp servers add \\{ $ntpServer \\}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="fc05114e-157f-4ade-81d0-8ce4cbcbc857" action="command" session="$session">
+                    <command>
+                        <body>tmsh  create net trunk $trunkName interfaces add \\{ $ifList \\} lacp enabled</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="f294b66b-1aa3-44ae-a3f3-b03e6f850ed5" action="command" session="$session">
+                    <command>
+                        <body>tmsh create net vlan $vlanName interfaces add \\{ $trunkName \\{tagged \\} \\} tag $vlanId</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="e68a2fb6-a8fe-4671-b648-3cb0afa16644" action="command" session="$session">
+                    <command>
+                        <body>tmsh create net self $ipAddress/$cidr vlan $vlanName allow-service default floating</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="73559f00-35ee-4b2a-9ed6-7d91843de9a5" action="command" session="$session">
+                    <command>
+                        <body>tmsh save sys config</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>updatedFile()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>[llength $value] &gt; 0</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set statusCode &quot;OK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set statusCode &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="c7b0d632-c4f4-4e2f-b374-52fa9f49099b" action="eval">
+                    <command>
+                        <body>set statusCode</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>statusCode</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <version>1.0</version>
+            <multilineDescription>setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values</multilineDescription>
+            <arguments>
+                <item name="vlanId">
+                    <description>VLAN ID to tag this interface to</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="ifName">
+                    <description>interface to add to the VLAN e.g. &quot;1.2&quot;</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="hostname">
+                    <description>hostname of the current BigIP.  This should be retrieved from the topology, as the device may not be configured properly and will likely have &quot;localhost&quot; as the value.</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="ipAddress">
+                    <description>ip address of the interface being added to the VLAN.</description>
+                    <defaultValue>10.10.0.0</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="cidr">
+                    <description>CIDR formatted netmask of the interface we&apos;re adding to the VLAN.</description>
+                    <defaultValue>16</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="vlanName">
+                    <description>name of the VLAN we&apos;re adding the interface to.</description>
+                    <defaultValue>external</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="trunkName">
+                    <description>name of trunk to create</description>
+                    <defaultValue>ext_trunk</defaultValue>
+                </item>
+                <item name="dnsServers">
+                    <description>space-separated list of DNS server IP addresses</description>
+                    <defaultValue>172.27.1.1 172.27.2.1</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="ntpServer">
+                    <description>hostname or IP address of ntp server</description>
+                    <defaultValue>time.f5net.com</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="fqdn">
+                    <description>fqdn for this device.  Well, everything but the hostname.</description>
+                    <defaultValue>sh.pdsea.f5net.com</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;statusCode&quot;:null}</response>
+        </item>
+    </procedures>
+</testCase>

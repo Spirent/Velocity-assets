@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.3</manifestVersion>     
+    <version>1.0.0</version>     
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Management</interface> 
+    <entryPoint>checkDeviceOnline.fftc</entryPoint>
+    <resourceProperties>
+        <property>
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>           
+    </resourceProperties>
+</resourceDriver>

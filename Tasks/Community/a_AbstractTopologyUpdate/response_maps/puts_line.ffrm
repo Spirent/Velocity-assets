@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<ResponseMap version="6.0.0.18638fa">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="eval">
+                <command>
+                    <body>puts $line</body>
+                </command>
+            </action>
+            <responseBody>        &lt;property isimportant=&quot;false&quot; name=&quot;name&quot;&gt;P2&lt;/property&gt;
+
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+        <item name="sample2">
+            <action actionType="command">
+                <command>
+                    <body>read</body>
+                </command>
+            </action>
+            <responseBody>          &lt;session baseSessionProfile=&quot;&quot; name=&quot;ssh&quot; provider=&quot;com.fnfr&quot;&gt;
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;message&gt;          &amp;lt;session baseSessionProfile=&amp;quot;&amp;quot; name=&amp;quot;ssh&amp;quot; provider=&amp;quot;com.fnfr&amp;quot;&amp;gt;&lt;/message&gt;
+    &lt;success&gt;true&lt;/success&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="message">
+                    <queryFormatString>.//message</queryFormatString>
+                </item>
+                <item name="success">
+                    <queryFormatString>.//success</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+        <item name="sample5">
+            <action>
+                <command>
+                    <body>read</body>
+                </command>
+            </action>
+            <responseBody>          &lt;session baseSessionProfile=&quot;project://d_Cisco_IOSXR_AgilisCore/session_profiles/cisco_IOSXR_ssh_AgilisCore.ffsp&quot; name=&quot;ssh&quot; provider=&quot;com.fnfr&quot;&gt;</responseBody>
+        </item>
+        <item name="sample3">
+            <action actionType="command">
+                <command>
+                    <body>read</body>
+                </command>
+            </action>
+            <responseBody>              &lt;baseProfile&gt;project://my_project/session_profiles/SSH_ref_session_profile.ffsp&lt;/baseProfile&gt;
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;message&gt;              &amp;lt;baseProfile&amp;gt;project://my_project/session_profiles/SSH_ref_session_profile.ffsp&amp;lt;/baseProfile&amp;gt;&lt;/message&gt;
+    &lt;success&gt;true&lt;/success&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="message">
+                    <queryFormatString>.//message</queryFormatString>
+                </item>
+                <item name="success">
+                    <queryFormatString>.//success</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+        <item name="sample4">
+            <action actionType="command">
+                <command>
+                    <body>read</body>
+                </command>
+            </action>
+            <responseBody>        &lt;property name=&quot;inventoryName&quot;&gt;JUNIPER&lt;/property&gt;
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;message&gt;        &amp;lt;property name=&amp;quot;inventoryName&amp;quot;&amp;gt;JUNIPER&amp;lt;/property&amp;gt;&lt;/message&gt;
+    &lt;success&gt;true&lt;/success&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="message">
+                    <queryFormatString>.//message</queryFormatString>
+                </item>
+                <item name="success">
+                    <queryFormatString>.//success</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="abstract_resource">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\&lt;property isimportant=&quot;\\w+&quot; name=&quot;name&quot;\\&gt;</regex>
+                            <start>0</start>
+                            <end>42</end>
+                        </item>
+                        <item name="resouce_name">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>42</start>
+                            <end>44</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\&lt;/property\\&gt;</regex>
+                            <start>44</start>
+                            <end>55</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>&lt;property isimportant=&quot;false&quot; name=&quot;name&quot;&gt;P2&lt;/property&gt;</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="session">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\&lt;session baseSessionProfile=&quot;&quot; name=&quot;</regex>
+                            <start>0</start>
+                            <end>37</end>
+                        </item>
+                        <item name="sessionType">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>37</start>
+                            <end>40</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>&quot; provider=&quot;com\\.fnfr&quot;\\&gt;</regex>
+                            <start>40</start>
+                            <end>62</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>&lt;session baseSessionProfile=&quot;&quot; name=&quot;ssh&quot; provider=&quot;com.fnfr&quot;&gt;</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                    <maintainConsistency>false</maintainConsistency>
+                </item>
+                <item name="base_profile">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\&lt;baseProfile\\&gt;</regex>
+                            <start>0</start>
+                            <end>13</end>
+                        </item>
+                        <item name="baseProfile">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>13</start>
+                            <end>79</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{66}">exactly 66 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\&lt;/baseProfile\\&gt;</regex>
+                            <start>79</start>
+                            <end>93</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>&lt;baseProfile&gt;project://my_project/session_profiles/SSH_ref_session_profile.ffsp&lt;/baseProfile&gt;</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                    <maintainConsistency>false</maintainConsistency>
+                </item>
+                <item name="actual_resource">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\&lt;property name=&quot;inventoryName&quot;\\&gt;</regex>
+                            <start>0</start>
+                            <end>31</end>
+                        </item>
+                        <item name="actualResource">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>31</start>
+                            <end>38</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\&lt;/property\\&gt;</regex>
+                            <start>38</start>
+                            <end>49</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>&lt;property name=&quot;inventoryName&quot;&gt;JUNIPER&lt;/property&gt;</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="session_1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\&lt;session baseSessionProfile=&quot;\\S+&quot; name=&quot;</regex>
+                            <start>0</start>
+                            <end>120</end>
+                        </item>
+                        <item name="sessionType">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>120</start>
+                            <end>123</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>&quot; provider=&quot;com\\.fnfr&quot;\\&gt;</regex>
+                            <start>123</start>
+                            <end>145</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>&lt;session baseSessionProfile=&quot;project://d_Cisco_IOSXR_AgilisCore/session_profiles/cisco_IOSXR_ssh_AgilisCore.ffsp&quot; name=&quot;ssh&quot; provider=&quot;com.fnfr&quot;&gt;</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="eval" command="puts $line"/>
+    <aliases>
+        <item name="baseProfile">
+            <queryFormatString>count(//baseProfile)</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>

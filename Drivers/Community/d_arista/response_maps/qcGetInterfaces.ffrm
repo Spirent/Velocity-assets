@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <responseStructure>application/json</responseStructure>
+    <sampleDictionary>
+        <item name="sample2">
+            <action actionType="getInterfaces"/>
+            <responseBody>{&quot;ports&quot;:[{&quot;name&quot;:&quot;Et1&quot;,&quot;status&quot;:&quot;up&quot;},{&quot;name&quot;:&quot;Et2&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et3&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et4&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et5&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et6&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et7&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et8&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et9&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et10&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et11&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et12&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et13&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et14&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et15&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et16&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et17&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et18&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et19&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et20&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et21&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et22&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et23&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et24&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et25&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et26&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et27&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et28&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et29&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et30&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et31&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et32&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et33&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et34&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et35&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et36&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et37&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et38&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et39&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et40&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et41&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et42&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et43&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et44&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et45&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et46&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et47&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et48&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et49&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et50&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et51&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Et52&quot;,&quot;status&quot;:&quot;up&quot;},{&quot;name&quot;:&quot;Ma1&quot;,&quot;status&quot;:&quot;up&quot;},{&quot;name&quot;:&quot;Po5&quot;,&quot;status&quot;:&quot;down&quot;},{&quot;name&quot;:&quot;Vl5&quot;,&quot;status&quot;:&quot;down&quot;}]}</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;definedIn&gt;project://d_arista/session_profiles/arista_base_qc.fftc&lt;/definedIn&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="definedIn">
+                    <queryFormatString>.//definedIn</queryFormatString>
+                    <source>Kernel</source>
+                </item>
+            </aliases>
+            <duration>2.3</duration>
+        </item>
+    </sampleDictionary>
+    <applicabilityProperties actionType="getInterfaces">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+    <aliases>
+        <item name="portName">
+            <queryFormatString>mapped/Json/ports/item/name</queryFormatString>
+        </item>
+        <item name="portStatus">
+            <queryFormatString>mapped/Json/ports/item/status</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>

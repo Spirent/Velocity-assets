@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show interfaces description</body>
+                </command>
+            </action>
+            <responseBody>Interface                      Status         Protocol Description
+Et1                            up             up       
+Et2                            down           down     
+Et3                            down           down     
+Et4                            down           down     
+Et5                            down           down     
+Et6                            down           down     
+Et7                            down           down     
+Et8                            down           down     
+Et9                            down           down     
+Et10                           down           down     
+Et11                           down           down     
+Et12                           down           down     
+Et13                           down           down     
+Et14                           down           down     
+Et15                           down           down     
+Et16                           down           down     
+Et17                           down           down     
+Et18                           down           down     
+Et19                           down           down     
+Et20                           down           down     
+Et21                           down           down     
+Et22                           down           down     
+Et23                           down           down     
+Et24                           down           down     
+Et25                           down           down     
+Et26                           down           down     
+Et27                           down           down     
+Et28                           down           down     
+Et29                           down           down     
+Et30                           down           down     
+Et31                           down           down     
+Et32                           down           down     
+Et33                           down           down     
+Et34                           down           down     
+Et35                           down           down     
+Et36                           down           down     
+Et37                           down           down     
+Et38                           down           down     
+Et39                           down           down     
+Et40                           down           down     
+Et41                           down           down     
+Et42                           down           down     
+Et43                           down           down     
+Et44                           down           down     
+Et45                           down           down     
+Et46                           down           down     
+Et47                           down           down     
+Et48                           down           down     
+Et49                           down           down     
+Et50                           down           down     
+Et51                           down           down     
+Et52                           up             up       
+Ma1                            up             up       
+Po5                            down           lowerlayerdown 
+Vl5                            down           lowerlayerdown </responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;C14-Arista-TRF&amp;gt;&lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;show interfaces description&lt;/echo&gt;
+        &lt;connClosed/&gt;
+        &lt;idleTime&gt;3.695&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="interfaceTable">
+                    <banner>Interface                      Status         Protocol Description</banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <footerStructure>End</footerStructure>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="Interface">
+                            <isKey>true</isKey>
+                        </item>
+                        <item name="Status"/>
+                        <item name="Protocol"/>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show interfaces description">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

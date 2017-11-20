@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.4.0.4f90e5a">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <ipAddress inherit="false">[get scrubbedIp 172.27.59.79]</ipAddress>
+        <port inherit="false">[param property_SSH_Port 22]</port>
+        <user inherit="false">[param property_username admin]</user>
+        <password inherit="false">Hu62+w4ez8VRjpeoxPozxOrYANzZETwjzu0CKiqSrE0=</password>
+    </sessionProperties>
+    <baseProfile>arista_base.ffsp</baseProfile>
+    <standalone>false</standalone>
+</SessionTemplate>

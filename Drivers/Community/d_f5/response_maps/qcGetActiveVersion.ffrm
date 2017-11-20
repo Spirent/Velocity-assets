@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <responseStructure>application/json</responseStructure>
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="getActiveVersion"/>
+            <responseBody>{&quot;activeVersion&quot;:&quot;11.6.0&quot;}</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;definedIn&gt;project://d_f5/session_profiles/big_ip_base_qc.fftc&lt;/definedIn&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="definedIn">
+                    <queryFormatString>.//definedIn</queryFormatString>
+                    <source>Kernel</source>
+                </item>
+            </aliases>
+            <duration>0.3</duration>
+        </item>
+    </sampleDictionary>
+    <applicabilityProperties actionType="getActiveVersion"/>
+    <aliases>
+        <item name="activeVersion">
+            <queryFormatString>mapped/Json/activeVersion</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>

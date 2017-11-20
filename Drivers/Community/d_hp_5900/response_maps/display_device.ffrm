@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.4.1.be355a6">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>display device</body>
+                </command>
+            </action>
+            <responseBody>Slot Type             State    Subslot  Soft Ver             Patch Ver
+1    FF 5950 32Q28 Sw Master   0        FF 5950-6106         None      
+     itch                                                                      
+2    FF 5950 32Q28 Sw Standby  0        FF 5950-6106         None      
+     itch                  
+                                                    </responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;&amp;lt;FTC-R19-S-2551-5950-IRF&amp;gt;&lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;display device&lt;/echo&gt;
+        &lt;idleTime&gt;0.195&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="deviceInfoTable">
+                    <banner>Slot Type             State    Subslot  Soft Ver             Patch Ver</banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <columnBoundaries>Positional</columnBoundaries>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="slot">
+                            <width>5</width>
+                            <spillover>Steal</spillover>
+                            <lastFullCell></lastFullCell>
+                            <uid>5db0d05b-af61-49c3-94e5-d2bba64184f3</uid>
+                        </item>
+                        <item name="type">
+                            <width>17</width>
+                            <spillover>Extend</spillover>
+                            <lastFullCell></lastFullCell>
+                            <uid>b4fce0aa-e583-495e-a12a-9398942e34ce</uid>
+                        </item>
+                        <item name="state">
+                            <width>9</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>0195500d-e966-4408-9cb7-fd89fc7bd531</uid>
+                        </item>
+                        <item name="subslot">
+                            <width>9</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>f933bc0a-86a0-417a-8422-fbbe722e0e99</uid>
+                        </item>
+                        <item name="softVer">
+                            <width>21</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>0933fa03-39d6-461d-be01-c5be6791a024</uid>
+                        </item>
+                        <item name="patchVer">
+                            <width>0</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>417a652b-661b-4184-8878-09ee4fa9c9eb</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="display device">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

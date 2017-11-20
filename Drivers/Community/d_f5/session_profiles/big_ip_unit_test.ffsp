@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.1.0.77511">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <ipAddress inherit="false">172.27.76.44</ipAddress>
+    </sessionProperties>
+    <baseProfile>big_ip_base.ffsp</baseProfile>
+    <standalone>false</standalone>
+</SessionTemplate>
