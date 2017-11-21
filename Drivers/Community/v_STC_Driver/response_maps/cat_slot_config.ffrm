@@ -1,0 +1,361 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.2.0.95bb698">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>cat slot8/.config</body>
+                </command>
+            </action>
+            <responseBody>CONTEXT=8:E09100433:80-001404:SHADOWCAT:cm-1g-d12
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;cat slot8/.config&lt;/echo&gt;
+    &lt;prompt&gt;80-000722.E12230496:testmodule$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.4</duration>
+        </item>
+        <item name="sample2">
+            <action actionType="command">
+                <command>
+                    <body>cat slot1/.config</body>
+                </command>
+            </action>
+            <responseBody>CONTEXT=1:E10460491:80-001404:SHADOWCAT:cm-1g-d12
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;cat slot1/.config&lt;/echo&gt;
+    &lt;prompt&gt;debug@changeling-hypervisor:/mnt/spirent/testmodule$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.2</duration>
+        </item>
+        <item name="sample3">
+            <action actionType="command">
+                <command>
+                    <body>cat slot3/.config</body>
+                </command>
+            </action>
+            <responseBody>CONTEXT=morphphase2:3:E15480818:80-002303:psylocke:fx2-11acn-2
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;cat slot3/.config&lt;/echo&gt;
+    &lt;prompt&gt;debug@changeling-hypervisor:/mnt/spirent/testmodule$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.3</duration>
+        </item>
+        <item name="sample7">
+            <action actionType="command">
+                <command>
+                    <body>cat slot9/.config</body>
+                </command>
+            </action>
+            <responseBody>CONTEXT=morphphase2:9::80-001015:warpath:dx2-40g-q8
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;dollar&lt;/promptName&gt;
+    &lt;echo&gt;cat slot9/.config&lt;/echo&gt;
+    &lt;prompt&gt;debug@fi-amara-01:/mnt/spirent/testmodule$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.5</duration>
+        </item>
+        <item name="sample4">
+            <action actionType="command">
+                <command>
+                    <body>cat slot11/.config</body>
+                </command>
+            </action>
+            <responseBody>CONTEXT=11:N08101833:80-001083:SYNCH:wan-2003a
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;dollar&lt;/promptName&gt;
+    &lt;echo&gt;cat slot11/.config&lt;/echo&gt;
+    &lt;prompt&gt;hw-outer-9u-01:testmodule$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.5</duration>
+        </item>
+        <item name="sample5">
+            <action actionType="command">
+                <command>
+                    <body>cat slot5/.config</body>
+                </command>
+            </action>
+            <responseBody>CONTEXT=5:E08510168:80-000004:MASTERMIND:cm-10g-s2
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;dollar&lt;/promptName&gt;
+    &lt;echo&gt;cat slot5/.config&lt;/echo&gt;
+    &lt;prompt&gt;80-001884.E11261667:testmodule$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.7</duration>
+        </item>
+        <item name="sample6">
+            <action actionType="command">
+                <command>
+                    <body>cat slot0/.config</body>
+                </command>
+            </action>
+            <responseBody>CONTEXT=0:E10250453:80-001404:SHADOWCAT:cm-1g-d12
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;dollar&lt;/promptName&gt;
+    &lt;echo&gt;cat slot0/.config&lt;/echo&gt;
+    &lt;prompt&gt;80-001884.E12350867:testmodule$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.6</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern2">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>CONTEXT=</regex>
+                            <start>0</start>
+                            <end>8</end>
+                        </item>
+                        <item name="slotNum">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>8</start>
+                            <end>10</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>:</regex>
+                            <start>10</start>
+                            <end>11</end>
+                        </item>
+                        <item name="serialNum">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>11</start>
+                            <end>20</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>:\\d+-\\d+:\\S+:</regex>
+                            <start>20</start>
+                            <end>37</end>
+                        </item>
+                        <item name="modelNum">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>37</start>
+                            <end>46</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>CONTEXT=11:N08101833:80-001083:SYNCH:wan-2003a</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>CONTEXT=.*:</regex>
+                            <start>0</start>
+                            <end>20</end>
+                        </item>
+                        <item name="slotNum">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>20</start>
+                            <end>21</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>:</regex>
+                            <start>21</start>
+                            <end>22</end>
+                        </item>
+                        <item name="serialNum">
+                            <regex>.*</regex>
+                            <named>true</named>
+                            <start>22</start>
+                            <end>31</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>:\\d+-\\d+:.*:</regex>
+                            <start>31</start>
+                            <end>51</end>
+                        </item>
+                        <item name="modelNum">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>51</start>
+                            <end>62</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>CONTEXT=morphphase2:3:E15480818:80-002303:psylocke:fx2-11acn-2</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="cat slot*/.config"/>
+</ResponseMap>

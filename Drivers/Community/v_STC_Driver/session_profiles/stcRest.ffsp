@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<SessionTemplate version="6.0.0.18638fa">
+    <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="http://[param property_STC_Lab_Server]/stcapi" url.inherit="false">
+        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+            <memberClasses>
+                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+            </memberClasses>
+            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/x-www-form-urlencoded" value.inherit="false"/>
+            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Accept" header.inherit="false" value="application/json" value.inherit="false"/>
+        </httpHeader>
+    </sessionProperties>
+</SessionTemplate>
