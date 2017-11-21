@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.2.0.95bb698">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>arp -a</body>
+                </command>
+            </action>
+            <responseBody>mcpu.card8 (169.254.24.1) at 00:60:F3:00:18:01 [ether] on eth0
+mcpu.card6 (169.254.22.1) at 00:60:F3:00:16:01 [ether] on eth0
+mcpu.card7 (169.254.23.1) at 00:60:F3:00:17:01 [ether] on eth0
+mcpu.card0 (169.254.16.1) at 00:60:F3:00:10:01 [ether] on eth0
+mcpu.card1 (169.254.17.1) at 00:60:F3:00:11:01 [ether] on eth0
+mcpu.card2 (169.254.18.1) at 00:60:F3:00:12:01 [ether] on eth0
+nat (169.254.0.3) at 00:60:F3:00:00:01 [ether] on eth0
+nfs (169.254.0.2) at 00:60:F3:00:00:02 [ether] on eth0
+80-000722.E12230496:debug$ </responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;80-000722.E12230496:debug$ &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;arp -a&lt;/echo&gt;
+        &lt;idleTime&gt;98.787&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+        <item name="sample2">
+            <action actionType="command">
+                <command>
+                    <body>if [ -e /usr/sbin/arp ]; then /usr/sbin/arp -a; else /sbin/arp -a; fi</body>
+                </command>
+            </action>
+            <responseBody>mcpu.card1 (169.254.17.1) at 00:60:f3:00:11:01 [ether] on backplane
+ccpu8.card4 (169.254.20.23) at 00:60:f3:00:14:17 [ether] on backplane
+ccpu1.card3 (169.254.19.16) at 00:60:f3:00:13:10 [ether] on backplane
+ccpu2.card1 (169.254.17.17) at 00:60:f4:00:11:11 [ether] on backplane
+mcpu.card3 (169.254.19.1) at 00:60:f3:00:13:01 [ether] on backplane
+ccpu1.card5 (169.254.21.16) at 00:60:f3:00:15:10 [ether] on backplane
+ccpu9.card5 (169.254.21.24) at 00:60:f3:00:15:18 [ether] on backplane
+ccpu3.card1 (169.254.17.18) at 00:60:f4:00:11:12 [ether] on backplane
+mcpu.card5 (169.254.21.1) at 00:60:f3:00:15:01 [ether] on backplane
+ccpu1.card4 (169.254.20.16) at 00:60:f3:00:14:10 [ether] on backplane
+ccpu17.card5 (169.254.21.32) at 00:60:f3:00:15:20 [ether] on backplane
+mcpu.card4 (169.254.20.1) at 00:60:f3:00:14:01 [ether] on backplane
+chassis (169.254.0.1) at 00:60:f3:00:00:01 [ether] on backplane
+? (10.6.2.234) at 00:60:f3:00:10:10 [ether] on eth0
+ccpu4.card1 (169.254.17.19) at 00:60:f4:00:11:13 [ether] on backplane
+ccpu2.card4 (169.254.20.17) at 00:60:f3:00:14:11 [ether] on backplane
+mcpu.card6 (169.254.22.1) at 00:60:f3:00:16:01 [ether] on backplane
+? (169.254.0.68) at &lt;incomplete&gt; on backplane
+ccpu2.card6 (169.254.22.17) at 00:60:f4:00:16:11 [ether] on backplane
+ccpu3.card4 (169.254.20.18) at 00:60:f3:00:14:12 [ether] on backplane
+ccpu5.card1 (169.254.17.20) at 00:60:f4:00:11:14 [ether] on backplane
+? (169.254.0.69) at 00:60:f3:00:14:01 [ether] on backplane
+ccpu5.card3 (169.254.19.20) at 00:60:f3:00:13:14 [ether] on backplane
+ccpu3.card6 (169.254.22.18) at 00:60:f4:00:16:12 [ether] on backplane
+ccpu6.card1 (169.254.17.21) at 00:60:f4:00:11:15 [ether] on backplane
+ccpu4.card4 (169.254.20.19) at 00:60:f3:00:14:13 [ether] on backplane
+? (169.254.0.70) at &lt;incomplete&gt; on backplane
+ccpu5.card5 (169.254.21.20) at 00:60:f3:00:15:14 [ether] on backplane
+ccpu4.card6 (169.254.22.19) at 00:60:f4:00:16:13 [ether] on backplane
+ccpu13.card5 (169.254.21.28) at 00:60:f3:00:15:1c [ether] on backplane
+ccpu5.card4 (169.254.20.20) at 00:60:f3:00:14:14 [ether] on backplane
+? (10.6.2.1) at d0:67:e5:6d:cb:cc [ether] on eth0
+ccpu5.card6 (169.254.22.20) at 00:60:f4:00:16:14 [ether] on backplane
+ccpu6.card4 (169.254.20.21) at 00:60:f3:00:14:15 [ether] on backplane
+? (10.6.2.142) at 00:21:1b:fd:39:c0 [ether] on eth0
+ccpu6.card6 (169.254.22.21) at 00:60:f4:00:16:15 [ether] on backplane
+ccpu7.card4 (169.254.20.22) at 00:60:f3:00:14:16 [ether] on backplane
+ccpu1.card1 (169.254.17.16) at 00:60:f4:00:11:10 [ether] on backplane
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;if [ -e /usr/sbin/arp ]; then /usr/sbin/arp -a; else /sbin/arp -a; fi&lt;/echo&gt;
+    &lt;prompt&gt;debug@changeling-hypervisor:~$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.4</duration>
+        </item>
+        <item name="sample3">
+            <action actionType="command">
+                <command>
+                    <body>if [ -e /usr/sbin/arp ]; then /usr/sbin/arp -a; else /sbin/arp -a; fi</body>
+                </command>
+            </action>
+            <responseBody>nat (169.254.0.3) at 00:60:F3:00:00:01 [ether] on eth0
+nfs (169.254.0.2) at 00:60:F3:00:00:02 [ether] on eth0
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;dollar&lt;/promptName&gt;
+    &lt;echo&gt;if [ -e /usr/sbin/arp ]; then /usr/sbin/arp -a; else /sbin/arp -a; fi&lt;/echo&gt;
+    &lt;prompt&gt;smt-2u-03:debug$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.5</duration>
+        </item>
+        <item name="sample4">
+            <action actionType="command">
+                <command>
+                    <body>if [ -e /usr/sbin/arp ]; then /usr/sbin/arp -a; else /sbin/arp -a; fi</body>
+                </command>
+            </action>
+            <responseBody>mcpu.card0 (169.254.16.1) at 00:60:F3:00:10:01 [ether] on eth0
+ccpu7.card8 (169.254.24.22) at 00:60:F3:00:18:16 [ether] on eth0
+ccpu6.card11 (169.254.27.21) at 00:60:F4:06:1B:60 [ether] on eth0
+ccpu8.card8 (169.254.24.23) at 00:60:F3:00:18:17 [ether] on eth0
+ccpu5.card11 (169.254.27.20) at 00:60:F4:05:1B:80 [ether] on eth0
+ccpu5.card8 (169.254.24.20) at 00:60:F3:00:18:14 [ether] on eth0
+ccpu8.card11 (169.254.27.23) at 00:60:F4:08:1B:90 [ether] on eth0
+ccpu6.card8 (169.254.24.21) at 00:60:F3:00:18:15 [ether] on eth0
+ccpu7.card11 (169.254.27.22) at 00:60:F4:07:1B:70 [ether] on eth0
+ccpu3.card8 (169.254.24.18) at 00:60:F3:00:18:12 [ether] on eth0
+ccpu2.card11 (169.254.27.17) at 00:60:F4:02:1B:B0 [ether] on eth0
+ccpu4.card8 (169.254.24.19) at 00:60:F3:00:18:13 [ether] on eth0
+ccpu1.card11 (169.254.27.16) at 00:60:F4:01:1B:50 [ether] on eth0
+ccpu1.card8 (169.254.24.16) at 00:60:F3:00:18:10 [ether] on eth0
+ccpu4.card11 (169.254.27.19) at 00:60:F4:04:1B:40 [ether] on eth0
+ccpu2.card8 (169.254.24.17) at 00:60:F3:00:18:11 [ether] on eth0
+ccpu3.card11 (169.254.27.18) at 00:60:F4:03:1B:A0 [ether] on eth0
+ccpu6.card2 (169.254.18.21) at 00:60:F3:00:12:15 [ether] on eth0
+ccpu4.card4 (169.254.20.19) at 00:60:F3:00:14:13 [ether] on eth0
+ccpu5.card2 (169.254.18.20) at 00:60:F3:00:12:14 [ether] on eth0
+ccpu3.card4 (169.254.20.18) at 00:60:F3:00:14:12 [ether] on eth0
+ccpu5.card1 (169.254.17.20) at 00:60:F3:00:11:14 [ether] on eth0
+ccpu8.card2 (169.254.18.23) at 00:60:F3:00:12:17 [ether] on eth0
+ccpu2.card4 (169.254.20.17) at 00:60:F3:00:14:11 [ether] on eth0
+ccpu7.card2 (169.254.18.22) at 00:60:F3:00:12:16 [ether] on eth0
+ccpu1.card4 (169.254.20.16) at 00:60:F3:00:14:10 [ether] on eth0
+nat (169.254.0.3) at 00:60:F3:00:00:01 [ether] on eth0
+ccpu3.card1 (169.254.17.18) at 00:60:F3:00:11:12 [ether] on eth0
+ccpu2.card2 (169.254.18.17) at 00:60:F3:00:12:11 [ether] on eth0
+ccpu8.card4 (169.254.20.23) at 00:60:F3:00:14:17 [ether] on eth0
+ccpu1.card2 (169.254.18.16) at 00:60:F3:00:12:10 [ether] on eth0
+ccpu7.card4 (169.254.20.22) at 00:60:F3:00:14:16 [ether] on eth0
+nfs (169.254.0.2) at 00:60:F3:00:00:02 [ether] on eth0
+ccpu4.card2 (169.254.18.19) at 00:60:F3:00:12:13 [ether] on eth0
+ccpu6.card4 (169.254.20.21) at 00:60:F3:00:14:15 [ether] on eth0
+ccpu1.card1 (169.254.17.16) at 00:60:F3:00:11:10 [ether] on eth0
+ccpu3.card2 (169.254.18.18) at 00:60:F3:00:12:12 [ether] on eth0
+ccpu5.card4 (169.254.20.20) at 00:60:F3:00:14:14 [ether] on eth0
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;dollar&lt;/promptName&gt;
+    &lt;echo&gt;if [ -e /usr/sbin/arp ]; then /usr/sbin/arp -a; else /sbin/arp -a; fi&lt;/echo&gt;
+    &lt;prompt&gt;80-001884.E12350867:debug$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.9</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties"/>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>mcpu\\.card</regex>
+                            <start>0</start>
+                            <end>9</end>
+                        </item>
+                        <item name="slot">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>9</start>
+                            <end>10</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\s+\\(((\\d+\\.)+\\d+)\\).*</regex>
+                            <start>10</start>
+                            <end>62</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>mcpu.card8 (169.254.24.1) at 00:60:F3:00:18:01 [ether] on eth0</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="*/sbin/arp -a*"/>
+    <aliases>
+        <item name="slotCount">
+            <queryFormatString>fn:count(//slot)</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>

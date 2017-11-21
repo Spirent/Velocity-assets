@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.2.0.95bb698">
+    <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://10.108.37.143/velocity/api" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false"/>
+</SessionTemplate>

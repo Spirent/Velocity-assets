@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.2.0.95bb698">
+    <responseStructure>text/xml</responseStructure>
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="readFile">
+                <command>
+                    <body>project://v_STC_Driver/RcmFiles/Default/CM-1G-D12_Default/CM-1G-D12_Default_TestModule.xml</body>
+                </command>
+            </action>
+            <responseBody>&lt;?xml version=&quot;1.0&quot; ?&gt;&lt;rcm:RcmService version=&quot;2.0.1&quot; xmlns:rcm=&quot;urn:www.spirentcom.com:rcmAuto.xsd&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;urn:www.spirentcom.com:rcmAuto.xsd StcRcmAuto.xsd&quot;&gt;
+  &lt;rcm:resourceList category=&quot;TestModule&quot; doc=&quot;Test Module&quot; fullFileName=&quot;CM-1G-D12_Default_TestModule&quot; instances=&quot;1&quot; name=&quot;TestModule&quot; testMode=&quot;&quot;&gt;
+    &lt;rcm:resource name=&quot;TestModule&quot;&gt;
+      &lt;rcm:capability name=&quot;property&quot; type=&quot;enum&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:enum&gt;
+              &lt;rcm:enumvalue name=&quot;Model name=CM-1G-D12&quot; value=&quot;0&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;Family=Shadowcat&quot; value=&quot;1&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;Series=3000&quot; value=&quot;2&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;Agile 800 pn=80-001404&quot; value=&quot;2&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;Description=HYPERMETRICS CM 10/100/1000 DUAL MEDIA 12-PORTS&quot; value=&quot;4&quot;/&gt;
+            &lt;/rcm:enum&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+     &lt;rcm:capability name=&quot;isThisFWVersionSupported&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;true&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;cpuArch&quot; type=&quot;str&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:str value=&quot;ppc&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;cpuSpeed&quot; type=&quot;num&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:num value=&quot;200&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;memSize&quot; type=&quot;num&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:num value=&quot;1024&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;flashSize&quot; type=&quot;num&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:num value=&quot;1024&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;numOfPortGroups&quot; type=&quot;num&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:num value=&quot;6&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;siblingsPerContainer&quot; type=&quot;num&quot;&gt;
+       &lt;rcm:value&gt;
+            &lt;rcm:num value=&quot;0&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;numOfPorts&quot; type=&quot;num&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:num value=&quot;12&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;hasMcpu&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;true&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;supportsTestModuleReboot&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;true&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;supportsPortGroupReboot&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;true&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;supportedPortGroupSizes&quot; type=&quot;enum&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:enum&gt;
+              &lt;rcm:enumvalue name=&quot;1&quot; value=&quot;1&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;2&quot; value=&quot;2&quot;/&gt;
+            &lt;/rcm:enum&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;supportedTestPackages&quot; type=&quot;enum&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:enum&gt;
+              &lt;rcm:enumvalue name=&quot;l2l3&quot; value=&quot;0&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;stc&quot; value=&quot;1&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;stc_vtc&quot; value=&quot;2&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;stc_pentium4&quot; value=&quot;3&quot;/&gt;
+              &lt;rcm:enumvalue name=&quot;l4l7&quot; value=&quot;4&quot;/&gt;
+            &lt;/rcm:enum&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;supportsTimestampMeasurements&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;true&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+
+      &lt;rcm:capability name=&quot;supportsEnabledPortCountFeature&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;false&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;supportedPortSpeedModes&quot; type=&quot;enum&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:enum&gt;
+              &lt;rcm:enumvalue name=&quot;NOT_SUPPORTED&quot; value=&quot;0&quot;/&gt;
+            &lt;/rcm:enum&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;testPackageActivationRequiresCardReboot&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;false&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;testPackageActivationRequiresChassisReboot&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;false&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;numCores&quot; type=&quot;num&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:num value=&quot;6&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;dynamicPortConfiguration&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;false&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+      &lt;rcm:capability name=&quot;dynamicPortNumberingConfiguration&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;false&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;      
+      &lt;rcm:capability name=&quot;supportsPortGrouping&quot; type=&quot;bool&quot;&gt;
+        &lt;rcm:value&gt;
+            &lt;rcm:bool value=&quot;true&quot;/&gt;
+          &lt;/rcm:value&gt;
+      &lt;/rcm:capability&gt;
+    &lt;/rcm:resource&gt;
+  &lt;/rcm:resourceList&gt;
+&lt;/rcm:RcmService&gt;
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <applicabilityProperties actionType="readFile" command="project://*Default_TestModule.xml"/>
+    <aliases>
+        <item name="numOfPortGroups">
+            <queryFormatString>mapped/Xml/rcm:RcmService/rcm:resourceList/rcm:resource/rcm:capability[@name=&apos;numOfPortGroups&apos;]/rcm:value/rcm:num/@value</queryFormatString>
+        </item>
+        <item name="numOfPorts">
+            <queryFormatString>mapped/Xml/rcm:RcmService/rcm:resourceList/rcm:resource/rcm:capability[@name=&apos;numOfPorts&apos;]/rcm:value/rcm:num/@value</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>
