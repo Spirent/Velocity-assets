@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>2.0.3</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Management</interface> 
+    <entryPoint>stc.driver.2.0.3.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>IP address of the STC chassis</description>
+        </property>
+        <property optional="false">
+            <name>STC_Lab_Server</name>
+            <description>STC Lab Server IP address</description>
+        </property>                            
+    </resourceProperties>
+</resourceDriver>
