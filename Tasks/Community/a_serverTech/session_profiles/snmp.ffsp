@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.2.0.95bb698">
+    <baseApplication>com.fnfr.svt.applications.snmp</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.snmp.documents.DeviceProperties" ipAddress="192.168.1.55" ipAddress.inherit="false" writeCommunity.masked="true" writeCommunity="iRB7kootlx4=" writeCommunity.inherit="false">
+        <MibsProperties>
+            <mibsDirectory inherit="false">../mibs/</mibsDirectory>
+        </MibsProperties>
+    </sessionProperties>
+    <nickName>snmp</nickName>
+</SessionTemplate>

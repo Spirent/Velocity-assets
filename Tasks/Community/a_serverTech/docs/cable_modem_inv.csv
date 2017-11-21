@@ -1,0 +1,9 @@
+name,pwrManaged,pwrIpaddress,pwrPortId,pwrSnmpCommunity,pwrSnmpCommunityRw
+CM10,TRUE,192.168.1.55,A1,public,private
+CM11,TRUE,192.168.1.55,A2,public,private
+CM12,TRUE,192.168.1.55,A3,public,private
+CM13,TRUE,192.168.1.55,A4,public,private
+CM14,TRUE,192.168.1.55,A5,public,private
+CM15,TRUE,192.168.1.55,A6,public,private
+CM16,TRUE,192.168.1.55,A7,public,private
+CM17,TRUE,192.168.1.55,A8,public,private

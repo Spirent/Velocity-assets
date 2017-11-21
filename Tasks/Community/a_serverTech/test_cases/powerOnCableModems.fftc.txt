@@ -1,0 +1,98 @@
+============General==================
+============Steps====================
+Procedure main
+	1 #Get Power Supply Info
+		useFieldsInCommand="false"
+		1.1 eval tbml query {.//resource/propertyCollection[@name = 'Device Info']}
+			analyze
+				query count(.//deviceInfo)
+				store deviceCount
+			useResponseMapLibraryApplicability="false"
+			responseMap="project://a_serverTech/response_maps/Device_Info__.ffrm"
+			useResponseMapLibraryFromSession="false"
+			useFieldsInCommand="false"
+		1.2 for {set i 1} {$i <= $deviceCount} {incr i}
+			useFieldsInCommand="false"
+			1.2.1 #If device is power managed then provision unit
+				useFieldsInCommand="false"
+			1.2.2 if [query devices (.//pwrManaged)\\[$i\\]] == "true"
+				useFieldsInCommand="false"
+				1.2.2.1 then 
+					useFieldsInCommand="false"
+					1.2.2.1.1 #Provision the device - RW query for private community [query devices (.//pwrSnmpCommunityRw)\\[$i\\]]
+						useFieldsInCommand="false"
+					1.2.2.1.2 eval set port [string trim [query devices (.//pwrPortId)\\[$i\\]] ABC]
+						useFieldsInCommand="false"
+					1.2.2.1.3 eval set community [query devices (.//pwrSnmpCommunity)\\[$i\\]]
+						useFieldsInCommand="false"
+					1.2.2.1.4 eval set communityrw [query devices (.//pwrSnmpCommunityRw)\\[$i\\]]
+						useFieldsInCommand="false"
+					1.2.2.1.5 eval set ip [query devices (.//pwrIpaddress)\\[$i\\]]
+						useFieldsInCommand="false"
+					1.2.2.1.6 eval puts $port
+						useFieldsInCommand="false"
+					1.2.2.1.7 call serverTechPowerOn -port $port -community $community -communityrw $communityrw -ip $ip
+						useFieldsInCommand="false"
+					1.2.2.1.8 call serverTechPowerOff -port $port -community $community -communityrw $communityrw -ip $ip
+						skip="true"
+						useFieldsInCommand="false"
+Procedure serverTechPowerOn
+	1 open $ip-$port project://a_serverTech/session_profiles/snmp.ffsp
+		ipAddress="$ip"
+		ipAddress.inherit="false"
+		readcommunity.masked="true"
+		readcommunity="ZNP+c/Kz4VpTIbId1t0Hqg=="
+		readcommunity.inherit="false"
+		writeCommunity.masked="true"
+		writeCommunity="ZNP+c/Kz4Vr6xcIzLHT/3Q=="
+		writeCommunity.inherit="false"
+	2 set $ip-$port .iso.org.dod.internet.private.enterprises.serverTech.sentry3.systemTables.outletTable.outletEntry.outletControlAction.1.1.$port on
+		normalOffset="40.221"
+		estimatedStepExecutionTime="0.025"
+		setType(inherit="false")="Integer"
+	3 walk $ip-$port .iso.org.dod.internet.private.enterprises.serverTech.sentry3.systemTables.outletTable.outletEntry.outletStatus
+		analyze
+			query outletStatus("1.1.$port")
+			assert $value == "on"
+				When True
+					DeclareExecutionIssue OK:Verify port state, ip - $ip, portNo - $port, expected value: on; actual value: $value
+					PassTestIfNotAlreadyFailed 
+				When False
+					RepeatStep 0.5:
+					DeclareExecutionIssue Information:Verify port state, ip - $ip, portNo - $port, expected value: on; actual value: $value
+		normalOffset="6.687"
+		estimatedStepExecutionTime="0.099"
+	4 close $ip-$port 
+		setType(inherit="false")="Integer"
+Procedure serverTechPowerOff
+	1 open $ip-$port project://a_serverTech/session_profiles/snmp.ffsp
+		ipAddress="$ip"
+		ipAddress.inherit="false"
+		readcommunity.masked="true"
+		readcommunity="ZNP+c/Kz4VpTIbId1t0Hqg=="
+		readcommunity.inherit="false"
+		writeCommunity.masked="true"
+		writeCommunity="ZNP+c/Kz4Vr6xcIzLHT/3Q=="
+		writeCommunity.inherit="false"
+	2 set $ip-$port .iso.org.dod.internet.private.enterprises.serverTech.sentry3.systemTables.outletTable.outletEntry.outletControlAction.1.1.$port off
+		normalOffset="40.221"
+		estimatedStepExecutionTime="0.025"
+		setType(inherit="false")="Integer"
+	3 walk $ip-$port .iso.org.dod.internet.private.enterprises.serverTech.sentry3.systemTables.outletTable.outletEntry.outletStatus
+		analyze
+			query outletStatus("1.1.$port")
+			assert $value == "off"
+				When True
+					DeclareExecutionIssue OK:Verify port state, ip - $ip, portNo - $port, expected value: off; actual value: $value
+					PassTestIfNotAlreadyFailed 
+				When False
+					RepeatStep 0.5:
+					DeclareExecutionIssue Information:OK:Verify port state, ip - $ip, portNo - $port, expected value: off; actual value: $value
+		normalOffset="6.687"
+		estimatedStepExecutionTime="0.099"
+	4 close $ip-$port 
+		setType(inherit="false")="Integer"
+============Parameters===============
+parameters(escape="true")
+	parameters
+		param1

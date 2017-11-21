@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.2.0.95bb698">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="eval">
+                <command>
+                    <body>tbml query {.//resource/propertyCollection[@name = &apos;Device Info&apos;]}</body>
+                </command>
+            </action>
+            <responseBody>{
+true
+192.168.1.55
+A1
+public
+private
+} {
+true
+192.168.1.56
+A2
+public
+private
+} {
+true
+192.168.1.57
+A3
+public
+private
+}</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.block.documents.BlockMapperProperties">
+            <BlockMaps name="container">
+                <nodes>
+                    <item type="com.fnfr.svt.mapping.block.documents.ResponseMapBlock" name="deviceInfo">
+                        <maxOccurences>0</maxOccurences>
+                        <lines>
+                            <item>
+                                <tokens>
+                                    <item representativeValue="{" parser="Punctuation" isOptional="true"/>
+                                </tokens>
+                            </item>
+                            <item>
+                                <tokens>
+                                    <item representativeValue="}" parser="Punctuation" isOptional="true"/>
+                                    <item representativeValue=" " parser="Whitespace" isOptional="true" isVariable="true"/>
+                                    <item representativeValue="{" parser="Punctuation" isOptional="true"/>
+                                </tokens>
+                            </item>
+                            <item>
+                                <tokens>
+                                    <item name="pwrManaged" representativeValue="true" parser="Word" isVariable="true"/>
+                                </tokens>
+                            </item>
+                            <item>
+                                <tokens>
+                                    <item name="pwrIpaddress" representativeValue="192.168.1.55" parser="IPv4Address" isVariable="true"/>
+                                </tokens>
+                            </item>
+                            <item>
+                                <tokens>
+                                    <item name="pwrPortId" representativeValue="abc" parser="Word" isVariable="true" isWildcard="true"/>
+                                </tokens>
+                            </item>
+                            <item>
+                                <tokens>
+                                    <item name="pwrSnmpCommunity" representativeValue="public" parser="Word" isVariable="true"/>
+                                </tokens>
+                            </item>
+                            <item>
+                                <tokens>
+                                    <item name="pwrSnmpCommunityRw" representativeValue="private" parser="Word" isVariable="true"/>
+                                </tokens>
+                            </item>
+                            <item>
+                                <tokens>
+                                    <item representativeValue="}" parser="Punctuation" isOptional="true"/>
+                                    <item representativeValue=" " parser="Whitespace" isOptional="true" isVariable="true"/>
+                                    <item representativeValue="{" parser="Punctuation" isOptional="true"/>
+                                </tokens>
+                            </item>
+                            <item>
+                                <tokens>
+                                    <item representativeValue="}" parser="Punctuation" isOptional="true"/>
+                                </tokens>
+                            </item>
+                        </lines>
+                    </item>
+                </nodes>
+            </BlockMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="eval" command="tbml query *&apos;Device Info&apos;*"/>
+</ResponseMap>
