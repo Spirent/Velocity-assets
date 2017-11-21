@@ -1,0 +1,184 @@
+============General==================
+documentation="emulated l1"
+notes="Model a device called "Emulated L1 Switch 1” using the MRV template, associate it with this driver, and assign it an IP address of 127.0.0.1 (no other properties are required)
+Click “Discover” for the driver to auto-populate the port groups and ports
+Connect at least two inventory devices to this emulated L1 switch
+Create a topology connecting these two devices together with an Ethernet connection
+Reserve the topology, and the connection light should go green."
+owner="cwhitty"
+defaultStepTimeout="300"============Steps====================
+Procedure main
+	1 call getHostParameter
+		useFieldsInCommand="false"
+	2 eval set ret ""
+		useFieldsInCommand="false"
+	3 for {set i 0} {$i < [param call_count]} {incr i}
+		useFieldsInCommand="false"
+		3.1 eval set cl [split [param call_$i]]
+			useFieldsInCommand="false"
+		3.2 eval set params [lassign $cl proc]
+			useFieldsInCommand="false"
+		3.3 #message to user
+			analyze
+				none 
+				message Information:Calling a proc called $proc with these parameters: $params
+			useFieldsInCommand="false"
+		3.4 call $proc $params
+			useFieldsInCommand="false"
+	4 return $ret
+Procedure getDeviceStatus
+	1 return "online"
+Procedure getProperties
+	1 #fill known properties
+		useFieldsInCommand="false"
+	2 eval set ret "\\"Make\\":\\"Spirent Communications Inc.\\""
+		useFieldsInCommand="false"
+	3 #Retrieves the serial number and software version
+		useFieldsInCommand="false"
+	4 eval set serialNumber 3315
+		useFieldsInCommand="false"
+	5 eval set softwareVersion 2.1
+		useFieldsInCommand="false"
+	6 eval set model Emulatex1
+		useFieldsInCommand="false"
+	7 call addPropToResult -json $ret -name "Serial Number" -val $serialNumber
+		useFieldsInCommand="false"
+	8 call addPropToResult -json $ret -name "Software Version" -val $softwareVersion
+		useFieldsInCommand="false"
+	9 call addPropToResult -json $ret -name "Model" -val $model
+		useFieldsInCommand="false"
+	10 eval set ret "\\"properties\\":{$ret}"
+		useFieldsInCommand="false"
+	11 if [llength arg] > 0 & ${arg[1]} == "true"
+		useFieldsInCommand="false"
+		11.1 then 
+			useFieldsInCommand="false"
+			11.1.1 #Insert steps here for when expression is true
+				useFieldsInCommand="false"
+			11.1.2 call getUnwrappedPorts
+				useFieldsInCommand="false"
+			11.1.3 eval set ret "$ret,$ports"
+				useFieldsInCommand="false"
+	12 eval set ret "{$ret}"
+		useFieldsInCommand="false"
+	13 return $ret
+Procedure getHostParameter
+	1 eval set host ""
+		useFieldsInCommand="false"
+	2 if [info exists param property_ipAddress] == 1
+		useFieldsInCommand="false"
+		2.1 then 
+			useFieldsInCommand="false"
+			2.1.1 if [param property_ipAddress] != ""
+				useFieldsInCommand="false"
+				2.1.1.1 then 
+					useFieldsInCommand="false"
+					2.1.1.1.1 eval set host [param property_ipAddress]
+						useFieldsInCommand="false"
+	3 eval set host EmulatedL1Switch
+		useFieldsInCommand="false"
+	4 if $host == ""
+		useFieldsInCommand="false"
+		4.1 then 
+			useFieldsInCommand="false"
+			4.1.1 #Parameter ipAddress or Hostname should be specified
+				analyze
+					none 
+					assert 1 == 1
+						When True
+							DeclareExecutionIssue Error:Parameter ipAddress or Hostname should be specified.
+							FailTest 
+							AbortExecution 
+				useFieldsInCommand="false"
+	5 return $host
+Procedure getPorts
+	1 call getUnwrappedPorts
+		useFieldsInCommand="false"
+	2 eval set ret "{$ret}"
+		useFieldsInCommand="false"
+	3 return $ret
+Procedure getUnwrappedPorts
+	1 eval set ret "\\"ports\\":\\["
+		useFieldsInCommand="false"
+	2 eval set chassis EmulatedL1Switch
+		useFieldsInCommand="false"
+	3 eval set blades 1
+		useFieldsInCommand="false"
+	4 eval set ports {port1 port2}
+		useFieldsInCommand="false"
+	5 eval set statuses {online online}
+		useFieldsInCommand="false"
+	6 for {set i 0} {$i < 48} {incr i}
+		useFieldsInCommand="false"
+		6.1 eval set name port$i
+			useFieldsInCommand="false"
+		6.2 eval set status online
+			useFieldsInCommand="false"
+		6.3 eval set group "Chassis [lindex $chassis 0]/Blade [lindex $chassis 0].[lindex $blades 0]"
+			useFieldsInCommand="false"
+		6.4 if [expr $i % 2]
+			useFieldsInCommand="false"
+			6.4.1 then 
+				useFieldsInCommand="false"
+				6.4.1.1 eval set status "online"
+					useFieldsInCommand="false"
+			6.4.2 else 
+				useFieldsInCommand="false"
+				6.4.2.1 eval set status "offline"
+					useFieldsInCommand="false"
+		6.5 if $i != 0
+			useFieldsInCommand="false"
+			6.5.1 then 
+				useFieldsInCommand="false"
+				6.5.1.1 eval set ret "$ret,"
+					useFieldsInCommand="false"
+		6.6 eval set ret "$ret{\\"name\\":\\"$name\\",\\"status\\":\\"$status\\",\\"container\\":\\"$group\\"}"
+			useFieldsInCommand="false"
+	7 eval set ret "$ret\\]"
+		useFieldsInCommand="false"
+	8 return $ret
+Procedure addPropToResult
+	1 if $val != "" & $val != 0
+		useFieldsInCommand="false"
+		1.1 then 
+			useFieldsInCommand="false"
+			1.1.1 eval set delimeter ""
+				useFieldsInCommand="false"
+			1.1.2 if $json != ""
+				useFieldsInCommand="false"
+				1.1.2.1 then 
+					useFieldsInCommand="false"
+					1.1.2.1.1 eval set delimeter ","
+						useFieldsInCommand="false"
+			1.1.3 eval set json "$json$delimeter\\"$name\\":\\"$val\\""
+				useFieldsInCommand="false"
+	2 return $json
+Procedure connect
+	1 #return PASS
+		analyze
+			none 
+			assert 1 == 1
+				When True
+					DeclareExecutionIssue OK:{auto_message_true}
+					PassTestIfNotAlreadyFailed 
+				When False
+					DeclareExecutionIssue Error:{auto_message_false}
+					FailTest 
+		useFieldsInCommand="false"
+Procedure disconnect
+	1 #return PASS
+		analyze
+			none 
+			assert 1 == 1
+				When True
+					DeclareExecutionIssue OK:{auto_message_true}
+					PassTestIfNotAlreadyFailed 
+				When False
+					DeclareExecutionIssue Error:{auto_message_false}
+					FailTest 
+		useFieldsInCommand="false"
+============Parameters===============
+parameters(escape="true")
+	parameters
+		call_count="1"
+		call_0="getPorts"

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.0.1</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Layer 1 Switch</interface> 
+    <entryPoint>emulated.l1.switch.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="true">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+    </resourceProperties>
+</resourceDriver>
