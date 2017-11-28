@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><tbml xmlns="http://www.teslaalliance.org/trs/tbml/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.teslaalliance.org/trs/tbml/1.0/tbml-core.xsd">
+<header>
+<name>Any 2 Servers</name>
+<description/>
+</header>
+<illustration>
+<layer/>
+</illustration>
+<body>
+<resources>
+<resource guid="21872c47-e7e5-4bf0-8677-ada59f20d7b4" id="i1aa14ce8-6115-46ec-9351-6580729013ed" shared="true" type="device">
+<property isimportant="false" name="name">Server 2</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=2104f111-72e3-4822-9f52-70bba56fc2cd</property>
+<property isimportant="false" name="ilo_iconId">e7d74c46-ff0b-42ee-93c2-9698befc0e5e</property>
+<property isimportant="false" name="ilo_shape">RECTANGLE</property>
+
+<boundary height="100" width="100" x="383" y="186"/>
+<resource guid="51fb4c7a-c71a-4699-8c1c-84d45c53101b" id="ifcbe3c2c-46fa-430a-ae09-e55f09e010b1" type="port">
+<property isimportant="false" name="name">Port 1</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="connectivity">connected</property>
+
+<property name="inventoryName">eth5</property>
+<propertyCollection name="System Identification">
+<property id="14f82672-927d-4a3c-a15b-f12e3f6480f4" name="portNumber" type="text">5</property>
+<property id="429d5419-6fa7-33e0-e5b8-d778a089d221" name="Port Type" type="text">Ethernet</property>
+<property id="4601f782-ce4a-6a0d-2d92-9badcb6db1e8" name="Port Speed" type="integer">1000</property>
+</propertyCollection>
+</resource>
+<property name="inventoryName">pwrEdge321</property>
+<propertyCollection name="Location Information">
+<property id="14ae2c0a-0c06-f108-5a27-7dcbf67c3dd9" name="Facility" type="text"/>
+<property id="46c73e05-4c3c-e925-2fe4-c98c341f1f64" name="Room" type="text"/>
+<property id="5c0d53c5-9b10-e185-76a2-78d71d59205b" name="Floor Position" type="text"/>
+</propertyCollection>
+<propertyCollection name="System Identification">
+<property id="847b07f9-1710-4eb5-8b3f-dd8c4cbf7c46" name="ipAddress" type="text">166.34.10.10</property>
+<property id="6765c056-f437-1035-2740-26f9944b3683" name="Hostname" type="text"/>
+<property id="9bc4b2c6-4715-26fa-e621-6d0e0db6808a" name="Make" type="text"/>
+<property id="32ad9cf2-b571-9f2a-ae55-94d1a342001b" name="Model" type="text"/>
+<property id="594ccbd0-0fc6-b360-528a-aa76a9e30e44" name="Serial Number" type="text"/>
+</propertyCollection>
+</resource>
+<resource guid="3d4fd4f4-91ec-42d0-8316-c8595276721c" id="idd4d293d-86e9-4116-ab71-3c012ad9f4fa" shared="true" type="device">
+<property isimportant="false" name="name">Server 1</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=2104f111-72e3-4822-9f52-70bba56fc2cd</property>
+<property isimportant="false" name="ilo_iconId">e7d74c46-ff0b-42ee-93c2-9698befc0e5e</property>
+<property isimportant="false" name="ilo_shape">RECTANGLE</property>
+
+<boundary height="100" width="100" x="103" y="186"/>
+<resource guid="6b76eab0-7b68-472f-9d29-712e47135f31" id="ifb7c7059-d2be-4982-b2c0-b3b2407512c8" type="port">
+<property isimportant="false" name="name">Port 1</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="connectivity">connected</property>
+
+<property name="inventoryName">eth3</property>
+<propertyCollection name="System Identification">
+<property id="55e79073-039d-4b1c-9442-ebd2f7f0ca4e" name="portNumber" type="text">3</property>
+<property id="e41f4ef6-71a0-a452-1a37-1606e084d256" name="Port Type" type="text">Ethernet</property>
+<property id="a4b76f57-6665-6c4f-67e2-570c1cc092e3" name="Port Speed" type="integer">1000</property>
+</propertyCollection>
+</resource>
+<property name="inventoryName">pwrEdge755</property>
+<propertyCollection name="Location Information">
+<property id="9cd8f235-0319-ec45-4ecc-a4c61f10b9dd" name="Facility" type="text"/>
+<property id="5bf9eb2f-9d0b-1e99-da8f-033c9e82b9a5" name="Room" type="text"/>
+<property id="9c3ac2c4-d8d2-656a-35fc-2a3d4dcd811f" name="Floor Position" type="text"/>
+</propertyCollection>
+<propertyCollection name="System Identification">
+<property id="7421add2-e49c-4470-abb6-67c75944f087" name="ipAddress" type="text">166.34.10.25</property>
+<property id="cef4940e-4549-32ff-d3ef-5fb29a4108b7" name="Hostname" type="text"/>
+<property id="e4c2e92e-f6a3-96de-4dc2-cd9b623d8ccf" name="Make" type="text"/>
+<property id="9f5f7478-28c1-a099-7c82-a3e451ca32ef" name="Model" type="text"/>
+<property id="58db9157-bf48-f701-b983-5a1b80ce133a" name="Serial Number" type="text"/>
+</propertyCollection>
+</resource>
+</resources>
+<connectivity>
+<link id="i7d6e929e-7b61-4d4b-a9ce-8944c1124568">
+<property isimportant="false" name="name">Link</property>
+<property isimportant="false" name="type">Ethernet</property>
+<property isimportant="false" name="abstractResourceId"/>
+<property isimportant="false" name="abstractResourceName"/>
+<endpoint direction="bidirectional" id="ifcbe3c2c-46fa-430a-ae09-e55f09e010b1"/>
+<endpoint direction="bidirectional" id="ifb7c7059-d2be-4982-b2c0-b3b2407512c8"/>
+<extensions type="com.fnfr.rm.condition"/>
+</link>
+</connectivity>
+</body>
+</tbml>

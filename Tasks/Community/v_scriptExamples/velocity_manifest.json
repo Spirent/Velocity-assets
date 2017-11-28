@@ -1,0 +1,132 @@
+{
+  "defaultData": {
+    "headline": "%file% from Core Regression Suite",
+    "description": "%file% script run from core regression",
+    "owner": "Joe Scripter",
+    "testCaseId": "TC.CR.%file%",
+    "testCaseName": "Core Regression %file%",
+    "namespace": "CoreRegression",
+    "language": "python",
+    "hidden": false,
+    "timeout": 10,
+    "commandSequence": [
+      "%file% %parameterNameValuePairList%"
+    ],
+    "parameters": [
+      {
+        "name": "build",
+        "type": "TEXT",
+        "value": "72e8644",
+        "description": "for all scripts (from defaultData)"
+      }
+    ],
+    "executionMessages": {
+      "error": "^.*(ERROR|CRITICAL).*",
+      "info": "^.*(DEBUG|INFO).*",
+      "ok": "^.*(verified).*",
+      "warning": "^.*(WARNING).*"
+    },
+    "verdictMethod": "EXIT_CODE_VERDICT_PARSING",
+    "verdictParsing": {
+      "failTest": "Finished: FAILED",
+      "failTestIfPassing": "Failure number \\d+",
+      "passTest": "Finished: PASSED",
+      "passTestIfNotAlreadyFailed": "SUCCESS"
+    }
+  },
+  "fileSets": [
+    {
+      "fileNameMatch": "timeout\\.sh",
+      "language": "bash",
+      "timeout": 1
+    },
+    {
+      "fileNameMatch": "execution_env\\.py",
+      "requirements": [
+        {
+          "name": "product.arch",
+          "value": "x86"
+        }
+      ]
+    },
+    {
+      "fileNameMatch": "parameters_list\\.py",
+      "commandSequence": [
+        "%file% --build %param_build% --testCaseSpecificParameter %param_testCaseSpecificParameter%"
+      ],
+      "parameters": [
+        {
+          "description": "A specific parameter specific for this test",
+          "name": "testCaseSpecificParameter",
+          "type": "TEXT",
+          "value": "Default Value"
+        }
+      ]
+    },
+    {
+      "fileNameMatch": "robotDemo\\.rst",
+      "description": "This is a Robot Framework demo which requires one input parameter - dbActiveStatus. This is the database string for an online user, and the expected value is the word Active. The execution agent must have robotframework and docutils installed, e.g., pip install robotframwork docutils",
+      "commandSequence": [
+        "-m robot -b debug.txt --variable dbActiveStatus:%param_dbActiveStatus% %file%",
+        "robotDemoShowDebugFile.py"
+      ],
+      "parameters": [
+        {
+          "description": "The database status string of an online user - Active is the expected string",
+          "name": "dbActiveStatus",
+          "type": "TEXT",
+          "value": "Active"
+        }
+      ],
+      "executionMessages": {
+        "error": "^.*(\\| FAIL \\||- FAIL -).*",
+        "info": "^.*(\\[INFO\\]).*",
+        "ok": "^.*(\\| PASS \\|).*",
+        "warning": "^.*(\\[WARNING\\]).*"
+      },
+      "verdictParsing": {
+        "failTest": "Finished: FAILED|\\d tests total, \\d passed, [1-9]\\d* failed",
+        "failTestIfPassing": "Failure number \\d+",
+        "passTest": "\\d tests total, \\d passed, 0 failed",
+        "passTestIfNotAlreadyFailed": "SUCCESS"
+      }
+    },
+    {
+      "fileNameMatch": "robotDemoShowDebugFile\\.py",
+      "hidden": true
+    },
+    {
+      "fileNameMatch": "robotQuickStart/.*",
+      "hidden": true
+    },
+    {
+      "fileNameMatch": "legacy/smokeTest[0-9]+\\.tcl",
+      "description": "Smoke test %file% from the legacy suite",
+      "testCaseName": "Smoke test %file%",
+      "headline": "%file% from Smoke Test Suite",
+      "timeout": 60,
+      "language": "bash",
+      "commandSequence": [
+        "-c '/usr/bin/tclsh %file%'"
+      ]
+    },
+    {
+      "fileNameMatch": ".*\\.sh",
+      "language": "bash",
+      "commandSequence": [
+        "%file% %param_build%"
+      ]
+    },
+    {
+      "fileNameMatch": ".*\\.py",
+      "parameters": [
+        {
+          "name": "python_parameter",
+          "type": "TEXT",
+          "value": "my Python parameter",
+          "description": "for all other .py files (from fileNameMatch)"
+        }
+      ]
+    }
+  ]
+}
