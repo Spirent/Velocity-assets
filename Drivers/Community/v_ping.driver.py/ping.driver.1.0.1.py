@@ -38,30 +38,27 @@ class pingSession:
             ping = subprocess.call(["ping", "-n", "1", ipAddress], stdout=subprocess.PIPE)
 
         if ping == 0:
-          returnJson = {"ports":[]}
+            return json.loads('{"ports": []}')
         else:
-            returnJson = {'status': 'unreachable'}
+            return json.loads('{"status": "unreachable"}')
 
-        # JSON response
-        return returnJson
 
     def getProperties(self, args):
         # create resource properties dictionary
         resourceProperties = {}
 
-        # JSON response
-        returnJson = { 'properties' : resourceProperties }
+        # create properties dictionary
+        returnDictionary = { "properties" : resourceProperties }
 
         # include ports in response if argument is true
         if args[0] == 'true':
             portList = self.getPorts()
             if portList.has_key('ports'):
-                returnJson['ports'] = portList['ports']
+                returnDictionary['ports'] = portList['ports']
             else:
-                returnJson = { 'status' : 'unreachable'}
+                returnDictionary = { "status" : "unreachable"}
 
-
-        return returnJson
+        return returnDictionary
 
 # log the environment variables
 logger.debug(os.environ)
@@ -70,7 +67,7 @@ logger.debug(os.environ)
 # otherwise use hard-coded values below for development
 if 'VELOCITY_PARAM_call_count' not in os.environ:
     # development area
-    callBlock = '2'
+    callBlock = '1'
     if callBlock == '1':
         os.environ["VELOCITY_PARAM_call_count"] = '1'
         os.environ["VELOCITY_PARAM_call_0"] = 'getProperties true'
@@ -98,6 +95,5 @@ for callNumber in range(int(os.environ['VELOCITY_PARAM_call_count'])):
 
     # invoke each driver call with arguments and send output to stdout
     retVal = eval('c.'+callName+'()') if len(callArgs) < 1 else eval('c.'+callName+'(callArgs)')
-    finalReturn=json.dumps(retVal, sort_keys=True, indent=4)    
-    logger.debug(finalReturn)
-    print(finalReturn)
+    logger.debug(json.dumps(retVal))   
+    print(json.dumps(retVal))
