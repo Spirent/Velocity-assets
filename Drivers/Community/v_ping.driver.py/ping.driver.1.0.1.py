@@ -38,9 +38,11 @@ class pingSession:
             ping = subprocess.call(["ping", "-n", "1", ipAddress], stdout=subprocess.PIPE)
 
         if ping == 0:
-            return json.loads('{"ports": []}')
+            returnDictionary = {"ports": []}
         else:
-            return json.loads('{"status": "unreachable"}')
+            returnDictionary = {"status": "unreachable"}
+            
+        return returnDictionary
 
 
     def getProperties(self, args):
@@ -67,7 +69,7 @@ logger.debug(os.environ)
 # otherwise use hard-coded values below for development
 if 'VELOCITY_PARAM_call_count' not in os.environ:
     # development area
-    callBlock = '1'
+    callBlock = '2'
     if callBlock == '1':
         os.environ["VELOCITY_PARAM_call_count"] = '1'
         os.environ["VELOCITY_PARAM_call_0"] = 'getProperties true'
