@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="7.0.0.9d01ac1">
+<testCase version="7.0.0.0776cca">
     <general>
         <documentation>emulated L2</documentation>
         <notes>Model a device called &quot;Emulated L2 Switch 1” using the Cisco switch template, associate it with this driver, and assign it an IP address of 127.0.0.1 (no other properties are required)
@@ -10,7 +10,7 @@ Reserve the topology, and the connection light should go green.</notes>
         <owner>cwhitty</owner>
     </general>
     <execution defaultStepTimeout="300">
-        <parameters version="7.0.0.9d01ac1">
+        <parameters version="7.0.0.0776cca">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
                     <call_count>1</call_count>
@@ -72,44 +72,6 @@ Reserve the topology, and the connection light should go green.</notes>
                                         <processorInfo ruleType="message">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                 <message>Calling a proc called $proc with these parameters: $params</message>
-                                            </ruleProperties>
-                                        </processorInfo>
-                                    </item>
-                                </analysisRules>
-                            </postProcessing>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
-                        </item>
-                        <item guid="b078aeff-d94c-46d0-8662-e529ccf93891" action="comment">
-                            <postProcessing>
-                                <analysisRules>
-                                    <item>
-                                        <extractorInfo extractorType="none">
-                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
-                                        </extractorInfo>
-                                        <processorInfo ruleType="assert">
-                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
-                                                <expression>0 == 1</expression>
-                                                <actionsWhenTrue>
-                                                    <item actionId="DeclareExecutionIssue">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
-                                                            <message>{auto_message_true}</message>
-                                                        </actionProperties>
-                                                    </item>
-                                                    <item actionId="PassTestIfNotAlreadyFailed">
-                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                    </item>
-                                                </actionsWhenTrue>
-                                                <actionsWhenFalse>
-                                                    <item actionId="DeclareExecutionIssue">
-                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                            <message>{auto_message_false}</message>
-                                                        </actionProperties>
-                                                    </item>
-                                                    <item actionId="FailTest">
-                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                                    </item>
-                                                </actionsWhenFalse>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
