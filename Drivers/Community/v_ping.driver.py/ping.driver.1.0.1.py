@@ -6,19 +6,23 @@ import json
 import re
 import subprocess
 
-
-# create logger and set debugging level
+# create logger
 logger = logging.getLogger()
-logger.setLevel(logging.WARNING)
-#logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.DEBUG)
 # create console handler and set level
 ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+# create file handler which and set level
+#fh = logging.FileHandler('/tmp/ping.1.0.1.driver.log')
+#fh.setLevel(logging.INFO)
 # create formatter
 formatter = logging.Formatter("%(asctime)s %(levelname)-8s %(message)s")
-# add formatter to ch
+# add formatter to ch and fh
 ch.setFormatter(formatter)
-# add ch to logger
+#fh.setFormatter(formatter)
+# add ch and fh to logger
 logger.addHandler(ch)
+#logger.addHandler(fh)
 
  
 class pingSession:
@@ -59,6 +63,8 @@ class pingSession:
 
         return returnJson
 
+# log the environment variables
+logger.debug(os.environ)
  
 # get the driver call count from the external environment variables when running on a live agent
 # otherwise use hard-coded values below for development
@@ -92,4 +98,6 @@ for callNumber in range(int(os.environ['VELOCITY_PARAM_call_count'])):
 
     # invoke each driver call with arguments and send output to stdout
     retVal = eval('c.'+callName+'()') if len(callArgs) < 1 else eval('c.'+callName+'(callArgs)')
-    print(json.dumps(retVal, sort_keys=True, indent=4))
+    finalReturn=json.dumps(retVal, sort_keys=True, indent=4)    
+    logger.debug(finalReturn)
+    print(finalReturn)
