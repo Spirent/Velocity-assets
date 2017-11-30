@@ -225,7 +225,7 @@ class sshSession:
 # otherwise use hard-coded values below for development
 if 'VELOCITY_PARAM_call_count' not in os.environ:
     # development area
-    callBlock = '1'
+    callBlock = '2'
     if callBlock == '1':
         os.environ["VELOCITY_PARAM_call_count"] = '1'
         os.environ["VELOCITY_PARAM_call_0"] = 'getProperties true'
@@ -246,7 +246,7 @@ if 'VELOCITY_PARAM_call_count' not in os.environ:
     # hard-coded credentials and linux host for dev
     sshUsername = 'spirent'
     sshPassword = 'spirent'
-    sshServer = '127.0.0.1'
+    sshServer = '10.18.36.168'
 
 else:
     # derive the credentials from the os environment when running on live agent
