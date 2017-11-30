@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceDriver>
     <manifestVersion>1.4</manifestVersion>     
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <vendor>Spirent</vendor>     
     <language>python</language>     
     <interface>Management</interface> 
-    <entryPoint>ping.driver.1.0.1.py</entryPoint>
+    <entryPoint>ping.driver.py</entryPoint>
     <resourceProperties>     
         <property optional="false">
             <name>ipAddress</name>
