@@ -1,5 +1,4 @@
-Sample inventory with cable modem information - cable_modem_inv.csv
+ServerTech Power Management Task
 
-The inventory which used for the demo in included under the configuration folder
-
+This task powers up and down banks of cable modems using the Server Tech power controller.
 <b>Tags:</b> Example 
