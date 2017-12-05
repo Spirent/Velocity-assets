@@ -15,6 +15,3 @@ specified in the 'ipAddress' property. This driver works both on Linux and Windo
 
 
 
-
-
-Created on: Monday December 04 2017 21:27:01 CST

@@ -53,6 +53,3 @@ trunkName | name of trunk to create
 dnsServers | space-separated list of DNS server IP addresses
 ntpServer | hostname or IP address of ntp server
 fqdn | fqdn for this device.  Well, everything but the hostname.
-
-
-Created on: Monday December 04 2017 21:25:30 CST

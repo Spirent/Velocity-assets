@@ -52,6 +52,3 @@ bagNum | Number of bridge aggregate group to create
 Argument | Description
 ------------ | -------------
 bagNum | Number of bridge aggregate group to shutdown
-
-
-Created on: Monday December 04 2017 21:25:52 CST

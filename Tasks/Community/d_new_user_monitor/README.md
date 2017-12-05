@@ -37,6 +37,3 @@ Argument | Description
 ------------ | -------------
 userId | ID of user to modify
 username | email handle.  The LDAP username is sufficient.
-
-
-Created on: Monday December 04 2017 21:26:29 CST

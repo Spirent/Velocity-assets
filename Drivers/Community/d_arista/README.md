@@ -29,6 +29,3 @@ e.g.
     900-905
     900,902,905
 portName | 
-
-
-Created on: Monday December 04 2017 21:25:04 CST

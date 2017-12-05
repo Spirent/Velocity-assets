@@ -46,6 +46,3 @@ Argument | Description
 port1 | 
 port2 | 
 switch_id | 
-
-
-Created on: Monday December 04 2017 21:26:12 CST

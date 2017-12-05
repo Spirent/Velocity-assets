@@ -9,6 +9,3 @@ This driver requires a property called STC_Lab_Server to be present in the resou
 
 
 
-
-
-Created on: Monday December 04 2017 21:27:35 CST
