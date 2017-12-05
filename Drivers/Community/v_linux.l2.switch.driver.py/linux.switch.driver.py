@@ -276,4 +276,4 @@ for callNumber in range(int(os.environ['VELOCITY_PARAM_call_count'])):
 
     # invoke each driver call with arguments and send output to stdout
     retVal = eval('c.'+callName+'()') if len(callArgs) < 1 else eval('c.'+callName+'(callArgs)')
-    print(json.dumps(retVal, sort_keys=True, indent=4))
+    print(json.dumps(retVal))
