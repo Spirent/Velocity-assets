@@ -57,4 +57,34 @@ user who runs the script using the provided token and URI. if a topology and/or
 reservation are assocciated with the execution, that information will also be
 shown. this script requires 'requests' as an additional package
 
+Other information:
+The script below may be helpful to upload zipped project bundles to your
+Velocity instance:
+
+---------------------------------------
+
+#!/bin/bash
+
+fileName=$1
+projName=`basename $1 .zip`
+velocityUri=https://velocity700a-cal-lab.spirenteng.com
+username="spirent"
+password="spirent"
+
+zip -f $fileName
+
+curl -X PUT --data-binary "@$1" -H "X-Auth-Token:`curl -s -X GET --user $username:$password $velocityUri/velocity/api/auth/v2/token | python -c \"import sys, json; print json.load(sys.stdin)['token']\"`" $velocityUri/ito/repository/v1/repository/main/$projName -H "Content-Type:application/zip" | python -m json.tool
+
+---------------------------------------
+
+Make the necessary changes to velocityUri, username, and password
+To use the script, start in some directory like ~/v_scriptExamples where
+velocity_manifest.json exists as does your scripts and other folders. 
+First, bundle your project with: zip -r scriptExamples.zip *
+Second, upload your bundle to Velocity with: ulProj.sh scriptExamples.zip
+(where ulProj.sh is the name of this upload script)
+The script will freshen your bundle (updating the zip with any changes you have
+made to your scripts) and then upload the project to Velocity (replacing any
+existing instance of that project)
+
 <b>Tags:</b> Examples
