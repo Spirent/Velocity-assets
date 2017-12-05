@@ -1,6 +1,6 @@
 Velocity Linux Bridge L2 Switch Driver
 
-## Requirements
+Requirements
 Python on the Agent
     The agent must have Python installed: from the prompt, typing 'python'
     returns the >>> prompt
@@ -15,7 +15,7 @@ SSH login username and password credentials
     Once logged into the Linux host, the user can type 'ssh ls' and files are
     listed WITHOUT prompting for a sudo passwd
 
-## Customization
+Customization
 Prompt
     The driver uses '$ ' as the current system prompt and this may need to be
     changed by setting 'prompt' in the source file
@@ -25,7 +25,7 @@ Excluded Interface
     admin/management interface as excluded by setting 'excludedInterface' in
     the source file.
    
-## Installation
+Installation
 Driver Upload
     Upload the driver project into Velocity and give it a meaningful name like
     "Linux Switch 1.0.0"
@@ -44,5 +44,7 @@ Discover the switch's ports
     are populated as well as the creation of a new port group called 'System'
     that includes the ports to be used for L2 switching 
 
+## Changelog
+1.0.1 Initial release
 
 <b>Tags:</b> Driver, L2
