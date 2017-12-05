@@ -7,8 +7,6 @@ helpful to users starting to run external scripts within Velocity. Here is a
 
 brief description of its contents:
 
-
-
 timeout.sh - default language and timeout values are over-written. this
 
 demonstrates that the agent aborts execution if not completed within 1 minute
