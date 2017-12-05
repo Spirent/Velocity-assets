@@ -1,3 +1,5 @@
-Spirent Test Center Device Project
-Provides basic traffic quickcalls for the STC Tcl API session type and response maps for result and statistics views. Tested with STC FW version 4.75. 
-<b>Tags:</b> Test Equipment, Traffic Generator
+Spirent Test Center Management Driver
+This requires access to the STC Lab Server. The driver connects to an STC chassis via the lab server to discover what modules are installed and determine if the chassis is online or offline. The driver is not able to detect link on each port. 
+This driver requires a property called STC_Lab_Server to be present in the resource's template. The value of this property is the IP address or hostname of the STC Lab Server.
+
+ <b>Tags:</b> Test Equipment, Traffic Generator
