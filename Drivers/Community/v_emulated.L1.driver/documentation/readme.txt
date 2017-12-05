@@ -6,4 +6,4 @@ Create a topology connecting these two devices together with an Ethernet connect
 Reserve the topology, and the connection light should go green.
 
 
-<b>Tag s:</b> Driver, Emulated, L1
+<b>Tags:</b> Driver, Emulated, L1

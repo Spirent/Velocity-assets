@@ -45,4 +45,4 @@ Discover the switch's ports
     that includes the ports to be used for L2 switching 
 
 
-<b>Tag s:</b> Driver, L2
+<b>Tags:</b> Driver, L2

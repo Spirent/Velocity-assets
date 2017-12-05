@@ -5,4 +5,4 @@ Connect at least two inventory devices to this emulated L2 switch
 Create a topology connecting these two devices together with an Ethernet connection
 Reserve the topology, and the connection light should go green.
 
-<b>Tag s:</b> Driver, Emulated, L2
+<b>Tags:</b> Driver, Emulated, L2

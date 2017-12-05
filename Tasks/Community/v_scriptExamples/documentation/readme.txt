@@ -57,4 +57,4 @@ user who runs the script using the provided token and URI. if a topology and/or
 reservation are assocciated with the execution, that information will also be
 shown. this script requires 'requests' as an additional package
 
-<b>Tag s:</b> Examples
+<b>Tags:</b> Examples
