@@ -1,9 +1,6 @@
 # BigSwitch L1 Driver
 Provides basic commands for management of BigSwitch L1 switches. 
-
 <b>Tags:</b> L1
-
-
 
 1 QuickCall Library in project://d_l1_bigswitch:
 ## project://d_l1_bigswitch/session_profiles/big_switch_ssh_base.fftc (project://d_l1_bigswitch/session_profiles/big_switch_ssh_base.fftc)

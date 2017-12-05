@@ -1,9 +1,6 @@
 # HP Device Project
 Provides basic commands for management of HP servers.
-
 <b>Tags:</b> Management
-
-
 
 1 QuickCall Library in project://d_hp_5900:
 ## project://d_hp_5900/session_profiles/hp_5900_ssh_qc.fftc (project://d_hp_5900/session_profiles/hp_5900_ssh_qc.fftc)

@@ -1,9 +1,6 @@
 # Monitor New User Accounts Driver
 
-
 <b>Tags:</b> Management
-
-
 
 2 QuickCall Libraries in project://d_new_user_monitor:
 ## project://d_new_user_monitor/session_profiles/velocity_db_qc.fftc (project://d_new_user_monitor/session_profiles/velocity_db_qc.fftc)

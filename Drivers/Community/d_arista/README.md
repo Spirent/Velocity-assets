@@ -1,9 +1,6 @@
 # Arista L1 Driver
 Provides basic commands for management of Arista L2 switches. 
-
 <b>Tags:</b> L1
-
-
 
 1 QuickCall Library in project://d_arista:
 ## project://d_arista/session_profiles/arista_base_qc.fftc (project://d_arista/session_profiles/arista_base_qc.fftc)

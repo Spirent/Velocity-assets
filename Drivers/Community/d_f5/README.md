@@ -1,9 +1,6 @@
 # F5 Device Project
 Provides basic commands for management of F5 equipment.
-
 <b>Tags:</b> Management
-
-
 
 2 QuickCall Libraries in project://d_f5:
 ## project://d_f5/session_profiles/big_ip_base_qc.fftc (project://d_f5/session_profiles/big_ip_base_qc.fftc)
