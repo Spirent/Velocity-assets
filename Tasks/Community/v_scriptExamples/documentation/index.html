@@ -74,6 +74,7 @@ H1,H2{padding-left:15px}
 <DIV style='margin-left:30px; ' class='normalText'>Velocity instance:</DIV>
 <DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
 <DIV style='margin-left:30px; ' class='normalText'>---------------------------------------</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>```</DIV>
 <DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
 <DIV style='margin-left:30px; ' class='normalText'>#!/bin/bash</DIV>
 <DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
@@ -87,6 +88,7 @@ H1,H2{padding-left:15px}
 <DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
 <DIV style='margin-left:30px; ' class='normalText'>curl -X PUT --data-binary "@$1" -H "X-Auth-Token:`curl -s -X GET --user $username:$password $velocityUri/velocity/api/auth/v2/token | python -c \"import sys, json; print json.load(sys.stdin)['token']\"`" $velocityUri/ito/repository/v1/repository/main/$projName -H "Content-Type:application/zip" | python -m json.tool</DIV>
 <DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>```</DIV>
 <DIV style='margin-left:30px; ' class='normalText'>---------------------------------------</DIV>
 <DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
 <DIV style='margin-left:30px; ' class='normalText'>Make the necessary changes to velocityUri, username, and password</DIV>

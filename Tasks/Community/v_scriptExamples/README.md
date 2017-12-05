@@ -62,6 +62,7 @@ The script below may be helpful to upload zipped project bundles to your
 Velocity instance:
 
 ---------------------------------------
+```
 
 #!/bin/bash
 
@@ -75,6 +76,7 @@ zip -f $fileName
 
 curl -X PUT --data-binary "@$1" -H "X-Auth-Token:`curl -s -X GET --user $username:$password $velocityUri/velocity/api/auth/v2/token | python -c \"import sys, json; print json.load(sys.stdin)['token']\"`" $velocityUri/ito/repository/v1/repository/main/$projName -H "Content-Type:application/zip" | python -m json.tool
 
+```
 ---------------------------------------
 
 Make the necessary changes to velocityUri, username, and password
