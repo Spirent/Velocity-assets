@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.1.0</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Management</interface> 
+    <entryPoint>ping-1.1.0.fftc</entryPoint>
+    <resourceProperties>
+        <property optional="true">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+		<property optional="true">
+            <name>Hostname</name>
+            <description>Hostname of the remote device</description>
+        </property>
+    </resourceProperties>
+</resourceDriver>

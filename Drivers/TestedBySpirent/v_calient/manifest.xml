@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.0.10</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Layer 1 Switch</interface> 
+    <entryPoint>calient-1.0.10.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="true">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+		<property optional="true">
+            <name>Hostname</name>
+            <description>Hostname of the remote device</description>
+        </property>       
+        <property>
+            <name>username</name>
+            <description>username to login via SSH</description>
+        </property>        
+        <property optional="true">
+            <name>password</name>
+            <description>password to login via SSH</description>
+        </property>
+        <property>
+            <name>calientUsername</name>
+            <description>username to login to switch managment console</description>
+        </property>        
+        <property optional="true">
+            <name>calientPassword</name>
+            <description>password to login to switch managment console</description>
+        </property>  
+        <property optional="true"> 
+        	<name>SSH Port</name>
+        	<description>port for SSH connection</description>
+    	</property>
+    </resourceProperties>
+</resourceDriver>

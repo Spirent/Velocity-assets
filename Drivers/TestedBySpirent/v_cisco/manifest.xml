@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>5.3.1</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Configurable Layer 2 Switch</interface> 
+    <entryPoint>cisco-5.3.1.fftc</entryPoint>
+    <resourceProperties>
+        <property optional="true">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+		<property optional="true">
+            <name>Hostname</name>
+            <description>Hostname of the remote device</description>
+        </property>       
+        <property>
+            <name>username</name>
+            <description>username to login via SSH</description>
+        </property>        
+        <property>
+            <name>password</name>
+            <description>password to login via SSH</description>
+        </property>        
+        <property optional="true">
+            <name>SSH Port</name>
+            <description>port for SSH connection</description>
+        </property> 
+    </resourceProperties>
+</resourceDriver>

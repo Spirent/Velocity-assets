@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>SHO SWI *</body>
+                </command>
+            </action>
+            <responseBody>  Switch (&gt;20 ..)          Model  IPv4             Discovery  Link Prop  Status
+  -----------------------  -----  ---------------  ---------  ---------  ------
+* 3901                     3901   10.155.0.111     Auto Eth   Disable    Active
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;prompt&gt;=&amp;gt; &lt;/prompt&gt;
+    &lt;echo&gt;SHO SWI *&lt;/echo&gt;
+    &lt;promptName&gt;onPathPrompt&lt;/promptName&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.6</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="switches">
+                    <additionalBannerLineCount>1</additionalBannerLineCount>
+                    <banner>\\s+Switch \\(\\&gt;(\\d+)\\s+\\.\\.\\)\\s+Model\\s+IPv(\\d+)\\s+Discovery\\s+Link Prop\\s+Status\\s*</banner>
+                    <bannerStructure>Regex</bannerStructure>
+                    <columnBoundaries>Positional</columnBoundaries>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="Current">
+                            <width>2</width>
+                        </item>
+                        <item name="SwitchName">
+                            <width>25</width>
+                        </item>
+                        <item name="Model">
+                            <width>7</width>
+                        </item>
+                        <item name="IPv4">
+                            <width>17</width>
+                        </item>
+                        <item name="Discovery">
+                            <width>11</width>
+                        </item>
+                        <item name="Link_Prop">
+                            <width>11</width>
+                        </item>
+                        <item name="Status">
+                            <width>999</width>
+                        </item>
+                    </columns>
+                    <ignoreBlankLines>false</ignoreBlankLines>
+                    <autoUpdateNames>false</autoUpdateNames>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="SHO SWI .*" matchType="Regex"/>
+</ResponseMap>

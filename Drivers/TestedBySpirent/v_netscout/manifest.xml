@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>2.5.0</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Layer 1 Switch</interface> 
+    <entryPoint>netscout-2.5.0.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="true">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+		<property optional="true">
+            <name>Hostname</name>
+            <description>Hostname of the remote device</description>
+        </property>       
+        <property>
+            <name>username</name>
+            <description>username to login to switch managment console</description>
+        </property>        
+        <property optional="true">
+            <name>password</name>
+            <description>password to login to switch managment console</description>
+        </property>
+        <property optional="true"> 
+            <name>Protocol</name>
+            <description>protocol to login to switch managment console: SSH or Telnet, SSH used by default</description>
+        </property>        
+        <property optional="true"> 
+            <name>SSH Port</name>
+            <description>port for SSH connection, 22022 used by default</description>
+        </property>
+        <property optional="true"> 
+        	<name>Telnet Port</name>
+        	<description>port for telnet connection, 53058 used by default</description>
+    	</property>        
+    </resourceProperties>
+</resourceDriver>

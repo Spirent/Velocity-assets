@@ -1,0 +1,2672 @@
+<?xml version="1.0"?>
+<testCase version="5.1.0.77511">
+    <execution defaultStepTimeout="300"/>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="a899995d-339c-4573-b502-c5b203e1a3a0" action="call">
+                    <command>
+                        <body>parseSessionInfo</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7258712b-fe0b-4939-9bf4-23c81c4fbd05" action="call">
+                    <command>
+                        <body>openSession simple</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="d2da0387-a488-44ba-a65c-55e4924aa645" action="eval">
+                    <command>
+                        <body>set ret &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c847b78a-5d90-4c82-8978-7868a0e6be80" action="comment">
+                    <command>
+                        <body>executing procedures</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f67cbd34-e424-4ed8-90d9-86a020564d5c" action="eval">
+                    <command>
+                        <body>set collectedVlan &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a9c45de5-afd7-4aa6-94d5-b1aab65ce50c" action="eval">
+                    <command>
+                        <body>set collectedPorts &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="4a0fcdac-2457-4cb2-9508-f3e31bc29926" action="eval">
+                    <command>
+                        <body>set collectedPortsCount 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6fa35333-fe29-43b5-ad58-95cfd0447653" action="eval">
+                    <command>
+                        <body>set collectedVlanCommand &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c3ca4a81-8ae4-4227-abe1-7716fd027871" action="eval">
+                    <command>
+                        <body>set collectedVlanCommandBatch &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c913c699-6d7e-424a-94f5-7dfc27bc8d02" action="eval">
+                    <command>
+                        <body>set newConfig &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="65c5d151-6a44-484c-b58e-0009acbe2ec0" action="eval">
+                    <command>
+                        <body>set newConfigSize 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="749e7df0-a485-4ec7-b8f7-0dea53ef8acd" action="eval">
+                    <command>
+                        <body>set newImage &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="ac7ff579-2a4f-406e-bc0c-a50734482be4" action="eval">
+                    <command>
+                        <body>set newImageSize 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="da75322c-18d3-46e2-8243-5aa574e24c93" action="eval">
+                    <command>
+                        <body>set collectedTrunkMode 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="74aa63e8-e0b7-49f6-9cf5-3a076f3a83ba" action="for">
+                    <command>
+                        <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4c372e3a-f124-48ff-af4d-d6a3fdcbc4e4" action="eval">
+                            <command>
+                                <body>set cl [split [param call_$i]]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="6017cc4a-20a1-4b3e-b010-7a4b99ae1cfc" action="eval">
+                            <command>
+                                <body>set params [lassign $cl proc]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="87b068ca-5449-4e25-bdbb-02644a496f6e" action="if">
+                            <command>
+                                <body>$proc == &quot;addToVlan&quot; || $proc == &quot;removeFromVlan&quot;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="e83799c2-4b7d-4c61-a0f6-c0e89fceb964" action="then">
+                                    <nestedSteps>
+                                        <item guid="e243be5f-906f-404c-ae17-a9ba76e3ac14" action="comment">
+                                            <command>
+                                                <body>Insert steps here for when expression is true</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="68ea8473-95be-448f-906b-d511a34fce4b" action="eval">
+                                            <command>
+                                                <body>set curVlan [lindex $params 0]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="fae25ff1-fccd-4b8e-9251-471affb61b04" action="eval">
+                                            <command>
+                                                <body>set curPort [lindex $params 1]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="6467fa8d-e077-45f9-9dff-fd0c11dfd3fb" action="eval">
+                                            <command>
+                                                <body>set curTaggedValue [lindex $params 2]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="c3bc6926-cbb2-41b3-b466-2c4e7d47b420" action="eval">
+                                            <command>
+                                                <body>set curTrunkMode [call getIsInTrunkModeByTaggedValue -taggedValue $curTaggedValue]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="377248e3-45fd-40b2-bf48-96c976c23820" action="if">
+                                            <command>
+                                                <body>$curTrunkMode != 1</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="31c3d43e-5708-45e3-a98b-9893970745ee" action="then">
+                                                    <nestedSteps>
+                                                        <item guid="8e8320f9-c659-49b2-a744-f724c021171e" action="comment">
+                                                            <command>
+                                                                <body>Need to put dynamic-mode ports to access mode</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="1210fcda-f768-4ca9-b57c-bb68542ae5e7" action="call">
+                                                            <command>
+                                                                <body>switchPortToAccessModeIfDynamic -portName $curPort</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="06324ca6-9b02-4b03-ba6b-3674473eb60c" action="if">
+                                            <command>
+                                                <body>$collectedVlan != $curVlan &amp;&amp; $collectedVlan != &quot;&quot; || $collectedTrunkMode != $curTrunkMode &amp;&amp; $collectedPortsCount != 0 || $collectedVlanCommand != $proc &amp;&amp; $collectedVlanCommand != &quot;&quot; &amp;&amp; $collectedVlan != &quot;&quot;</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="971a42c1-8477-43e3-9085-8048784723f1" action="then">
+                                                    <nestedSteps>
+                                                        <item guid="26bf5564-67be-4fb7-954a-049f68dc5686" action="comment">
+                                                            <command>
+                                                                <body>Insert steps here for when expression is true</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="9ae1b23c-363c-4f75-966a-1522a2ee8454" action="call">
+                                                            <command>
+                                                                <body>$collectedVlanCommandBatch -vlan $collectedVlan -ports $collectedPorts -trunkMode $collectedTrunkMode</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="020696df-f4d5-4056-bb60-8f406f57d84b" action="eval">
+                                                            <command>
+                                                                <body>set collectedVlan &quot;&quot;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="e9bccf81-cbba-4441-87c4-f4b31014e3ea" action="eval">
+                                                            <command>
+                                                                <body>set collectedPorts &quot;&quot;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="33803f16-1d1d-4b9d-9035-77722b0ab85b" action="eval">
+                                                            <command>
+                                                                <body>set collectedPortsCount 0</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="ae94e144-fc26-4563-98f9-276c18f8a166" action="eval">
+                                            <command>
+                                                <body>set collectedVlan $curVlan</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="bab1edb7-e550-4fe5-b1f2-f0c5fba06c33" action="eval">
+                                            <command>
+                                                <body>set collectedTrunkMode $curTrunkMode</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="54c6f793-7f81-4175-91df-f479c3c09b93" action="eval">
+                                            <command>
+                                                <body>set collectedVlanCommand $proc</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="3f9d8353-1f97-409f-ab0a-45a334f15982" action="if">
+                                            <command>
+                                                <body>$proc == &quot;addToVlan&quot;</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="1bd50aad-1ef3-404f-91ce-306e1846a2e2" action="then">
+                                                    <nestedSteps>
+                                                        <item guid="3afe5bf5-9d79-4496-b408-a9713c2f7827" action="eval">
+                                                            <command>
+                                                                <body>set collectedVlanCommandBatch &quot;batchAddToVlan&quot;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="0f19ad7f-e602-4921-bbe7-d6bcec543db4" action="elseif">
+                                                    <command>
+                                                        <body>$proc == &quot;removeFromVlan&quot;</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="18b9728b-861d-4d4f-982b-ff19050ce3d3" action="eval">
+                                                            <command>
+                                                                <body>set collectedVlanCommandBatch &quot;batchRemoveFromVlan&quot;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="cc99bbb5-2307-4c57-bb08-e2606d2d254e" action="if">
+                                            <command>
+                                                <body>$collectedPorts != &quot;&quot;</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="09f9977d-fc34-41e8-809b-31141ac38495" action="then">
+                                                    <nestedSteps>
+                                                        <item guid="c28693c5-6f04-40de-950f-0f7c3518388c" action="comment">
+                                                            <command>
+                                                                <body>Insert steps here for when expression is true</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="cfc160b2-8194-4144-a5cd-fe2bbcdf8db9" action="eval">
+                                                            <command>
+                                                                <body>set collectedPorts &quot;$collectedPorts ,&quot;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="f761fd01-9098-4e33-926b-d01ef21c21c4" action="eval">
+                                            <command>
+                                                <body>set collectedPorts &quot;$collectedPorts $curPort&quot;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="e457ffec-40b5-492e-a335-99eb4d59387d" action="eval">
+                                            <command>
+                                                <body>incr collectedPortsCount</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="0c1de4ec-9483-44fb-94eb-e5365c78a5d7" action="if">
+                                            <command>
+                                                <body>$collectedPortsCount &gt;= 5</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="b965b1d6-f24a-4548-8db5-2807d26b61a1" action="then">
+                                                    <nestedSteps>
+                                                        <item guid="e1c861c6-9dee-4cc8-aab3-dbf41beded69" action="comment">
+                                                            <command>
+                                                                <body>Insert steps here for when expression is true</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="dd73b12a-a029-4279-b159-ad55290992be" action="call">
+                                                            <command>
+                                                                <body>$collectedVlanCommandBatch -vlan $collectedVlan -ports $collectedPorts -trunkMode $collectedTrunkMode</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="4f48722b-2aff-4a22-92a2-d87d5e84d5d7" action="eval">
+                                                            <command>
+                                                                <body>set collectedPorts &quot;&quot;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="d016a691-5add-4f75-9cae-474a1d2cdcfa" action="eval">
+                                                            <command>
+                                                                <body>set collectedPortsCount 0</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="727f2f28-33a6-469d-8108-8de5c2832ae5" action="eval">
+                                                            <command>
+                                                                <body>set collectedVlan &quot;&quot;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="5b583609-af85-483c-8f91-99f7208d1cf6" action="eval">
+                                                            <command>
+                                                                <body>set collectedTrunkMode 0</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="52f14e6c-8347-4a27-a520-bcc05af320d8" action="elseif">
+                                    <command>
+                                        <body>$proc == &quot;setConfig&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="738683fc-d485-4e31-8a24-30b89e82d0f8" action="eval">
+                                            <command>
+                                                <body>set newConfigSize [lindex $params 0]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="99d77932-d9e0-49ef-bd2f-642c9cb10738" action="eval">
+                                            <command>
+                                                <body>set newConfig [lindex $params 1]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="2983d461-49cc-42f4-8dbf-89af86c372a6" action="elseif">
+                                    <command>
+                                        <body>$proc == &quot;setImage&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="f92396ba-c934-43c5-adde-8ef9f0fa74f1" action="eval">
+                                            <command>
+                                                <body>set newImageSize [lindex $params 0]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="107b52e3-0a70-4422-92e0-f194f0666297" action="eval">
+                                            <command>
+                                                <body>set newImage [lindex $params 1]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="cb136783-f53f-4eef-a091-580f09757701" action="else">
+                                    <nestedSteps>
+                                        <item guid="6a080c42-dc15-491d-9bb9-2a49c87b2b32" action="comment">
+                                            <command>
+                                                <body>Insert steps here for when expression is false</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="1ccb1e19-b714-41c3-acef-d21f0108a92e" action="call">
+                                            <command>
+                                                <body>$proc $params</body>
+                                            </command>
+                                            <postProcessing>
+                                                <storeResponseAt>ret</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="80c6ac36-fae8-4d73-9e59-62fd072b0f64" action="if">
+                    <command>
+                        <body>$collectedVlan != &quot;&quot; &amp; $collectedPorts != &quot;&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="78ac9b25-ed7d-4e5f-a35f-63eebb35b8aa" action="then">
+                            <nestedSteps>
+                                <item guid="cb88a491-2d8d-4431-a4ce-841b79a1a020" action="comment">
+                                    <command>
+                                        <body>Insert steps here for when expression is true</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="8c7cd4e0-15ac-441d-bd8a-70425c072ae1" action="call">
+                                    <command>
+                                        <body>$collectedVlanCommandBatch -vlan $collectedVlan -ports $collectedPorts -trunkMode $collectedTrunkMode</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="89fd45ca-f029-42cf-8a2f-62cc39bfb184" action="call">
+                    <command>
+                        <body>setConfigAndImage $newConfigSize $newConfig $newImageSize $newImage</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f929f131-a1d9-4ec2-b143-b3a44c209268" action="close" session="s1">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>1 == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="1108b0c6-6efa-4f63-81cb-36c521b1f9ae" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="switchPortToAccessModeIfDynamic">
+            <steps>
+                <item guid="118b215f-7348-40e9-918a-b917e3aa9e2d" action="comment">
+                    <command>
+                        <body>Check that iface is not in access and trunk mode</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="e5755d05-3ff1-4bc5-90a5-8fe74c18b7f0" action="command" session="s1">
+                    <command>
+                        <body>sh int ${portName} switchport</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>Administrative Mode: dynamic</searchString>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>isDynamicModeOn</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="e3828834-b323-402c-a88f-b46ad90c8c6d" action="if">
+                    <command>
+                        <body>$isDynamicModeOn != 1</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6f1d181f-5b60-44a1-81e5-6bb39056dc4c" action="then">
+                            <nestedSteps>
+                                <item guid="9834d8d6-f67c-4d4c-aae9-277088aa29b5" action="return">
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="e52a6ba3-0ab6-48a5-bfa1-027ecf8e8e61" action="comment">
+                    <command>
+                        <body>Iface is not in access/trunk, switch it to access</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="88b01ce9-57d5-4f0f-92c0-2ca0dad797fb" action="command" session="s1">
+                    <command>
+                        <body>configure terminal</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="322ba50d-9faf-4b95-bffe-032026fd2657" action="command" session="s1">
+                    <command>
+                        <body>int ${portName}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="484822ec-ae44-46dd-a05b-c8850ed2a0e0" action="command" session="s1">
+                    <command>
+                        <body>switchport mode access</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>^</searchString>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Cannot switch port from dynamic to access mode</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="AbortTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="SkipRemainingRules">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.*</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>{value}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="e12fa565-ddb7-4f58-a63b-b81190c592d7" action="command" session="s1">
+                    <command>
+                        <body>end</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="40d508db-f84a-4a4b-80a1-d4a9c00401c2" action="return">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getIsInTrunkModeByTaggedValue">
+            <steps>
+                <item guid="a4536d49-a67d-4d7a-9e50-39c57f503ea4" action="if">
+                    <command>
+                        <body>$taggedValue == &quot;tagged&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ba279f51-a56e-4dd4-aac1-9b9f3d001d70" action="then">
+                            <nestedSteps>
+                                <item guid="29c64ff2-6cf8-4ad6-b605-8c80b496a685" action="comment">
+                                    <command>
+                                        <body>Insert steps here for when expression is true</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="4ba390f6-513b-40b5-ac56-a40fcf0dd8a8" action="return">
+                                    <command>
+                                        <body>1</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="b1ea7d05-1332-4561-bdc9-f10a16f4b6ca" action="else">
+                            <nestedSteps>
+                                <item guid="695f0577-028d-4c81-a1c7-8cb2cb221485" action="comment">
+                                    <command>
+                                        <body>Insert steps here for when expression is false</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="b2879f46-bfd3-460f-bdaa-f6e7c3a2f69a" action="return">
+                                    <command>
+                                        <body>0</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="parseSessionInfo">
+            <steps>
+                <item guid="5bcbaffc-5e3e-4e59-954e-3f8c8a1cbf7a" action="call">
+                    <command>
+                        <body>getHostParameter</body>
+                    </command>
+                    <postProcessing isStoreResponseGlobal="true">
+                        <storeResponseAt>addr</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="ed8f1bbf-7ab4-4d72-9ec3-f93e34749228" action="eval">
+                    <command>
+                        <body>gset port [param property_SSH_Port 22]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f95aea18-de09-4d51-8977-4c94a5f23c72" action="eval">
+                    <command>
+                        <body>gset password [param property_password]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="openSession">
+            <steps>
+                <item guid="f6741a65-a719-4fb6-9978-b644386254ec" action="eval">
+                    <command>
+                        <body>set tryhard ${arg[1]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="2e9355ba-f69d-450d-af28-11ac86aa12f3" action="if">
+                    <command>
+                        <body>$tryhard == &quot;tryhard&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9e41359e-5913-415b-b311-baa4444f61ea" action="then">
+                            <nestedSteps>
+                                <item guid="06202cdf-da1a-4a48-856f-f29c1211f010" action="call">
+                                    <command>
+                                        <body>openSessionTryHard</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="f217695a-2e4c-496f-8978-0d945151da24" action="else">
+                            <nestedSteps>
+                                <item guid="fc42fe89-7a5f-4c24-be6c-66e2be6d3d5b" action="call">
+                                    <command>
+                                        <body>openSessionSimple</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="14fd310b-075d-4b64-b9b3-d1a051d0a2a2" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>enable</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <promptProperties>
+                            <stepPrompts>
+                                <item name="Password">
+                                    <Content>Password: </Content>
+                                </item>
+                            </stepPrompts>
+                            <alsoUseSessionPrompts inherit="false" defaultValue=""/>
+                        </promptProperties>
+                    </applicationProperties>
+                </item>
+                <item guid="33fbd6fa-330c-41a7-8900-33f8c5363a28" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>[gget password]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getProperties">
+            <steps>
+                <item guid="35d8eefe-6f00-4e0e-abf4-03afd6f70a90" action="eval">
+                    <command>
+                        <body>set ret &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="23fd0e26-3395-4e94-9a15-803c64c8f368" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;physicalClass&quot; -val &quot;chassis&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="575191f9-980c-428b-acde-5ad3b2a5e53f" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;functionalClass&quot; -val &quot;Ethernet Switch&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="873ac85d-1042-44c0-bb86-da4559346877" action="command" session="s1">
+                    <command>
+                        <body>sh ver</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                        <query>mapped/Tabular/table1/table/row[1]/Model</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>modelName</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                        <query>mapped/Tabular/table1/table/row[1]/SW_Version</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>versionSoftware</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                        <query>mapped/Tabular/table1/table/row[1]/Ports</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>numberPorts</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                        <storeResponseAt>ver</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="eed9b506-de78-4751-807a-f32cd858ae98" action="eval">
+                    <command>
+                        <body>set description [string range $ver 0 [string first &quot;\\n&quot; $ver]]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c6a9119f-1c55-494e-9491-eaa076beb3fa" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;description&quot; -val $description</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="5b43ac81-38c4-4dbc-8fe8-4b22a310890e" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;manufacturerName&quot; -val &quot;Cisco Systems, Inc.&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="3cd88c7c-e703-44dd-a8c3-4a5e77b0b432" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;modelName&quot; -val $modelName</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="9623b480-0eeb-4950-8dd8-fa612f9536ed" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;versionSoftware&quot; -val $versionSoftware</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c2f3ccac-5409-4c7d-81c2-797e00ffe1db" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;numberPorts&quot; -val $numberPorts</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="bcc12067-7a4a-46cf-a9f9-f83526e1b44a" action="eval">
+                    <command>
+                        <body>set ret &quot;\\&quot;properties\\&quot;:{$ret}&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="1e8d020d-1abe-4502-994c-0bba380d9953" action="if">
+                    <command>
+                        <body>[llength arg] &gt; 0 &amp; ${arg[1]} == &quot;true&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e525c8b4-6c5b-49df-bdb7-89ddbbc82d6a" action="then">
+                            <nestedSteps>
+                                <item guid="92b34532-1955-4da6-86d8-4e6801ce3a58" action="comment">
+                                    <command>
+                                        <body>Insert steps here for when expression is true</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="21747017-6062-486e-b242-3a0a5b6d14a2" action="call">
+                                    <command>
+                                        <body>getUnwrappedPorts</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>ports</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="18de89cd-bf68-4358-8ef4-e7759fc29f6c" action="eval">
+                                    <command>
+                                        <body>set ret &quot;$ret,$ports&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="bdb299e4-1fe1-46bc-bd63-52ea5979298f" action="eval">
+                    <command>
+                        <body>set ret &quot;{$ret}&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="69f9ab27-5766-4f0a-ae48-72e97e011315" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="addPropToResult">
+            <steps>
+                <item guid="134a3195-b85c-4a91-869f-0d71625e8d15" action="if">
+                    <command>
+                        <body>$val != &quot;&quot; &amp; $val != 0</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7ef85d76-3099-4565-bae8-340737c05d66" action="then">
+                            <nestedSteps>
+                                <item guid="94100ecd-0bda-4bad-9166-b1d0a8f91e0b" action="eval">
+                                    <command>
+                                        <body>set delimeter &quot;&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="072089e3-9581-4d50-8648-cb9dd08c0416" action="if">
+                                    <command>
+                                        <body>$json != &quot;&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="c40b7a84-8039-4c06-b9f8-2d4c22204aea" action="then">
+                                            <nestedSteps>
+                                                <item guid="7d28d237-365e-4842-85d9-fa5228a5c95b" action="eval">
+                                                    <command>
+                                                        <body>set delimeter &quot;,&quot;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="91ba8b0b-9bd8-4bb4-b0dd-38397e3a3938" action="eval">
+                                    <command>
+                                        <body>set json &quot;$json$delimeter\\&quot;$name\\&quot;:\\&quot;$val\\&quot;&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="69ce445c-3d27-42e8-9834-298cba129996" action="return">
+                    <command>
+                        <body>$json</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="json">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="name">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="val">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="getPorts">
+            <steps>
+                <item guid="f463c563-252f-401d-9f1a-4e61f220ce55" action="call">
+                    <command>
+                        <body>getUnwrappedPorts</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="98676d85-dc87-41b1-b6bf-c682f4180e0c" action="eval">
+                    <command>
+                        <body>set ret &quot;{$ret}&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="2750310e-2c50-442e-b00f-ce2413b30c21" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getUnwrappedPorts">
+            <steps>
+                <item guid="7dc40cf8-f9eb-4fd9-8ccf-aaeb627633f9" action="command" session="s1">
+                    <command>
+                        <body>sh int status</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                        <query>mapped/Tabular/table1/table/row[*]/Port</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>ports</storageLocation>
+                                        <storeInAList>true</storeInAList>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                        <query>mapped/Tabular/table1/table/row[*]/Port_Name</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>portNames</storageLocation>
+                                        <storeInAList>true</storeInAList>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>Status_all()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>statuses</storageLocation>
+                                        <storeInAList>true</storeInAList>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="c9993d1e-d096-48b2-8c77-636d9e42fe99" action="if">
+                    <command>
+                        <body>0 == [llength $ports]</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="90702dc8-3f25-435b-9538-584e4f7b20b3" action="then">
+                            <nestedSteps>
+                                <item guid="7c01ea5a-91c1-483d-af06-19ce23ad148a" action="comment">
+                                    <command>
+                                        <body>Insert steps here for when expression is true</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="2ee56bbe-30d8-48b3-909e-bfd4e0a538bd" action="eval">
+                                    <command>
+                                        <body>set ports $portNames</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="2f1e4788-d1d4-46f1-ad8d-d340314cc9be" action="eval">
+                    <command>
+                        <body>set ret &quot;\\&quot;ports\\&quot;:\\[&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="8097a91d-44ba-4a96-8913-beac3cd7f409" action="for">
+                    <command>
+                        <body>{set i 0} {$i &lt; [llength $ports]} {incr i}</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e0338d5c-7559-44fe-80ff-d35e06c7c4b7" action="eval">
+                            <command>
+                                <body>set name [lindex $ports $i]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="c3df74ac-c409-45e7-ac49-fbda7b81c3a4" action="eval">
+                            <command>
+                                <body>set signal [lindex $statuses $i]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="46734f73-c498-462d-a0ff-df46c2166056" action="if">
+                            <command>
+                                <body>$signal == &quot;connected&quot;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="d533e633-6c8e-472a-adab-99058fa65e57" action="then">
+                                    <nestedSteps>
+                                        <item guid="fdc7100f-de72-4b57-8753-052f6de8a34a" action="eval">
+                                            <command>
+                                                <body>set status online</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="04a5de56-f288-49d7-bdf6-d9c751b71ba4" action="else">
+                                    <nestedSteps>
+                                        <item guid="2ee9ee10-c926-4797-8f1a-1c1e1ce5ba5d" action="eval">
+                                            <command>
+                                                <body>set status offline</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="437ff444-dc8d-4ef1-a0ec-301f82b73281" action="if">
+                            <command>
+                                <body>$i != 0</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="def36ff7-4c72-4996-8c73-f6ff2af6d02d" action="then">
+                                    <nestedSteps>
+                                        <item guid="3ec54c45-9c76-4259-8ee6-b3302aa9f74a" action="eval">
+                                            <command>
+                                                <body>set ret &quot;$ret,&quot;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="e14bb446-175d-478c-aa28-61d4497cadd1" action="eval">
+                            <command>
+                                <body>set ret &quot;$ret{\\&quot;name\\&quot;:\\&quot;$name\\&quot;,\\&quot;status\\&quot;:\\&quot;$status\\&quot;}&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="1de70137-8e90-41e5-99a6-0a74e4432e58" action="eval">
+                    <command>
+                        <body>set ret &quot;$ret\\]&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="87a51898-c669-4149-b02d-81f130fec2a6" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="openSessionSimple">
+            <steps>
+                <item guid="88d02c7a-2d80-4857-9acd-e185d8166003" action="open" session="s1">
+                    <command>
+                        <body>application:com.fnfr.svt.applications.ssh</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                            <TerminalProperties>
+                                <terminalSizeProperties>
+                                    <termWidth inherit="false">512</termWidth>
+                                    <widthSizing inherit="false">FIXED</widthSizing>
+                                </terminalSizeProperties>
+                                <prompts merge="true">
+                                    <item name="Base" MatchMethod="WILDCARD">
+                                        <Content>*#</Content>
+                                    </item>
+                                    <item name="Base2" MatchMethod="WILDCARD">
+                                        <Content>*&gt;</Content>
+                                    </item>
+                                    <item name="More" TypeOfPrompt="MORE">
+                                        <Content> --More-- </Content>
+                                    </item>
+                                </prompts>
+                            </TerminalProperties>
+                            <ipAddress inherit="false">[gget addr]</ipAddress>
+                            <port inherit="false">[gget port]</port>
+                            <user inherit="false">[param property_username]</user>
+                            <password inherit="false">0HzJhc4quU9wTe1HNqTuWQ==</password>
+                            <connectTimeout inherit="false" defaultValue=""/>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+            </steps>
+        </item>
+        <item name="openSessionTryHard">
+            <steps>
+                <item guid="9bbaed73-36ce-4d8a-9834-50fa1f3f0f6c" action="open" session="s1">
+                    <command>
+                        <body>application:com.fnfr.svt.applications.ssh</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                            <TerminalProperties>
+                                <terminalSizeProperties>
+                                    <termWidth inherit="false">512</termWidth>
+                                    <widthSizing inherit="false">FIXED</widthSizing>
+                                </terminalSizeProperties>
+                                <prompts merge="true">
+                                    <item name="Base" MatchMethod="WILDCARD">
+                                        <Content>*#</Content>
+                                    </item>
+                                    <item name="Base2" MatchMethod="WILDCARD">
+                                        <Content>*&gt;</Content>
+                                    </item>
+                                    <item name="More" TypeOfPrompt="MORE">
+                                        <Content> --More-- </Content>
+                                    </item>
+                                </prompts>
+                            </TerminalProperties>
+                            <ipAddress inherit="false">[gget addr]</ipAddress>
+                            <port inherit="false">[gget port]</port>
+                            <user inherit="false">[param property_username]</user>
+                            <password inherit="false">0HzJhc4quU9wTe1HNqTuWQ==</password>
+                            <retryCount inherit="false">60</retryCount>
+                            <connectTimeout inherit="false">10</connectTimeout>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+            </steps>
+        </item>
+        <item name="getDeviceStatus">
+            <steps>
+                <item guid="27c21547-f70b-4dd5-8915-d9173604f5a3" action="return">
+                    <command>
+                        <body>online</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="createVlan">
+            <steps>
+                <item guid="6e7a2dca-532d-484e-94bc-37ab4e7247f0" action="comment">
+                    <command>
+                        <body>this is NOOP, since Catalyst can automatically create vlans</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7cda8040-e767-4cfa-9be4-75121341ad30" action="return">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="batchAddToVlan">
+            <steps>
+                <item guid="77016b57-de91-42fc-bbed-f599b7d6cee4" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>configure terminal</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="86219bd5-472e-4b77-8391-9df48f6c7248" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>vlan ${vlan}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="c26c6ff6-8cea-4960-bd3f-91792897341a" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>int range ${ports}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="d3d64365-3f67-4faa-a867-140e92c2f08c" action="if">
+                    <command>
+                        <body>$trunkMode != 1</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="11f5dbde-32f0-4b80-b861-0c966a7deedc" action="then">
+                            <nestedSteps>
+                                <item guid="ecdddd05-4cf1-41b6-b252-60f2e35122b2" action="comment">
+                                    <command>
+                                        <body>Access mode. Set trunk mode native VLAN also</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="5efc015e-d67c-45e5-8bc3-e508ca50b98d" action="command" session="s1">
+                                    <command>
+                                        <body>switchport trunk native vlan ${vlan}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="f59573d0-3295-471c-908f-c6d100705b63" action="command" session="s1" useAutoMap="false">
+                                    <command>
+                                        <body>switchport access vlan ${vlan}</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="contains">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                        <searchString>^</searchString>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>$value == 1</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>Invalid port</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="AbortTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="SkipRemainingRules">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="regex">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                                        <regex>.*</regex>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>$value eq &quot;&quot;</expression>
+                                                        <actionOnMultiple>True if all true</actionOnMultiple>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>{value}</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="cf179010-0079-4e68-ade6-65d8ba6819e0" action="else">
+                            <nestedSteps>
+                                <item guid="79949d8f-ae7c-43aa-94f0-67b21e0b30e3" action="comment">
+                                    <command>
+                                        <body>Trunk mode</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="33d3ea7b-d575-4ec7-9408-a1ecaea8ee52" action="command" session="s1">
+                                    <command>
+                                        <body>switchport trunk encapsulation dot1q</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="85016a91-93f5-494a-a00d-87e8a8788b74" action="command" session="s1">
+                                    <command>
+                                        <body>switchport mode trunk</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="contains">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                        <searchString>^</searchString>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>$value == 1</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>Invalid port</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="AbortTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="SkipRemainingRules">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="regex">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                                        <regex>.*</regex>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>$value eq &quot;&quot;</expression>
+                                                        <actionOnMultiple>True if all true</actionOnMultiple>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>{value}</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="929f8e7d-946d-41bb-a3cf-cd90231b4dcc" action="command" session="s1">
+                                    <command>
+                                        <body>switchport trunk allowed vlan add ${vlan}</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="contains">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                        <searchString>^</searchString>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>$value == 1</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>Invalid port</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="AbortTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="SkipRemainingRules">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="regex">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                                        <regex>.*</regex>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>$value eq &quot;&quot;</expression>
+                                                        <actionOnMultiple>True if all true</actionOnMultiple>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>{value}</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="62afbdcf-a749-4406-b892-6ccb0731cae3" action="command" session="s1">
+                    <command>
+                        <body>end</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+        <item name="batchRemoveFromVlan">
+            <steps>
+                <item guid="1d644c7d-0a5f-41fe-b4ae-36b5e918be46" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>configure terminal</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="7446c89c-0636-4ff7-a2ea-e9654069d896" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>int range $ports</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="03dee936-0f62-426e-a518-0d51bae64f56" action="if">
+                    <command>
+                        <body>$trunkMode != 1</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="392c6ef0-4561-49bf-929b-223615f3a086" action="then">
+                            <nestedSteps>
+                                <item guid="78b03eed-3604-4bd7-be8c-88e3fa9c3ec5" action="comment">
+                                    <command>
+                                        <body>Access mode</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="96a10b82-8c62-4eee-b3fe-b9e2c5a65ca1" action="command" session="s1" useAutoMap="false">
+                                    <command>
+                                        <body>no switchport access vlan ${vlan}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="581838a4-3b5e-4646-8413-86abc784e7cd" action="comment">
+                                    <command>
+                                        <body>set native trunk vlan to default value</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="b09cd687-1527-4962-aba5-78493db52f51" action="command" session="s1">
+                                    <command>
+                                        <body>switchport trunk native vlan 1</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="1a46a58c-6b4e-4f4c-b25e-194624db1514" action="else">
+                            <nestedSteps>
+                                <item guid="6c4df952-597a-4a91-b1db-18bbc0cf1afb" action="comment">
+                                    <command>
+                                        <body>Trunk mode</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="7521be55-e82b-47b9-9640-2592ea09b004" action="command" session="s1">
+                                    <command>
+                                        <body>switchport trunk allowed vlan remove ${vlan}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6653c800-d00b-4922-8cf5-ed7543d24f55" action="command" session="s1">
+                    <command>
+                        <body>end</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+        <item name="destroyVlan">
+            <steps>
+                <item guid="da7e028a-45f1-4a30-9ca5-ce55fa089927" action="comment">
+                    <command>
+                        <body>NOOP as we cannot get VLAN ports&apos; list for trunk ports.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="cb8bf54e-2fea-4d26-895a-df7034c8ffaf" action="comment">
+                    <command>
+                        <body>batchRemoveFromVlan should be used instead for each port.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="setConfig">
+            <steps>
+                <item guid="b40388db-ce3e-4079-a3b0-c4e78f50d688" action="eval">
+                    <command>
+                        <body>set config ${arg[2]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7c3ef3b0-2e84-4a0e-a1fe-e6331f3bc69a" action="call">
+                    <command>
+                        <body>isEnoughSpace ${arg[1]}</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>^\\d+$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> Not enough space on device [gget addr]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7ec5cfb4-b15d-4c22-8af4-edb01d44d5d3" action="if">
+                    <command>
+                        <body>$config != &quot;skip&quot; &amp; $config != &quot;&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9d03838b-c1ed-406d-968b-6d0289e671f7" action="then">
+                            <nestedSteps>
+                                <item guid="6fb2d4e9-3700-486e-86d8-e204d834d7eb" action="command" session="s1" useAutoMap="false">
+                                    <command>
+                                        <body>copy $config startup-config</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <promptProperties>
+                                            <stepPrompts>
+                                                <item name="Confirmation">
+                                                    <Content>Destination filename [startup-config]?</Content>
+                                                </item>
+                                            </stepPrompts>
+                                        </promptProperties>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="0d31b363-9e7d-4a91-bbba-b7919e903fe8" action="command" session="s1" useAutoMap="false">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="setImage">
+            <steps>
+                <item guid="ff0dd619-b569-4eae-a3ac-00ea352d3476" action="eval">
+                    <command>
+                        <body>set image [string trim ${arg[2]}]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="64b1e79e-dcfd-4f7c-8806-415d35136d05" action="eval">
+                    <command>
+                        <body>set requiredSpace ${arg[1]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="694050e1-314f-43fd-bfb4-e42145185786" action="eval">
+                    <command>
+                        <body>set protocol &quot;tftp://&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="1ce8ceb8-8208-4082-9dea-bc94297220b1" action="eval">
+                    <command>
+                        <body>string first $protocol $image</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^([-+]?\\d+)$</regex>
+                                        <extractionGroupIndex>0</extractionGroupIndex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 0</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Image is not a TFTP link</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="SkipRemainingRules">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>^([-+]?\\d+)$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>1 &lt; [expr [string length $image] -  [string last / $image]]</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Empty image file</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="SkipRemainingRules">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="0ea5ca3b-2522-4dc6-a9e8-4569f3f906bd" action="call">
+                    <command>
+                        <body>isEnoughSpace $requiredSpace</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>isEnough</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="d21f5b2f-023d-4f2d-865f-762b3dd9714b" action="eval">
+                    <command>
+                        <body>set backup &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="dc7ec948-f7a8-4997-a8f9-5a05c0c1011e" action="call">
+                    <command>
+                        <body>getCurrentImage</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>currentImage</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="71cee896-788d-44ab-aa9f-9d20b9881791" action="if">
+                    <command>
+                        <body>$isEnough == 0</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="97d0be55-cc1e-48b8-966b-0d0db4f0e667" action="then">
+                            <nestedSteps>
+                                <item guid="32e41deb-00cf-4b61-86e7-d82ac9259cef" action="call">
+                                    <command>
+                                        <body>backupCurrentImage [string range $image 0 [string last / $image]]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>backup</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="55ad13a5-0129-48e3-9352-39f4bba70950" action="command" session="s1" useAutoMap="false">
+                                    <command>
+                                        <body>delete $currentImage</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <promptProperties>
+                                            <stepPrompts>
+                                                <item name="Confirmation" MatchMethod="WILDCARD" TypeOfPrompt="MORE">
+                                                    <Content>* [*]?</Content>
+                                                    <MoreNextCommand> \\n</MoreNextCommand>
+                                                    <MoreQuitCommand></MoreQuitCommand>
+                                                </item>
+                                                <item name="Confirmation2" MatchMethod="WILDCARD">
+                                                    <Content>* [confirm]</Content>
+                                                    <MoreNextCommand> \\n</MoreNextCommand>
+                                                    <MoreQuitCommand></MoreQuitCommand>
+                                                </item>
+                                            </stepPrompts>
+                                        </promptProperties>
+                                        <completionProperties promptLearnUserResponseTime="300" promptLearnUserResponseTime.inherit="false"/>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="b938d477-245d-4fd3-82d8-d3cabbdb6d98" action="command" session="s1" useAutoMap="false">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6f42fc4f-5e57-47fd-b336-8ff3c2cef342" action="eval">
+                    <command>
+                        <body>set error &quot;&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>error</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="11848343-19d2-48c9-beab-21c7cb3a131a" action="call">
+                    <command>
+                        <body>copyFile $image flash:</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="fc0a8532-ac79-4872-8f2f-35d052449120" action="if">
+                    <command>
+                        <body>$error == &quot;&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="cec65f80-0534-4203-aef5-4017040f97c4" action="then">
+                            <nestedSteps>
+                                <item guid="9e752822-4e50-4eb0-a40c-cd19688421aa" action="comment">
+                                    <command>
+                                        <body>set local image to boot</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="971f506f-e9ba-4600-8f8e-af36d09ea5ad" action="eval">
+                                    <command>
+                                        <body>set localImage [string range $image [string last / $image] end]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="a70f5318-e5e1-40ae-8aa4-d8117da037a9" action="eval">
+                                    <command>
+                                        <body>set localImage [string range $localImage 1 end]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="9869d557-a2ef-4565-903f-da67a3217d93" action="eval">
+                                    <command>
+                                        <body>set localImage &quot;flash:$localImage&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="1e77eac0-0c15-4d8e-b60f-ef21f8f34f9d" action="command" session="s1" useAutoMap="false">
+                                    <command>
+                                        <body>configure terminal</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="46d18b68-8a83-4d9f-91c3-695898d947f2" action="command" session="s1" useAutoMap="false">
+                                    <command>
+                                        <body>boot system $localImage</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="9ae4fd66-e974-4f14-afcc-74e10929991d" action="command" session="s1" useAutoMap="false">
+                                    <command>
+                                        <body>exit</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="49f132e3-cabe-4b13-9547-ab3098f6f9e5" action="elseif">
+                            <command>
+                                <body>$backup != &quot;&quot;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="5b448f2a-5cba-4841-99ee-370b52bf20d5" action="call">
+                                    <command>
+                                        <body>copyFile $backup $currentImage</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="reload">
+            <steps>
+                <item guid="d45905a0-882e-4ac2-8770-d3e7e9e23475" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>reload</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <promptProperties>
+                            <stepPrompts>
+                                <item name="SaveConfig" TypeOfPrompt="MORE">
+                                    <Content>System configuration has been modified. Save? [yes/no]:</Content>
+                                    <MoreNextCommand>no\\n</MoreNextCommand>
+                                    <MoreQuitCommand></MoreQuitCommand>
+                                </item>
+                                <item name="Proceed" TypeOfPrompt="MORE">
+                                    <Content>Proceed with reload? [confirm]</Content>
+                                    <MoreNextCommand>\\n</MoreNextCommand>
+                                    <MoreQuitCommand></MoreQuitCommand>
+                                </item>
+                            </stepPrompts>
+                        </promptProperties>
+                    </applicationProperties>
+                </item>
+                <item guid="42c6b5a1-3df9-4172-9ad2-bfe580dbb1de" action="sleep">
+                    <command>
+                        <body>20</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5111ef3a-bb3e-489b-90d0-665a9dafcd77" action="close" session="s1" useAutoMap="false">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a6b80439-aa08-47aa-97a8-023b84f37c5f" action="call">
+                    <command>
+                        <body>openSession tryhard</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="setConfigAndImage">
+            <steps>
+                <item guid="29439baf-aa01-4594-b163-37086f4bac32" action="eval">
+                    <command>
+                        <body>set newConfigSize ${arg[1]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="1b8a415b-f55c-4616-838d-0d9d6ede02a3" action="eval">
+                    <command>
+                        <body>set newConfig ${arg[2]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="908ae6ae-dea7-4dc7-b102-7ff632791d6b" action="eval">
+                    <command>
+                        <body>set newImageSize ${arg[3]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7e410679-e8f6-4573-a8a6-7c372f099434" action="eval">
+                    <command>
+                        <body>set newImage ${arg[4]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="55ab16e9-132f-4cd5-b3fe-ec13b2e43db3" action="if">
+                    <command>
+                        <body>$newConfig != &quot;&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ae196de2-0c1b-47e0-be1b-58322dc5dd62" action="then">
+                            <nestedSteps>
+                                <item guid="e975d354-2317-47f3-92f6-e2df33acec66" action="call">
+                                    <command>
+                                        <body>setConfig $newConfigSize $newConfig</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="ff7cda82-31c1-43fc-b3ac-a7a6a19c1126" action="if">
+                    <command>
+                        <body>$newImage != &quot;&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a72e5f05-6b72-482d-bf41-73387c3be01c" action="then">
+                            <nestedSteps>
+                                <item guid="b82f2006-0030-4c7a-92e4-705aa39f185d" action="call">
+                                    <command>
+                                        <body>setImage $newImageSize $newImage</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="877cb57a-19a2-4619-b4a3-69500c47f25f" action="if">
+                    <command>
+                        <body>$newConfig != &quot;&quot; | $newImage != &quot;&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f0dbfff6-14f7-450d-b9dc-a0ea455481d7" action="then">
+                            <nestedSteps>
+                                <item guid="a5978d33-eac3-4cc0-a323-e19ae8b70eb1" action="call">
+                                    <command>
+                                        <body>reload</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="isEnoughSpace">
+            <steps>
+                <item guid="de255b72-c0b3-4f96-b0c5-c99c3b206efb" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>dir</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^(\\d+)\\s+bytes total \\((\\d+)\\s+bytes free\\)$</regex>
+                                        <extractionGroupIndex>2</extractionGroupIndex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>freeBytes</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="1f8bc35f-78ce-478c-b24c-7a6c04691394" action="eval">
+                    <command>
+                        <body>set ret [expr $freeBytes &gt; ${arg[1]}]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a51b861a-736f-4027-bcc0-a8d2624ded57" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getCurrentImage">
+            <steps>
+                <item guid="1a6a72dd-675e-41c1-afed-ccb0c5da0de4" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>sh ver</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^System image file is &quot;([^&quot;]+)&quot;$</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>ret</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="a3a0776d-a502-491d-87f5-30b9c761ab97" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="backupCurrentImage">
+            <steps>
+                <item guid="2cef89ac-01a0-460c-9934-f37d9ad9e7b5" action="eval">
+                    <command>
+                        <body>set serverPrefix ${arg[1]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="3815c272-16fd-4876-bffd-4935f6eb9a42" action="call">
+                    <command>
+                        <body>getCurrentImage</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>curImg</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="df646d2f-21b1-4ff6-84e9-7403123ccb59" action="eval">
+                    <command>
+                        <body>set backupName [string range $curImg [string first : $curImg] end]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="57e31052-336c-42ef-b5eb-d83d2efe3c60" action="eval">
+                    <command>
+                        <body>set backupName [string range $backupName 1 end]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="8b88182d-1eae-45df-8f68-f0f0bba40ef5" action="eval">
+                    <command>
+                        <body>set backupName &quot;${serverPrefix}$backupName&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="b367c100-cced-4f1b-9f10-cd3c332ade35" action="command" session="s1" useAutoMap="false">
+                    <command>
+                        <body>copy $curImg $backupName</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^.*Error.*$</regex>
+                                        <extractionType>full_match</extractionType>
+                                        <declareNoMatchIssue>false</declareNoMatchIssue>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>{value}</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <promptProperties>
+                            <stepPrompts>
+                                <item name="Confirmation" MatchMethod="WILDCARD" TypeOfPrompt="MORE">
+                                    <Content>*[*]? </Content>
+                                    <MoreNextCommand>\\n</MoreNextCommand>
+                                    <MoreQuitCommand></MoreQuitCommand>
+                                </item>
+                            </stepPrompts>
+                        </promptProperties>
+                    </applicationProperties>
+                </item>
+                <item guid="d6c5c5c8-3b0f-4598-a431-7353ff2c7982" action="return">
+                    <command>
+                        <body>$backupName</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="copyFile">
+            <steps>
+                <item guid="3e9d9fce-f1d6-412f-a293-54c253575efd" action="eval">
+                    <command>
+                        <body>set error &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c6654fde-d812-4282-b6ca-d472d727a307" action="command" session="s1" timeout="180" useAutoMap="false">
+                    <command>
+                        <body>copy ${arg[1]} ${arg[2]}</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^.*Error.*$</regex>
+                                        <extractionType>full_match</extractionType>
+                                        <declareNoMatchIssue>false</declareNoMatchIssue>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set error $value</statement>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>{value}</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <promptProperties>
+                            <stepPrompts>
+                                <item name="Confirmation" MatchMethod="WILDCARD" TypeOfPrompt="MORE">
+                                    <Content>* [*]? </Content>
+                                    <MoreNextCommand> \\n</MoreNextCommand>
+                                    <MoreQuitCommand></MoreQuitCommand>
+                                </item>
+                                <item name="Copying1" TypeOfPrompt="MORE">
+                                    <Content>!</Content>
+                                    <MoreQuitCommand></MoreQuitCommand>
+                                </item>
+                                <item name="Copying2" TypeOfPrompt="MORE">
+                                    <Content>0</Content>
+                                    <MoreQuitCommand></MoreQuitCommand>
+                                </item>
+                            </stepPrompts>
+                        </promptProperties>
+                        <completionProperties promptLearnUserResponseTime="180" promptLearnUserResponseTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="cab52213-7ff2-4d15-885e-bebe73a82445" action="return">
+                    <command>
+                        <body>$error</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getHostParameter">
+            <steps>
+                <item guid="35f9a75a-42a0-4af6-a1e9-4563916f997d" action="eval">
+                    <command>
+                        <body>set host &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="2712eab2-309d-4c1d-b9d5-0e98967bb47f" action="if">
+                    <command>
+                        <body>[info exists param property_ipAddress] == 1</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7e542b85-779d-4e27-a1dc-90178a37f313" action="then">
+                            <nestedSteps>
+                                <item guid="d99b9e7b-c70f-475b-ad0f-8e27773bcf0c" action="if">
+                                    <command>
+                                        <body>[param property_ipAddress] != &quot;&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="648b10d1-0e13-42b3-8a42-10a05ce907ee" action="then">
+                                            <nestedSteps>
+                                                <item guid="4ea92a45-b5a7-45e0-8c6d-4ab254af4fbc" action="eval">
+                                                    <command>
+                                                        <body>set host [param property_ipAddress]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="b04aceb6-c160-4214-9c73-309b6b5669e5" action="if">
+                    <command>
+                        <body>$host == &quot;&quot; &amp;&amp; [info exists param property_Hostname]</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ea90386a-9588-4221-b35e-d44e1e601fb2" action="then">
+                            <nestedSteps>
+                                <item guid="0f5bc871-a53f-41ef-8a01-0d1c2e174ff2" action="if">
+                                    <command>
+                                        <body>[param property_Hostname] != &quot;&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="e3b99ccf-0c10-4796-a3b2-391420fa14c9" action="then">
+                                            <nestedSteps>
+                                                <item guid="a5988fd6-09d2-4e72-ba23-c98dcd63d2ae" action="eval">
+                                                    <command>
+                                                        <body>set host [param property_Hostname]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="45d5d859-2198-4a30-9ea7-2aa5d2ebc9d7" action="if">
+                    <command>
+                        <body>$host == &quot;&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="89f29078-65bf-46d1-a1f1-9e7d52fe00e3" action="then">
+                            <nestedSteps>
+                                <item guid="f502daf1-4569-4a73-815e-d42ead48db63" action="comment">
+                                    <command>
+                                        <body>Parameter ipAddress or Hostname should be specified</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>1 == 1</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>Parameter ipAddress or Hostname should be specified.</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="AbortExecution">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="b3d43156-2783-48e3-8bbf-85cf0e59b18a" action="return">
+                    <command>
+                        <body>$host</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>
