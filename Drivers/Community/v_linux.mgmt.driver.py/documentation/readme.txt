@@ -1,6 +1,6 @@
 Velocity Linux Management Driver
 
-##Requirements
+## Requirements
 Python on the Agent
     The agent must have Python installed: from the prompt, typing 'python'
     returns the >>> prompt
@@ -11,12 +11,12 @@ Python Paramiko module on Agent
 SSH login username and password credentials
     Need SSH user credentials to the Linux system
 
-##Customization
+## Customization
 Prompt
     The driver uses '$ ' as the current system prompt and this may need to be
     changed by setting 'prompt' in the source file
    
-##Installation
+## Installation
 Driver Upload
     Zip the contents of this directory (ensuring that manifest.xml is located
     at the root of the file bundle and give the zip file a meaningful name.

@@ -1,6 +1,6 @@
 # Velocity Linux Bridge L2 Switch Driver
 
-##Requirements
+## Requirements
 Python on the Agent
     The agent must have Python installed: from the prompt, typing 'python'
     returns the >>> prompt
@@ -18,7 +18,7 @@ SSH login username and password credentials
     Once logged into the Linux host, the user can type 'sudo ls' and files are
     listed WITHOUT prompting for a sudo passwd
 
-##Customization
+## Customization
 Prompt
     The driver uses '$ ' as the current system prompt and this may need to be
     changed by setting 'prompt' in the source file
@@ -29,7 +29,7 @@ Excluded Interface
     admin/management interface as excluded by setting 'excludedInterface' in
     the source file.
    
-##Installation
+## Installation
 Driver Upload
     Zip the contents of this directory (ensuring that manifest.xml is located
     at the root of the file bundle and give the zip file a meaningful name.
