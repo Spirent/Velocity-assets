@@ -27,11 +27,10 @@ Excluded Interface
    
 Installation
 Driver Upload
-Driver Upload
     Zip the contents of this directory (ensuring that manifest.xml is located
     at the root of the file bundle and give the zip file a meaningful name.
     Upload the driver project into Velocity and give it a meaningful name like
-    "Linux L2 Switch"
+    "Linux L2 Switch Driver"
 Velocity Template
     Duplicate the "Cisco Switch" template in Velocity and give it a name like
     "Linux Switch"

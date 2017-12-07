@@ -130,7 +130,7 @@ if 'VELOCITY_PARAM_call_count' not in os.environ:
     # hard-coded credentials and linux host for dev
     sshUsername = 'apt'
     sshPassword = 'spirent'
-    sshServer = '10.108.36.168'
+    sshServer = '10.18.36.168'
 
 else:
     # derive the credentials from the os environment when running on live agent
