@@ -218,7 +218,6 @@ class sshSession:
     def close(self):
         if(self.client != None):
             self.client.close()
-            self.transport.close()
  
  
 # get the driver call count from the external environment variables when running on a live agent
@@ -277,3 +276,6 @@ for callNumber in range(int(os.environ['VELOCITY_PARAM_call_count'])):
     # invoke each driver call with arguments and send output to stdout
     retVal = eval('c.'+callName+'()') if len(callArgs) < 1 else eval('c.'+callName+'(callArgs)')
     print(json.dumps(retVal))
+
+# close the ssh session
+c.close()

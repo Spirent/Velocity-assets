@@ -12,7 +12,7 @@ A Linux host with support for bridging to use as an L2 Switch
 SSH login username and password credentials
     Need SSH credentials to the Linux system being used as an L2 switch with
     sudo NOPASSWD enabled
-    Once logged into the Linux host, the user can type 'ssh ls' and files are
+    Once logged into the Linux host, the user can type 'sudo ls' and files are
     listed WITHOUT prompting for a sudo passwd
 
 Customization
@@ -27,8 +27,10 @@ Excluded Interface
    
 Installation
 Driver Upload
+    Zip the contents of this directory (ensuring that manifest.xml is located
+    at the root of the file bundle and give the zip file a meaningful name.
     Upload the driver project into Velocity and give it a meaningful name like
-    "Linux Switch 1.0.0"
+    "Linux L2 Switch Driver"
 Velocity Template
     Duplicate the "Cisco Switch" template in Velocity and give it a name like
     "Linux Switch"
@@ -46,6 +48,7 @@ Discover the switch's ports
 
 ## Changelog
 1.0.1 Initial release
+1.0.2 Properly closing the ssh session when done
 
 <b>Tags:</b> Driver, L2
 
