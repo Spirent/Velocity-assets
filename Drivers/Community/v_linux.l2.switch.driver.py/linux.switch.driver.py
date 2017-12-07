@@ -81,9 +81,9 @@ class sshSession:
                 # add the port port properties to the port list
                 portList.append(portProperties)
 
-        # JSON response
-        returnJson = {'ports' : portList}
-        return returnJson
+        # response
+        returnDictionary = {'ports' : portList}
+        return returnDictionary
 
     def getProperties(self, args):
         # get the system hostname
@@ -101,15 +101,15 @@ class sshSession:
         # create resource properties dictionary
         resourceProperties = {"Hostname" : response1[0], "Make" : response2[0], "Model" : response3[0]}
 
-        # JSON response
-        returnJson = { 'properties' : resourceProperties }
+        # response
+        returnDictionary = { 'properties' : resourceProperties }
 
         # include ports in response if argument is true
         if args[0] == 'true':
             portList = self.getPorts()
-            returnJson['ports'] = portList['ports']
+            returnDictionary['ports'] = portList['ports']
 
-        return returnJson
+        return returnDictionary
 
     def createVlan(self, args):
         # assign the VLAN Id argument
