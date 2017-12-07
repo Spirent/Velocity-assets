@@ -42,5 +42,7 @@ Discover the switch's ports
 ## Changelog
 1.0.0 Initial release
 
+1.0.1 renamed structures from returnJson to returnDictionary to be more accurate
+
 <b>Tags:</b> Driver, Management
 

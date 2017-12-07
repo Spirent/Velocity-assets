@@ -59,5 +59,6 @@ Discover the switch's ports
 
 1.0.2 Properly closing the ssh session when done
 
+1.0.3 renamed structures from returnJson to returnDictionary to be more accurate
 <b>Tags:</b> Driver, L2
 
