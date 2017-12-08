@@ -1,4 +1,4 @@
-# MRV driver
+MRV driver
 
 This is the default driver for MRV switches. The driver package contains the manifest file
 and a single test case. We encourage you to use the test case's structure (main procedures
@@ -10,4 +10,3 @@ properties:
 * Hostname (optional, but either ipAddress or Hostname must be specified)
 * username
 * password
-
