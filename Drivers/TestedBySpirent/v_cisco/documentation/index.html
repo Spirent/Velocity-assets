@@ -1,0 +1,27 @@
+<HTML><BODY>
+<style>TABLE,TD,TH{border:1px solid black;border-collapse:collapse;}
+th{text-align:left;background-color:AliceBlue;}
+H1,H2{padding-left:15px}
+.smallText{font-size:10px; color:black; font-family:courier}
+.normalText{font-size:14px; color:black; font-family:arial}
+.procText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.qcNotesText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.headerText{font-size:30px; color:black; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
+</style>
+<BR><DIV class='headerText'>Cisco driver</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>This default Cisco driver works for Cisco Catalyst 3550. Its structure is very similar to MRV,</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>except for L2- and config-specific items. You can use this driver as a stub for implementing</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>other L2 drivers.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>The driver implements the Configurable Layer 2 Switch interface and requires the</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>following resource properties:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* ipAddress (optional, but either ipAddress or Hostname must be specified)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* Hostname (optional, but either ipAddress or Hostname must be specified)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* username</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* password</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>The Cisco driver has been tested for models 3750 and 2960.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
