@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="5.4.1.be355a6">
+<testCase version="6.1.0.e2e4ec0">
     <general>
         <sessionClass includeTestCase="true" sessionType="hp_5900_ssh.ffsp"/>
     </general>
@@ -912,7 +912,7 @@
                 </item>
                 <item guid="fcafb211-a9bb-4970-9cd0-7601e919b1d3" action="command" session="$session" normalOffset="8.967" estimatedStepExecutionTime="0.015">
                     <command>
-                        <body>port trunk pvid vlan 535</body>
+                        <body>port trunk pvid vlan $trunk_vlan</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
@@ -1037,6 +1037,9 @@
                 </item>
                 <item name="bridgeAggNum">
                     <description>an integer</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="trunk_vlan">
                     <isMandatory>true</isMandatory>
                 </item>
             </arguments>
@@ -1425,7 +1428,6 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
-            <author>Alex Orr</author>
             <version>1.0 </version>
             <arguments>
                 <item name="bagNum">
@@ -1563,7 +1565,6 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
-            <author>Alex Orr</author>
             <version>1.0 </version>
             <arguments>
                 <item name="bagNum">

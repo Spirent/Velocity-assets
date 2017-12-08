@@ -1,0 +1,381 @@
+<?xml version="1.0"?>
+<testCase version="6.0.0.18638fa">
+    <execution>
+        <parameters version="6.0.0.18638fa">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <call_count pt:datatype="INTEGER">1</call_count>
+                    <call_0>getPorts</call_0>
+                    <property_ipAddress>10.16.160.212</property_ipAddress>
+                    <property_tcpPort>9760</property_tcpPort>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="db4d1725-0135-4d5b-8009-18437b726074" action="comment">
+                    <command>
+                        <body>opening the telnet session to usb master</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9563d3a5-0de8-4927-8449-35f273b097a3" action="open" session="telnet">
+                            <command>
+                                <body>application:com.fnfr.svt.applications.telnet</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                    <completionProperties>
+                                        <waitForFirstCharBeforeIdle inherit="false">false</waitForFirstCharBeforeIdle>
+                                    </completionProperties>
+                                </stepProperties>
+                                <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                                    <ipAddress inherit="false">[param property_ipAddress]</ipAddress>
+                                    <port inherit="false">[param property_tcpPort]</port>
+                                    <TerminalProperties>
+                                        <localEcho inherit="false">true</localEcho>
+                                        <prompts merge="true">
+                                            <item name="prompt">
+                                                <Content>USBMaster&gt;</Content>
+                                            </item>
+                                        </prompts>
+                                    </TerminalProperties>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="88dc72ce-4fa1-4552-8b16-c568bf918a6f" action="comment">
+                    <command>
+                        <body>executing procedures</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="75574845-63d3-4335-960f-28691a020f13" action="for">
+                            <command>
+                                <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="06e4a348-f369-4bd0-830a-1c01fe9fc770" action="eval">
+                                    <command>
+                                        <body>set cl [split [param call_$i]]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="566da20b-2491-45f7-84f8-f6fd02279857" action="eval">
+                                    <command>
+                                        <body>set params [lassign $cl proc]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="c6673b3e-0c4b-4bac-b16b-c25a907d307a" action="comment">
+                                    <command>
+                                        <body>debug message</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="7d9d09ed-c614-4397-af0d-d9625a55a30a" action="eval">
+                                            <command>
+                                                <body>lappend /data/cmdText &quot;$proc $params&quot;</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="none">
+                                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="message">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                                <message>&quot;$proc $params&quot;</message>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="f99f0a05-7006-446f-a808-3303b3add4d2" action="call">
+                                    <command>
+                                        <body>$proc $params</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>ret</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6abac9a8-51cb-4399-a9df-9399a43ff0a6" action="comment">
+                    <command>
+                        <body>close telnet connections to Cytec controller</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="273994fc-c62c-4f80-81fb-c30659626500" action="close" session="telnet">
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="none">
+                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>1 == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="62e6306c-83d7-46e8-9e01-83ef1fe30d7c" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="connect" isPublic="true">
+            <steps>
+                <item guid="66597b8d-f2d4-42ca-b073-b17fc5aa2219" action="eval">
+                    <command>
+                        <body>set port_num [lindex $arg 0]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="8cb109c4-ce5e-43c4-8b78-88c51cb0b9ea" action="command" session="telnet">
+                    <command>
+                        <body>SELECT=$port_num</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>OK</searchString>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="RepeatStep">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="5" delayBetweenRepeats="5.0"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <eventHandlers>
+                        <item name="OnRepeatStepMaxCountExceeded">
+                            <item actionId="DeclareExecutionIssue">
+                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                    <message>Problem switching USB port</message>
+                                </actionProperties>
+                            </item>
+                            <item actionId="FailTest">
+                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </item>
+                        </item>
+                    </eventHandlers>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="c9436e0d-fcff-4d81-a36d-0fb210a15357" action="command" session="telnet">
+                    <command>
+                        <body>CONNECT=1</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>OK</searchString>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="RepeatStep">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="5" delayBetweenRepeats="5.0"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <eventHandlers>
+                        <item name="OnRepeatStepMaxCountExceeded">
+                            <item actionId="DeclareExecutionIssue">
+                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                    <message>Problem switching USB port</message>
+                                </actionProperties>
+                            </item>
+                            <item actionId="FailTest">
+                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </item>
+                        </item>
+                    </eventHandlers>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+        <item name="disconnect" isPublic="true">
+            <steps>
+                <item guid="10b5e188-7fe9-4580-91df-545313760dd2" action="eval">
+                    <command>
+                        <body>set port_num [lindex $arg 0]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="9d2d930b-42c6-41f2-8eb7-35869de4bcfe" action="command" session="telnet">
+                    <command>
+                        <body>SELECT=$port_num</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>OK</searchString>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="RepeatStep">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="5" delayBetweenRepeats="5.0"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <eventHandlers>
+                        <item name="OnRepeatStepMaxCountExceeded">
+                            <item actionId="DeclareExecutionIssue">
+                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                    <message>Problem switching USB port</message>
+                                </actionProperties>
+                            </item>
+                            <item actionId="FailTest">
+                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </item>
+                        </item>
+                    </eventHandlers>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="cd54e0b3-208a-4a0c-9d60-24260d8e345a" action="command" session="telnet">
+                    <command>
+                        <body>CONNECT=0</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>OK</searchString>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="RepeatStep">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="5" delayBetweenRepeats="5.0"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <eventHandlers>
+                        <item name="OnRepeatStepMaxCountExceeded">
+                            <item actionId="DeclareExecutionIssue">
+                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                    <message>Problem switching USB port</message>
+                                </actionProperties>
+                            </item>
+                            <item actionId="FailTest">
+                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </item>
+                        </item>
+                    </eventHandlers>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getDeviceStatus" isPublic="true">
+            <steps>
+                <item guid="55ee1d16-7969-467e-8f34-87adcd2ae08c" action="return">
+                    <command>
+                        <body>online</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <response>{&quot;status&quot;:&quot;value&quot;}</response>
+        </item>
+        <item name="getPorts" isPublic="true">
+            <steps>
+                <item guid="244e8367-75fc-43d6-a821-d86708e72f1d" action="return">
+                    <command>
+                        <body>{&quot;ports&quot;:\\[{&quot;name&quot;:&quot;USB1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;&quot;},{&quot;name&quot;:&quot;USB2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;&quot;},{&quot;name&quot;:&quot;USB3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;&quot;},{&quot;name&quot;:&quot;USB4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;&quot;},{&quot;name&quot;:&quot;Common&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;&quot;}\\]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getProperties" isPublic="true">
+            <steps>
+                <item guid="c166a82d-c49f-4740-b1ba-f19e4bfa8d38" action="return">
+                    <command>
+                        <body>{&quot;properties&quot;:\\[\\]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

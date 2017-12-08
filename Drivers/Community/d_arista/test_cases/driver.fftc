@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<testCase version="5.1.0.77511">
+<testCase version="6.1.0.e2e4ec0">
     <execution>
-        <parameters version="5.1.0.77511">
+        <parameters version="6.1.0.e2e4ec0">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
                     <property_ipAddress>172.27.59.79</property_ipAddress>
@@ -53,6 +53,7 @@
                             </TerminalProperties>
                         </sessionProperties>
                         <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                     </applicationProperties>
                 </item>
                 <item guid="d2da0387-a488-44ba-a65c-55e4924aa645" action="eval">
@@ -165,7 +166,7 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
-            <author>Andy Michaels</author>
+            <author> </author>
             <version>1.0</version>
             <multilineDescription>getProperties returns JSON-formatted properties for the device.  It also returns the port data.  The properties gathered will be populated back into velocity for the device.  This is a good way of keeping your inventory up-to-date.</multilineDescription>
             <response>{&quot;properties&quot;:{},&quot;ports&quot;:&quot;&quot;}</response>
@@ -287,7 +288,7 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
-            <author>Andy Michaels</author>
+            <author> </author>
             <version>1.0</version>
             <multilineDescription>getPorts returns JSON-formatted port information.  For this driver, we are only concerned with ports in the &quot;up&quot; state.  It ignores any other state.  </multilineDescription>
             <response>{&quot;ports&quot;:&quot;&quot;}</response>
@@ -302,6 +303,7 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <author> </author>
         </item>
         <item name="addToVlan">
             <steps>
@@ -327,6 +329,7 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <author> </author>
         </item>
         <item name="removeFromVlan">
             <steps>
@@ -352,6 +355,7 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <author> </author>
         </item>
         <item name="destroyVlan">
             <steps>
@@ -363,6 +367,7 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <author> </author>
         </item>
     </procedures>
 </testCase>

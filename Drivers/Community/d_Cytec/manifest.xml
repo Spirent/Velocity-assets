@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.0.0</version>     
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Layer 1 Switch</interface> 
+    <entryPoint>cytec-if9-mux-single-module-1.0.fftc</entryPoint>
+    <resourceProperties>     
+        <property>
+            <name>ipAddress</name>
+            <description>IP address of the Cytec Chassis</description>
+        </property>
+        <property>
+            <name>tcpPort</name>
+            <description>TCP port number to telnet to</description>
+        </property>
+        <property>
+            <name>moduleType</name>
+            <description>The type of the mux module. e.g 2X1, 12X1, and etc.</description>
+        </property>
+        <property>
+            <name>moduleLocation</name>
+            <description>The slot or subslot number of this module. e.g. 2, 3.0, etc</description>
+        </property>
+    </resourceProperties>
+</resourceDriver>
