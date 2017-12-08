@@ -1,10 +1,10 @@
-# Spirent Automation Asset Warehouse - Velocity
+# Spirent Developer Community - Velocity
 
-Welcome to the Spirent Automation Asset Warehouse! You will find a wide variety of useful lab automation assets for your Velocity deployment.  This repository is specific to Velocity.  The iTest repository is located [here](https://github.com/Spirent/iTest-assets).  All Automation Asset Warehouse assets are available for your immediate download and use. 
+Welcome to the Spirent Developer Community! You will find a wide variety of useful lab automation assets for your Velocity deployment.  This repository is specific to Velocity.  The iTest repository is located [here](https://github.com/Spirent/iTest-assets).  All Spirent Developer Community assets are available for your immediate download and use. 
 
-This portion of the Warehouse contains a selection of Velocity automation. They are useful for gaining the greatest value from your Velocity LaaS deployment. The assets are rich in reusable drivers, startup tasks, teardown tasks, triggered automation tasks, and example scripts. All are key capabilities that will help you create the most value in your LaaS environment. Content included in this warehouse is a combination of iTest and Python automation.
+This portion of the Developer Community contains a selection of Velocity automation. They are useful for gaining the greatest value from your Velocity LaaS deployment. The assets are rich in reusable drivers, startup tasks, teardown tasks, triggered automation tasks, and example scripts. All are key capabilities that will help you create the most value in your LaaS environment. Content included in this portion of the Developer Community is a combination of iTest and Python automation.
 
-All assets in the Automation Asset Warehouse are categorized into three levels of maturity/testing:
+All assets are categorized into three levels of maturity/testing:
 - Certified:  provided and tested by Spirent
 - Reference:  provided by Spirent with intent to serve as “blueprint” for your project's structure and usage
 - Community:  submitted by community or Spirent personnel with no review or testing by Spirent       
