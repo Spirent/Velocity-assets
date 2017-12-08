@@ -1,0 +1,49 @@
+<HTML><BODY>
+<style>TABLE,TD,TH{border:1px solid black;border-collapse:collapse;}
+th{text-align:left;background-color:AliceBlue;}
+H1,H2{padding-left:15px}
+.smallText{font-size:10px; color:black; font-family:courier}
+.normalText{font-size:14px; color:black; font-family:arial}
+.procText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.qcNotesText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.headerText{font-size:30px; color:black; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
+</style>
+<BR><DIV class='headerText'>Velocity Linux Management Driver</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>## Requirements</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Version 7.0 or later, since it uses the json command introduced in that release</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>## Customization</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Prompt</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    The driver uses *# and *$ glob patterns for its system prompt and this may need to be</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    changed in the session profile</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>   </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>## Installation</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Driver Upload</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Export the project as an iTar or use the zip command (ensuring that manifest.xml is located</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    at the root of the file bundle) and give the archive file a meaningful name.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Upload the driver project into Velocity and give it a meaningful name like</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    "Linux Management Driver"</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Velocity Template</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Duplicate the "Server" template in Velocity and give it a name like "Linux Server"</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Ensure the interface type is 'Management'</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Add these two mandatory properties: SSH_Username and SSH_Password, and this optional property: Kernel_Release</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Create an Linux server resource</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Create a new resource using the Linux Server template</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Define values of at least these 3 properties on the resource: ipAddress, SSH_Username, and SSH_Password    </DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Discover the switch's ports</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Click discover on the resource and verify that Hostname and Kernel_Release</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    are populated as well as the creation of a new port group called 'ports'</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    that includes the ports on the system </DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>## Changelog</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>1.0.0 Initial release</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'><b>Tags:</b> Driver, Management</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>

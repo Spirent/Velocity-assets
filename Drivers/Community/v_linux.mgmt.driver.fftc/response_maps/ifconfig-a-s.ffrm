@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.0.0.2e413e8">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>ifconfig -a -s</body>
+                </command>
+            </action>
+            <responseBody>Iface   MTU Met   RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+eth0       1500 0   2107514      0      0 0       2076657      0      0      0 BMRU
+eth1       1500 0         0      0      0 0             0      0      0      0 BM
+eth2       1500 0         0      0      0 0             0      0      0      0 BM
+eth3       1500 0         0      0      0 0             0      0      0      0 BM
+lo        65536 0   1211930      0      0 0       1211930      0      0      0 LRU
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;ifconfig -a -s&lt;/echo&gt;
+    &lt;prompt&gt;root@10:~# &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.4</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <banner>Iface\\s+MTU Met\\s+RX-OK RX-ERR RX-DRP RX-OVR\\s+TX-OK TX-ERR TX-DRP TX-OVR Flg\\s*</banner>
+                    <bannerStructure>Regex</bannerStructure>
+                    <minOccurences>0</minOccurences>
+                    <columns>
+                        <item name="Iface">
+                            <isKey>true</isKey>
+                            <width>7</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>f9c6ba0e-c2f0-46ca-a0a2-89b4453590b5</uid>
+                        </item>
+                        <item name="MTU">
+                            <width>8</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>521a44be-5791-4fb6-94d6-ddf8c1cf11f7</uid>
+                        </item>
+                        <item name="Met">
+                            <width>2</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>1a3b6ddc-3fee-40df-873a-a81790b0ce3a</uid>
+                        </item>
+                        <item name="RX-OK">
+                            <width>10</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>22d41237-f7ea-46cc-b2af-9cd28215063f</uid>
+                        </item>
+                        <item name="RX-ERR">
+                            <width>13</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>cef3723b-0edd-4aba-8310-812bc361893f</uid>
+                        </item>
+                        <item name="RX-DRP">
+                            <width>2</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>6cbb7d0b-49af-427f-8b1e-9a3680d72494</uid>
+                        </item>
+                        <item name="RX-OVR">
+                            <lastFullCell></lastFullCell>
+                            <uid>6fafd8bc-6ed9-4462-b66f-7e3e18ecd98e</uid>
+                        </item>
+                        <item name="TX-OK">
+                            <width>14</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>7f8b7042-73f5-40e1-ab7d-513340a0fd20</uid>
+                        </item>
+                        <item name="TX-ERR">
+                            <width>13</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>0618599d-fede-494a-8967-08b56c0c04af</uid>
+                        </item>
+                        <item name="TX-DRP">
+                            <width>7</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>ac623948-e88a-4c67-a53d-f5c52c209e55</uid>
+                        </item>
+                        <item name="TX-OVR">
+                            <width>2</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>cfdb9ca9-a2bd-4b29-b8cd-4837f0534d26</uid>
+                        </item>
+                        <item name="Flg">
+                            <width>999</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>1004f6a7-d9b9-4d29-9a3d-8c538a446f81</uid>
+                        </item>
+                    </columns>
+                    <ignoreBlankLines>false</ignoreBlankLines>
+                    <autoUpdateNames>false</autoUpdateNames>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="ifconfig -a -s*"/>
+</ResponseMap>

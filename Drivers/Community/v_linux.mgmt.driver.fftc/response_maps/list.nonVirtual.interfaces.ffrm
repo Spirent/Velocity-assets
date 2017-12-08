@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.0.0.2e413e8">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>ls -l /sys/class/net/ |grep --color=never -v /devices/virtual/net</body>
+                </command>
+            </action>
+            <responseBody>total 0
+lrwxrwxrwx 1 root root 0 Dec  8 04:59 eth0 -&gt; ../../devices/pci0000:00/0000:00:10.0/net/eth0
+lrwxrwxrwx 1 root root 0 Dec  8 04:59 eth1 -&gt; ../../devices/pci0000:00/0000:00:11.0/net/eth1
+lrwxrwxrwx 1 root root 0 Dec  8 04:59 eth2 -&gt; ../../devices/pci0000:00/0000:00:12.0/net/eth2
+lrwxrwxrwx 1 root root 0 Dec  8 04:59 eth3 -&gt; ../../devices/pci0000:00/0000:00:13.0/net/eth3
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;ls -l /sys/class/net/ |grep --color=never -v /devices/virtual/net&lt;/echo&gt;
+    &lt;prompt&gt;root@velocity700a-cal-lab:~# &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.4</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties"/>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <banner>total 0</banner>
+                    <bannerStructure>Wildcard</bannerStructure>
+                    <columns>
+                        <item name="permissions">
+                            <lastFullCell></lastFullCell>
+                            <uid>66732f79-4c60-472c-858d-4c8ebd82e74c</uid>
+                        </item>
+                        <item name="links">
+                            <lastFullCell></lastFullCell>
+                            <uid>aa1c0885-bef7-4c3c-9c4d-5f6a44d37ee4</uid>
+                        </item>
+                        <item name="owner">
+                            <lastFullCell></lastFullCell>
+                            <uid>ee97ad47-7cca-4d51-8caa-dc3d91c302d1</uid>
+                        </item>
+                        <item name="group">
+                            <lastFullCell></lastFullCell>
+                            <uid>190a2949-db51-468b-a2e5-a23ac79b4234</uid>
+                        </item>
+                        <item name="size">
+                            <lastFullCell></lastFullCell>
+                            <uid>d5a3c626-51e6-442a-841b-e266ebe296bd</uid>
+                        </item>
+                        <item name="month">
+                            <lastFullCell></lastFullCell>
+                            <uid>80ffee07-be6e-4093-b030-d9729ad7a0c8</uid>
+                        </item>
+                        <item name="day">
+                            <lastFullCell></lastFullCell>
+                            <uid>31d4307f-b21c-4910-900c-c3c105c76ab6</uid>
+                        </item>
+                        <item name="time">
+                            <lastFullCell></lastFullCell>
+                            <uid>457c53cc-cef7-4df8-9c7c-3cb625e5699b</uid>
+                        </item>
+                        <item name="interface">
+                            <lastFullCell></lastFullCell>
+                            <uid>6f34f0dd-f611-4450-8200-0b0d65efea23</uid>
+                        </item>
+                        <item name="arrow">
+                            <lastFullCell></lastFullCell>
+                            <uid>6b5b35bb-315c-4a6d-9b71-89bb901c8e71</uid>
+                        </item>
+                        <item name="longPath">
+                            <lastFullCell></lastFullCell>
+                            <uid>719d5cf1-a341-4cc7-96ad-fd6df85cb154</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="ls -l /sys/class/net/ |grep --color=never -v /devices/virtual/net"/>
+    <aliases>
+        <item name="Iface_all">
+            <queryFormatString>//interface</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>

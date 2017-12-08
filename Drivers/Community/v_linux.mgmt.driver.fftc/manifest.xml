@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.0.0</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Management</interface> 
+    <entryPoint>linux.mgmt.driver.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+        <property optional="false">
+            <name>Hostname</name>
+            <description>Host name of the system</description>
+        </property>
+        <property optional="false">
+            <name>SSH_Username</name>
+            <description>Username for ssh access</description>
+        </property>
+        <property optional="false">
+            <name>SSH_Password</name>
+            <description>Password for ssh access</description>
+        </property>        
+    </resourceProperties>
+</resourceDriver>

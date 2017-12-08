@@ -1,0 +1,149 @@
+============General==================
+documentation="linux driver"
+owner="cwhitty"
+============Steps====================
+Procedure main
+	1 #open ssh session to linux
+		useFieldsInCommand="false"
+		1.1 open s1 project://v_Linux_Driver/session_profiles/ssh.ffsp
+	2 #call each procedure in call_count
+		useFieldsInCommand="false"
+		2.1 for {set i 0} {$i < [param call_count]} {incr i}
+			useFieldsInCommand="false"
+			2.1.1 eval set cl [split [param call_$i]]
+				useFieldsInCommand="false"
+			2.1.2 eval set params [lassign $cl proc]
+				useFieldsInCommand="false"
+			2.1.3 #message to user
+				analyze
+					none 
+					message Information:Calling a proc called $proc with these parameters: $params
+				analyze
+					none 
+					message Information:Resource IP address: [param property_ipAddress]
+				useFieldsInCommand="false"
+			2.1.4 call $proc $params
+				useFieldsInCommand="false"
+				emulation
+				response="{
+"ports":[{"name":"port0","status":"online","container":"Chassis EmulatedL1Switch/Blade EmulatedL1Switch.1"},{"name":"port1","status":"online","container":"Chassis EmulatedL1Switch/Blade EmulatedL1Switch.1"}]
+}"
+				responseType="text"
+				structuredData="
+<structure xmlns:map="http://www.fnfr.com/svt/mapping">
+    <isEmpty>false</isEmpty>
+</structure>
+"
+				aliases
+					isEmpty
+						queryFormatString=".//isEmpty"
+				duration="13.0"
+	3 #show and return JSON response
+		useFieldsInCommand="false"
+		3.1 eval puts $ret
+			useFieldsInCommand="false"
+		3.2 return $ret
+Procedure getProperties
+	1 command s1 echo kernel: `uname -r`
+		analyze
+			query kernel()
+			store kernel[return properties/Kernel_Release]
+	2 command s1 echo hostname: `uname -n`
+		analyze
+			query hostname()
+			store hostname[return properties/Hostname]
+	3 call getPortList
+		analyze
+			regex \\S+ full_match false
+			store jsonPortListtrue[return ports]
+		useFieldsInCommand="false"
+		emulation
+		response="{"name":"//10.108.32.17/1/1","status":"online","container":"slot1_cm-1g-d12_E10210259/group1_E10210259"} {"name":"//10.108.32.17/1/2","status":"online","container":"slot1_cm-1g-d12_E10210259/group1_E10210259"} {"name":"//10.108.32.17/1/3","status":"online","container":"slot1_cm-1g-d12_E10210259/group2_E10210259"} {"name":"//10.108.32.17/1/4","status":"online","container":"slot1_cm-1g-d12_E10210259/group2_E10210259"} {"name":"//10.108.32.17/1/5","status":"online","container":"slot1_cm-1g-d12_E10210259/group3_E10210259"} {"name":"//10.108.32.17/1/6","status":"online","container":"slot1_cm-1g-d12_E10210259/group3_E10210259"} {"name":"//10.108.32.17/1/7","status":"online","container":"slot1_cm-1g-d12_E10210259/group4_E10210259"} {"name":"//10.108.32.17/1/8","status":"online","container":"slot1_cm-1g-d12_E10210259/group4_E10210259"} {"name":"//10.108.32.17/1/9","status":"online","container":"slot1_cm-1g-d12_E10210259/group5_E10210259"} {"name":"//10.108.32.17/1/10","status":"online","container":"slot1_cm-1g-d12_E10210259/group5_E10210259"} {"name":"//10.108.32.17/1/11","status":"online","container":"slot1_cm-1g-d12_E10210259/group6_E10210259"} {"name":"//10.108.32.17/1/12","status":"online","container":"slot1_cm-1g-d12_E10210259/group6_E10210259"} {"name":"//10.108.32.17/2/1","status":"online","container":"slot2_cm-1g-d12_E10220545/group1_E10220545"} {"name":"//10.108.32.17/2/2","status":"online","container":"slot2_cm-1g-d12_E10220545/group1_E10220545"} {"name":"//10.108.32.17/2/3","status":"online","container":"slot2_cm-1g-d12_E10220545/group2_E10220545"} {"name":"//10.108.32.17/2/4","status":"online","container":"slot2_cm-1g-d12_E10220545/group2_E10220545"} {"name":"//10.108.32.17/2/5","status":"online","container":"slot2_cm-1g-d12_E10220545/group3_E10220545"} {"name":"//10.108.32.17/2/6","status":"online","container":"slot2_cm-1g-d12_E10220545/group3_E10220545"} {"name":"//10.108.32.17/2/7","status":"online","container":"slot2_cm-1g-d12_E10220545/group4_E10220545"} {"name":"//10.108.32.17/2/8","status":"online","container":"slot2_cm-1g-d12_E10220545/group4_E10220545"} {"name":"//10.108.32.17/2/9","status":"online","container":"slot2_cm-1g-d12_E10220545/group5_E10220545"} {"name":"//10.108.32.17/2/10","status":"online","container":"slot2_cm-1g-d12_E10220545/group5_E10220545"} {"name":"//10.108.32.17/2/11","status":"online","container":"slot2_cm-1g-d12_E10220545/group6_E10220545"} {"name":"//10.108.32.17/2/12","status":"online","container":"slot2_cm-1g-d12_E10220545/group6_E10220545"}"
+		responseType="text"
+		structuredData="
+<structure xmlns:map="http://www.fnfr.com/svt/mapping">
+    <isEmpty>false</isEmpty>
+</structure>
+"
+		aliases
+			isEmpty
+				queryFormatString=".//isEmpty"
+		duration="2.3"
+Procedure getPorts
+	1 call getPortList
+		analyze
+			regex \\S+ full_match false
+			store jsonPortListtrue[return ports]
+		useFieldsInCommand="false"
+		emulation
+		response="{"name":"//10.108.32.17/1/1","status":"online","container":"slot1_cm-1g-d12_E10210259/group1_E10210259"} {"name":"//10.108.32.17/1/2","status":"online","container":"slot1_cm-1g-d12_E10210259/group1_E10210259"} {"name":"//10.108.32.17/1/3","status":"online","container":"slot1_cm-1g-d12_E10210259/group2_E10210259"} {"name":"//10.108.32.17/1/4","status":"online","container":"slot1_cm-1g-d12_E10210259/group2_E10210259"} {"name":"//10.108.32.17/1/5","status":"online","container":"slot1_cm-1g-d12_E10210259/group3_E10210259"} {"name":"//10.108.32.17/1/6","status":"online","container":"slot1_cm-1g-d12_E10210259/group3_E10210259"} {"name":"//10.108.32.17/1/7","status":"online","container":"slot1_cm-1g-d12_E10210259/group4_E10210259"} {"name":"//10.108.32.17/1/8","status":"online","container":"slot1_cm-1g-d12_E10210259/group4_E10210259"} {"name":"//10.108.32.17/1/9","status":"online","container":"slot1_cm-1g-d12_E10210259/group5_E10210259"} {"name":"//10.108.32.17/1/10","status":"online","container":"slot1_cm-1g-d12_E10210259/group5_E10210259"} {"name":"//10.108.32.17/1/11","status":"online","container":"slot1_cm-1g-d12_E10210259/group6_E10210259"} {"name":"//10.108.32.17/1/12","status":"online","container":"slot1_cm-1g-d12_E10210259/group6_E10210259"} {"name":"//10.108.32.17/2/1","status":"online","container":"slot2_cm-1g-d12_E10220545/group1_E10220545"} {"name":"//10.108.32.17/2/2","status":"online","container":"slot2_cm-1g-d12_E10220545/group1_E10220545"} {"name":"//10.108.32.17/2/3","status":"online","container":"slot2_cm-1g-d12_E10220545/group2_E10220545"} {"name":"//10.108.32.17/2/4","status":"online","container":"slot2_cm-1g-d12_E10220545/group2_E10220545"} {"name":"//10.108.32.17/2/5","status":"online","container":"slot2_cm-1g-d12_E10220545/group3_E10220545"} {"name":"//10.108.32.17/2/6","status":"online","container":"slot2_cm-1g-d12_E10220545/group3_E10220545"} {"name":"//10.108.32.17/2/7","status":"online","container":"slot2_cm-1g-d12_E10220545/group4_E10220545"} {"name":"//10.108.32.17/2/8","status":"online","container":"slot2_cm-1g-d12_E10220545/group4_E10220545"} {"name":"//10.108.32.17/2/9","status":"online","container":"slot2_cm-1g-d12_E10220545/group5_E10220545"} {"name":"//10.108.32.17/2/10","status":"online","container":"slot2_cm-1g-d12_E10220545/group5_E10220545"} {"name":"//10.108.32.17/2/11","status":"online","container":"slot2_cm-1g-d12_E10220545/group6_E10220545"} {"name":"//10.108.32.17/2/12","status":"online","container":"slot2_cm-1g-d12_E10220545/group6_E10220545"}"
+		responseType="text"
+		structuredData="
+<structure xmlns:map="http://www.fnfr.com/svt/mapping">
+    <isEmpty>false</isEmpty>
+</structure>
+"
+		aliases
+			isEmpty
+				queryFormatString=".//isEmpty"
+		duration="2.3"
+Procedure getPortList
+	1 command s1 ifconfig -a -s
+		analyze
+			query Iface_all()
+			store portList
+	2 command s1 cd /sys/class/net
+	3 eval set jsonPortList ""
+		useFieldsInCommand="false"
+	4 foreach port $portList
+		useFieldsInCommand="false"
+		4.1 command s1 if \\[ `more $port/carrier` \\] ; then echo linkState: `more $port/carrier` ; else echo linkState: 0 ; fi
+			analyze
+				query linkState()
+				assert $value == 1
+					When True
+						Eval set portStatus online
+					When False
+						Eval set portStatus offline
+		4.2 call addPortToJSON -portContainer ports -portStatus $portStatus -portName $port
+			useFieldsInCommand="false"
+			emulation
+			response="{"name":"//10.108.32.17/2/12","status":"online","container":"slot2_cm-1g-d12_E10220545/group6_E10220545"}"
+			responseType="text"
+			structuredData="
+<structure xmlns:map="http://www.fnfr.com/svt/mapping">
+    <isEmpty>false</isEmpty>
+</structure>
+"
+			aliases
+				isEmpty
+					queryFormatString=".//isEmpty"
+		4.3 eval set jsonPortList [concat $jsonPortList $portJSON]
+			useFieldsInCommand="false"
+	5 return $jsonPortList
+Procedure addPortToJSON
+	1 eval puts "portName: $portName"
+		analyze
+			query portName()
+			store portName[return name]
+		useFieldsInCommand="false"
+	2 eval puts "portStatus: $portStatus"
+		analyze
+			query portStatus()
+			store portStatus[return status]
+		useFieldsInCommand="false"
+	3 eval puts "portContainer: $portContainer"
+		analyze
+			query portContainer()
+			store portContainer[return container]
+		useFieldsInCommand="false"
+============Parameters===============
+parameters(escape="true")
+	parameters
+		call_count="1"
+		call_0="getProperties true"
+		property_ipAddress="10.108.37.167"
+		property_Kernel_Release="3.13.0-32-generic"
+		property_Hostname="foobar"
+		property_SSH_Username="root"
+		property_SSH_Password="admin"
