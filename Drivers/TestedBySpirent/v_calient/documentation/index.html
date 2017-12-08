@@ -1,0 +1,76 @@
+<HTML><BODY>
+<style>TABLE,TD,TH{border:1px solid black;border-collapse:collapse;}
+th{text-align:left;background-color:AliceBlue;}
+H1,H2{padding-left:15px}
+.smallText{font-size:10px; color:black; font-family:courier}
+.normalText{font-size:14px; color:black; font-family:arial}
+.procText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.qcNotesText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.headerText{font-size:30px; color:black; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
+</style>
+<BR><DIV class='headerText'>Calient driver</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>This is the default driver for Calient switches. The driver package contains the manifest file and</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>a single test case.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>The driver implements the Layer 1 Switch interface and requires the following resource</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>properties:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* ipAddress (optional, but if omitted, Hostname must be specified)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* Hostname (optional, but if omitted, ipAddress must be specified)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* username - SSH username</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* password - SSH password</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* calientUsername - TL1 session username</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* calientPassword – TL1 session password</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Note: The Calient driver connects to the switch via an SSH connection using the “username”</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>and “password” credentials. Once the SSH connection is established, the TL1 agent> prompt</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>will appear, and the driver issues the ACT-USER TL1 command to activate the</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>“calientUsername” using its “CalientPassword” password string.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>This driver requires the following to be configured on the Calient switch:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* An SSH user account on the Calient switch (the “username” property)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>By default, an ssh user named “tl1user” exists on the Calient switch as a factory</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>default, and this ssh user can be used for the driver’s “username” property. This</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>account requires no password by default, so the “password” property can remain</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>blank.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* A TL1 user account with provisioning access (the “calientUsername” property)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>In order to create and remove cross connects, a TL1 account with provisioning</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>access must have been provisioned on the Calient switch. By default, a TL1</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>user named “admin” exists on the Calient switch as a factory default and can be</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>used as the “calientUsername”. The default password for admin is “pxc***”, and</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>can be used as the “calientPassword” value.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>## Readiness check</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Below is a procedure to ensure that the Calient is ready to be managed by the Velocity driver.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>SSH to the Calient using syntax like: ssh tl1user@10.140.64.30</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* Where tl1user is the ssh username to be used as the “username” property</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* Where the IP address is the Calient’s IP address or hostname</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* If necessary, type a password for ssh access (the “password” property)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* If this step is successful, the agent> prompt should appear in the terminal</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* Activate the user in TL1 with syntax like: act-user::admin:::pxc***</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* Where admin is the TL1 username (the “calientUsername” property”)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>* Where pxc*** is the TL1 password (the “calientPassword” value)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>If this step is successful, the following response should appear in the terminal:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'> TL1AGENT 16-12-03 13:45:16</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>M 0 COMPLD</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'> "admin:admin,2"</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'> /* NOTICE This is a private computer system. Unauthorized</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>access or use may lead to prosecution. */</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>;</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>If the SSH connection and activate user operations are successful, the Calient driver configured</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>with the appropriate credentials should now auto-discover the Calient ports and allow users to</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>create and delete cross-connects.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
