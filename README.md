@@ -9,7 +9,7 @@ All assets are categorized into three levels of maturity/testing:
 - Reference:  provided by Spirent with intent to serve as “blueprint” for your project's structure and usage
 - Community:  submitted by community or Spirent personnel with no review or testing by Spirent       
 
-You are encouraged to submit your projects back to the Warehouse for others to benefit from.
+You are encouraged to submit your projects back to the Developer Community for others to benefit from.
 
 Each project within this repository conforms to a standard naming convention:
 
