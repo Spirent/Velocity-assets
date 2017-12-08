@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
-<testCase version="5.1.0.77511">
+<testCase version="7.0.0.2e413e8">
     <general>
         <sessionClass includeTestCase="true" sessionType="arista_base.ffsp"/>
     </general>
     <procedures>
         <item name="main">
             <steps>
-                <item guid="bdae6faa-1d4d-432d-b4bc-c0543442fffb" action="call">
+                <item guid="bdae6faa-1d4d-432d-b4bc-c0543442fffb" action="comment">
                     <command>
-                        <body>project://d_arista/test_cases/unit_test.fftc#main</body>
+                        <body>QC Library</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                     <useFieldsInCommand>false</useFieldsInCommand>
@@ -212,7 +212,7 @@
                         <completionProperties expectedIdleTime="4.43" expectedIdleTime.inherit="false"/>
                     </applicationProperties>
                 </item>
-                <item guid="bf584071-34c9-4fcb-99ec-ff9cb1b02aa4" action="command" session="$session" normalOffset="8.011" estimatedStepExecutionTime="0.266">
+                <item guid="bf584071-34c9-4fcb-99ec-ff9cb1b02aa4" action="command" session="$session" normalOffset="8.01" estimatedStepExecutionTime="0.266">
                     <command>
                         <body>switchport mode trunk</body>
                     </command>
