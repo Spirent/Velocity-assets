@@ -1,0 +1,54 @@
+<HTML><BODY>
+<style>TABLE,TD,TH{border:1px solid black;border-collapse:collapse;}
+th{text-align:left;background-color:AliceBlue;}
+H1,H2{padding-left:15px}
+.smallText{font-size:10px; color:black; font-family:courier}
+.normalText{font-size:14px; color:black; font-family:arial}
+.procText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.qcNotesText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.headerText{font-size:30px; color:black; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
+</style>
+<BR><DIV class='headerText'>Arista L1 Driver</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Provides basic commands for management of Arista L2 switches. </DIV>
+<DIV style='margin-left:30px; ' class='normalText'><b>Tags:</b> L1</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<BR><DIV class='header2Text'>1 QuickCall Library in project://ri_arista:</DIV>
+<BR><DIV class='header2Text'>project://ri_arista/session_profiles/arista_base_qc.fftc (project://ri_arista/session_profiles/arista_base_qc.fftc)</DIV><BR>
+<DIV class='qcNotesText'></DIV>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getInterfaces</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>addPortToVlan</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>vlanId</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>can be a single number, a range delimited by "-" or a set of numbers delimited by ","
+e.g.
+    900
+    900-905
+    900,902,905 </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>portName</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>removePortFromVlan</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>vlanId</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>can be a single number, a range delimited by "-" or a set of numbers delimited by ","
+e.g.
+    900
+    900-905
+    900,902,905 </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>portName</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+</TABLE></DIV><br>
+<br>

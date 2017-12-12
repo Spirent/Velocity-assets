@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<SessionTemplate version="7.0.0.2e413e8">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <terminalSizeProperties>
+                <termWidth inherit="false">512</termWidth>
+            </terminalSizeProperties>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content>*#</Content>
+                </item>
+                <item name="prompt2" MatchMethod="WILDCARD">
+                    <Content>*$</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <ipAddress inherit="false">[param property_ipAddress]</ipAddress>
+        <user inherit="false">[param property_SSH_Username]</user>
+        <password inherit="false">Hu62+w4ez8VRjpeoxPozxPGvDTj9+g7+rW3d6jsyx9w=</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_linux.mgmt.driver</responseLibrary>
+</SessionTemplate>

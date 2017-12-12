@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<testCase version="5.4.1.be355a6">
+    <execution>
+        <parameters version="5.4.1.be355a6">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <call_count>2</call_count>
+                    <call_0>addToVlan 3700 BAG01-Ten-GigabitEthernet2/0/28:4_Ten-GigabitEthernet2/0/28:3_Ten-GigabitEthernet2/0/28:2</call_0>
+                    <call_1>removeFromVlan 3700 BAG01-Ten-GigabitEthernet2/0/28:4_Ten-GigabitEthernet2/0/28:3_Ten-GigabitEthernet2/0/28:2</call_1>
+                    <property_ipAddress>10.1.2.226</property_ipAddress>
+                    <property_username>andy</property_username>
+                    <property_password>init123#</property_password>
+                    <property_Model pt:description="5900, 5920, 5930, 5950">5930</property_Model>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="c4c6f00b-fbf1-44de-a2f3-3c1b42882c66" action="open" session="s1">
+                    <command>
+                        <body>project://ri_hp_5900/session_profiles/driver_hp_5900_ssh.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                    <advancedProperties defaultSessionProfile="project://ri_hp_5900/session_profiles/hp_5900_ssh.ffsp"/>
+                </item>
+                <item guid="a16681b4-0c22-4b2a-84e7-dcabb36fa4b8" action="eval">
+                    <command>
+                        <body>set ret &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="3f901ec2-765e-4f25-8656-6f0bdaaa5b2c" action="comment">
+                    <command>
+                        <body>executing procedures</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="3ec746cf-c32c-4777-9eb6-a5f11c01e0ae" action="for">
+                    <command>
+                        <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="870c535e-ff31-4885-9fee-00b88e663676" action="eval">
+                            <command>
+                                <body>set cl [split [param call_$i]]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="f1af5f56-f3b8-42b7-97bc-270026c5deef" action="eval">
+                            <command>
+                                <body>set params [lassign $cl proc]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="4f8ceae5-729a-4301-adc5-5bd1fa9777c6" action="call">
+                            <command>
+                                <body>$proc $params</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>ret</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="df8ede32-12df-45d3-8f06-323c9ca48a72" action="close" session="s1">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="4d93fcbd-ec7f-44bf-801b-a21309e544aa" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getProperties" isVBlock="true">
+            <steps>
+                <item guid="0a8473b9-94bb-4849-b4e1-2f02e6e365f1" action="comment">
+                    <command>
+                        <body>do nothing at the moment</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="getPorts" isVBlock="true">
+            <steps>
+                <item guid="13333683-d35f-491c-9b59-799755682fc0" action="comment">
+                    <command>
+                        <body>do nothing at the moment</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="createVlan" isVBlock="true">
+            <steps>
+                <item guid="5b1cc0ff-8a6d-406c-9a23-fbf0b8ceae73" action="comment">
+                    <command>
+                        <body>vlans should already be configured on the switch</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="destroyVlan" isVBlock="true">
+            <steps>
+                <item guid="51f259e9-50d9-416a-99ca-750aab8f1269" action="comment">
+                    <command>
+                        <body>vlans should already be configured on the switch and not dynamically added/removed</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="addToVlan" isVBlock="true">
+            <steps>
+                <item guid="283802ea-056a-483d-afa4-d48216e61cd2" action="eval">
+                    <command>
+                        <body>set vlanSpec [lindex ${arg[1]} 0]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a0a27050-071d-449f-a5a0-20859ca0442a" action="eval">
+                    <command>
+                        <body>set portName [lindex ${arg[1]} 1]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6fb7feea-d17f-49eb-b997-3698043e1337" action="eval">
+                    <command>
+                        <body>string range $portName 0 2</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="d0d48f5d-a4ea-443a-9b30-4bdf8e261127" action="comment">
+                    <command>
+                        <body>If current port is a BAG port</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4418828c-2fd1-462d-b8a6-fb3448c68870" action="if">
+                            <command>
+                                <body>[string range $portName 0 2] == &quot;BAG&quot;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="395d0422-2c3c-4c7c-b1bb-c64d8f0284f4" action="then">
+                                    <nestedSteps>
+                                        <item guid="9954a89f-f44b-408a-b7e5-485727a39042" action="comment">
+                                            <command>
+                                                <body>Get BAG port number</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="de744faf-affd-44a7-9b87-9c37609f56a8" action="eval">
+                                                    <command>
+                                                        <body>set dashIndex [string first - $portName]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="a8a0f576-53ef-4401-911f-d11370002111" action="eval">
+                                                    <command>
+                                                        <body>set bagNum [string range $portName 3 [expr $dashIndex - 1]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="42d01d84-7462-4911-8985-b6e58a246f54" action="comment">
+                                            <command>
+                                                <body>Seperate BAG group into individual ports</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="d8d55d37-df13-4733-b8ac-837416678cbc" action="eval">
+                                                    <command>
+                                                        <body>set portString [string range $portName [expr $dashIndex + 1] end]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="b1e0481a-e699-47b7-a412-f41c20b92acc" action="eval">
+                                                    <command>
+                                                        <body>set portList [split $portString _]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="819e1292-de15-4cef-b206-862519507ff3" action="comment">
+                                            <command>
+                                                <body>Change port name variable to use bridge aggregate</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="f6aaf2d8-16ff-4169-bcee-23394e5f3298" action="eval">
+                                                    <command>
+                                                        <body>set portName &quot;bridge-aggregation $bagNum&quot;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="adb9e88c-da20-40af-8eab-02a10e521c8a" action="comment">
+                                            <command>
+                                                <body>Configure BAG group</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="b244d648-070d-4457-9597-6ab9c27f125a" action="enableBridgeAggregate" session="s1">
+                                                    <command>
+                                                        <body> -bagNum $bagNum</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="7dfd9863-7cff-4808-98a1-06ea886f4be4" action="foreach">
+                                                    <command>
+                                                        <body>curPort $portList</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="d692e00d-037f-4b6f-932d-3c2b5697fe87" action="addPortToBridgeAggregate" session="s1">
+                                                            <command>
+                                                                <body> -portName $curPort -bridgeAggNum $bagNum</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="03998ad0-970d-445b-a19f-3c0b5683e300" action="eval">
+                                                            <command>
+                                                                <body>puts $curPort</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="20e1b3e3-3b26-4cdb-b01f-e5ece4267f7c" action="addPortToVlan" session="s1">
+                    <command>
+                        <body>-portName $portName -vlanId $vlanSpec</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="removeFromVlan" isVBlock="true">
+            <steps>
+                <item guid="fa23414f-fb05-4a33-8441-323349f309c2" action="eval">
+                    <command>
+                        <body>set vlanSpec [lindex ${arg[1]} 0]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="97d58661-89ab-48c2-a287-166b25e5eac8" action="eval">
+                    <command>
+                        <body>set portName [lindex ${arg[1]} 1]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="64f27b0b-bd35-4e60-b06f-46f480f7659d" action="comment">
+                    <command>
+                        <body>If current port is a BAG port</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="968066d0-3f86-49b4-b122-77150aa33d2d" action="if">
+                            <command>
+                                <body>[string range $portName 0 2] == &quot;BAG&quot;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="422357cf-e0de-45a8-95ba-256c2658cab9" action="then">
+                                    <nestedSteps>
+                                        <item guid="6f069315-ad49-4b52-93f4-21cb55c84342" action="comment">
+                                            <command>
+                                                <body>Get BAG port number</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="58fb7c05-d1b9-4cb1-bb1f-818dcc060a6c" action="eval">
+                                                    <command>
+                                                        <body>set dashIndex [string first - $portName]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="1cb932f6-854b-4c5f-b9c4-23005689dd17" action="eval">
+                                                    <command>
+                                                        <body>set bagNum [string range $portName 3 [expr $dashIndex - 1]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="d5579304-09cb-4837-bfd5-4c5549022a93" action="comment">
+                                            <command>
+                                                <body>Seperate BAG group into individual ports</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="135e0d97-affd-4ec0-ba6e-950c35a0ca37" action="eval">
+                                                    <command>
+                                                        <body>set portString [string range $portName [expr $dashIndex + 1] end]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="febba7f5-86af-43f5-a119-db865ed1a2eb" action="eval">
+                                                    <command>
+                                                        <body>set portList [split $portString _]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="0ef63cb6-35c8-4565-9f35-e2119f4562de" action="comment">
+                                            <command>
+                                                <body>Change port name variable to use bridge aggregate</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="a09123d7-8ee7-48e3-8c20-fd038866f065" action="eval">
+                                                    <command>
+                                                        <body>set portName &quot;bridge-aggregation $bagNum&quot;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="8d5ffcc6-21c1-4ece-9b9b-9df6af60d348" action="comment">
+                                            <command>
+                                                <body>Configure BAG group</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="4cd39b49-92d3-4e14-a9d0-b6f049558c35" action="foreach">
+                                                    <command>
+                                                        <body>curPort $portList</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="2622d97f-d232-4981-9374-5dc285a40be0" action="removePortFromBridgeAggregate" session="s1">
+                                                            <command>
+                                                                <body> -portName $curPort -bridgeAggNum $bagNum</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="2e432885-81e9-496e-a146-d825a9d3dcf5" action="eval">
+                                                            <command>
+                                                                <body>puts $curPort</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="30912eb0-cc8b-4be1-9511-c7779de68b8a" action="disableBridgeAggregate" session="s1">
+                                                    <command>
+                                                        <body> -bagNum $bagNum</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="10857f68-34de-4d1a-99aa-a1bfe44e2b76" action="removePortFromVlan" session="s1">
+                    <command>
+                        <body>-portName $portName -vlanId $vlanSpec</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

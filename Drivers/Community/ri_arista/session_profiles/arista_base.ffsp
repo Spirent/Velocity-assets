@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.1.0.77511">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <terminalSizeProperties>
+                <termHeight inherit="false">100</termHeight>
+                <termWidth inherit="false">256</termWidth>
+            </terminalSizeProperties>
+            <prompts merge="true">
+                <item name="unprivileged" MatchMethod="WILDCARD">
+                    <Content>*&gt;</Content>
+                </item>
+                <item name="enable" MatchMethod="WILDCARD">
+                    <Content>*#</Content>
+                </item>
+                <item name="bash" MatchMethod="WILDCARD">
+                    <Content>[*@* ~]$</Content>
+                </item>
+                <item name="more" TypeOfPrompt="MORE">
+                    <Content>--More--</Content>
+                </item>
+                <item name="config">
+                    <Content>*(config*)#</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <user inherit="false">admin</user>
+        <password inherit="false">iRyLc4KQj80=</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_arista/</responseLibrary>
+    <sessionClassTestCase inherit="false">arista_base_qc.fftc</sessionClassTestCase>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>

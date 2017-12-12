@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<testCase version="5.1.0.77511">
+    <procedures>
+        <item name="main" isPublic="true">
+            <steps>
+                <item guid="cb543587-caad-4b07-8a57-dd28efd51f8a" action="comment">
+                    <command>
+                        <body>basic run-through</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="96b7727d-3231-41d7-b95f-5c84c17312eb" action="open" session="s1">
+                            <command>
+                                <body>project://ri_f5/session_profiles/big_ip_unit_test.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="ace25453-0da7-4744-91a1-27da229e8a36" action="getInterfaces" session="s1">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="1af68b5e-b66a-486a-b834-70fd94b8e350" action="getRunningState" session="s1">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="ac651647-1dbb-4efa-b6a9-210948c12bc9" action="getActiveVersion" session="s1">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="68b63948-e889-4b91-8a7a-f074b0c3b926" action="getFirstActivePort" session="s1">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="ce5226b1-7f63-472d-b2a6-71118f054266" action="setVlan" session="s1">
+                            <command>
+                                <body>-vlanId 900 -ifName 1.2 -hostname 10000-4</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="cf7595ca-4402-4891-aebd-1adb26126939" action="clearVlan" session="s1">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="9e770bd8-6f15-4e35-b4c2-a083c043e89b" action="close" session="s1">
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="2e62a573-0d46-43f6-929b-0aae8ad0132d" action="comment">
+                    <command>
+                        <body>Exercise those VLANs</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

@@ -1,0 +1,970 @@
+<?xml version="1.0"?>
+<testCase version="6.0.0.18638fa">
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="c4561d67-55b9-4d93-afb6-c6e16abc54db" action="comment">
+                    <command>
+                        <body>#### Wait for 1 minute for reservation to Complete ####</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="98da2c90-ceef-4115-a04b-b5e86f37bc10" action="sleep">
+                            <command>
+                                <body>[param reservationWaitTime]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="6ca7b961-7a16-47cc-9896-8789df26bf78" action="eval">
+                            <command>
+                                <body>set user_name [param user_name]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="2e7195ac-10bd-453a-bcd0-7ebebe2f827a" action="eval">
+                            <command>
+                                <body>set password [param password]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="2c426e71-079f-4d83-85eb-c8501a1316b8" action="eval">
+                            <command>
+                                <body>set reservationId [param reservationId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="01888add-a487-4832-8384-3c5ffbf5ce18" action="eval">
+                            <command>
+                                <body>set token null</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="74aca26a-8df9-4298-a7d7-a81bd8e7b4b2" action="eval">
+                            <command>
+                                <body>set url [velocity url]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="1cf871bd-dc6d-4d2d-8f9d-b79cb06f14ea" action="comment">
+                    <command>
+                        <body>#### Open REST API session to Velocity and retrieve token ####</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ac359afe-80d6-4729-9bf6-0c88bc5af0ac" action="open" session="REST">
+                            <command>
+                                <body>project://ti_AbstractTopologyUpdate/session_profiles/velocity_rest_api.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="3e22cdaa-3608-4f33-b052-690b5dc734ce" action="GET" session="REST">
+                            <command>
+                                <body>api/auth/v1/token</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/xtoken</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>token</storageLocation>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/auth/v1/token" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="[get user_name]" user.inherit="false" password.masked="true" password="1xuOt5DLBjjcnpinSpi3qQ==" password.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="323f9038-2c66-4c9a-85bf-d0fbd4989b75" action="comment">
+                    <command>
+                        <body>#### Get Topology in TBML format ####</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d094429c-e037-4d1b-b66f-990e14cf4791" action="comment">
+                            <command>
+                                <body>Get Topology ID</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="65b9c7e1-8155-467f-a632-0225e667f0a5" action="GET" session="REST">
+                                    <command>
+                                        <body>api/reservation/v6/reservation/${reservationId}</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/topologyId</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>topologyId</storageLocation>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/reservation/v6/reservation/${reservationId}" action.inherit="false">
+                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="[get user_name]" user.inherit="false" password.masked="true" password="1xuOt5DLBjjcnpinSpi3qQ==" password.inherit="false"/>
+                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                            <memberClasses>
+                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                            </memberClasses>
+                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                        </httpHeader>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="369fe3e2-d3ff-4c3d-8c2f-62ba90356893" action="eval">
+                                    <command>
+                                        <body>puts $topologyId;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="c8a5d25d-fa40-4ed0-b822-93b9816da72f" action="comment">
+                            <command>
+                                <body>Get Topology in TBML Format</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="4cbb85eb-cd72-41f8-b8bc-d9f7135ecf55" action="GET" session="REST">
+                                    <command>
+                                        <body>api/topology/v6/topology/${topologyId}?asFile=true</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                        <query sub="true">AbstractResrources()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>abstrctResources</storageLocation>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/topology/v6/topology/${topologyId}?asFile=true" action.inherit="false"/>
+                                    <responseMap>project://d_velocity/response_maps/AbstractTopology.ffrm</responseMap>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="438f6b78-b54d-48ba-9a32-3f736df973be" action="comment">
+                            <command>
+                                <body>Print Abstract Resources</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ae1ce889-27f5-430e-bfff-f920f666d541" action="eval">
+                                    <command>
+                                        <body>puts $abstrctResources;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="0cc9e681-8d3b-4c3e-aa2c-c97a56cae1b1" action="comment">
+                    <command>
+                        <body>#### If Reservation and Abstract Resources available, Modify TBML ######</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="32024c34-eab6-4832-819f-144988a18b73" action="if">
+                            <command>
+                                <body>([string length $reservationId] != 0) &amp;&amp; ([llength $abstrctResources] != 0)</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="fd547b6d-ead2-450b-b2f8-08f9bbb28586" action="then">
+                                    <nestedSteps>
+                                        <item guid="6f399bd4-60b2-4046-a596-695d62bc0394" action="comment">
+                                            <command>
+                                                <body>#### Get Topology for reservation ####</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="092b39c1-368d-4134-ac5e-dbba035007e4" action="GET" session="REST">
+                                                    <command>
+                                                        <body>api/reservation/v6/reservation/${reservationId}/topology/</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <storeResponseAt>origTopo</storeResponseAt>
+                                                        <storeResponseText>true</storeResponseText>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/reservation/v6/reservation/${reservationId}/topology/" action.inherit="false">
+                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                            <memberClasses>
+                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                            </memberClasses>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/xml" value.inherit="false"/>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                        </httpHeader>
+                                                    </applicationProperties>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="2361cfae-75d4-47f7-bf93-d5ddcb3e5bb1" action="comment">
+                                            <command>
+                                                <body>#### Lock Topology ####</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="5255d585-186e-444e-8196-5c303498032e" action="POST" session="REST" estimatedStepExecutionTime="0.237">
+                                                    <command>
+                                                        <body>api/reservation/v6/reservation/[get reservationId]/topology/lock</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>fn:count(mapped/Json/expires)</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="assert">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                        <expression>$value == 1.0</expression>
+                                                                        <actionsWhenTrue>
+                                                                            <item actionId="PassTest">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                        </actionsWhenTrue>
+                                                                        <actionsWhenFalse>
+                                                                            <item actionId="RepeatStep">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" delayBetweenRepeats="6.0"/>
+                                                                            </item>
+                                                                        </actionsWhenFalse>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/reservation/v6/reservation/[get reservationId]/topology/lock" action.inherit="false">
+                                                        <message inherit="false">
+</message>
+                                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                            <memberClasses>
+                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                            </memberClasses>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                        </httpHeader>
+                                                    </applicationProperties>
+                                                </item>
+                                                <item guid="0f0e2aca-6ce8-4659-b38d-c8e3f92e289a" action="GET" session="REST" estimatedStepExecutionTime="0.237">
+                                                    <command>
+                                                        <body>api/reservation/v5/reservation/[get reservationId]/state</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/reservation/v5/reservation/[get reservationId]/state" action.inherit="false">
+                                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                            <memberClasses>
+                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                            </memberClasses>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/xml" value.inherit="false"/>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                        </httpHeader>
+                                                    </applicationProperties>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="e041764c-b764-407d-a2a0-4d9e49cdfb94" action="comment">
+                                            <command>
+                                                <body>#### Modify TBML #### </body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="08b2a7dc-478a-43a3-809f-b7f3aef7d912" action="call">
+                                                    <command>
+                                                        <body>modifyTBML -origTopology $origTopo -abstractResources $abstrctResources</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <storeResponseAt>newTopo</storeResponseAt>
+                                                        <storeResponseText>true</storeResponseText>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="0771c626-3cef-4825-9800-3957af67025e" action="comment">
+                                            <command>
+                                                <body>#### Update Topology TBML ####</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="498f69fc-191c-4ff2-a326-4bbff8b7ac53" action="POST" session="REST" estimatedStepExecutionTime="0.237">
+                                                    <command>
+                                                        <body>api/reservation/v6/reservation/[get reservationId]/topology</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>fn:count(mapped/Json/jobId)</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="assert">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                        <expression>$value == 1.0</expression>
+                                                                        <actionsWhenTrue>
+                                                                            <item actionId="PassTest">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                        </actionsWhenTrue>
+                                                                        <actionsWhenFalse>
+                                                                            <item actionId="RepeatStep">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" delayBetweenRepeats="6.0"/>
+                                                                            </item>
+                                                                        </actionsWhenFalse>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/reservation/v6/reservation/[get reservationId]/topology" action.inherit="false">
+                                                        <message inherit="false">$newTopo
+</message>
+                                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                            <memberClasses>
+                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                            </memberClasses>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/xml" value.inherit="false"/>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                        </httpHeader>
+                                                    </applicationProperties>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="6372b7be-cb33-44cb-8fee-a65b815e5594" action="comment">
+                                            <command>
+                                                <body>#### Delete Lock on Topology ####</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="af17265f-4ca9-4d65-9e9e-31ffc5f85b5d" action="GET" session="REST" estimatedStepExecutionTime="0.237">
+                                                    <command>
+                                                        <body>api/reservation/v6/reservation/[get reservationId]/state</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/reservation/v6/reservation/[get reservationId]/state" action.inherit="false">
+                                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                            <memberClasses>
+                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                            </memberClasses>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/xml" value.inherit="false"/>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                        </httpHeader>
+                                                    </applicationProperties>
+                                                </item>
+                                                <item guid="b6ea2aec-f39b-4479-900d-29ac8524b1e3" action="DELETE" session="REST" estimatedStepExecutionTime="0.237">
+                                                    <command>
+                                                        <body>api/reservation/v6/reservation/[get reservationId]/topology/lock</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/reservation/v6/reservation/[get reservationId]/topology/lock" action.inherit="false">
+                                                        <message inherit="false">
+</message>
+                                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                            <memberClasses>
+                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                            </memberClasses>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                        </httpHeader>
+                                                    </applicationProperties>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="6db2378f-6963-4efc-beac-a4fcf6950e4f" action="else">
+                                    <nestedSteps>
+                                        <item guid="6cd6ef25-c4e9-4e0e-8beb-053959274c74" action="comment">
+                                            <command>
+                                                <body>Print Message that Reservation is not successfull</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="none">
+                                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="message">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup">
+                                                                <message> There are no Abstract Resources in the topology</message>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="modifyTBML">
+            <steps>
+                <item guid="681b45a6-c93a-4a0d-b100-ffcfa4c350bf" action="comment">
+                    <command>
+                        <body>Modify TBML Procedure</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="59667700-aea6-4be9-8f56-e5e347873043" action="eval">
+                    <command>
+                        <body>puts $origTopology</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>//resource[@type=&apos;device&apos;]/property[@name=&apos;name&apos;]</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>resources</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a3e11bed-84e3-4a83-8248-e9d08cf03de5" action="eval">
+                    <command>
+                        <body>set dataFile  [split $origTopology \\n]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="67fc3f8c-1b53-48fc-96a1-2339bd6a64b4" action="eval">
+                    <command>
+                        <body>set extension_end &quot;&lt;/extensions&gt;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6c4a44f2-f6f6-49fe-b1fd-56eb0992affc" action="eval">
+                    <command>
+                        <body>set resource_end &quot;&lt;/resource&gt;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7212484d-03cb-40a2-ae62-820cc7fe0a27" action="eval">
+                    <command>
+                        <body>set extn_locn_all [lsearch -glob -all $dataFile  *${extension_end}*]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="18e7c529-032c-4d41-9bb7-3140246e7aca" action="if">
+                    <command>
+                        <body>[llength $resources] == [llength $extn_locn_all]</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="465c6862-c3e2-4e90-9bab-c2b455a95ae5" action="then">
+                            <nestedSteps>
+                                <item guid="134dcc95-bf8e-49c2-abaf-7faeebfefafa" action="eval">
+                                    <command>
+                                        <body>set rsrc_end_locn_all [lsearch -glob -all $dataFile  *${resource_end}*]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="9d8b29f5-991c-46ba-8c3f-f1836aa42c63" action="eval">
+                                    <command>
+                                        <body>set baseSession [lsearch -glob -all $dataFile  *baseSessionProfile*]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="ea8cf08e-e202-4ce9-9b90-a2a265f239db" action="eval">
+                                    <command>
+                                        <body>set baseProfile [lsearch -glob -all $dataFile  *baseProfile*]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="99c3c298-7e9d-432d-a397-443f43f6e532" action="eval">
+                                    <command>
+                                        <body>set modify 0</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="e53c2d2e-1d5e-4467-8dd5-c565d98fc5ef" action="foreach">
+                                    <command>
+                                        <body>abstractRsrc $abstractResources</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="9df38c3e-31c5-4acb-9c84-83c2920f75d1" action="eval">
+                                            <command>
+                                                <body>set search &quot;&lt;property isimportant=\\&quot;false\\&quot; name=\\&quot;name\\&quot;&gt;$abstractRsrc&lt;/property&gt;&quot;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="ebe0b33a-82de-4bb1-b73c-042c39694622" action="eval">
+                                            <command>
+                                                <body>set abst_rsrc_locn [lsearch -glob -all $dataFile  *${search}*]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="49b0c235-40bc-44d2-b255-24437cac1c3d" action="eval">
+                                            <command>
+                                                <body>lappend abstrLocn_list $abst_rsrc_locn</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="99ea2d7d-1bd7-46b4-be99-4622ea7d02c9" action="eval">
+                                            <command>
+                                                <body>lappend extn_locn [lindex $extn_locn_all  [lsearch $resources $abstractRsrc]]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="f9a8ea26-551c-4ba7-aa50-27b12571bfe2" action="eval">
+                                            <command>
+                                                <body>puts $origTopology</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                <query sub="true">//resource\\[property=&apos;$abstractRsrc&apos;]/propertyCollection\\[@name=&apos;Automation Information&apos;]/property\\[@name=&apos;sessionProfiles&apos;]</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>session_information_list</storageLocation>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="e37da0c4-f278-4e33-bfb5-97e1334ccfb7" action="if">
+                                            <command>
+                                                <body>[string length $session_information_list] == 0</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="9bfc7c64-476e-4d40-ab0e-68e6219739cc" action="then">
+                                                    <nestedSteps>
+                                                        <item guid="d77ba043-fab9-4706-93e7-3a8fe639631d" action="eval">
+                                                            <command>
+                                                                <body>set modify 0</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="32f42fa3-2942-4067-aa6b-30dd237f0d24" action="else">
+                                                    <nestedSteps>
+                                                        <item guid="c6734135-51d4-4bc6-8bb5-8de13b0aa6a7" action="eval">
+                                                            <command>
+                                                                <body>set  modify 1</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="1139f7b9-fc88-4209-9822-761bc767bf7c" action="foreach">
+                                            <command>
+                                                <body>sessionType [string map {, &quot; &quot;} $session_information_list]</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="c29cc311-9378-4810-a29b-f3561fa2fbd5" action="eval">
+                                                    <command>
+                                                        <body>set info [string map {:: &quot; &quot;} $sessionType]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="ccee5632-4e1b-4119-a0f7-e4c5a430fda7" action="eval">
+                                                    <command>
+                                                        <body>set ${abstractRsrc}_[lindex $info 0]  [lindex $info 1]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="c8793d10-132c-43b3-a42c-ca52d1d1504a" action="eval">
+                                                    <command>
+                                                        <body>lappend ${abstractRsrc}_sessions [lindex $info 0]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="51132f20-1f10-4fd2-b7ba-b333ba2c8c73" action="eval">
+                                                    <command>
+                                                        <body>puts [get ${abstractRsrc}_[lindex $info 0]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="d23ab714-23f7-4118-804f-bd5a6d84dfa5" action="eval">
+                                    <command>
+                                        <body>puts $abstrLocn_list</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="6dd85f77-df31-4ea8-ab7b-9ee42acab6c2" action="if">
+                                    <command>
+                                        <body>$modify</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="959f68c9-d46c-458a-a5a1-0929be39369b" action="then">
+                                            <nestedSteps>
+                                                <item guid="fae00a9a-0075-46dd-841d-f38b97128c00" action="eval">
+                                                    <command>
+                                                        <body>set track 0</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="4992093c-4a07-46ee-a636-76eecbb3be53" action="for">
+                                                    <command>
+                                                        <body>{set i 0} {$i &lt; [llength $abstractResources] } {incr i}</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="1dd17b90-1792-4ab1-a57c-d1b7b07902c7" action="for">
+                                                            <command>
+                                                                <body>{set j $track} {$j &lt; [llength $baseSession] } {incr j}</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="c736c37d-441b-4338-8b67-c50f628d10e4" action="if">
+                                                                    <command>
+                                                                        <body>(([lindex $baseSession $j] &gt; [lindex $abstrLocn_list $i])) &amp;&amp; ([lindex $baseSession $j] &lt; [lindex $extn_locn $i])</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="c7c1e22f-d7d4-4bec-8e54-8e0e7dd4ec76" action="then">
+                                                                            <nestedSteps>
+                                                                                <item guid="5aa98896-7c12-4000-9e0d-1e7748003bd3" action="eval">
+                                                                                    <command>
+                                                                                        <body>lappend baseSessions_[lindex $abstractResources $i] [lindex $baseSession $j]</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                                </item>
+                                                                                <item guid="384324d8-589e-4dd8-8324-1c4f48aa42cb" action="eval">
+                                                                                    <command>
+                                                                                        <body>lappend baseProfile_[lindex $abstractResources $i] [lindex $baseProfile $j]</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                                </item>
+                                                                                <item guid="9886b793-400e-483d-880a-ecbcd64f09ac" action="eval">
+                                                                                    <command>
+                                                                                        <body>set track [expr $track + 1]</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="c5957955-96f0-4003-a0a0-558342777d1d" action="foreach">
+                                                    <command>
+                                                        <body>abstractRsrc $abstractResources</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="b2a6ff1e-3d75-4bd5-979a-d092343ecfdc" action="eval">
+                                                            <command>
+                                                                <body>puts [get baseSessions_${abstractRsrc}]</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="4e2a33b7-6995-44dd-be09-aec27ab03d88" action="eval">
+                                                            <command>
+                                                                <body>puts [get baseProfile_${abstractRsrc}]</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                        <item guid="7a5ab039-1626-485a-a1f7-9a18f6dddf76" action="foreach">
+                                                            <command>
+                                                                <body>locn_base [get baseSessions_${abstractRsrc}] locn_prof [get baseProfile_${abstractRsrc}]</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="202c129d-772f-4da3-880d-6c4776bdb6c5" action="eval" useResponseMapLibraryApplicability="false">
+                                                                    <command>
+                                                                        <body>puts [lindex $dataFile $locn_base]</body>
+                                                                    </command>
+                                                                    <postProcessing>
+                                                                        <analysisRules>
+                                                                            <item>
+                                                                                <extractorInfo extractorType="query">
+                                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                                        <query>sessionType()</query>
+                                                                                    </extractorProperties>
+                                                                                </extractorInfo>
+                                                                                <processorInfo ruleType="store">
+                                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                                        <storageLocation>session</storageLocation>
+                                                                                    </ruleProperties>
+                                                                                </processorInfo>
+                                                                            </item>
+                                                                        </analysisRules>
+                                                                    </postProcessing>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    <responseMap>project://ti_AbstractTopologyUpdate/response_maps/puts_line.ffrm</responseMap>
+                                                                    <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                </item>
+                                                                <item guid="155c5cdb-3bfc-4307-829c-8d43c296aa76" action="eval">
+                                                                    <command>
+                                                                        <body>puts $session</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                </item>
+                                                                <item guid="9e879242-5800-4a97-995f-12610cbb0ed4" action="eval">
+                                                                    <command>
+                                                                        <body>set sessionInfoPresent [lsearch [get ${abstractRsrc}_sessions] $session]</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                </item>
+                                                                <item guid="ae8e95fd-9250-4929-8887-580fd9005b10" action="if">
+                                                                    <command>
+                                                                        <body>$sessionInfoPresent != -1</body>
+                                                                    </command>
+                                                                    <nestedSteps>
+                                                                        <item guid="cf372783-a868-4ae9-94be-c736365794a5" action="then">
+                                                                            <nestedSteps>
+                                                                                <item guid="0d1385c2-049d-4662-a23d-2a3b803f6591" action="eval">
+                                                                                    <command>
+                                                                                        <body>set session_profile  &quot;              &lt;baseProfile&gt;[get ${abstractRsrc}_${session}]&lt;/baseProfile&gt;&quot;</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                                </item>
+                                                                                <item guid="c7c0bbcc-b385-4c85-b9c4-03a808316373" action="eval">
+                                                                                    <command>
+                                                                                        <body>puts $session_profile</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                                </item>
+                                                                                <item guid="36fdd1f1-8528-44b4-9bdb-5e7233a3da07" action="eval">
+                                                                                    <command>
+                                                                                        <body>lset dataFile $locn_prof $session_profile</body>
+                                                                                    </command>
+                                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                                </item>
+                                                                            </nestedSteps>
+                                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                                        </item>
+                                                                    </nestedSteps>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                        <item guid="a3d0350e-db46-4d83-84a3-063516cefcd4" action="else">
+                                            <nestedSteps>
+                                                <item guid="2567b27e-84f1-4656-b884-f2b0bdc0a852" action="comment">
+                                                    <command>
+                                                        <body>Display Information that &quot;Automation Information&quot; property not defiend for All element or any of the element</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="none">
+                                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="message">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                                        <message> &quot;Automation Information&quot; for device is not update, XML will not be updated as session information is missing for Abstract Resource</message>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="77e727b3-5b19-46de-b228-c5bfd2ab17f5" action="else">
+                            <nestedSteps>
+                                <item guid="2d1898b3-ab16-401b-811d-5d2f7782d83d" action="comment">
+                                    <command>
+                                        <body>Insert steps here for when the expression evaluates to false</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message> Not All the Devices are configured with Session Profile, which is required for test execution using iTest, Hence no Modificaiton is made on TBML file</message>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c5d52b09-c7e8-4a5e-8950-bd50dffed46f" action="foreach">
+                    <command>
+                        <body>line $dataFile</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="44122af6-8e9e-49dd-89b5-1e834d6892ff" action="write">
+                            <command>
+                                <body>$line\\r\\n</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <arguments>
+                <item name="origTopology"/>
+                <item name="abstractResources"/>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

@@ -1,0 +1,356 @@
+<?xml version="1.0"?>
+<testCase version="5.1.0.77511">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="velocity_rest.ffsp"/>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="aa87b2b8-bf93-4c9d-9fe5-0d93a35b425e" action="call">
+                    <command>
+                        <body>project://ti_new_user_monitor/test_cases/unit_test.fftc#basicFunctionality</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="getUngroupedUsers" isPublic="true">
+            <steps>
+                <item guid="3807fe77-f273-441f-87c5-0bdacc7dc04d" action="GET" session="$session" normalOffset="19.509" estimatedStepExecutionTime="0.094">
+                    <command>
+                        <body>user/v1/group/NONE/users</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>userId()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>userIds</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>username()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>usernames</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/group/NONE/users" action.inherit="false">
+                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="afd5a499-b66a-40e7-8868-a57f1f3c462b" action="eval">
+                    <command>
+                        <body>set scrubbedList &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7945e4e4-0892-4797-8b2b-c2e534c8423d" action="foreach">
+                    <command>
+                        <body>id $userIds name $usernames</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7181142e-c9ef-412d-be3b-17b0eba175f1" action="eval">
+                            <command>
+                                <body>lsearch -exact $ignoredUsers $name</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="71429d87-d52d-45af-b495-306580956267" action="if">
+                            <command>
+                                <body>[lsearch -exact $ignoredUsers $name] == -1</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="271f3851-e6bf-4b3c-a74a-456cad1dff51" action="then">
+                                    <nestedSteps>
+                                        <item guid="e29579e7-0d82-4edd-889c-82ea06be7e54" action="eval">
+                                            <command>
+                                                <body>lappend scrubbedList &quot;userId = $id username = $name\\n&quot;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="ef38a396-4b4e-4739-9662-d959c223de26" action="if">
+                    <command>
+                        <body>[llength $scrubbedList] == 0</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0adce538-0eae-4410-848c-085bd72ea5f0" action="then">
+                            <nestedSteps>
+                                <item guid="8a270bbe-dbd0-4ddb-aa5e-72ebe7c5fa6e" action="return">
+                                    <command>
+                                        <body>userId = none username = none</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="ad727f8d-0f9f-48b8-bc51-99ea3f4d09ea" action="else">
+                            <nestedSteps>
+                                <item guid="0f4fd0f6-e988-4d4e-97ae-173ecd5ba397" action="return">
+                                    <command>
+                                        <body>$scrubbedList</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <arguments>
+                <item name="ignoredUsers">
+                    <description>a space-separated list of usernames to ignore</description>
+                    <defaultValue>_pdsvcacct</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;userInfo&quot;:{&quot;username&quot;:&quot;value&quot;,&quot;userId&quot;:&quot;value&quot;}}</response>
+        </item>
+        <item name="addUserToGroup" isPublic="true">
+            <steps>
+                <item guid="f6b671d8-250f-4a12-86cd-6f7a2e5f292f" action="eval">
+                    <command>
+                        <body>set retVal &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="0f11c404-0868-40e5-b0c3-32ca3dcc2e32" action="POST" session="$session" estimatedStepExecutionTime="0.078">
+                    <command>
+                        <body>user/v1/group/$groupId/user/$userId</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>statusCode()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 200</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set retVal &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/group/$groupId/user/$userId" action.inherit="false">
+                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="d8f755c3-ad3c-4136-aee7-42764ea160b3" action="return">
+                    <command>
+                        <body>updateStatus = $retVal</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="userId">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="groupId">
+                    <description>343282eb-a7f7-4dbe-ab2f-b1d25cf86d79 = shared harness users</description>
+                    <defaultValue>343282eb-a7f7-4dbe-ab2f-b1d25cf86d79</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="enableSystemMessageEmail" isPublic="true">
+            <steps>
+                <item guid="fcfb5bdf-38c6-4b43-adc1-124c9056280b" action="eval">
+                    <command>
+                        <body>set retVal &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="ce4d29bd-75fd-4efa-93d8-c8f28154229a" action="GET" session="$session" estimatedStepExecutionTime="0.063">
+                    <command>
+                        <body>user/v1/profile/$userId</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>userJson</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/profile/$userId" action.inherit="false">
+                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="15115b1c-8104-4663-ae5f-3d4ccb11cb5d" action="eval">
+                    <command>
+                        <body>regsub &quot;receivesEmailNotifications\\&quot;:false&quot;  $userJson &quot;receivesEmailNotifications\\&quot;:true&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>updatedJson</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="d8cf3f26-6216-4bdc-9d28-66a951c049ae" action="PUT" session="$session">
+                    <command>
+                        <body>user/v1/profile/$userId</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>statusCode()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 200</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set retVal &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="$updatedJson" message.inherit="false" action="user/v1/profile/$userId" action.inherit="false"/>
+                </item>
+                <item guid="b924079b-2a6d-4aab-895c-eaa66c6226cd" action="return">
+                    <command>
+                        <body>updateStatus = $retVal</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="userId">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="setEmailAddress" isPublic="true">
+            <steps>
+                <item guid="7a654b27-2dcc-49a6-86ec-2fccd1567ede" action="eval">
+                    <command>
+                        <body>set retVal &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="44cf82e5-79f9-4716-85e3-11615f26d1ad" action="GET" session="$session" estimatedStepExecutionTime="0.063">
+                    <command>
+                        <body>user/v1/profile/$userId</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>userJson</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/profile/$userId" action.inherit="false">
+                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="9c914c1e-0a5e-4289-ad9f-a0512504fb46" action="eval">
+                    <command>
+                        <body>regsub &quot;email\\&quot;:null,&quot;  $userJson &quot;email\\&quot;:\\&quot;$username@f5.com\\&quot;,&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>updatedJson</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="664add76-a03e-404c-a7da-1ce1a53940d9" action="PUT" session="$session">
+                    <command>
+                        <body>user/v1/profile/$userId</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>statusCode()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 200</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set retVal &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="$updatedJson" message.inherit="false" action="user/v1/profile/$userId" action.inherit="false"/>
+                </item>
+                <item guid="6ff97c09-16d3-4fb3-8ce3-e4da23adc0e7" action="return">
+                    <command>
+                        <body>updateStatus = $retVal</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="userId">
+                    <description>ID of user to modify</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="username">
+                    <description>email handle.  The LDAP username is sufficient.</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

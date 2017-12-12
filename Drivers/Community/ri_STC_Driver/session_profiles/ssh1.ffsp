@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.2.0.95bb698">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <prompts merge="true">
+                <item name="dollar" MatchMethod="WILDCARD">
+                    <Content>*$</Content>
+                </item>
+                <item name="password">
+                    <Content>Password:</Content>
+                </item>
+                <item name="admin">
+                    <Content>admin&gt;</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <ipAddress inherit="false">[param property_ipAddress]</ipAddress>
+        <user inherit="false">debug</user>
+        <password inherit="false">MwNQK8kiUvohOI4hubynxQ==</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_STC_Driver/</responseLibrary>
+</SessionTemplate>

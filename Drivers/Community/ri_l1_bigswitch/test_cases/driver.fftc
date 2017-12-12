@@ -1,0 +1,615 @@
+<?xml version="1.0"?>
+<testCase version="6.1.0.fee968d">
+    <general>
+        <documentation>BigSwitch L1 Switch Driver</documentation>
+        <notes>How it works.
+
+The BigSwitch has a single controller with multiple switches.  Velocity needs to control the switches individually. To identify the different switches in the ssh session BigSwitch uses MAC addresses of the switches.
+
+The Manifist has the following properties
+1. ipAddress : IP of the BigSwitch controller &lt;required&gt;
+2. username : login credentials to controller &lt;required&gt;
+3. password : login credentials to controller &lt;required&gt;
+4. SSH Port : ssh port of BigSwitch controller &lt;optional&gt;
+5. Switch Id : MAC address of individual switch managed by BigSwitch controller &lt; required&gt;</notes>
+        <owner>Michael Gretzinger</owner>
+        <isProcedureLibrary>true</isProcedureLibrary>
+    </general>
+    <execution>
+        <parameters version="6.1.0.fee968d">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <property_ipAddress>10.140.64.5</property_ipAddress>
+                    <property_SSH_Port>22</property_SSH_Port>
+                    <property_password>spirent</property_password>
+                    <property_username>admin</property_username>
+                    <property_Switch_Id>00:00:cc:37:ab:bd:ed:85</property_Switch_Id>
+                    <call_count>4</call_count>
+                    <call_0>getPorts</call_0>
+                    <call_1>getProperties</call_1>
+                    <call_2>connect ethernet25 ethernet26</call_2>
+                    <call_3>disconnect ethernet25 ethernet26</call_3>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <description>BigIP device Driver</description>
+            <steps>
+                <item guid="e46e98c7-98cb-4b9b-b49e-5f16c289842b" action="eval">
+                    <command>
+                        <body>set scrubbedIp [lindex [split [param property_ipAddress] &quot;//&quot;] end]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="381a4119-2f21-47a8-a44e-e9656aeb946b" action="open" session="s1">
+                    <command>
+                        <body>project://ri_l1_bigswitch/session_profiles/big_switch_driver_ssh.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                            <TerminalProperties>
+                                <terminalSizeProperties>
+                                    <termWidth inherit="false">512</termWidth>
+                                    <widthSizing inherit="false">FIXED</widthSizing>
+                                </terminalSizeProperties>
+                            </TerminalProperties>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="d2da0387-a488-44ba-a65c-55e4924aa645" action="eval">
+                    <command>
+                        <body>set ret &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c847b78a-5d90-4c82-8978-7868a0e6be80" action="comment">
+                    <command>
+                        <body>executing procedures</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="74aa63e8-e0b7-49f6-9cf5-3a076f3a83ba" action="for">
+                    <command>
+                        <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4c372e3a-f124-48ff-af4d-d6a3fdcbc4e4" action="eval">
+                            <command>
+                                <body>set cl [split [param call_$i]]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="6017cc4a-20a1-4b3e-b010-7a4b99ae1cfc" action="eval">
+                            <command>
+                                <body>set params [lassign $cl proc]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="1ccb1e19-b714-41c3-acef-d21f0108a92e" action="call">
+                            <command>
+                                <body>$proc $params</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>ret</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f929f131-a1d9-4ec2-b143-b3a44c209268" action="close" session="s1">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>1 == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="1108b0c6-6efa-4f63-81cb-36c521b1f9ae" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <author>Andy Michaels</author>
+            <version>1.0</version>
+            <multilineDescription>This is a basic management driver, and therefore implements the following 2 procedures for the management interface:
+- getPorts : return the status of the ports in the BigIP
+- getProperties: returns the properties that Velocity expects for the device</multilineDescription>
+        </item>
+        <item name="getPorts" isPublic="true">
+            <description>getPorts</description>
+            <steps>
+                <item guid="a71f572e-f06c-4ae2-924d-8fd1c10bab07" action="call">
+                    <command>
+                        <body>getPortContainer -switch_id [param property_Switch_Id]</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>portList</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="a79aed97-2dec-4425-bdbf-0b133817a058" action="eval">
+                    <command>
+                        <body>set ret &quot;{$portList}&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="4519c789-0c59-403b-9662-bcc6a52a1dfd" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <author>Andy Michaels</author>
+            <version>1.0</version>
+            <multilineDescription>getPorts returns JSON-formatted port information.  For this driver, we are only concerned with ports in the &quot;up&quot; state.  It ignores any other state.  </multilineDescription>
+            <response>{&quot;ports&quot;:&quot;&quot;}</response>
+        </item>
+        <item name="connect" isPublic="true">
+            <steps>
+                <item guid="d94a685a-4b23-4e51-907d-6d3f2737dfe9" action="eval">
+                    <command>
+                        <body>set p ${arg[1]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="e792b0e5-0d0c-46bc-9c3f-a655b2a7e6ed" action="eval">
+                    <command>
+                        <body>set port1 [lindex $p 0]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="b7ae6fac-4c25-487b-8190-bd59570a6d04" action="eval">
+                    <command>
+                        <body>set port2 [lindex $p 1]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="aca1a936-89bb-44af-8412-3984d7681340" action="connect" session="s1">
+                    <command>
+                        <body>-port1 $port1 -port2 $port2 -switch_id [param property_Switch_Id]</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/status</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;OK&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Big Switch error. Failed to connect $port1 to $port2 on switch id [param property_Switch_Id]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="disconnect" isPublic="true">
+            <steps>
+                <item guid="6d3f2cef-7d1d-4976-9030-e5f2dc7a51a5" action="eval">
+                    <command>
+                        <body>set p ${arg[1]}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="742ce023-8d69-4732-a35d-647cf8ca3a36" action="eval">
+                    <command>
+                        <body>set port1 [lindex $p 0]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="550f7305-f258-44fd-adaa-95db824c65a1" action="eval">
+                    <command>
+                        <body>set port2 [lindex $p 1]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="295ab838-12f9-4f18-bcb0-819be8a0a034" action="disconnect" session="s1">
+                    <command>
+                        <body>-port1 $port1 -port2 $port2 -switch_id [param property_Switch_Id]</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/status</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;OK&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Big Switch error. Failed to disconnect $port1 from $port2 on switch id [param property_Switch_Id]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="getProperties" isPublic="true">
+            <steps>
+                <item guid="845f1b68-ecdb-4825-b17a-92e42a9f500a" action="getProperties" session="s1">
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/model</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>model</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/version</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>version</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="d96354c9-3e1e-41d6-8243-9c08dfa8ffa4" action="call">
+                    <command>
+                        <body>getPortContainer -switch_id [param property_Switch_Id]</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>portList</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f5e58ae1-db6e-4d68-bd6e-2ff91e029311" action="eval">
+                    <command>
+                        <body>set ret &quot;\\&quot;Make\\&quot;:\\&quot;Big Switch Inc .\\&quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="bb246334-8aad-4f44-a529-dcc37852e771" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;Software Version&quot; -val $version</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="792f9cc5-554f-4e58-bfdd-c6bdbf4c52db" action="call">
+                    <command>
+                        <body>addPropToResult -json $ret -name &quot;Model&quot; -val $model</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>ret</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6317c2d2-52c3-4f45-a381-7826cfa07947" action="eval">
+                    <command>
+                        <body>set ret &quot;\\&quot;properties\\&quot;:{$ret}&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="5b43935f-15f3-42d0-abb0-3a2aac40f0f7" action="eval">
+                    <command>
+                        <body>set ret &quot;$ret,$portList&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="83ea79cf-456f-438f-926c-65a6ebcab4b3" action="eval" skip="true">
+                    <command>
+                        <body>set ret &quot;\\&quot;physicalClass\\&quot;:\\&quot;Chassis\\&quot;,\\&quot;functionalClass\\&quot;:\\&quot;Ethernet Switch\\&quot;,\\&quot;manufacturerName\\&quot;:\\&quot;Big Switch.\\&quot;,\\&quot;productFamily\\&quot;:\\&quot;Chassis\\&quot;,\\&quot;model\\&quot;:\\&quot;$model\\&quot;,\\&quot;version\\&quot;:\\&quot;$version\\&quot;,$portList&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="853f232d-216a-47be-8d3b-bee098fb4d06" action="eval">
+                    <command>
+                        <body>set ret &quot;{$ret}&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="d6648ebe-10c9-4769-b10e-54d55030447b" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getPortContainer">
+            <steps>
+                <item guid="77809f3f-98a6-4655-a0ca-269daf8604aa" action="getPortsAndStates" session="s1">
+                    <command>
+                        <body>-switch_id [param property_Switch_Id]</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/interfaces</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>ports</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/states</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>states</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="13a0533f-39b2-49dc-8cf5-2033bda0171e" action="eval">
+                    <command>
+                        <body>set ret &quot;\\&quot;ports\\&quot;:\\[&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="203195a1-c197-4736-b705-52cceb8d19e6" action="eval">
+                    <command>
+                        <body>set portlist {}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="55c386ed-4015-4c02-a785-1f994e4b81d0" action="foreach">
+                    <command>
+                        <body>port $ports state $states</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="15a7c4d2-1619-4274-890c-13fd263ddd72" action="if">
+                            <command>
+                                <body>$state == &quot;up&quot;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="c55ee281-b093-4948-891c-7e53be5e29eb" action="then">
+                                    <nestedSteps>
+                                        <item guid="c0a485e5-f060-4c65-9bb4-883ea03e76d4" action="eval">
+                                            <command>
+                                                <body>set state online</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="67058eb8-24cc-4d4e-a27f-31b9253cb760" action="else">
+                                    <nestedSteps>
+                                        <item guid="904f6058-8a03-4e34-a1cd-fb2250662013" action="eval">
+                                            <command>
+                                                <body>set state offline</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="3d80916f-9e31-4ea8-b19a-2dfd7d95e2b0" action="eval">
+                            <command>
+                                <body>lappend portlist &quot;{\\&quot;name\\&quot;:\\&quot;$port\\&quot;,\\&quot;status\\&quot;:\\&quot;$state\\&quot;}&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="293f8717-f11c-4304-ac34-a4d2a6668b43" action="eval">
+                    <command>
+                        <body>set portlist </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="b33b8704-63db-44a5-893c-900b0204bd22" action="eval">
+                    <command>
+                        <body>set ret &quot;${ret}[join $portlist ,]\\]&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="99f29354-ba3d-45f9-afb6-a4c66b777029" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="switch_id">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="addPropToResult">
+            <steps>
+                <item guid="bc3f0abb-89d2-4e9f-9348-d5630c3e552a" action="if">
+                    <command>
+                        <body>$val != &quot;&quot; &amp; $val != 0</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ea067eee-692c-42dd-8157-336383b4437b" action="then">
+                            <nestedSteps>
+                                <item guid="dd5e96ca-6652-47d0-902d-52a2e7ea68df" action="eval">
+                                    <command>
+                                        <body>set delimeter &quot;&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="321018e3-3934-4dc0-8487-48293aa10d14" action="if">
+                                    <command>
+                                        <body>$json != &quot;&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="dc17b1e5-7e8e-4e7b-9fd5-9aaff1a24c6c" action="then">
+                                            <nestedSteps>
+                                                <item guid="d58813fb-05eb-4624-beb1-f375ffc01504" action="eval">
+                                                    <command>
+                                                        <body>set delimeter &quot;,&quot;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="5e48f820-ba8a-490d-bb76-6b54d478c852" action="eval">
+                                    <command>
+                                        <body>set json &quot;$json$delimeter\\&quot;$name\\&quot;:\\&quot;$val\\&quot;&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="3848ec74-1f21-48f0-b327-70898b2d7c92" action="return">
+                    <command>
+                        <body>$json</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="json">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="name">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="val">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

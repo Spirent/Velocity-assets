@@ -1,0 +1,109 @@
+<HTML><BODY>
+<style>TABLE,TD,TH{border:1px solid black;border-collapse:collapse;}
+th{text-align:left;background-color:AliceBlue;}
+H1,H2{padding-left:15px}
+.smallText{font-size:10px; color:black; font-family:courier}
+.normalText{font-size:14px; color:black; font-family:arial}
+.procText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.qcNotesText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.headerText{font-size:30px; color:black; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
+</style>
+<BR><DIV class='headerText'>F5 Device Project</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Provides basic commands for management of F5 equipment.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><b>Tags:</b> Management</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<BR><DIV class='header2Text'>2 QuickCall Libraries in project://ri_f5:</DIV>
+<BR><DIV class='header2Text'>project://ri_f5/session_profiles/big_ip_base_qc.fftc (project://ri_f5/session_profiles/big_ip_base_qc.fftc)</DIV><BR>
+<DIV class='qcNotesText'></DIV>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getActiveVersion</DIV>
+<DIV class='procText'>This quickcall returns a JSON value corresponding to the version of the active image on the BigIP.</DIV><BR>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getInterfaces</DIV>
+<DIV class='procText'>This quickcall returns a JSON list of interface names and statuses</DIV><BR>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getRunningState</DIV>
+<DIV class='procText'>getRunningState returns the status displayed in the prompt</DIV><BR>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>setVlan</DIV>
+<DIV class='procText'>setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>vlanId</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>VLAN ID to tag this interface to </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>ifName</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>interface to add to the VLAN e.g. "1.2" </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>hostname</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>hostname of the current BigIP.  This should be retrieved from the topology, as the device may not be configured properly and will likely have "localhost" as the value. </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>ipAddress</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>ip address of the interface being added to the VLAN. </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>cidr</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>CIDR formatted netmask of the interface we're adding to the VLAN. </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>vlanName</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>name of the VLAN we're adding the interface to. </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>dnsServers</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>space-separated list of DNS server IP addresses </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>ntpServer</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>hostname or IP address of ntp server </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>fqdn</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>fqdn for this device.  Well, everything but the hostname. </TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>clearVlan</DIV>
+<DIV class='procText'>clearVlan removes the specified VLAN.</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>vlanName</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>Name of VLAN to remove. </TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getFirstActivePort</DIV>
+<DIV class='procText'>getFirstActivePort returns the name of the first port with the status of "up"</DIV><BR>
+<br>
+<BR><DIV class='header2Text'>project://ri_f5/session_profiles/big_ip_chassis_qc.fftc (project://ri_f5/session_profiles/big_ip_chassis_qc.fftc)</DIV><BR>
+<DIV class='qcNotesText'></DIV>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>setVlan</DIV>
+<DIV class='procText'>setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>vlanId</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>VLAN ID to tag this interface to </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>ifName</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>interface to add to the VLAN e.g. "1.2" </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>hostname</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>hostname of the current BigIP.  This should be retrieved from the topology, as the device may not be configured properly and will likely have "localhost" as the value. </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>ipAddress</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>ip address of the interface being added to the VLAN. </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>cidr</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>CIDR formatted netmask of the interface we're adding to the VLAN. </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>vlanName</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>name of the VLAN we're adding the interface to. </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>trunkName</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>name of trunk to create </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>dnsServers</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>space-separated list of DNS server IP addresses </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>ntpServer</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>hostname or IP address of ntp server </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>fqdn</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>fqdn for this device.  Well, everything but the hostname. </TD>
+</TR>
+</TABLE></DIV><br>
+<br>

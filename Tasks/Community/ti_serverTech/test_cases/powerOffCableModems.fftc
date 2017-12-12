@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<testCase version="7.0.0.9d01ac1">
+    <execution>
+        <parameters version="7.0.0.9d01ac1">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <param1/>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="f5474b62-b49f-4de3-ac82-eb76aa1b48e9" action="comment">
+                    <command>
+                        <body>Get Power Supply Info</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="64320fcf-a15a-433e-9aff-7e7422a18d43" action="eval" useResponseMapLibraryApplicability="false">
+                            <command>
+                                <body>tbml query {.//resource/propertyCollection[@name = &apos;Device Info&apos;]}</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>count(.//deviceInfo)</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>deviceCount</storageLocation>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                                <storeResponseAt>devices</storeResponseAt>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <responseMap>project://ti_serverTech/response_maps/Device_Info__.ffrm</responseMap>
+                            <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="d1ab2226-fabc-4de3-9c37-54751b0a9a71" action="for">
+                            <command>
+                                <body>{set i 1} {$i &lt;= $deviceCount} {incr i}</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="730505ff-fa79-47a5-8e80-b47305f8ecb8" action="comment">
+                                    <command>
+                                        <body>If device is power managed then provision unit</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="006cf7b8-07c7-43f1-b70d-dd60e8830652" action="if">
+                                    <command>
+                                        <body>[query devices (.//pwrManaged)\\[$i\\]] == &quot;true&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="49d8b893-a950-4e5c-b22c-d3cbc1fc3823" action="then">
+                                            <nestedSteps>
+                                                <item guid="de9e9cef-8c00-4391-a5b0-f3b2faf4f1dc" action="comment">
+                                                    <command>
+                                                        <body>Provision the device - RW query for private community [query devices (.//pwrSnmpCommunityRw)\\[$i\\]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="15f0d387-55dc-4d7b-a301-24cca5c88b38" action="eval">
+                                                    <command>
+                                                        <body>set port [string trim [query devices (.//pwrPortId)\\[$i\\]] ABC]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="55bb4212-d9a7-439f-a3d5-fdb6ebb6f936" action="eval">
+                                                    <command>
+                                                        <body>set community [query devices (.//pwrSnmpCommunity)\\[$i\\]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="e9232e80-f39d-4111-b876-7918f53cfe77" action="eval">
+                                                    <command>
+                                                        <body>set communityrw [query devices (.//pwrSnmpCommunityRw)\\[$i\\]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="152f64b4-9235-4882-8161-89d782b90c1e" action="eval">
+                                                    <command>
+                                                        <body>set ip [query devices (.//pwrIpaddress)\\[$i\\]]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="29e1b8bb-0a2b-4b02-bfa0-73c8d54c0a01" action="eval">
+                                                    <command>
+                                                        <body>puts $port</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="790fa599-f2c2-4fd4-ad67-1df5ff6bc674" action="call" skip="true">
+                                                    <command>
+                                                        <body>serverTechPowerOn -port $port -community $community -communityrw $communityrw -ip $ip</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                                <item guid="706b063c-0386-42c9-89e4-92fd2996c003" action="call">
+                                                    <command>
+                                                        <body>serverTechPowerOff -port $port -community $community -communityrw $communityrw -ip $ip</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            <useFieldsInCommand>false</useFieldsInCommand>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="serverTechPowerOn" defaultSessionProfile="project://ti_serverTech/session_profiles/snmp.ffsp">
+            <steps>
+                <item guid="52635d3e-61d9-4ae0-9cdd-a89d0a00cad0" action="open" session="$ip-$port">
+                    <command>
+                        <body>project://ti_serverTech/session_profiles/snmp.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.applications.snmp.documents.DeviceProperties" ipAddress="$ip" ipAddress.inherit="false" readcommunity.masked="true" readcommunity="ZNP+c/Kz4VpTIbId1t0Hqg==" readcommunity.inherit="false" writeCommunity.masked="true" writeCommunity="ZNP+c/Kz4Vr6xcIzLHT/3Q==" writeCommunity.inherit="false"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="2a5bc1ca-193b-49e9-a7b4-48fc0a897485" action="set" session="$ip-$port" normalOffset="40.221" estimatedStepExecutionTime="0.025">
+                    <command>
+                        <body>.iso.org.dod.internet.private.enterprises.serverTech.sentry3.systemTables.outletTable.outletEntry.outletControlAction.1.1.$port on</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.applications.snmp.documents.StepDefaultProperties">
+                        <SetProperties>
+                            <setType inherit="false">Integer</setType>
+                        </SetProperties>
+                    </applicationProperties>
+                </item>
+                <item guid="b8fe54b0-3ac2-48e6-b751-a3e88ccc659a" action="walk" session="$ip-$port" normalOffset="6.687" estimatedStepExecutionTime="0.099">
+                    <command>
+                        <body>.iso.org.dod.internet.private.enterprises.serverTech.sentry3.systemTables.outletTable.outletEntry.outletStatus</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query sub="true">outletStatus(&quot;1.1.$port&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;on&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Verify port state, ip - $ip, portNo - $port, expected value: on; actual value: $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="RepeatStep">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" delayBetweenRepeats="0.5"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                    <message>Verify port state, ip - $ip, portNo - $port, expected value: on; actual value: $value</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.applications.snmp.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="d0d62112-0676-4269-941d-677038bdbfa6" action="close" session="$ip-$port">
+                    <applicationProperties type="com.fnfr.svt.applications.snmp.documents.StepDefaultProperties">
+                        <SetProperties>
+                            <setType inherit="false">Integer</setType>
+                        </SetProperties>
+                    </applicationProperties>
+                </item>
+            </steps>
+            <arguments>
+                <item name="port">
+                    <description>Valid servertech port</description>
+                </item>
+                <item name="community">
+                    <description>SNMP community string (RO)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="communityrw">
+                    <description>SNMP community string (RW)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="ip">
+                    <description>Valid IP address</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="serverTechPowerOff" defaultSessionProfile="project://ti_serverTech/session_profiles/snmp.ffsp">
+            <steps>
+                <item guid="19ad9c5d-1bd0-43e6-a055-5d07ad423de8" action="open" session="$ip-$port">
+                    <command>
+                        <body>project://ti_serverTech/session_profiles/snmp.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.applications.snmp.documents.DeviceProperties" ipAddress="$ip" ipAddress.inherit="false" readcommunity.masked="true" readcommunity="ZNP+c/Kz4VpTIbId1t0Hqg==" readcommunity.inherit="false" writeCommunity.masked="true" writeCommunity="ZNP+c/Kz4Vr6xcIzLHT/3Q==" writeCommunity.inherit="false"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="b0208908-6b58-41ed-bdba-411fe9fdbcd7" action="set" session="$ip-$port" normalOffset="40.221" estimatedStepExecutionTime="0.025">
+                    <command>
+                        <body>.iso.org.dod.internet.private.enterprises.serverTech.sentry3.systemTables.outletTable.outletEntry.outletControlAction.1.1.$port off</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.applications.snmp.documents.StepDefaultProperties">
+                        <SetProperties>
+                            <setType inherit="false">Integer</setType>
+                        </SetProperties>
+                    </applicationProperties>
+                </item>
+                <item guid="339f6b37-1b78-47b9-a242-753691b25aba" action="walk" session="$ip-$port" normalOffset="6.687" estimatedStepExecutionTime="0.099">
+                    <command>
+                        <body>.iso.org.dod.internet.private.enterprises.serverTech.sentry3.systemTables.outletTable.outletEntry.outletStatus</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query sub="true">outletStatus(&quot;1.1.$port&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;off&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Verify port state, ip - $ip, portNo - $port, expected value: off; actual value: $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="RepeatStep">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" delayBetweenRepeats="0.5"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                    <message>OK:Verify port state, ip - $ip, portNo - $port, expected value: off; actual value: $value</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.applications.snmp.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="076612ec-c837-4589-af72-5e98c60a1917" action="close" session="$ip-$port">
+                    <applicationProperties type="com.fnfr.svt.applications.snmp.documents.StepDefaultProperties">
+                        <SetProperties>
+                            <setType inherit="false">Integer</setType>
+                        </SetProperties>
+                    </applicationProperties>
+                </item>
+            </steps>
+            <arguments>
+                <item name="port">
+                    <description>Valid servertech port</description>
+                </item>
+                <item name="community">
+                    <description>SNMP community string (RO)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="communityrw">
+                    <description>SNMP community string (RW)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="ip">
+                    <description>Valid IP address</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

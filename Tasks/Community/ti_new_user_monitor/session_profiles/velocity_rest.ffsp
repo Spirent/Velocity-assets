@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.1.0.77511">
+    <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://velocity.sh.pdsea.f5net.com/velocity/api" url.inherit="false">
+        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ti_new_user_monitor/</responseLibrary>
+    <sessionClassTestCase inherit="false">velocity_rest_qc.fftc</sessionClassTestCase>
+    <nickName>velocity</nickName>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>

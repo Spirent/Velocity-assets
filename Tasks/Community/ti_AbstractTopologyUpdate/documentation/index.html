@@ -1,0 +1,24 @@
+<HTML><BODY>
+<style>TABLE,TD,TH{border:1px solid black;border-collapse:collapse;}
+th{text-align:left;background-color:AliceBlue;}
+H1,H2{padding-left:15px}
+.smallText{font-size:10px; color:black; font-family:courier}
+.normalText{font-size:14px; color:black; font-family:arial}
+.procText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.qcNotesText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.headerText{font-size:30px; color:black; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
+</style>
+<BR><DIV class='headerText'>Abstract Topoloy Update</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>This task is useful when abstact resource conditions are so loose that any class of device could be chosen to meet a loose requirement. This task assigns a specific reference session profile to a very non-specific abstract resource.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>AbstractTopologyUpdate utility will update the tbml file of active reservation, if the active reservation does not have abstract resource, script will not modify tbml file. This script changes the tbml of reservation and not the topology, once the reservation is over, changes will not be present.  By default, all the resources in topology will have session associated with them, even this is true for abstract resource, actual resource for abstract resource could be different during reservation, in that scenario there is a need to change the session profile for abstract resource based on which resource resolved. It is mandatory that all the resources in topology (Abstract or Logical) have session profile defined and committed in to the Velocity for the script to run, if resource do not have session profile, script will not update the tbml for reservation.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'><b>Tags:</b> Examples</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<BR><DIV class='header2Text'>1 QuickCall Library in project://ti_AbstractTopologyUpdate:</DIV>
+<BR><DIV class='header2Text'>project://ti_AbstractTopologyUpdate/session_profiles/velocity_qc_lib.fftc (project://ti_AbstractTopologyUpdate/session_profiles/velocity_qc_lib.fftc)</DIV><BR>
+<DIV class='qcNotesText'></DIV>
+<br>

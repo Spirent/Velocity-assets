@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<testCase version="6.0.0.18638fa">
+    <execution>
+        <parameters version="6.0.0.18638fa">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <user_name>ciscortp</user_name>
+                    <password>cisco123</password>
+                    <reservationWaitTime>30</reservationWaitTime>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="ecd7771d-8849-49c0-95be-73a4cbedbed5" action="eval">
+                    <command>
+                        <body>set reservationTime [param reservationWaitTime]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="0dca4699-094c-426b-8c76-78c855233e4f" action="eval">
+                    <command>
+                        <body>set user_name [param user_name]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="855c13bc-ba2f-450a-923e-a961124ff45a" action="eval">
+                    <command>
+                        <body>set password [param password]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="926902f0-a6b7-450f-a336-2e27d093982e" action="eval">
+                    <command>
+                        <body>set url [velocity url]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="645f2ee3-8ff1-4907-84a3-56532e85546e" action="eval">
+                    <command>
+                        <body>set reservationId [velocity reservationId]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="0a8401f9-d373-49ba-a96a-7456ac95843c" action="eval">
+                    <command>
+                        <body>set token [velocity token]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="5f39e257-f587-4e8d-ae14-adf9eb19b516" action="open" session="t1">
+                    <command>
+                        <body>project://ti_AbstractTopologyUpdate/session_profiles/velocity_rest_api.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties">
+                            <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                <memberClasses>
+                                    <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                </memberClasses>
+                                <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                            </httpHeader>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="d6774edc-9494-4345-8536-d5b4b2a40e20" action="POST" session="t1" estimatedStepExecutionTime="0.237">
+                    <command>
+                        <body>/ito/executions/v1/executions</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/executionID</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>executionId</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/executionState</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;NOT_BEGUN&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Test case queued</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Test case failed to queue</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/ito/executions/v1/executions" action.inherit="false">
+                        <message inherit="false">{ 
+&quot;testPath&quot;:&quot;main/a_AbstractTopologyUpdate/library/AbstractTopologyUpdate.fftc&quot;, 
+&quot;parametersList&quot;:\\[
+{&quot;name&quot;: &quot;reservationId&quot;, 
+&quot;value&quot;: &quot;$reservationId&quot;},
+{&quot;name&quot;: &quot;user_name&quot;, 
+&quot;value&quot;: &quot;$user_name&quot;},
+{&quot;name&quot;: &quot;password&quot;, 
+&quot;value&quot;: &quot;$password&quot;},
+{&quot;name&quot;: &quot;reservationWaitTime&quot;, 
+&quot;value&quot;: &quot;$reservationTime&quot;}
+\\]
+}</message>
+                    </applicationProperties>
+                </item>
+                <item guid="312ef595-d665-422a-a6ec-ba757bd8858e" action="close" session="t1" normalOffset="61.82">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

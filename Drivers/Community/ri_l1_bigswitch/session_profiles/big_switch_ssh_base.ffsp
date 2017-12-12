@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.3.0.338ed32">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <terminalSizeProperties>
+                <termWidth inherit="false">200</termWidth>
+                <widthSizing inherit="false">FIXED</widthSizing>
+            </terminalSizeProperties>
+            <captureProperties>
+                <commandCompletionchars inherit="false">
+                    <item>?</item>
+                    <item>[char TAB]</item>
+                </commandCompletionchars>
+            </captureProperties>
+            <prompts merge="true">
+                <item name="basic" MatchMethod="WILDCARD">
+                    <Content>*&gt;</Content>
+                </item>
+                <item name="enabled" MatchMethod="WILDCARD">
+                    <Content>*#</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <ipAddress inherit="false">[get scrubbedIp 10.140.64.5]</ipAddress>
+        <port inherit="false">[param property_SSH_Port 22]</port>
+        <user inherit="false">[param property_username admin]</user>
+        <password inherit="false">Hu62+w4ez8VRjpeoxPozxOrYANzZETwjSumsqQJPkn1IHNAaGBit5A==</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_l1_bigswitch/</responseLibrary>
+    <sessionClassTestCase inherit="false">project://ri_l1_bigswitch/session_profiles/big_switch_ssh_base.fftc</sessionClassTestCase>
+    <nickName>big_ip</nickName>
+    <Overview>BigIP Velocity device driver</Overview>
+    <Description>This session profile is used to connect to BigIP devices via Velocity.  The connection information is passed via the calling test case</Description>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>

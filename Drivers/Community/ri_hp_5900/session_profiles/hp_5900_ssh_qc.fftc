@@ -1,0 +1,1578 @@
+<?xml version="1.0"?>
+<testCase version="6.1.0.e2e4ec0">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="hp_5900_ssh.ffsp"/>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="5adbd732-abd4-4f1b-8a0b-afad7046cc3b" action="comment">
+                    <command>
+                        <body>Unit Testing goes here</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="b92e422c-214e-446f-89fc-8deaed540815" action="open" session="UT">
+                    <command>
+                        <body>project://ri_hp_5900/session_profiles/UT_hp_5900_ssh.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="78d1c88c-5672-45d3-8ec3-d3d91546fb37" action="getFirmwareVersion" session="UT">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="fa2add8d-546d-4253-b576-5aa715aeb479" action="getAllPortsStatus" session="UT" skip="true">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f89affbd-e572-4a8a-81e7-78030f05e403" action="getBridgeAggregateInterfaces" session="UT">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="976edfc2-00a1-4944-86e2-e78a25c32da2" action="addPortToBridgeAggregate" session="UT" skip="true">
+                    <command>
+                        <body> -portName HundredGigE2/0/1 -bridgeAggNum 1</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="e6eb7a42-98c1-493f-8e31-3282b7886759" action="removePortFromBridgeAggregate" session="UT" skip="true">
+                    <command>
+                        <body> -portName HundredGigE2/0/1 -bridgeAggNum 1</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="610eba22-736c-4d49-a509-528af861a2a0" action="foreach">
+                    <command>
+                        <body>id {2 3 4 5 6 7 8 9}</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c0ed0a47-036a-4a25-aba7-386d0db37a41" action="addPortToVlan" session="UT">
+                            <command>
+                                <body> -portName HundredGigE2/0/1 -vlanId $id</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="e2ead12d-68e3-4b4e-97e4-e6305acb915b" action="foreach">
+                    <command>
+                        <body>id {2 3 4 5 6 7 8 9}</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4683908d-8766-4af9-b4ee-60bf910b6191" action="removePortFromVlan" session="UT">
+                            <command>
+                                <body> -portName HundredGigE2/0/1 -vlanId $id</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="19fcb4aa-e953-4b31-8b64-eb4bcbe68b2c" action="close" session="UT">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="addPortToVlan" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="d59aebf0-9773-4092-842c-fd05a17f2a57" action="eval">
+                    <command>
+                        <body>set status &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c8014f81-cfd5-4569-bd7b-4275dd77cd74" action="command" session="$session" normalOffset="3.59" estimatedStepExecutionTime="0.008">
+                    <command>
+                        <body>sys</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.2" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="59bef6ea-c4e6-489a-9f37-4a447956e427" action="command" session="$session" normalOffset="13.854" estimatedStepExecutionTime="0.012">
+                    <command>
+                        <body>interface $portName</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.432" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="5a21a6ce-85b9-4fb3-a6e7-3296939432c9" action="command" session="$session">
+                    <command>
+                        <body>port trunk permit vlan $vlanId</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>Configuring * done.</searchString>
+                                        <matchType>Wildcard</matchType>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="SkipRemainingRules">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="4d8199da-c484-4241-975b-2f2a9c59c8a2" action="command" session="$session">
+                    <command>
+                        <body>undo port trunk permit vlan 1</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>Configuring * done.</searchString>
+                                        <matchType>Wildcard</matchType>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="SkipRemainingRules">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="54afcc44-6d64-4851-b98c-57ae1d3af23e" action="command" session="$session">
+                    <command>
+                        <body>dis this</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="9c3d105a-7cd8-4dbe-946e-93543889538e" action="command" session="$session">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="c494ff1b-5a67-4e23-8997-1c5c5a241fbc" action="command" session="$session">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="27604b59-efb1-448b-a3b8-ddcfc206d0ae" action="eval">
+                    <command>
+                        <body>set status</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>addToVlanStatus</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <arguments>
+                <item name="portName">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="vlanId">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;addToVlanStatus&quot;:null}</response>
+        </item>
+        <item name="removePortFromVlan" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="0c4befc1-4c91-4ccc-835e-87222f5756f4" action="eval">
+                    <command>
+                        <body>set status &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="b6a2dd87-4157-4f09-8db4-97eaafd94478" action="command" session="$session" normalOffset="3.59" estimatedStepExecutionTime="0.008">
+                    <command>
+                        <body>sys</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.2" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="81622170-3a16-4ded-b230-4ab7504ffd03" action="command" session="$session" normalOffset="13.854" estimatedStepExecutionTime="0.012">
+                    <command>
+                        <body>interface $portName</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.432" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="748f6745-eb9c-4518-9be2-60fdb00b4df3" action="command" session="$session">
+                    <command>
+                        <body>undo port trunk permit vlan $vlanId</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>Configuring * done.</searchString>
+                                        <matchType>Wildcard</matchType>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="SkipRemainingRules">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="18275760-1db3-4aaf-9742-fb86d307127c" action="command" session="$session">
+                    <command>
+                        <body>undo port trunk permit vlan 1</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="contains">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                        <searchString>Configuring * done.</searchString>
+                                        <matchType>Wildcard</matchType>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="SkipRemainingRules">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="83e40a68-0bc0-45d5-b0f3-3738b1594c19" action="command" session="$session">
+                    <command>
+                        <body>dis this</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="b5663521-75d6-4d5e-9ba5-851a5c0c3c75" action="command" session="$session">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="967248f0-9e8b-4dba-bb06-85f607062e70" action="command" session="$session">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="404125bb-d684-410a-a584-6c8f3a7ee025" action="eval">
+                    <command>
+                        <body>set status</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>removeFromVlanStatus</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <arguments>
+                <item name="portName">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="vlanId">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;removeFromVlanStatus&quot;:null}</response>
+        </item>
+        <item name="formatPortStatus" isVBlock="true">
+            <steps>
+                <item guid="01d707bd-e9b6-4aeb-8747-475af685379b" action="eval">
+                    <command>
+                        <body>set portName</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>portName</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="ab4770ec-d7ce-4264-a840-c0421facba08" action="if">
+                    <command>
+                        <body>$status eq &quot;UP&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="13b7378e-52ef-4062-82c7-bef94dda9cca" action="then">
+                            <nestedSteps>
+                                <item guid="811eeb31-c5f4-4503-b113-389d81c14c15" action="eval">
+                                    <command>
+                                        <body>set status &quot;online&quot;</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="regex">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                                        <regex>.+</regex>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <query>status</query>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="ac64b5cf-bdf8-430b-8cc1-ef3f3dde7ac1" action="else">
+                            <nestedSteps>
+                                <item guid="97dd527d-21b2-4c34-926c-34c4153fcbcd" action="eval">
+                                    <command>
+                                        <body>set status &quot;offline&quot;</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="regex">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                                        <regex>.+</regex>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <query>status</query>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <multilineDescription>Returns JSON formatted string for port status usable by Velocity</multilineDescription>
+            <arguments>
+                <item name="portName">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="status">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;portName&quot;:null,&quot;status&quot;:null}</response>
+        </item>
+        <item name="getFirmwareVersion" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="8ab94747-9609-45f9-91b8-725c26158fdf" action="command" session="$session" estimatedStepExecutionTime="3.898">
+                    <command>
+                        <body>display version</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>version()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>firmwareVersion</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+            <response>{&quot;firmwareVersion&quot;:null}</response>
+        </item>
+        <item name="getAllPortsStatus" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="24083582-93b1-4ade-bb50-d6a58c1a6a2e" action="command" session="$session">
+                    <command>
+                        <body>display interface brief</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>bridgeModeTable_interface_all()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>portNames</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>bridgeModeTable_link_all()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>portStatuses</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="7c276a28-57a0-42f8-ba19-ddf867c5c6cb" action="foreach">
+                    <command>
+                        <body>portName $portNames status $portStatuses</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="8a5d1f13-dd26-4525-84f8-ec82ac614460" action="call">
+                            <command>
+                                <body>formatPortStatus -portName $portName -status $status</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="regex">
+                                            <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                                <regex>.+</regex>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>curPort</storageLocation>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="77897e84-faf3-4bfc-ab57-35dc20ca1ecb" action="eval">
+                            <command>
+                                <body>lappend allPorts $curPort</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="c00e5184-796f-4df3-a44e-dd3712abc1ad" action="eval">
+                    <command>
+                        <body>set allPorts &quot;\\[[join $allPorts ,]\\]&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>ports</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <response>{&quot;ports&quot;:null}</response>
+        </item>
+        <item name="getBridgeAggregateInterfaces" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="543aa01a-2561-4fbf-a834-1073981b0104" action="command" session="$session" estimatedStepExecutionTime="0.028">
+                    <command>
+                        <body>display interface Bridge-Aggregation brief</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+        <item name="addPortToBridgeAggregate" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="646125a7-7778-4c23-9ca9-8b4b75c5fb3a" action="eval">
+                    <command>
+                        <body>set status &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="6c96e023-b330-431c-8623-171d27a596d0" action="command" session="$session" normalOffset="3.59" estimatedStepExecutionTime="0.008">
+                    <command>
+                        <body>sys</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.2" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="17e8457d-f910-428b-a185-4fac7a09f37d" action="command" session="$session" normalOffset="13.854" estimatedStepExecutionTime="0.012">
+                    <command>
+                        <body>interface $portName</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.432" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="24cd52f7-7bee-4d71-b2a9-e26893fd8a0b" action="command" session="$session" normalOffset="28.685" estimatedStepExecutionTime="0.008">
+                    <command>
+                        <body>port link-mode bridge</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="5.696" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="572966e1-b531-4649-855e-9435357c17f2" action="command" session="$session" normalOffset="7.072" estimatedStepExecutionTime="0.106">
+                    <command>
+                        <body>port link-type trunk</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.241" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="e7897f85-98f2-4cd8-b409-421ea7b985c4" action="command" session="$session" normalOffset="8.294" estimatedStepExecutionTime="0.106">
+                    <command>
+                        <body>undo port trunk permit vlan 1</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.747" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="fcafb211-a9bb-4970-9cd0-7601e919b1d3" action="command" session="$session" normalOffset="8.967" estimatedStepExecutionTime="0.015">
+                    <command>
+                        <body>port trunk pvid vlan $trunk_vlan</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.891" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="e5abe3c3-93be-4c33-9260-c8b77f48fe27" action="command" session="$session" normalOffset="31.386" estimatedStepExecutionTime="0.089">
+                    <command>
+                        <body>port link-aggregation group $bridgeAggNum</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.264" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="46731117-c345-4980-9556-7f7c4d2b9e33" action="command" session="$session" normalOffset="22.471" estimatedStepExecutionTime="0.038">
+                    <command>
+                        <body>dis this</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.151" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="4afa8315-1383-44dc-854a-fa06e9416d87" action="command" session="$session" normalOffset="105.085" estimatedStepExecutionTime="0.005">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.226" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="6f5916dc-54a8-4805-a9dc-85d4b18f04d1" action="command" session="$session" normalOffset="5.586" estimatedStepExecutionTime="0.005">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.522" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="8fa0f1bf-692d-47a2-a246-5d308980cc2b" action="eval">
+                    <command>
+                        <body>set status</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>addPortToBridgeAggStatus</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <arguments>
+                <item name="portName">
+                    <description>e.g. &quot;FortyGigE1/0/6:1&quot;</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="bridgeAggNum">
+                    <description>an integer</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="trunk_vlan">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;addPortToBridgeAggStatus&quot;:null}</response>
+        </item>
+        <item name="removePortFromBridgeAggregate" isPublic="true" isVBlock="true">
+            <steps>
+                <item guid="c9cd63e1-773b-4620-86da-6ea35618a9ea" action="eval">
+                    <command>
+                        <body>set status &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="673afca7-0c6b-4e0f-96ed-0e144057d481" action="command" session="$session" normalOffset="3.59" estimatedStepExecutionTime="0.008">
+                    <command>
+                        <body>sys</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.2" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="3d3cb679-7a7e-4f43-851e-facea0376474" action="command" session="$session" normalOffset="13.854" estimatedStepExecutionTime="0.012">
+                    <command>
+                        <body>interface $portName</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.432" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="928c7977-74ef-4f13-a740-3361078cdaf5" action="command" session="$session">
+                    <command>
+                        <body>undo port link-agg group</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.241" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="bc9295fd-d45a-411f-ad6f-e386eebfeee8" action="command" session="$session" normalOffset="7.072" estimatedStepExecutionTime="0.106">
+                    <command>
+                        <body>port link-type access</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.241" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="74efae66-1822-432e-84e0-b1412efc4469" action="command" session="$session" normalOffset="7.072" estimatedStepExecutionTime="0.106">
+                    <command>
+                        <body>port link-type trunk</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.241" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="2657ed0a-1345-4db6-90f9-99b65eb71e89" action="command" session="$session" normalOffset="22.471" estimatedStepExecutionTime="0.038">
+                    <command>
+                        <body>dis this</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.151" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="7ea88cff-c298-40a9-96b2-af86432d194a" action="command" session="$session" normalOffset="105.085" estimatedStepExecutionTime="0.005">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.226" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="1865fe65-5f79-4da0-97d7-55d1402ecfc1" action="command" session="$session" normalOffset="5.586" estimatedStepExecutionTime="0.005">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.522" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="16a260d2-244f-4db4-b468-4dff7c04a4d3" action="eval">
+                    <command>
+                        <body>set status</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>removePortFromBridgeAggStatus</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <arguments>
+                <item name="portName">
+                    <description>e.g. &quot;FortyGigE1/0/6:1&quot;</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="bridgeAggNum">
+                    <description>an integer</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;removePortFromBridgeAggStatus&quot;:null}</response>
+        </item>
+        <item name="enableBridgeAggregate" isPublic="true">
+            <description>Enable Bridge Aggregate Group</description>
+            <steps>
+                <item guid="dc9b747c-82a4-4413-bb32-f7b586bb1ee1" action="eval">
+                    <command>
+                        <body>set status &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="12787378-17d6-485a-a499-723ec02d9d94" action="command" session="$session">
+                    <command>
+                        <body>sys</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="ac8fda6e-6f5f-470b-bbcd-4c88845d4d80" action="command" session="$session" estimatedStepExecutionTime="0.031">
+                    <command>
+                        <body>interface bridge-aggregation $bagNum</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.732" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="604c4d1d-12b7-4b4d-91cb-42b73bd3b131" action="command" session="$session" estimatedStepExecutionTime="0.109">
+                    <command>
+                        <body>port link-type trunk </body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="ee88bcb7-e5df-4108-8ca9-45874c682a39" action="command" session="$session">
+                    <command>
+                        <body>undo shutdown</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.732" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="3817c46b-0e07-4dbf-8fde-2182bc1c3400" action="command" session="$session">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.732" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="a15b1f3f-c59c-4592-bbe3-d26e8871045d" action="command" session="$session">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.732" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="b5fa2368-502e-431b-a92a-17c8bbebffef" action="eval">
+                    <command>
+                        <body>set status</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>removePortFromBridgeAggStatus</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <version>1.0 </version>
+            <arguments>
+                <item name="bagNum">
+                    <description>Number of bridge aggregate group to create
+</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="disableBridgeAggregate" isPublic="true">
+            <description>Disable Bridge Aggregate Group</description>
+            <steps>
+                <item guid="cf5bdcd1-a19d-4ed5-924e-43023aadef1d" action="eval">
+                    <command>
+                        <body>set status &quot;OK&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="7e75d050-6eb2-452c-9a2c-a4b576c6645a" action="command" session="$session">
+                    <command>
+                        <body>sys</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="91290f30-9aba-412b-861f-7bea5a01dbf3" action="command" session="$session" estimatedStepExecutionTime="0.031">
+                    <command>
+                        <body>interface bridge-aggregation $bagNum</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.732" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="a07b86ae-82a0-44d2-b933-12ab3321336b" action="command" session="$session">
+                    <command>
+                        <body>shutdown</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>isEmpty()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;true&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message> $value</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>set status &quot;NOK&quot;</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.732" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="c1f293af-3120-41f8-aef1-226419309e03" action="command" session="$session">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.732" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="4215a8ff-3859-4f5a-9866-b94425e68e0f" action="command" session="$session">
+                    <command>
+                        <body>quit</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.732" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="c090aa55-918b-4186-84d4-184accf06a24" action="eval">
+                    <command>
+                        <body>set status</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                        <regex>.+</regex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <query>removePortFromBridgeAggStatus</query>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <version>1.0 </version>
+            <arguments>
+                <item name="bagNum">
+                    <description>Number of bridge aggregate group to shutdown
+</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

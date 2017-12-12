@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.1.0.77511">
+    <baseApplication>com.fnfr.itest.tools.database</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.tools.database" transferableType="com.fnfr.itest.tools.database.DatabaseSessionProperties" databaseType="Postgresql" databaseType.inherit="false" ipAddress="essentials.sh.pdsea.f5net.com" ipAddress.inherit="false" port="5432" port.inherit="false" databaseName="velocity_main" databaseName.inherit="false" user="admin" user.inherit="false" password.masked="true" password="iRyLc4KQj80=" password.inherit="false"/>
+    <responseLibrary inherit="false">project://ti_new_user_monitor/</responseLibrary>
+    <sessionClassTestCase inherit="false">velocity_db_qc.fftc</sessionClassTestCase>
+    <nickName>velocity_db</nickName>
+</SessionTemplate>

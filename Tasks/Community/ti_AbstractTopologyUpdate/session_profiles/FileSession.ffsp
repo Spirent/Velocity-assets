@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<SessionTemplate version="6.0.0.18638fa">
+    <baseApplication>com.fnfr.itest.applications.file</baseApplication>
+    <sessionProperties type="com.fnfr.itest.applications.file.properties.FileSessionProperties">
+        <terminalProperties>
+            <scrollBackLines inherit="false">100000</scrollBackLines>
+            <localLineEditing inherit="false" defaultValue=""/>
+            <autoScroll inherit="false">false</autoScroll>
+        </terminalProperties>
+        <uri inherit="false">[get file]</uri>
+        <accessMode inherit="false" defaultValue=""/>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ti_AbstractTopologyUpdate/</responseLibrary>
+</SessionTemplate>

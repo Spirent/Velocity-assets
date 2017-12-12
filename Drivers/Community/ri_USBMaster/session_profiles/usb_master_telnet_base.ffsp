@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<SessionTemplate version="6.0.0.18638fa">
+    <baseApplication>com.fnfr.svt.applications.telnet</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+        <TerminalProperties>
+            <localEcho inherit="false">true</localEcho>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_USBMaster/</responseLibrary>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>

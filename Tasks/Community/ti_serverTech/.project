@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>ti_serverTech</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.fnfr.svt.builders.documents.svtdocumentsbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.fnfr.svt.builders.documents.svtdocumentsnature</nature>
+		<nature>com.fnfr.svt.formmapping.formmaplibrarynature</nature>
+		<nature>com.fnfr.svt.mapping.maplibrarynature</nature>
+	</natures>
+</projectDescription>

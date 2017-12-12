@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.1.0.77511">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <captureProperties>
+                <commandBreakChars inherit="false">
+                    <item>[char Ctrl-C]</item>
+                </commandBreakChars>
+            </captureProperties>
+            <prompts merge="true">
+                <item name="normal" MatchMethod="WILDCARD">
+                    <Content>[root@*:*] config #</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <user inherit="false">root</user>
+        <password inherit="false">SVj2jwwTD4w=</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_f5/</responseLibrary>
+    <sessionClassTestCase inherit="false">big_ip_base_qc.fftc</sessionClassTestCase>
+    <nickName>big_ip</nickName>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>

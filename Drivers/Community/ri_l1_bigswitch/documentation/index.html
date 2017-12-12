@@ -1,0 +1,97 @@
+<HTML><BODY>
+<style>TABLE,TD,TH{border:1px solid black;border-collapse:collapse;}
+th{text-align:left;background-color:AliceBlue;}
+H1,H2{padding-left:15px}
+.smallText{font-size:10px; color:black; font-family:courier}
+.normalText{font-size:14px; color:black; font-family:arial}
+.procText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.qcNotesText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.headerText{font-size:30px; color:black; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
+</style>
+<BR><DIV class='headerText'>BigSwitch L1 Driver</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Provides basic commands for management of BigSwitch L1 switches. </DIV>
+<DIV style='margin-left:30px; ' class='normalText'><b>Tags:</b> L1</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<BR><DIV class='header2Text'>1 QuickCall Library in project://ri_l1_bigswitch:</DIV>
+<BR><DIV class='header2Text'>project://ri_l1_bigswitch/session_profiles/big_switch_ssh_base.fftc (project://ri_l1_bigswitch/session_profiles/big_switch_ssh_base.fftc)</DIV><BR>
+<DIV class='qcNotesText'></DIV>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>connect</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>port1</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>port2</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>switch_id</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>disconnect</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>port1</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>port2</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>switch_id</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getPorts</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>switch_id</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getPortState</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>switch_id</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>interface</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getPortsAndStates</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>switch_id</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getProperties</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>createChainName</DIV>
+<DIV class='procText'></DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>port1</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>port2</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>switch_id</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'> </TD>
+</TR>
+</TABLE></DIV><br>
+<br>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.4.1.be355a6">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <captureProperties>
+                <commandBreakChars inherit="false">
+                    <item>[char Ctrl-C]</item>
+                </commandBreakChars>
+                <commandCompletionchars inherit="false">
+                    <item>[char TAB]</item>
+                    <item>?</item>
+                </commandCompletionchars>
+            </captureProperties>
+            <prompts merge="true">
+                <item name="normal" MatchMethod="WILDCARD">
+                    <Content>&lt;*&gt;</Content>
+                </item>
+                <item name="root" MatchMethod="WILDCARD">
+                    <Content>[*]</Content>
+                </item>
+                <item name="more" TypeOfPrompt="MORE">
+                    <Content>---- More ----</Content>
+                    <MoreNextCommand>\\r</MoreNextCommand>
+                </item>
+                <item name="password" TypeOfPrompt="PASSWORD">
+                    <Content>Password:</Content>
+                </item>
+                <item name="prompt1">
+                    <Content>This port is a member of the link aggregation group. If configuration of the whole group is required to be modified, please configure it under the aggregation interface view. Otherwise, this operation may interrupt network traffic.Continue?[Y/N]:</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_hp_5900/</responseLibrary>
+    <sessionClassTestCase inherit="false">hp_5900_ssh_qc.fftc</sessionClassTestCase>
+    <Overview>HP 5900 Series Switch  RSP</Overview>
+    <Description>Reference Session profile for HP 5900 Series switches.  All HP switches have the same command set.</Description>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>

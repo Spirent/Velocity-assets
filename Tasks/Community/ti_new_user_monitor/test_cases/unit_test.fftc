@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<testCase version="5.1.0.77511">
+    <general>
+        <isProcedureLibrary>true</isProcedureLibrary>
+    </general>
+    <execution>
+        <parameters version="5.1.0.77511">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <IGNORE_LIST pt:description="space-separated list of usernames to ignore">_pdsvcacct</IGNORE_LIST>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="e1f2c6f1-75f7-46be-a98f-d19b9164eaba" action="comment">
+                    <command>
+                        <body>This test case unit tests the new user monitor driver</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+        </item>
+        <item name="basicFunctionality" isPublic="true">
+            <steps>
+                <item guid="973a69ce-b23d-4797-8920-89985115eed1" action="open" session="s1">
+                    <command>
+                        <body>project://ti_new_user_monitor/session_profiles/velocity_rest.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="8a903cf6-2d58-488b-9a44-b9cdb296948a" action="getUngroupedUsers" session="s1" skip="true">
+                    <command>
+                        <body>-ignoredUsers [param IGNORE_LIST]</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>userId()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>userIds</storageLocation>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="4fd219fe-e7bc-4f36-ac2f-3805e3658d05" action="foreach" skip="true">
+                    <command>
+                        <body>id $userIds</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e09cdba8-13f5-4d3f-8379-f602c89c5f34" action="addUserToGroup" session="s1" skip="true">
+                            <command>
+                                <body>-userId $id</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="0e08435b-ec8b-4a09-ae40-1d505d8966ff" action="close" session="s1">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

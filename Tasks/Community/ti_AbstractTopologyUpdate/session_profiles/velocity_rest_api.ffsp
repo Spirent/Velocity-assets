@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<SessionTemplate version="6.0.0.18638fa">
+    <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[get url]" url.inherit="false">
+        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="[get user_name]" user.inherit="false" password.masked="true" password="1xuOt5DLBjjcnpinSpi3qQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ti_AbstractTopologyUpdate/</responseLibrary>
+    <sessionClassTestCase inherit="false">velocity_qc_lib.fftc</sessionClassTestCase>
+</SessionTemplate>
