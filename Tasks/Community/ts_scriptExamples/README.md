@@ -58,7 +58,6 @@ reservation are assocciated with the execution, that information will also be
 shown. this script requires 'requests' as an additional package
 
 ## Installation
-Driver Upload
     Zip the contents of this directory (ensuring that velocity_manifest.json is located
     at the root of the file bundle and give the zip file a meaningful name like ts_scriptExamples.zip
     Upload the zip file into Velocity from the "Automation Assets" tab
