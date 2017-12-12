@@ -11,7 +11,7 @@ All assets are categorized into three levels of maturity/testing:
 
 You are encouraged to submit your projects back to the Spirent Developer Community for others to benefit from.
 
-Each project within this repository conforms to a standard naming convention. Project names are pre-pended with two letters. The first letter indicates what type of content exists in the project, and the second letter indicates the language in which the project was written. For example, a project called ri_foobar contains a driver written in iTest. The tables below lists the prefix values:
+Each project within this repository conforms to a standard naming convention. Project names are pre-pended with two letters. The first letter indicates what type of content exists in the project, and the second letter indicates the language in which the project was written. For example, a project called ri_foobar contains a driver written in iTest. The tables below list the prefix values:
 
 |First Letter|Project Content|Description|
 | -------- |-------------| -------------| 
