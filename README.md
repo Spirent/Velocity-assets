@@ -1,8 +1,14 @@
 # Spirent Developer Community - Velocity
 
-Welcome to the Spirent Developer Community! You will find a wide variety of useful lab automation assets for your Velocity deployment.  This repository is specific to Velocity.  The iTest repository is located [here](https://github.com/Spirent/iTest-assets).  All Spirent Developer Community assets are available for your immediate download and use. 
+Welcome to the Spirent Developer Community! You will find a wide variety of useful assets for your Velocity deployments and iTest automation projects.  This repository is specific to Velocity.  The iTest repository is located [here](https://github.com/Spirent/iTest-assets).  All Spirent Developer Community assets are available for your immediate download and use. 
 
-This portion of the Developer Community contains a selection of Velocity automation. They are useful for gaining the greatest value from your Velocity LaaS deployment. The assets are rich in reusable drivers, startup tasks, teardown tasks, triggered automation tasks, and example scripts. All are key capabilities that will help you create the most value in your LaaS environment. Content included in this portion of the Developer Community is a combination of iTest and Python automation.
+ <table style="width:100%; border: 5px solid gray;">
+  <tr>
+     <td style="color:white"><img src="images/Speedometer-QuickCalls.png" alt="Over 1000 QuickCalls!">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td> 
+    <td style="border: 0px solid black;">This portion of the Developer Community contains a selection of Velocity automation. They are useful for gaining the greatest value from your Velocity LaaS deployment. The assets are rich in reusable drivers, startup tasks, teardown tasks, triggered automation tasks, and example scripts. All are key capabilities that will help you create the most value in your LaaS environment. Content included in this portion of the Developer Community is a combination of iTest and Python automation.</td>
+    <td><img src="images/Speedometer-ResponseMaps.png" alt="Over 700 Response Maps!">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+  </tr>
+</table>
 
 All assets are categorized into three levels of maturity/testing:
 - Certified:  provided and tested by Spirent
