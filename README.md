@@ -4,7 +4,7 @@ Welcome to the Spirent Developer Community! You will find a wide variety of usef
 
  <table style="width:100%; border: 5px solid gray;">
   <tr>
-     <td style="color:white"><img src="images/velocity_color.png" alt="Velocity Logo">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td> 
+     <td style="color:white"><img src="Images/velocity_color.png" alt="Velocity Logo">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td> 
     <td style="border: 0px solid black;">This portion of the Developer Community contains a selection of Velocity automation. They are useful for gaining the greatest value from your Velocity LaaS deployment. The assets are rich in reusable drivers, startup tasks, teardown tasks, triggered automation tasks, and example scripts. All are key capabilities that will help you create the most value in your LaaS environment. Content included in this portion of the Developer Community is a combination of iTest and Python automation.</td>
     <td><img src="images/v-agent_color.png" alt="Velocity Agent Logo">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
   </tr>
