@@ -20,11 +20,11 @@ Each project within this repository conforms to a standard naming convention. Pr
 
 |First Letter|Project Content|Description|
 | -------- |-------------| -------------| 
+|r|[Drivers](https://github.com/Spirent/Velocity-assets/Drivers/)|Velocity drivers|
+|t|[Tasks](https://github.com/Spirent/Velocity-assets/Tasks/)|Velocity startup, teardown, and triggered automation tasks|
+|k|[Dashboards](https://github.com/Spirent/Velocity-assets/Dashboards/)|Velocity dashboards|
 |d|Libraries|Response maps and QuickCalls|
 |a|Automation|Test cases|
-|r|[Drivers](https://github.com/Spirent/Velocity-assets/drivers)|Velocity drivers|
-|t|Tasks|Velocity startup, teardown, and triggered automation tasks|
-|k|Dashboards|Velocity dashboards|
 |u|Utilities|Tools and utilities|
 
 |Second Letter|Language|Description|
