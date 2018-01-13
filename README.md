@@ -7,7 +7,7 @@
   </tr>
 </table>
 
-Welcome to the Spirent Developer Community! You will find a wide variety of useful assets for your Velocity deployments and iTest automation projects.  This repository is specific to Velocity.  The iTest repository is located [here](https://github.com/Spirent/iTest-assets).  All Spirent Developer Community assets are available for your immediate download and use. 
+Welcome to the Spirent Developer Community! You'll find a wide variety of useful assets for your Velocity deployments and iTest automation projects.  This repository is specific to Velocity.  The iTest repository is located [here](https://github.com/Spirent/iTest-assets).  All Spirent Developer Community assets are available for your immediate download and use. 
 
  <table style="width:100%; border: 5px solid gray;">
   <tr>
