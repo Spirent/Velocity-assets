@@ -3,7 +3,7 @@
   <tr>
      <td><img src="images/Developer_Community_Icon.png" alt="Spirent Developer Community"></td> 
    <td style="font-size:x-large"> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
-    <td><img src="images/velocity-color-small.png" alt="iTest Logo"</td>
+    <td><img src="images/velocity_color_small.png" alt="Velocity Logo"</td>
   </tr>
 </table>
 
