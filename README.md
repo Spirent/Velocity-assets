@@ -16,7 +16,7 @@ Welcome to the Spirent Developer Community! You will find a wide variety of usef
   </tr>
 </table>
 
-All assets are categorized into three levels of maturity/testing:
+All assets are categorized into three levels of maturity/testing: 
 - Certified:  provided and tested by Spirent
 - Reference:  provided by Spirent with intent to serve as “blueprint” for your project's structure and usage
 - Community:  submitted by community or Spirent personnel with no review or testing by Spirent       
