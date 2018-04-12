@@ -1,6 +1,8 @@
 Velocity Ansible Configurable Driver for Linux
 This is a Velocity reference driver that implements an example Ansible driver in Velocity.
 
+Demo Video: https://youtu.be/RJQm1Tu2X0k
+
 Discovery:
 The driver discovers:
   The ports installed on the Linux host
