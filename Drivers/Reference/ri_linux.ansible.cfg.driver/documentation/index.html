@@ -1,0 +1,71 @@
+<HTML><BODY>
+<style>TABLE,TD,TH{border:1px solid black;border-collapse:collapse;}
+th{text-align:left;background-color:AliceBlue;}
+H1,H2{padding-left:15px}
+.smallText{font-size:10px; color:black; font-family:courier}
+.normalText{font-size:14px; color:black; font-family:arial}
+.procText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.qcNotesText{font-size:14px; color:black; font-family:arial; padding-left:30px}
+.headerText{font-size:30px; color:black; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
+.header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
+</style>
+<BR><DIV class='headerText'>Velocity Ansible Configurable Driver for Linux</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>This is a Velocity reference driver that implements an example Ansible driver in Velocity.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Discovery:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>The driver discovers:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  The ports installed on the Linux host</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  The kernel version of the Linux host</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  The version of curl installed on the Linux host</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Polling:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  When Velocity invokes this driver to poll the Linux host, roughly every 5 minutes,</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  the installed curl version is compared with the curl version set as a property and can message the admin of this change</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Configuration via Ansible:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  When a configuration is specified to be used upon reservation startup, a user can specify which Ansible playbook should be used</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  Optionally, the default configuration can be applied to the Linux host at reservation end - also an Ansible playbook</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>Requirements:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  The driver agent must have Ansible installed.</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  For example, on an Ubuntu driver agent: </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    apt-get update ; apt-get -y install software-properties-common</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    apt-add-repository ppa:ansible/ansible -y ; apt-get update</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    apt-get -y install ansible ; apt-get -y install tftp-hpa</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  The SSH username must be able to sudo with no password required (NOPASSWD setting)    </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>HOWTO:</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  Import the Linux Ansible template under the velocity.template directory. </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    As admin, go to Inventory, Import, Import from ZIP</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Point to the ansible.driver.template.zip file and upload</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Check Velocity messages to verify that one template has been successfully imported</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  Change the template's parent</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Navigate to the newly imported template and "Change Parent" to Server</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    This will add properties like ipAddress and Hostname</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  Upload the Ansible driver iTar</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Export the project to an iTar</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Upload the iTar as a Driver in Velocity</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  Associate the Driver with the Template</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Navigate to the template and choose the newly uploaded driver </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Verify that the template is set to "Configurable" interface type</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  Create a Linux host resource</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Create a new resource using the Linux template</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Assign the ipAddress, SSH username, and SSH password</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Optionally, assign the Velocity URL, Velocity admin, and Velocity password (to receive detected curl version changes when polling)</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Click "Discover" and verify that the system's interfaces and Hostname, Curl Version, and Kernel Version properties are detected</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  Reserve the resource with an Ansible playbook configuration</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    SSH into the Linux host</DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Create a new reservation on the Linux host with an Ansible playbook   </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    Look at the SSH console and verify that a broadcast message appears showing that curl software version has changed </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>    </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>  </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>   </DIV>
+<DIV style='margin-left:30px; ' class='normalText'>	</DIV>
+<DIV style='margin-left:30px; ' class='normalText'><BR></DIV>

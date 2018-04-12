@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.0.3</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Configurable</interface> 
+    <entryPoint>linux.ansible.driver.1.0.3.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+        <property optional="false">
+            <name>Kernel_Release</name>
+            <description>Kernel release</description>
+        </property>
+        <property optional="false">
+            <name>Hostname</name>
+            <description>Host name of the system</description>
+        </property>
+        <property optional="false">
+            <name>SSH_Username</name>
+            <description>Username for ssh access</description>
+        </property>
+        <property optional="false">
+            <name>SSH_Password</name>
+            <description>Password for ssh access</description>
+        </property>        
+        <property optional="false">
+            <name>Curl_Version</name>
+            <description>Version of curl installed</description>
+        </property>        
+        <property optional="false">
+            <name>velocityURL</name>
+            <description>Velocity URL</description>
+        </property>        
+        <property optional="false">
+            <name>velocityAdminUser</name>
+            <description>Velocity user</description>
+        </property>        
+        <property optional="false">
+            <name>velocityAdminPwd</name>
+            <description>Velocity password</description>
+        </property>        
+    </resourceProperties>
+</resourceDriver>

@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.2.0.95bb698">
+    <sampleDictionary>
+        <item name="sample2">
+            <action actionType="command">
+                <command>
+                    <body>cat /proc/net/dev</body>
+                </command>
+            </action>
+            <responseBody>Inter-|   Receive                                                |  Transmit
+ face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
+  eth0: 1410442423 2069601    0    0    0     0          0         0 357053133 2040596    0    0    0     0       0          0
+  eth1:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0
+  eth2:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0
+  eth3:       0       0    0    0    0     0          0         0        0       0    0    0    0     0       0          0
+    lo: 293374989 1164550    0    0    0     0          0         0 293374989 1164550    0    0    0     0       0          0
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;cat /proc/net/dev&lt;/echo&gt;
+    &lt;prompt&gt;root@10:~# &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.3</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties"/>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <banner>.*bytes.*packets.*errs.*</banner>
+                    <bannerStructure>Regex</bannerStructure>
+                    <columns>
+                        <item name="intf">
+                            <isKey>true</isKey>
+                            <lastFullCell></lastFullCell>
+                            <uid>b4aae0fe-76d0-45c2-a049-c55cdbf2ae67</uid>
+                        </item>
+                        <item name="rx-bytes">
+                            <lastFullCell></lastFullCell>
+                            <uid>c74c10f7-f4c4-4321-ad83-7d751c4f11dd</uid>
+                        </item>
+                        <item name="rx-packets">
+                            <lastFullCell></lastFullCell>
+                            <uid>c0c2177e-ab81-4dba-b275-d3e371aa35e3</uid>
+                        </item>
+                        <item name="rx-errs">
+                            <lastFullCell></lastFullCell>
+                            <uid>51e29cd1-4a2d-4070-8bd2-82cbc6755290</uid>
+                        </item>
+                        <item name="rx-drop">
+                            <lastFullCell></lastFullCell>
+                            <uid>ed524174-240e-48aa-8739-8c448c2a2dc3</uid>
+                        </item>
+                        <item name="rx-fifo">
+                            <lastFullCell></lastFullCell>
+                            <uid>a8ee96d3-9b28-4bda-8bd2-f639cfb6c6a7</uid>
+                        </item>
+                        <item name="rx-frame">
+                            <lastFullCell></lastFullCell>
+                            <uid>0ba13fc7-5bd2-40cf-aa50-9daac0f102d1</uid>
+                        </item>
+                        <item name="rx-compressed">
+                            <lastFullCell></lastFullCell>
+                            <uid>877021ff-e1fb-4ce0-b69d-02df9a9192ca</uid>
+                        </item>
+                        <item name="rx-mcast">
+                            <lastFullCell></lastFullCell>
+                            <uid>0c8631ee-e3a9-48b1-a985-890e52160f57</uid>
+                        </item>
+                        <item name="tx-bytes">
+                            <lastFullCell></lastFullCell>
+                            <uid>f775c17f-6c7d-4b79-a84e-1826cbdc1bf4</uid>
+                        </item>
+                        <item name="tx-packets">
+                            <lastFullCell></lastFullCell>
+                            <uid>2067a54e-47a4-483a-b5f8-3c5f9e4a93b0</uid>
+                        </item>
+                        <item name="tx-errs">
+                            <lastFullCell></lastFullCell>
+                            <uid>023ef6e6-b96e-4758-8b17-5909c8a9938a</uid>
+                        </item>
+                        <item name="tx-drop">
+                            <lastFullCell></lastFullCell>
+                            <uid>ed8ae0cf-7d18-44cb-ac3e-90356a5717bc</uid>
+                        </item>
+                        <item name="tx-fifo">
+                            <lastFullCell></lastFullCell>
+                            <uid>e392411d-cffb-4bd9-999a-9f499345762f</uid>
+                        </item>
+                        <item name="colls">
+                            <lastFullCell></lastFullCell>
+                            <uid>8918423a-ba0c-4ee7-9fde-6a63927516ed</uid>
+                        </item>
+                        <item name="carrier">
+                            <lastFullCell></lastFullCell>
+                            <uid>40f69fa5-6c5a-413f-8546-cccea830939c</uid>
+                        </item>
+                        <item name="compressed">
+                            <lastFullCell></lastFullCell>
+                            <uid>9ab71b54-b805-4be0-914a-e4fe12d2e441</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="cat /proc/net/dev"/>
+</ResponseMap>
