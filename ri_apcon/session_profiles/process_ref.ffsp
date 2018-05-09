@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.4.0.4f90e5a">
+    <baseApplication>com.fnfr.svt.applications.process</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.process.ProcessSessionProperties"/>
+    <sessionClassTestCase inherit="false">process_ref_qc.fftc</sessionClassTestCase>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>
