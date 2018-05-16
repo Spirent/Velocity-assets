@@ -2,6 +2,8 @@
 <testCase version="7.0.1.201802131446">
     <general>
         <documentation>Apcon Driver for Velocity</documentation>
+        <notes>This driver was developed and tested on a multi Blade APCON Layer 1 switch.  It will discover the ports and successfuly connect between end points</notes>
+        <owner>David Parsons</owner>
     </general>
     <procedures>
         <item name="main">

@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
-<testCase version="6.1.0.e2e4ec0">
+<testCase version="7.0.1.201802131446">
     <general>
         <documentation>Library Procedures</documentation>
+        <notes>THis is the supporting APCON procedure library</notes>
+        <owner>David Parsons</owner>
         <isProcedureLibrary>true</isProcedureLibrary>
     </general>
     <procedures>
