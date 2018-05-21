@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<ResponseMap version="6.1.0.e2e4ec0">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show port names A</body>
+                </command>
+            </action>
+            <responseBody>Port\tName
+A32:\tunnamed
+A31:\tunnamed
+A30:\tunnamed
+A29:\tunnamed
+A28:\tunnamed
+A27:\tunnamed
+A26:\tunnamed
+A25:\tunnamed
+A24:\tunnamed
+A23:\tunnamed
+A22:\tunnamed
+A21:\tunnamed
+A20:\tunnamed
+A19:\tunnamed
+A18:\tunnamed
+A17:\tunnamed
+A16:\tunnamed
+A15:\tunnamed
+A14:\tunnamed
+A13:\tunnamed
+A12:\tunnamed
+A11:\tunnamed
+A10:\tunnamed
+A09:\tunnamed
+A08:\tunnamed
+A07:\tunnamed
+A06:\tunnamed
+A05:\tunnamed
+A04:\tunnamed
+A03:\tunnamed
+A02:\tunnamed
+A01:\tunnamed
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;apcon&lt;/promptName&gt;
+    &lt;echo&gt;show port names A&lt;/echo&gt;
+    &lt;prompt&gt;APTAPCON&amp;gt;&amp;gt; &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.4</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="port">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>0</start>
+                            <end>3</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor0">
+                            <regex>:\\s+</regex>
+                            <start>3</start>
+                            <end>5</end>
+                        </item>
+                        <item name="portname">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>5</start>
+                            <end>12</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>A32:\tunnamed</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show port names *"/>
+</ResponseMap>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<testCase version="5.4.0.4f90e5a">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="ssh_ref.ffsp"/>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="ecb372b6-ac4b-408c-81b1-1ba2c39661ef" action="open" session="ssh">
+                    <command>
+                        <body>ssh_ref.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                            <ipAddress inherit="false">10.108.37.234</ipAddress>
+                            <user inherit="false">spirent</user>
+                            <password inherit="false">SrqvrrOjrgE=</password>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="a474dc84-b2aa-4590-8947-3cf20b1bea6d" action="comment">
+                    <command>
+                        <body>Unit tests go here</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="3eac8de9-6e2a-4b9a-867e-ffb1d5ec968e" action="close" session="ssh">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

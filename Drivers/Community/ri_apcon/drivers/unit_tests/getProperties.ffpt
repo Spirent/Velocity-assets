@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ParameterTree version="6.1.0.e2e4ec0">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <property_ipAddress>10.108.38.88</property_ipAddress>
+            <property_Hostname/>
+            <property_username>admin</property_username>
+            <property_password>secret</property_password>
+            <call_count>1</call_count>
+            <call_0>getProperties true</call_0>
+        </parameters>
+    </parameters>
+</ParameterTree>
