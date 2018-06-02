@@ -50,6 +50,19 @@
       ]
     },
     {
+      "fileNameMatch": "extractedData\\.py",
+      "extractedData": [
+        {
+        "pattern": "^DUT Version : (.*)$",
+        "tag": "DUT Build Number"
+        },
+        {
+        "pattern": "^Response Time : (\\d+)$",
+        "tag": "Response Latency ms"
+        }
+      ]
+    },
+    {
       "fileNameMatch": "parameters_list\\.py",
       "commandSequence": [
         "%file% --build %param_build% --testCaseSpecificParameter %param_testCaseSpecificParameter%"
