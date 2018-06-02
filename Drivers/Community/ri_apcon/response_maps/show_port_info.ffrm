@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<ResponseMap version="6.1.0.e2e4ec0">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show port info A02</body>
+                </command>
+            </action>
+            <responseBody>A02:\tName:\t\t\tUnnamed
+A02:\tType:\t\t\tACI-3030-E32-7 32-port 10G/40G Packet Aggregator
+A02:\tStatus:\t\t\tActive
+A02:\tRate:\t\t\t0x20: 1G
+A02:\tPort Link:\t\t1000Mb full
+A02:\tConnections:\t\tA02 &lt;&gt; A03
+A02:\tAggregated:\t\tyes
+A02:\tPort Locking:\t\tdisabled
+A02:\tZoning:\t\t\tdisabled
+A02:\tPresets:\t\t-None-
+A02:\tVendor Name:\t\tAVAGO
+A02:\tPart:\t\t\tABCU-5740ARZ
+A02:\tRevision:\t\t
+A02:\tSerial:\t\t\tAGC1604540WE
+A02:\tDate:\t\t\t01/26/16
+A02:\tBit Rate:\t\t1300 Mbit/sec
+A02:\tWavelength:\t\t0.00 nm
+A02:\tLaser:\t\t\t
+A02:\tMedia:\t\t\t
+A02:\tProtocol:\t\t1000Base-T, 
+A02:\tDiags:\t\t\tnot available
+A02:\tSFP Alarms:\t\t-None-
+A02:\tSignal Change Counter:\t3
+A02:\tFilter:\t\t\t-None-
+A02:\tFilter Type:\t\t-None-
+A02:\tBW Current:\t\t0%
+A02:\tBW Alarms:\t\t-None-
+A02:\tBW Low Alarm:\t\t0%
+A02:\tBW Low Warning:\t\t10%
+A02:\tBW High Warning:\t75%
+A02:\tBW High Alarm:\t\t100%
+A02:\tBW Lower Limits:\tdisabled
+A02:\tBW High Limits:\t\tenabled
+A02:\tPair Mode:\t\tDisabled
+
+WARNING: #509 Digital diagnostics not available for port A02
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;apcon&lt;/promptName&gt;
+    &lt;echo&gt;show port info A02&lt;/echo&gt;
+    &lt;prompt&gt;APTAPCON&amp;gt;&amp;gt; &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.3</duration>
+        </item>
+        <item name="sample2">
+            <responseBody>B02:\tName:\t\t\tUnnamed
+B02:\tType:\t\t\tACI-3030-E32-7 32-port 10G/40G Packet Aggregator
+B02:\tStatus:\t\t\tActive
+B02:\tRate:\t\t\t0x20: 1G
+B02:\tPort Link:\t\t1000Mb full
+B02:\tConnections:\t\tB02 &lt;&gt; A03
+B02:\tAggregated:\t\tyes
+B02:\tPort Locking:\t\tdisabled
+B02:\tZoning:\t\t\tdisabled
+B02:\tPresets:\t\t-None-
+B02:\tVendor Name:\t\tAVAGO
+B02:\tPart:\t\t\tABCU-5740ARZ
+B02:\tRevision:\t\t
+B02:\tSerial:\t\t\tAGC1604540WE
+B02:\tDate:\t\t\t01/26/16
+B02:\tBit Rate:\t\t1300 Mbit/sec
+B02:\tWavelength:\t\t0.00 nm
+B02:\tLaser:\t\t\t
+B02:\tMedia:\t\t\t
+B02:\tProtocol:\t\t1000Base-T, 
+B02:\tDiags:\t\t\tnot available
+B02:\tSFP Alarms:\t\t-None-
+B02:\tSignal Change Counter:\t3
+B02:\tFilter:\t\t\t-None-
+B02:\tFilter Type:\t\t-None-
+B02:\tBW Current:\t\t0%
+B02:\tBW Alarms:\t\t-None-
+B02:\tBW Low Alarm:\t\t0%
+B02:\tBW Low Warning:\t\t10%
+B02:\tBW High Warning:\t75%
+B02:\tBW High Alarm:\t\t100%
+B02:\tBW Lower Limits:\tdisabled
+B02:\tBW High Limits:\t\tenabled
+B02:\tPair Mode:\t\tDisabled
+
+WARNING: #509 Digital diagnostics not available for port B02</responseBody>
+        </item>
+        <item name="sample3">
+            <responseBody>B02:\tName:\t\t\tUnnamed
+B02:\tType:\t\t\tACI-3030-E32-7 32-port 10G/40G Packet Aggregator
+B02:\tStatus:\t\t\tActive
+B02:\tRate:\t\t\t0x20: 1G
+B02:\tPort Link:\t\t1000Mb full
+B02:\tConnections:\t\t-None-
+B02:\tAggregated:\t\tyes
+B02:\tPort Locking:\t\tdisabled
+B02:\tZoning:\t\t\tdisabled
+B02:\tPresets:\t\t-None-
+B02:\tVendor Name:\t\tAVAGO
+B02:\tPart:\t\t\tABCU-5740ARZ
+B02:\tRevision:\t\t
+B02:\tSerial:\t\t\tAGC1604540WE
+B02:\tDate:\t\t\t01/26/16
+B02:\tBit Rate:\t\t1300 Mbit/sec
+B02:\tWavelength:\t\t0.00 nm
+B02:\tLaser:\t\t\t
+B02:\tMedia:\t\t\t
+B02:\tProtocol:\t\t1000Base-T, 
+B02:\tDiags:\t\t\tnot available
+B02:\tSFP Alarms:\t\t-None-
+B02:\tSignal Change Counter:\t3
+B02:\tFilter:\t\t\t-None-
+B02:\tFilter Type:\t\t-None-
+B02:\tBW Current:\t\t0%
+B02:\tBW Alarms:\t\t-None-
+B02:\tBW Low Alarm:\t\t0%
+B02:\tBW Low Warning:\t\t10%
+B02:\tBW High Warning:\t75%
+B02:\tBW High Alarm:\t\t100%
+B02:\tBW Lower Limits:\tdisabled
+B02:\tBW High Limits:\t\tenabled
+B02:\tPair Mode:\t\tDisabled
+
+WARNING: #509 Digital diagnostics not available for port B02</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="Blade">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>0</start>
+                            <end>3</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor0">
+                            <regex>:\\tConnections:\\s+</regex>
+                            <start>3</start>
+                            <end>19</end>
+                        </item>
+                        <item name="connections">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>19</start>
+                            <end>29</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>A02:\tConnections:\t\tA02 &lt;&gt; A03</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show port info *"/>
+</ResponseMap>

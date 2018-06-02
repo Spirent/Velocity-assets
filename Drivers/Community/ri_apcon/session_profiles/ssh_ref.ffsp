@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<SessionTemplate version="7.0.1.201802131446">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <captureProperties>
+                <commandBreakChars inherit="false">
+                    <item>[char Ctrl-C]</item>
+                </commandBreakChars>
+                <commandCompletionchars inherit="false">
+                    <item>?</item>
+                </commandCompletionchars>
+            </captureProperties>
+            <prompts merge="true">
+                <item name="apcon" MatchMethod="WILDCARD">
+                    <Content>*&gt;&gt;</Content>
+                </item>
+                <item name="generic1" MatchMethod="WILDCARD">
+                    <Content>[*]$</Content>
+                </item>
+                <item name="generic2" MatchMethod="WILDCARD">
+                    <Content>*@*$</Content>
+                </item>
+                <item name="prompt1">
+                    <Content>Port, port list, or blade letter (? for help):</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <ipAddress inherit="false">10.108.38.88</ipAddress>
+        <user inherit="false">admin</user>
+        <password inherit="false">PFktqC2ejno=</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_apcon/</responseLibrary>
+    <sessionClassTestCase inherit="false">ssh_ref_qc.fftc</sessionClassTestCase>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>

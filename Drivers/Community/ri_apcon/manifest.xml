@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.2.0</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Layer 1 Switch</interface> 
+    <entryPoint>drivers/apcon-driver.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+		<property optional="true">
+            <name>Hostname</name>
+            <description>Hostname of the remote device</description>
+        </property>
+		<property optional="true">
+            <name>username</name>
+            <description>Username for the remote device</description>
+        </property>
+       	<property optional="true">
+            <name>password</name>
+            <description>Password for the remote device</description>
+        </property>
+    </resourceProperties>
+</resourceDriver>
