@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.2.0.5fe3783">
+    <sampleDictionary>
+        <item name="sample1">
+            <responseBody>
+ Status and Counters - VLAN Information - for ports 7
+
+  VLAN ID Name                 | Status     Voice Jumbo
+  ------- -------------------- + ---------- ----- -----
+  3000    VLAN3000             | Port-based No    No   
+ 
+
+</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <additionalBannerLineCount>1</additionalBannerLineCount>
+                    <banner>  VLAN ID Name                 | Status     Voice Jumbo</banner>
+                    <bannerStructure>Wildcard</bannerStructure>
+                    <columnBoundaries>Positional</columnBoundaries>
+                    <columns>
+                        <item name="VLAN_ID">
+                            <width>10</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>97428570-a20e-4ac4-8830-392137fe421c</uid>
+                        </item>
+                        <item name="Name">
+                            <width>21</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>accf7285-1835-42f4-87e4-2b790ff9f1a7</uid>
+                        </item>
+                        <item name="Separator">
+                            <width>2</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>4af39f0b-0c68-43a7-bb67-d602bd91bfd3</uid>
+                        </item>
+                        <item name="Status">
+                            <width>11</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>eedd57a1-1bd4-4e01-8119-469cc32d52bf</uid>
+                        </item>
+                        <item name="Voice">
+                            <width>6</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>03c68e4c-af13-4657-b937-3b206c9ea611</uid>
+                        </item>
+                        <item name="Jumbo">
+                            <width>0</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>b14fa2c1-886b-4ff1-8578-65a4d35c1a47</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+</ResponseMap>

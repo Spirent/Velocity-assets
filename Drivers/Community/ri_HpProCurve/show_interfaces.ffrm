@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.1.0.201804110601">
+    <sampleDictionary>
+        <item name="sample1">
+            <responseBody>
+ Status and Counters - Port Counters
+
+                                                               Flow Bcast
+  Port Total Bytes    Total Frames   Errors Rx    Drops Rx     Ctrl Limit
+  ---- -------------- -------------- ------------ ------------ ---- -----
+  1    15,398,329     169,406        0            0            off  0    
+  2    0              0              0            0            off  0    
+  3    0              0              0            0            off  0    
+  4    0              0              0            0            off  0    
+  5    0              0              0            0            off  0    
+  6    0              0              0            0            off  0    
+  7    209,305        1224           0            0            off  0    
+  8    212,037        1252           0            0            off  0    
+  9    209,241        1223           0            0            off  0    
+  10   210,755        1223           0            0            off  0    
+ </responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <banner>--</banner>
+                    <bannerStructure>Regex</bannerStructure>
+                    <columns>
+                        <item name="port">
+                            <lastFullCell></lastFullCell>
+                            <uid>13451447-a547-4abb-aa61-d3ec34f534a5</uid>
+                        </item>
+                        <item name="totalBytes">
+                            <lastFullCell></lastFullCell>
+                            <uid>413e22da-7c17-42de-bdab-9e67523714eb</uid>
+                        </item>
+                        <item name="totalFrames">
+                            <lastFullCell></lastFullCell>
+                            <uid>121a4587-8638-4fc8-b048-ab204342e857</uid>
+                        </item>
+                        <item name="errors">
+                            <lastFullCell></lastFullCell>
+                            <uid>180bd49c-883e-4f5f-ae2c-f781af45b41f</uid>
+                        </item>
+                        <item name="drops">
+                            <lastFullCell></lastFullCell>
+                            <uid>741e1aa6-924e-4caf-bb99-5c99b3355461</uid>
+                        </item>
+                        <item name="flow">
+                            <lastFullCell></lastFullCell>
+                            <uid>73a8249a-23c7-404a-94bf-030422892b86</uid>
+                        </item>
+                        <item name="bcast">
+                            <lastFullCell></lastFullCell>
+                            <uid>c6ea3edd-0a88-477d-8ad3-566f913ac82f</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+</ResponseMap>

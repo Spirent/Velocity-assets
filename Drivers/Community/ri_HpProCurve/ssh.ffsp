@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<SessionTemplate version="7.1.0.201804110601">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <terminalSizeProperties>
+                <termHeight inherit="false">24</termHeight>
+                <termWidth inherit="false">80</termWidth>
+            </terminalSizeProperties>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content>*#</Content>
+                </item>
+                <item name="prompt2" TypeOfPrompt="MORE">
+                    <Content>Do you want to log out [y/n]?</Content>
+                    <MoreNextCommand>y</MoreNextCommand>
+                </item>
+                <item name="prompt3" TypeOfPrompt="MORE">
+                    <Content>Do you want to continue? [y/n]</Content>
+                    <MoreNextCommand>y</MoreNextCommand>
+                </item>
+                <item name="prompt4" TypeOfPrompt="MORE">
+                    <Content>Press any key to continue</Content>
+                    <MoreNextCommand>\\n</MoreNextCommand>
+                </item>
+                <item name="prompt5" TypeOfPrompt="MORE">
+                    <Content>Do you want to save current configuration [y/n/^C]?</Content>
+                    <MoreNextCommand>y</MoreNextCommand>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <ipAddress inherit="false">[param property_ipAddress]</ipAddress>
+        <user inherit="false">[param property_ssh_username]</user>
+        <password inherit="false">Hu62+w4ez8VRjpeoxPozxDSUZZ/yy3TQrW3d6jsyx9w=</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_HpProCurve/</responseLibrary>
+</SessionTemplate>

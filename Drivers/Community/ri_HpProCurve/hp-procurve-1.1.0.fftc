@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+<testCase version="7.1.0.201804110601">
+    <execution>
+        <parameters version="7.1.0.201804110601">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <property_ipAddress>10.108.36.248</property_ipAddress>
+                    <property_ssh_username>spirent</property_ssh_username>
+                    <property_ssh_password>spirent</property_ssh_password>
+                    <property_openstack_username>demo</property_openstack_username>
+                    <property_openstack_tenant>demo</property_openstack_tenant>
+                    <property_openstack_password>3dviEpqYGs8=</property_openstack_password>
+                    <property_openstack_controllerIp>10.108.37.37</property_openstack_controllerIp>
+                    <call_count>1</call_count>
+                    <call_1>getPorts</call_1>
+                    <call_0>removeFromVlan -vlanId 200 -portNumber 7 -tagging untagged</call_0>
+                    <reservationId>345757d8-4bfb-4ab9-a379-575d43e30c80</reservationId>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="acf1d334-1ad0-4ba9-bedb-882fca30f6c8" action="open" session="s1">
+                    <command>
+                        <body>project://ri_HpProCurve/ssh.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="bad67e28-c472-4106-a52f-969b03486ff2" action="command" session="s1">
+                    <command>
+                        <body>\\n</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="c7a86cba-7746-4765-8bfb-29c14ca44655" action="command" session="s1">
+                    <command>
+                        <body>term length 1000</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="24fc7df2-4ec7-4ecf-ac22-9d67bb39fded" action="for">
+                    <command>
+                        <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="8865b973-594b-4e1b-9dea-d0fb0276ff06" action="call">
+                            <command>
+                                <body>[param call_$i]</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>ret</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="f037ec1f-41b0-4342-ab0a-96f2ad01fb62" action="command" session="s1">
+                    <command>
+                        <body>logout</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="f25891f1-12cb-41fa-aff6-ecc337eaf127" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getPorts" isVBlock="true">
+            <steps>
+                <item guid="5d971469-da13-446e-8227-baeb34894e32" action="comment">
+                    <command>
+                        <body>return empty list of ports</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <response>{&quot;ports&quot;:[]}</response>
+        </item>
+        <item name="getProperties" isVBlock="true">
+            <steps>
+                <item guid="ca072a58-9a43-4a2a-b1c6-11e363968d68" action="comment">
+                    <command>
+                        <body>return static information and empty list of ports</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+            </steps>
+            <arguments>
+                <item name="includePorts">
+                    <defaultValue>true</defaultValue>
+                </item>
+            </arguments>
+            <response>{&quot;properties&quot;:{&quot;Hostname&quot;:&quot;HP 2615&quot;},&quot;ports&quot;:[]}</response>
+        </item>
+        <item name="createVlan">
+            <steps>
+                <item guid="f5064079-397d-4e46-8072-afd3498fd1a5" action="comment">
+                    <command>
+                        <body>create the VLAN</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4a1aa1ea-e391-4d14-a8ec-e11328d6f9d6" action="command" session="s1">
+                            <command>
+                                <body>config t</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="a947f3c7-c201-46e0-abd2-1f84f049200d" action="command" session="s1">
+                            <command>
+                                <body>vlan $vlanId</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="961d092b-1c18-47fc-b35f-57d319b67863" action="command" session="s1">
+                            <command>
+                                <body>end</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="8309fffc-fcc5-4034-9a21-32310a917312" action="return">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="vlanId">
+                    <description>VLAN ID to manipulate</description>
+                </item>
+            </arguments>
+        </item>
+        <item name="destroyVlan">
+            <steps>
+                <item guid="874904b3-91c7-47df-b22d-160681622521" action="comment" skip="true">
+                    <command>
+                        <body>remove the VLAN</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="819a0a21-d3bd-4a62-9951-b8eaca83653c" action="command" session="s1">
+                            <command>
+                                <body>config t</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="12640490-8108-485c-bc17-ba3d1251c62b" action="command" session="s1">
+                            <command>
+                                <body>no vlan $vlanId</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="67026eb9-809a-44e8-ad25-bad5f55aac9c" action="command" session="s1">
+                            <command>
+                                <body>end</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="208b1fdf-ccfa-4d22-b80d-a43d7ebbff78" action="return">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="vlanId">
+                    <description>VLAN ID to manipulate</description>
+                </item>
+            </arguments>
+        </item>
+        <item name="addToVlan">
+            <steps>
+                <item guid="1811e9fd-eb73-4ab1-a076-bc861e0b87ce" action="comment">
+                    <command>
+                        <body>add port to VLAN</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="423eb785-78e6-463c-a6a1-83da698d1f69" action="command" session="s1">
+                            <command>
+                                <body>config t</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="8a0242f0-a688-4ba0-b023-6238e8cd350b" action="command" session="s1">
+                            <command>
+                                <body>vlan $vlanId</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="adac711a-bee2-4d12-abb8-cc17b5ff4991" action="command" session="s1">
+                            <command>
+                                <body>$tagging $portNumber</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="dca1ee46-6bf8-4e31-9e7c-27ec14630c90" action="command" session="s1">
+                            <command>
+                                <body>end</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="e0112c71-73e0-4d18-bdcd-5d1e1884466d" action="command" session="s1">
+                            <command>
+                                <body>wr mem</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="251284e6-d201-4a84-a92f-6a53e6886aa5" action="return">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="vlanId">
+                    <description>VLAN ID to manipulate</description>
+                </item>
+                <item name="portNumber">
+                    <description>Port number to add/remove to/from VLAN</description>
+                </item>
+                <item name="tagging">
+                    <description>tagged or untagged</description>
+                </item>
+            </arguments>
+        </item>
+        <item name="removeFromVlan">
+            <steps>
+                <item guid="14aa4637-aeec-45e7-88fd-1976aeb86505" action="comment">
+                    <command>
+                        <body>remove port from any VLAN membership</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="edbc2171-d23f-4b95-9422-1a8486a0bb46" action="command" session="s1">
+                            <command>
+                                <body>config t</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="9fe6e923-c333-4d66-b408-61f955b34c11" action="if">
+                            <command>
+                                <body>$tagging == &quot;untagged&quot;</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ce872bba-3e8d-432b-bfae-7116a336c10a" action="then">
+                                    <nestedSteps>
+                                        <item guid="e86faa51-cfbd-4e86-a0a8-ab2ff15c67db" action="command" session="s1">
+                                            <command>
+                                                <body>vlan 1</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                        <item guid="661b3de8-a4ec-4ab9-9ef9-93c97d9bbd25" action="command" session="s1">
+                                            <command>
+                                                <body>untagged $portNumber</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                                <item guid="e20105cd-3d85-48cf-8211-cbf507558dfb" action="else">
+                                    <nestedSteps>
+                                        <item guid="036b6a80-ed1c-4a85-b96c-5a6628a7696e" action="command" session="s1">
+                                            <command>
+                                                <body>vlan $vlanId</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                        <item guid="58bada7f-4027-4129-93d3-10d79db7e47d" action="command" session="s1">
+                                            <command>
+                                                <body>no tagged $portNumber</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    <useFieldsInCommand>false</useFieldsInCommand>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            <useFieldsInCommand>false</useFieldsInCommand>
+                        </item>
+                        <item guid="52a6fa59-46c4-459b-9dda-f31684e447e6" action="command" session="s1">
+                            <command>
+                                <body>end</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="01ae1ba6-1272-4571-a7cd-ef5861c961c1" action="command" session="s1">
+                            <command>
+                                <body>wr mem</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useFieldsInCommand>false</useFieldsInCommand>
+                </item>
+                <item guid="525ff9a9-ec3a-47b2-ac9d-0b157156b71b" action="return">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="vlanId">
+                    <description>VLAN ID to manipulate</description>
+                </item>
+                <item name="portNumber">
+                    <description>Port number to add/remove to/from VLAN</description>
+                </item>
+                <item name="tagging">
+                    <description>tagged or untagged</description>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+    <eventHandlers>
+        <item name="OnFailTestAction">
+            <item actionId="ExitExecution">
+                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+            </item>
+        </item>
+    </eventHandlers>
+</testCase>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.1.0</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Layer 2 Switch</interface> 
+    <supportCustomArguments></supportCustomArguments>
+    <entryPoint>hp-procurve-1.1.0.fftc</entryPoint>
+    <resourceProperties>
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>        
+        <property optional="false">
+            <name>ssh_username</name>
+            <description></description>
+        </property>	        
+        <property optional="false">
+            <name>ssh_password</name>
+            <description></description>
+        </property>
+    </resourceProperties>
+</resourceDriver>
