@@ -1,10 +1,5 @@
-# HP Device Project
-Provides basic commands for management of HP servers.
-<b>Tags:</b> Management
-
-1 QuickCall Library in project://ri_hp_5900:
-## project://ri_hp_5900/session_profiles/hp_5900_ssh_qc.fftc (project://ri_hp_5900/session_profiles/hp_5900_ssh_qc.fftc)
-
+1 QuickCall Library in project://ri_hp_5900
+## Library: project://ri_hp_5900/session_profiles/hp_5900_ssh_qc.fftc
 ### addPortToVlan
 
 Argument | Description
@@ -44,9 +39,9 @@ bridgeAggNum | an integer
 
 Argument | Description
 ------------ | -------------
-bagNum | Number of bridge aggregate group to create
+bagNum | Number of bridge aggregate group to create<br>
 ### disableBridgeAggregate
 
 Argument | Description
 ------------ | -------------
-bagNum | Number of bridge aggregate group to shutdown
+bagNum | Number of bridge aggregate group to shutdown<br>

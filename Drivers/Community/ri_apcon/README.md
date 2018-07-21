@@ -1,13 +1,39 @@
-# Apcon Layer1 device driver
-Provides basic commands for management of Apcon Layer1.
+2 QuickCall Libraries in project://ri_apcon
+1 Procedure Library in project://ri_apcon
+## Library: project://ri_apcon/session_profiles/process_ref_qc.fftc
+### ping
+Determines if device is online. Returns "online", "offline" or "error".
 
-Project: Apcon Layer1
-Description: Layer1 Apcon driver. This driver will connect layer 1 connections as well as discover the Layer1 ports.
+Argument | Description
+------------ | -------------
+host | IP or Hostname to ping
+## Library: project://ri_apcon/session_profiles/ssh_ref_qc.fftc
+## Library: project://ri_apcon/drivers/library.fftc
+## Headline: Library Procedures
+Description:  
+THis is the supporting APCON procedure library  
+  
+### displayInfoMsg
 
+Argument | Description
+------------ | -------------
+msg | The execution message to display.
+### abortExecution
 
-Category: driver
-Class: driver
+Argument | Description
+------------ | -------------
+msg | The execution message to display.
+### getDeviceHost
+### validateRequiredProperties
 
+Argument | Description
+------------ | -------------
+propNameList | List of property names to validate
+### getPortItemList
+### getPortItem
 
-<b>Tags:</b> Layer1
-
+Argument | Description
+------------ | -------------
+portName | 
+portStatus | 
+portContainer | 

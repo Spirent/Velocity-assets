@@ -1,10 +1,5 @@
-# F5 Device Project
-Provides basic commands for management of F5 equipment.
-<b>Tags:</b> Management
-
-2 QuickCall Libraries in project://ri_f5:
-## project://ri_f5/session_profiles/big_ip_base_qc.fftc (project://ri_f5/session_profiles/big_ip_base_qc.fftc)
-
+2 QuickCall Libraries in project://ri_f5
+## Library: project://ri_f5/session_profiles/big_ip_base_qc.fftc
 ### getActiveVersion
 This quickcall returns a JSON value corresponding to the version of the active image on the BigIP.
 ### getInterfaces
@@ -33,8 +28,7 @@ Argument | Description
 vlanName | Name of VLAN to remove.
 ### getFirstActivePort
 getFirstActivePort returns the name of the first port with the status of "up"
-## project://ri_f5/session_profiles/big_ip_chassis_qc.fftc (project://ri_f5/session_profiles/big_ip_chassis_qc.fftc)
-
+## Library: project://ri_f5/session_profiles/big_ip_chassis_qc.fftc
 ### setVlan
 setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values
 
