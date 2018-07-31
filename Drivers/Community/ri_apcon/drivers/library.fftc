@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<testCase version="7.0.1.201802131446">
+<testCase version="7.1.0.201804110601">
     <general>
         <documentation>Library Procedures</documentation>
-        <notes>THis is the supporting APCON procedure library</notes>
+        <notes>This is the supporting APCON procedure library</notes>
         <owner>David Parsons</owner>
         <isProcedureLibrary>true</isProcedureLibrary>
     </general>
@@ -214,6 +214,7 @@
             </steps>
         </item>
         <item name="displayInfoMsg" isPublic="true">
+            <description>Display Info msg</description>
             <steps>
                 <item guid="986fca00-b5ca-4ab9-9a8d-997f98a20882" action="comment">
                     <command>
@@ -245,6 +246,7 @@
             </arguments>
         </item>
         <item name="abortExecution" isPublic="true">
+            <description>Abort Execution</description>
             <steps>
                 <item guid="e765ea5d-adea-4561-a3b9-aebffd13aaf8" action="comment">
                     <command>
@@ -289,6 +291,7 @@
             </arguments>
         </item>
         <item name="getDeviceHost" isPublic="true">
+            <description>Get the Resource host</description>
             <steps>
                 <item guid="4a7b0bc1-0566-44ae-9892-334c1c70a6da" action="comment">
                     <command>
@@ -408,8 +411,14 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <multilineDescription>First look for property ipAddress. If ipAddress is not defined, look for a value in the Hostname property. If neither is defined, return Error.
+
+Properties:
+ipAddress
+Hostname</multilineDescription>
         </item>
         <item name="validateRequiredProperties" isPublic="true">
+            <description>Validate required properties</description>
             <steps>
                 <item guid="8ab1230a-f757-44be-bdf4-641efb28022a" action="comment">
                     <command>
@@ -495,6 +504,7 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <multilineDescription>Ensure all the  specified properties are available and have values</multilineDescription>
             <arguments>
                 <item name="propNameList">
                     <description>List of property names to validate</description>
@@ -503,6 +513,7 @@
             </arguments>
         </item>
         <item name="getPortItemList" isPublic="true">
+            <description>Simulate some ports to test getPortItem</description>
             <steps>
                 <item guid="6f935c83-2c40-4e6d-a7dc-cd44e03c737b" action="comment">
                     <command>
@@ -595,6 +606,7 @@
             </steps>
         </item>
         <item name="getPortItem" isPublic="true" isVBlock="true">
+            <description>Return port info</description>
             <steps>
                 <item guid="10349ec8-23e9-4943-9eb8-fa591225e65d" action="eval">
                     <command>
@@ -669,6 +681,7 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <multilineDescription>Return JSON formatted information.</multilineDescription>
             <arguments>
                 <item name="portName">
                     <isMandatory>true</isMandatory>
