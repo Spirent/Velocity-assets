@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
-<testCase version="7.0.1.201802131446">
+<testCase version="7.1.0.201804110601">
     <general>
         <documentation>Apcon Driver for Velocity</documentation>
         <notes>This driver was developed and tested on a multi Blade APCON Layer 1 switch.  It will discover the ports and successfuly connect between end points</notes>
         <owner>David Parsons</owner>
+        <isProcedureLibrary>true</isProcedureLibrary>
     </general>
     <procedures>
         <item name="main">
@@ -275,6 +276,7 @@
             </steps>
         </item>
         <item name="getPorts" isVBlock="true">
+            <description>Device Status and Port Status/Info</description>
             <steps>
                 <item guid="939e0e38-74ee-4237-88cb-06067f707226" action="comment">
                     <command>
@@ -351,6 +353,9 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <multilineDescription>Returns information about device ports and their properties.
+
+This method is also used to determine whether the device is online. If this call ends up with an error, the device is considered offline. Otherwise, the device is considered online.</multilineDescription>
             <arguments>
                 <item name="host">
                     <description>IP or hostname of the device</description>
@@ -360,6 +365,7 @@
             <response>{&quot;ports&quot;:[{&quot;name&quot;:&quot;port1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;Tray1/Slot1&quot;},{&quot;name&quot;:&quot;port1&quot;,&quot;status&quot;:&quot;value&quot;,&quot;container&quot;:&quot;Tray1/Slot1&quot;}]}</response>
         </item>
         <item name="getProperties" isVBlock="true">
+            <description>Device Properties</description>
             <steps>
                 <item guid="4c1ebe07-b43e-4d00-92aa-19b99490cc49" action="comment">
                     <command>
@@ -558,6 +564,10 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <multilineDescription>Returns available properties of the device. Each property has name and value.
+
+parameters:
+1. arg1 ports - If true, getPorts output will also be included into returned JSON</multilineDescription>
             <arguments>
                 <item name="host">
                     <description>IP or hostname of the device</description>
@@ -567,6 +577,7 @@
             <response>{&quot;properties&quot;:{&quot;Make&quot;:&quot;Spirent Communications Inc.&quot;,&quot;Model&quot;:&quot;M100&quot;,&quot;Hostname&quot;:&quot;DEVICE_HOSTNAME&quot;},&quot;ports&quot;:[{&quot;name&quot;:&quot;port1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;tray1/slot1&quot;}]}</response>
         </item>
         <item name="connect">
+            <description>Connect Ports</description>
             <steps>
                 <item guid="e5d40b9d-b08b-4b0a-87dc-93e9f4212cb2" action="eval">
                     <command>
@@ -692,14 +703,24 @@
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
             </steps>
+            <multilineDescription>Creates a connection between the specified ports: &quot;first port to/bidir second port&quot;.
+Does nothing if the connection already exists.
+
+Parameters: 
+arg1 - first port name
+arg2 - second port name
+arg3 - connection type: to, bidir</multilineDescription>
             <arguments>
                 <item name="host">
-                    <description>IP or hostname of the device</description>
+                    <description>IP or hostname of the device
+
+</description>
                     <isMandatory>true</isMandatory>
                 </item>
             </arguments>
         </item>
         <item name="disconnect">
+            <description>Disconnect Ports</description>
             <steps>
                 <item guid="fd47598f-d6fd-407a-a26b-c31c1ceba945" action="eval">
                     <command>
@@ -779,6 +800,13 @@
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
             </steps>
+            <multilineDescription>Destroys connection between the specified ports.
+Does nothing if the connection does not exist.
+
+Parameters: 
+arg1 - first port name
+arg2 - second port name
+arg3 - connection type: to, bidir</multilineDescription>
             <arguments>
                 <item name="host">
                     <description>IP or hostname of the device</description>
@@ -796,6 +824,9 @@
                     <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <multilineDescription>Returns a list of all currently connected ports
+
+Parameters: none</multilineDescription>
             <arguments>
                 <item name="host">
                     <description>IP or hostname of the device</description>

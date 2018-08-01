@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-<testCase version="5.4.0.4f90e5a">
+<testCase version="7.1.0.201804110601">
     <general>
+        <documentation>Process QuickCall library</documentation>
+        <notes>Currently used for ping.</notes>
         <sessionClass includeTestCase="true" sessionType="process_ref.ffsp"/>
     </general>
     <procedures>
@@ -205,6 +207,7 @@
             </steps>
         </item>
         <item name="ping" isPublic="true">
+            <description>Ping device</description>
             <steps>
                 <item guid="98f19dab-fb83-4dcb-9ae2-039c2c479a50" action="eval">
                     <command>

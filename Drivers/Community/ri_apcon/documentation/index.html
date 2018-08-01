@@ -11,9 +11,13 @@ H1,H2{padding-left:15px}
 .header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
 </style>
 <BR><DIV class='normalText'>2 QuickCall Libraries in project://ri_apcon</DIV>
-<BR><DIV class='normalText'>1 Procedure Library in project://ri_apcon</DIV>
+<BR><DIV class='normalText'>2 Procedure Libraries in project://ri_apcon</DIV>
 <br>
 <DIV class='header2Text'>Library: project://ri_apcon/session_profiles/process_ref_qc.fftc</DIV>
+<DIV class='header3Text'>Headline: Process QuickCall library</DIV>
+<DIV class='header3Text'>Description:<br>
+Currently used for ping. <br>
+</DIV>
 <br>
 <DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>ping</DIV>
 <DIV class='procText'>Determines if device is online. Returns "online", "offline" or "error".</DIV><BR>
@@ -27,13 +31,89 @@ H1,H2{padding-left:15px}
 <br>
 <br>
 <DIV class='header2Text'>Library: project://ri_apcon/session_profiles/ssh_ref_qc.fftc</DIV>
+<DIV class='header3Text'>Headline: SSH QuickCall Library</DIV>
+<DIV class='header3Text'>Description:<br>
+Just a placeholder for now. <br>
+</DIV>
 <br>
+<br>
+<br>
+<DIV class='header2Text'>Library: project://ri_apcon/drivers/apcon-driver.fftc</DIV>
+<DIV class='header3Text'>Headline: Apcon Driver for Velocity</DIV>
+<DIV class='header3Text'>Description:<br>
+This driver was developed and tested on a multi Blade APCON Layer 1 switch.  It will discover the ports and successfuly connect between end points <br>
+</DIV>
+<br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getPorts</DIV>
+<DIV class='procText'>Returns information about device ports and their properties.
+
+This method is also used to determine whether the device is online. If this call ends up with an error, the device is considered offline. Otherwise, the device is considered online.</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>host</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>IP or hostname of the device</TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getProperties</DIV>
+<DIV class='procText'>Returns available properties of the device. Each property has name and value.
+
+parameters:
+1. arg1 ports - If true, getPorts output will also be included into returned JSON</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>host</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>IP or hostname of the device</TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>connect</DIV>
+<DIV class='procText'>Creates a connection between the specified ports: "first port to/bidir second port".
+Does nothing if the connection already exists.
+
+Parameters: 
+arg1 - first port name
+arg2 - second port name
+arg3 - connection type: to, bidir</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>host</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>IP or hostname of the device<br><br></TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>disconnect</DIV>
+<DIV class='procText'>Destroys connection between the specified ports.
+Does nothing if the connection does not exist.
+
+Parameters: 
+arg1 - first port name
+arg2 - second port name
+arg3 - connection type: to, bidir</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>host</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>IP or hostname of the device</TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getConnections</DIV>
+<DIV class='procText'>Returns a list of all currently connected ports
+
+Parameters: none</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>host</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>IP or hostname of the device</TD>
+</TR>
+</TABLE></DIV><br>
 <br>
 <br>
 <DIV class='header2Text'>Library: project://ri_apcon/drivers/library.fftc</DIV>
 <DIV class='header3Text'>Headline: Library Procedures</DIV>
 <DIV class='header3Text'>Description:<br>
-THis is the supporting APCON procedure library <br>
+This is the supporting APCON procedure library <br>
 </DIV>
 <br>
 <DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>displayInfoMsg</DIV>
@@ -55,9 +135,13 @@ THis is the supporting APCON procedure library <br>
 </TR>
 </TABLE></DIV><br>
 <DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getDeviceHost</DIV>
-<DIV class='procText'></DIV><BR>
+<DIV class='procText'>First look for property ipAddress. If ipAddress is not defined, look for a value in the Hostname property. If neither is defined, return Error.
+
+Properties:
+ipAddress
+Hostname</DIV><BR>
 <DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>validateRequiredProperties</DIV>
-<DIV class='procText'></DIV><BR>
+<DIV class='procText'>Ensure all the  specified properties are available and have values</DIV><BR>
 <DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
 <TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
 <TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
@@ -68,7 +152,7 @@ THis is the supporting APCON procedure library <br>
 <DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getPortItemList</DIV>
 <DIV class='procText'></DIV><BR>
 <DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getPortItem</DIV>
-<DIV class='procText'></DIV><BR>
+<DIV class='procText'>Return JSON formatted information.</DIV><BR>
 <DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
 <TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
 <TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>

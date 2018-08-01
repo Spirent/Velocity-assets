@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-<testCase version="5.4.0.4f90e5a">
+<testCase version="7.1.0.201804110601">
     <general>
+        <documentation>SSH QuickCall Library</documentation>
+        <notes>Just a placeholder for now.</notes>
         <sessionClass includeTestCase="true" sessionType="ssh_ref.ffsp"/>
     </general>
     <procedures>
