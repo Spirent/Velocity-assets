@@ -1,25 +1,15 @@
-### Project Information:
-Project: Apcon  
-Description: Velocity driver for IntellaPatch switch, tested with ACI-3030-E32-7 32 Port 1/10/40G Aggregation & Filtering Blade  
-Category: drivers  
-Class: Community  
-  
-___
 2 QuickCall Libraries in project://ri_apcon
 1 Procedure Library in project://ri_apcon
-### Library: project://ri_apcon/session_profiles/process_ref_qc.fftc
-___
+## Library: project://ri_apcon/session_profiles/process_ref_qc.fftc
 ### ping
 Determines if device is online. Returns "online", "offline" or "error".
 
 Argument | Description
 ------------ | -------------
 host | IP or Hostname to ping
-### Library: project://ri_apcon/session_profiles/ssh_ref_qc.fftc
-___
-### Library: project://ri_apcon/drivers/library.fftc
-___
-Headline: Library Procedures
+## Library: project://ri_apcon/session_profiles/ssh_ref_qc.fftc
+## Library: project://ri_apcon/drivers/library.fftc
+## Headline: Library Procedures
 Description:  
 THis is the supporting APCON procedure library  
   
