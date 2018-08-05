@@ -1,5 +1,12 @@
-1 QuickCall Library in project://ri_hp_5900
-## Library: project://ri_hp_5900/session_profiles/hp_5900_ssh_qc.fftc
+### Project Information:
+HP Device Project  
+Provides basic commands for management of HP servers.  
+<b>Tags:</b> Management  
+  
+___
+### 1 QuickCall Library in project://ri_hp_5900
+### Library: project://ri_hp_5900/session_profiles/hp_5900_ssh_qc.fftc
+___
 ### addPortToVlan
 
 Argument | Description

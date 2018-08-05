@@ -1,6 +1,13 @@
-1 QuickCall Library in project://ri_l1_bigswitch
+### Project Information:
+BigSwitch L1 Driver  
+Provides basic commands for management of BigSwitch L1 switches.   
+<b>Tags:</b> L1  
+  
+___
+### 1 QuickCall Library in project://ri_l1_bigswitch
 1 Procedure Library in project://ri_l1_bigswitch
-## Library: project://ri_l1_bigswitch/session_profiles/big_switch_ssh_base.fftc
+### Library: project://ri_l1_bigswitch/session_profiles/big_switch_ssh_base.fftc
+___
 ### connect
 
 Argument | Description
@@ -39,8 +46,9 @@ Argument | Description
 port1 | 
 port2 | 
 switch_id | 
-## Library: project://ri_l1_bigswitch/test_cases/driver.fftc
-## Headline: BigSwitch L1 Switch Driver
+### Library: project://ri_l1_bigswitch/test_cases/driver.fftc
+___
+Headline: BigSwitch L1 Switch Driver
 Description:  
 How it works.  
   

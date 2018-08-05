@@ -1,5 +1,12 @@
-1 QuickCall Library in project://ri_arista
-## Library: project://ri_arista/session_profiles/arista_base_qc.fftc
+### Project Information:
+Arista L1 Driver  
+Provides basic commands for management of Arista L2 switches.   
+<b>Tags:</b> L1  
+  
+___
+### 1 QuickCall Library in project://ri_arista
+### Library: project://ri_arista/session_profiles/arista_base_qc.fftc
+___
 ### getInterfaces
 ### addPortToVlan
 
