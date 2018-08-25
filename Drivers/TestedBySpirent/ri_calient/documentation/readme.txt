@@ -1,3 +1,9 @@
+Project: Calient
+Description: This is the default driver for Calient switches. The driver package contains the manifest file and
+	a single test case.
+Category: driver|task|dashboard
+Class: Community
+
 Calient driver
 
 This is the default driver for Calient switches. The driver package contains the manifest file and

@@ -1,4 +1,8 @@
-NetScout driver
+Project: NetScout driver
+Description: This is the default driver for NetScout (OnPath) switches. The driver package contains the
+	manifest file and a single test case.
+Category: driver
+Class: Community
 
 This is the default driver for NetScout (OnPath) switches. The driver package contains the
 manifest file and a single test case.

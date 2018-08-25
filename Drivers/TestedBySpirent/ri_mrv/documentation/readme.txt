@@ -1,4 +1,7 @@
-MRV driver
+Project: MRV driver
+Description: This is the default driver for MRV switches.
+Category: driver
+Class: TestedBySpirent
 
 This is the default driver for MRV switches. The driver package contains the manifest file
 and a single test case. We encourage you to use the test case's structure (main procedures
