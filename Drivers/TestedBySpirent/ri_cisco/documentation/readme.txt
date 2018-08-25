@@ -1,3 +1,8 @@
+Project: Cisco driver
+Description: This default Cisco driver works for Cisco Catalyst 3550, 3750, 2960
+Category: driver
+Class: TestedBySpirent
+
 Cisco driver
 
 This default Cisco driver works for Cisco Catalyst 3550. Its structure is very similar to MRV,

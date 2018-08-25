@@ -1,3 +1,9 @@
+Project: Velocity Linux Management Driver
+Description: Velocity Linux Management Driver
+Category: driver
+Class: Community
+Tags: Driver, Management
+
 Velocity Linux Management Driver
 
 ## Requirements
@@ -43,5 +49,3 @@ Discover the switch's ports
 1.0.0 Initial release
 
 1.0.1 renamed structures from returnJson to returnDictionary to be more accurate
-
-<b>Tags:</b> Driver, Management

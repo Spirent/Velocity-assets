@@ -1,3 +1,9 @@
+Project: ks_Example-PassFail-Dashboard
+Description: ks_Example-PassFail-Dashboard
+Category: dashboard
+Class: Community
+Tags: Execution
+
 Sample Test Execution Dashboard
 Based on pass/fail of test executions.
 Contains the following visualizations:
@@ -8,5 +14,3 @@ Contains the following visualizations:
 Requires index with name “*report*”
 
 
-
-<b>Tags:</b> Execution 

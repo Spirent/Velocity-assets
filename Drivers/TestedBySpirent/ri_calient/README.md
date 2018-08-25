@@ -27,7 +27,7 @@ This driver requires the following to be configured on the Calient switch:
   
 ___
 By default, an ssh user named “tl1user” exists on the Calient switch as a factory  
-default, and this ssh user can be used for the driver’s “username” property. This  
+default, and this ssh user can be used for the driver's “username” property. This  
 account requires no password by default, so the “password” property can remain  
 blank.  
 * A TL1 user account with provisioning access (the “calientUsername” property)  
@@ -46,7 +46,7 @@ Below is a procedure to ensure that the Calient is ready to be managed by the Ve
 ___
 SSH to the Calient using syntax like: ssh tl1user@10.140.64.30  
 * Where tl1user is the ssh username to be used as the “username” property  
-* Where the IP address is the Calient’s IP address or hostname  
+* Where the IP address is the Calient's IP address or hostname  
 * If necessary, type a password for ssh access (the “password” property)  
 * If this step is successful, the agent> prompt should appear in the terminal  
 * Activate the user in TL1 with syntax like: act-user::admin:::pxc***  

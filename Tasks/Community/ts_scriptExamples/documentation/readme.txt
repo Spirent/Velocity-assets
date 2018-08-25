@@ -1,4 +1,9 @@
-scriptExamples.zip
+Project: Script Examples
+Description: This project contains a set of example Python and Bash scripts that may be
+	helpful to users starting to run external scripts within Velocity. Here is a
+	brief description of its contents
+Category: task
+Class: Community
 
 This project contains a set of example Python and Bash scripts that may be
 helpful to users starting to run external scripts within Velocity. Here is a

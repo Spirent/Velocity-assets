@@ -1,3 +1,8 @@
+Project: Velocity Linux Bridge L2 Switch Driver
+Description: Velocity Linux Bridge L2 Switch Driver
+Category: driver
+Class: Community
+
 Velocity Linux Bridge L2 Switch Driver
 
 ## Requirements

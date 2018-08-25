@@ -1,3 +1,8 @@
+Project: Velocity Ansible Configurable Driver for Linux
+Description: This is a Velocity reference driver that implements an example Ansible driver in Velocity.
+Category: driver
+Class: Reference
+
 Velocity Ansible Configurable Driver for Linux
 This is a Velocity reference driver that implements an example Ansible driver in Velocity.
 
