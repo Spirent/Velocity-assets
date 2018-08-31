@@ -1,5 +1,5 @@
 Project: Velocity Linux Management Driver
-Description: Velocity Linux Management Driver
+Description: Python driver for Velocity that manages a Linux server
 Category: driver
 Class: Community
 Tags: Driver, Management

@@ -1,5 +1,5 @@
 Project: Emulated L1 Driver
-Description: Model a device called "Emulated L1 Switch" using the MRV template, associate it with this driver
+Description: A NOOP L1 driver useful for testing and validation purposes.
 Category: driver
 Class: Community
 Tags: Driver, Emulated, L1

@@ -1,5 +1,5 @@
-Project: ks_Example-PassFail-Dashboard
-Description: ks_Example-PassFail-Dashboard
+Project: Testcase PassFail Dashboard
+Description: Example Kibana dashboard that displays testcase execution metrics
 Category: dashboard
 Class: Community
 Tags: Execution
