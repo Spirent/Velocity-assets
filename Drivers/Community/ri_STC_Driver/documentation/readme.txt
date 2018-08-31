@@ -1,5 +1,5 @@
 Project: Spirent Test Center Management Driver
-Description:
+Description: STC management driver supporting discovery and online check
 Category: driver
 Class: Community
 Tags: Test Equipment, Traffic Generator

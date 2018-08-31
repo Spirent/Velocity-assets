@@ -1,5 +1,5 @@
-Project: iTest Ping Driver
-Description: Check if device is online using management interface
+Project: Simple Online Driver
+Description: Check if device is online using management interface and ICMP
 Category: driver
 Class: Community
 Tags: Driver, Management
