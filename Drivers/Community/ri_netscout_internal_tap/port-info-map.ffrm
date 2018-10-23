@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.1.0.77511">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>SHOW PORT INFO *</body>
+                </command>
+            </action>
+            <responseBody>
+Port summary for switch 3901:
+
+Phys Addr  Status         Name                     Lock*  Tx Pwr(dBm)  Rx Pwr(dBm)  Speed    Protocol 
+---------  -------------  -----------------------  -----  -----------  -----------  -------  ---------
+01.01.01   Connected      01.01.01                        Not Present  Not Present  10000    Ethernet
+01.01.02   Connected      01.01.02                        Not Present  Not Present  10000    Ethernet
+01.01.03   Not Connected  01.01.03                        Not Present  Not Present  10000    Ethernet
+01.01.04   Not Connected  01.01.04                        Not Present  Not Present  10000    Ethernet
+01.01.05   Not Connected  01.01.05                        Not Present  Not Present  10000    Ethernet
+01.01.06   Not Connected  01.01.06                        Not Present  Not Present  10000    Ethernet
+01.01.07   Not Connected  01.01.07                        Not Present  Not Present  10000    Ethernet
+01.01.08   Not Connected  01.01.08                        Not Present  Not Present  10000    Ethernet
+01.01.09   Not Connected  01.01.09                        Not Present  Not Present  10000    Ethernet
+01.01.10   Not Connected  01.01.10                        Not Present  Not Present  10000    Ethernet
+01.01.11   Not Connected  01.01.11                        Not Present  Not Present  10000    Ethernet
+01.01.12   Not Connected  01.01.12                        Not Present  Not Present  10000    Ethernet
+01.01.13   Not Connected  01.01.13                        Not Present  Not Present  10000    Ethernet
+01.01.14   Not Connected  01.01.14                        Not Present  Not Present  10000    Ethernet
+01.01.15   Not Connected  01.01.15                        Not Present  Not Present  10000    Ethernet
+01.01.16   Not Connected  01.01.16                        Not Present  Not Present  10000    Ethernet
+01.01.17   Not Connected  01.01.17                        Not Present  Not Present  10000    Ethernet
+01.01.18   Not Connected  01.01.18                        Not Present  Not Present  10000    Ethernet
+01.01.19   Not Connected  01.01.19                        Not Present  Not Present  10000    Ethernet
+01.01.20   Not Connected  01.01.20                        Not Present  Not Present  10000    Ethernet
+01.01.21   Not Connected  01.01.21                        Not Present  Not Present  10000    Ethernet
+01.01.22   Not Connected  01.01.22                        Not Present  Not Present  10000    Ethernet
+01.01.23   Not Connected  01.01.23                        Not Present  Not Present  10000    Ethernet
+01.01.24   Not Connected  01.01.24                        Not Present  Not Present  10000    Ethernet
+01.01.25   Not Connected  01.01.25                        Not Present  Not Present  10000    Ethernet
+01.01.26   Not Connected  01.01.26                        Not Present  Not Present  1000     Ethernet
+01.01.27   Not Connected  01.01.27                        Not Present  Not Present  10000    Ethernet
+01.01.28   Not Connected  01.01.28                        Not Present  Not Present  10000    Ethernet
+01.01.29   Not Connected  01.01.29                        Not Present  Not Present  1000     Ethernet
+01.01.30   Not Connected  01.01.30                        Not Present  Not Present  1000     Ethernet
+01.01.31   Not Connected  01.01.31                        Not Present  Not Present  10000    Ethernet
+01.01.32   Not Connected  01.01.32                        Not Present  Not Present  10000    Ethernet
+01.01.33   Not Connected  01.01.33                        Not Present  Not Present  10000    Ethernet
+01.01.34   Not Connected  01.01.34                        Not Present  Not Present  10000    Ethernet
+01.01.35   Not Connected  01.01.35                        Not Present  Not Present  10000    Ethernet
+01.01.36   Not Connected  01.01.36                        Not Present  Not Present  10000    Ethernet
+01.01.37   Not Connected  01.01.37                        Not Present  Not Present  10000    Ethernet
+01.01.38   Not Connected  01.01.38                        Not Present  Not Present  10000    Ethernet
+01.01.39   Not Connected  01.01.39                        Not Present  Not Present  10000    Ethernet
+01.01.40   Not Connected  01.01.40                        Not Present  Not Present  10000    Ethernet
+01.01.41   Not Connected  01.01.41                        Not Present  Not Present  10000    Ethernet
+01.01.42   Not Connected  01.01.42                        Not Present  Not Present  10000    Ethernet
+01.01.43   Not Connected  01.01.43                        Not Present  Not Present  10000    Ethernet
+01.01.44   Not Connected  01.01.44                        Not Present  Not Present  10000    Ethernet
+01.01.45   Not Connected  01.01.45                        Not Present  Not Present  10000    Ethernet
+01.01.46   Not Connected  01.01.46                        Not Present  Not Present  10000    Ethernet
+01.01.47   Not Connected  01.01.47                        Not Present  Not Present  10000    Ethernet
+01.01.48   Not Connected  01.01.48                        Not Present  Not Present  10000    Ethernet
+
+
+Port summary for switch 3903:
+
+Phys Addr  Status         Name                     Lock*  Tx Pwr(dBm)  Rx Pwr(dBm)  Speed    Protocol 
+---------  -------------  -----------------------  -----  -----------  -----------  -------  ---------
+01.01.01   Connected      01.01.01                        Not Present  Not Present  10000    Ethernet
+01.01.02   Connected      01.01.02                        Not Present  Not Present  10000    Ethernet
+01.01.03   Not Connected  01.01.03                        Not Present  Not Present  10000    Ethernet
+01.01.04   Not Connected  01.01.04                        Not Present  Not Present  10000    Ethernet
+01.01.05   Not Connected  01.01.05                        Not Present  Not Present  10000    Ethernet
+01.01.06   Not Connected  01.01.06                        Not Present  Not Present  10000    Ethernet
+01.01.07   Not Connected  01.01.07                        Not Present  Not Present  10000    Ethernet
+01.01.08   Not Connected  01.01.08                        Not Present  Not Present  10000    Ethernet
+01.01.09   Not Connected  01.01.09                        Not Present  Not Present  10000    Ethernet
+01.01.10   Not Connected  01.01.10                        Not Present  Not Present  10000    Ethernet
+01.01.11   Not Connected  01.01.11                        Not Present  Not Present  10000    Ethernet
+01.01.12   Not Connected  01.01.12                        Not Present  Not Present  10000    Ethernet
+01.01.13   Not Connected  01.01.13                        Not Present  Not Present  10000    Ethernet
+01.01.14   Not Connected  01.01.14                        Not Present  Not Present  10000    Ethernet
+01.01.15   Not Connected  01.01.15                        Not Present  Not Present  10000    Ethernet
+01.01.16   Not Connected  01.01.16                        Not Present  Not Present  10000    Ethernet
+01.01.17   Not Connected  01.01.17                        Not Present  Not Present  10000    Ethernet
+01.01.18   Not Connected  01.01.18                        Not Present  Not Present  10000    Ethernet
+01.01.19   Not Connected  01.01.19                        Not Present  Not Present  10000    Ethernet
+01.01.20   Not Connected  01.01.20                        Not Present  Not Present  10000    Ethernet
+01.01.21   Not Connected  01.01.21                        Not Present  Not Present  10000    Ethernet
+01.01.22   Not Connected  01.01.22                        Not Present  Not Present  10000    Ethernet
+01.01.23   Not Connected  01.01.23                        Not Present  Not Present  10000    Ethernet
+01.01.24   Not Connected  01.01.24                        Not Present  Not Present  10000    Ethernet
+01.01.25   Not Connected  01.01.25                        Not Present  Not Present  10000    Ethernet
+01.01.26   Not Connected  01.01.26                        Not Present  Not Present  1000     Ethernet
+01.01.27   Not Connected  01.01.27                        Not Present  Not Present  10000    Ethernet
+01.01.28   Not Connected  01.01.28                        Not Present  Not Present  10000    Ethernet
+01.01.29   Not Connected  01.01.29                        Not Present  Not Present  1000     Ethernet
+01.01.30   Not Connected  01.01.30                        Not Present  Not Present  1000     Ethernet
+01.01.31   Not Connected  01.01.31                        Not Present  Not Present  10000    Ethernet
+01.01.32   Not Connected  01.01.32                        Not Present  Not Present  10000    Ethernet
+01.01.33   Not Connected  01.01.33                        Not Present  Not Present  10000    Ethernet
+01.01.34   Not Connected  01.01.34                        Not Present  Not Present  10000    Ethernet
+01.01.35   Not Connected  01.01.35                        Not Present  Not Present  10000    Ethernet
+01.01.36   Not Connected  01.01.36                        Not Present  Not Present  10000    Ethernet
+01.01.37   Not Connected  01.01.37                        Not Present  Not Present  10000    Ethernet
+01.01.38   Not Connected  01.01.38                        Not Present  Not Present  10000    Ethernet
+01.01.39   Not Connected  01.01.39                        Not Present  Not Present  10000    Ethernet
+01.01.40   Not Connected  01.01.40                        Not Present  Not Present  10000    Ethernet
+01.01.41   Not Connected  01.01.41                        Not Present  Not Present  10000    Ethernet
+01.01.42   Not Connected  01.01.42                        Not Present  Not Present  10000    Ethernet
+01.01.43   Not Connected  01.01.43                        Not Present  Not Present  10000    Ethernet
+01.01.44   Not Connected  01.01.44                        Not Present  Not Present  10000    Ethernet
+01.01.45   Not Connected  01.01.45                        Not Present  Not Present  10000    Ethernet
+01.01.46   Not Connected  01.01.46                        Not Present  Not Present  10000    Ethernet
+01.01.47   Not Connected  01.01.47                        Not Present  Not Present  10000    Ethernet
+01.01.48   Not Connected  01.01.48                        Not Present  Not Present  10000    Ethernet</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;prompt&gt;=&amp;gt; &lt;/prompt&gt;
+    &lt;echo&gt;SHOW PORT INFO *&lt;/echo&gt;
+    &lt;promptName&gt;onPathPrompt&lt;/promptName&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+            </aliases>
+            <duration>3.1</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="ports">
+                    <additionalBannerLineCount>1</additionalBannerLineCount>
+                    <startingLineNumber>4</startingLineNumber>
+                    <banner>Phys Addr  Status         Name                     Lock*  Tx Pwr(dBm)  Rx Pwr(dBm)  Speed    Protocol </banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <columnBoundaries>Positional</columnBoundaries>
+                    <rowHeadings>Tag</rowHeadings>
+                    <minOccurences>0</minOccurences>
+                    <columns>
+                        <item name="PhysAddr">
+                            <width>11</width>
+                        </item>
+                        <item name="Status">
+                            <width>15</width>
+                        </item>
+                        <item name="Name">
+                            <width>25</width>
+                        </item>
+                        <item name="Lock">
+                            <width>7</width>
+                        </item>
+                        <item name="TxPwr">
+                            <width>13</width>
+                        </item>
+                        <item name="RxPwr">
+                            <width>13</width>
+                        </item>
+                        <item name="Speed">
+                            <width>9</width>
+                        </item>
+                        <item name="Protocol">
+                            <width>9</width>
+                        </item>
+                    </columns>
+                    <ignoreBlankLines>false</ignoreBlankLines>
+                    <autoUpdateNames>false</autoUpdateNames>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="SHOW PORT INFO .*" matchType="Regex"/>
+</ResponseMap>

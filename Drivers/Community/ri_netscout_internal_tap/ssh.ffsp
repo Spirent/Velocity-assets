@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<SessionTemplate version="5.1.0.77511">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <terminalSizeProperties>
+                <termWidth inherit="false">150</termWidth>
+            </terminalSizeProperties>
+            <prompts merge="true">
+                <item name="onPathPrompt" MatchMethod="WILDCARD">
+                    <Content>=&gt;</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <ipAddress inherit="false">[get deviceHost]</ipAddress>
+        <port inherit="false">[get port]</port>
+        <user inherit="false">[param property_username]</user>
+        <password inherit="false">Hu62+w4ez8VRjpeoxPozxOrYANzZETwjSBzQGhgYreQ=</password>
+    </sessionProperties>
+</SessionTemplate>
