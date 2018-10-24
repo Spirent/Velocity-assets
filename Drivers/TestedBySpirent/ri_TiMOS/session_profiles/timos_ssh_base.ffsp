@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<SessionTemplate version="7.1.0.201804110601">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <captureProperties>
+                <commandCompletionchars inherit="false">
+                    <item>?</item>
+                </commandCompletionchars>
+            </captureProperties>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content>*#</Content>
+                </item>
+                <item name="more_prompt" TypeOfPrompt="MORE">
+                    <Content>Press any key to continue (Q to quit)</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_TiMOS/</responseLibrary>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>
