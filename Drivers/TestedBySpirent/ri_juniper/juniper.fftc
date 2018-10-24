@@ -927,8 +927,9 @@
                                                 </item>
                                             </eventHandlers>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <responseMap>project://di_Juniper_Junos_TBS/response_maps/show_interfaces.ffrm</responseMap>
+                                            <responseMap>response_maps/show_interfaces.ffrm</responseMap>
                                             <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                                            <performResponseMapping>false</performResponseMapping>
                                             <useFieldsInCommand>false</useFieldsInCommand>
                                         </item>
                                     </nestedSteps>
