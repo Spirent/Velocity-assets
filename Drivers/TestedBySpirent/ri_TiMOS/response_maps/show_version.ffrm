@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.1.0.201804110601">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show version</body>
+                </command>
+            </action>
+            <responseBody>TiMOS-B-7.0.R6 both/mpc ALCATEL SAS-D 6F4T ETR 7210 Copyright (c) 2000-2015 Alcatel-Lucent.
+All rights reserved. All use subject to applicable license agreements.
+Built on Sun May 31 10:19:38 IST 2015 by builder in /home/builder/7.0B1/R6/panos/main</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;*A:esw04t2awsccc# &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;show version&lt;/echo&gt;
+        &lt;connClosed/&gt;
+        &lt;idleTime&gt;0.206&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="sw_version">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>0</start>
+                            <end>14</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor0">
+                            <regex>\\s+both/mpc ALCATEL\\s+</regex>
+                            <start>14</start>
+                            <end>32</end>
+                        </item>
+                        <item name="Copyright">
+                            <regex>[^\\r\\n]+</regex>
+                            <start>32</start>
+                            <end>51</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name=".{19}">exactly 19 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\s+Copyright \\(c\\)\\s+</regex>
+                            <start>51</start>
+                            <end>66</end>
+                        </item>
+                        <item name="Alcatel_Lucent">
+                            <regex>\\d+</regex>
+                            <start>66</start>
+                            <end>70</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>-</regex>
+                            <start>70</start>
+                            <end>71</end>
+                        </item>
+                        <item name="group0">
+                            <regex>\\d+</regex>
+                            <start>71</start>
+                            <end>75</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>\\s+Alcatel-Lucent\\.</regex>
+                            <start>75</start>
+                            <end>91</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>TiMOS-B-7.0.R6 both/mpc ALCATEL SAS-D 6F4T ETR 7210 Copyright (c) 2000-2015 Alcatel-Lucent.</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show version"/>
+</ResponseMap>

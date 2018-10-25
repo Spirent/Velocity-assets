@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.1.0.201804110601">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show chassis</body>
+                </command>
+            </action>
+            <responseBody>
+===============================================================================
+Chassis Information
+===============================================================================
+  Name                              : esw04t2awsccc
+  Type                              : 7210 SAS-D 6F4T ETR-1
+  Location                          : 
+  Coordinates                       : 
+  CLLI code                         :            
+  Number of slots                   : 2
+  Number of ports                   : 10
+      System LED state              : Green
+  Over Temperature state            : OK
+  Low Temperature state             : OK
+  Base MAC address                  : 00:25:ba:0f:0a:30
+  Number of MAC addresses           : 16
+  Hardware Data
+    Part number                     : 3HE05676AAAA01
+    CLEI code                       : IPMSW10BRA
+    Serial number                   : NS1133C0235
+    Manufacture date                : 08112011
+    Manufacturing string            : (Not Specified)
+    Manufacturing deviations        : (Not Specified)
+    Manufacturing assembly number   : 
+    Temperature                     : 46C 
+    Time of last boot               : 2000/12/30 16:59:57
+    Current alarm state             : alarm cleared
+-------------------------------------------------------------------------------
+Environment Information
+    Number of fans                  : 0
+
+    Administrative State            : Not Applicable
+    Operational State               : Not Applicable
+-------------------------------------------------------------------------------
+Power Supply Information
+  Number of power supplies          : 1
+  
+  Power supply number               : 1
+    Configured power supply type    : ac single
+    Status                          : up
+    AC power                        : within range
+===============================================================================</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;*A:esw04t2awsccc# &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;show chassis&lt;/echo&gt;
+        &lt;idleTime&gt;2.234&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="colon_auto1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\s+Name\\s+:\\s+</regex>
+                            <start>0</start>
+                            <end>38</end>
+                        </item>
+                        <item name="hostname">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>38</start>
+                            <end>51</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>  Name                              : esw04t2awsccc</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>Type\\s+:\\s+</regex>
+                            <start>0</start>
+                            <end>36</end>
+                        </item>
+                        <item name="Type">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>36</start>
+                            <end>57</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>Type                              : 7210 SAS-D 6F4T ETR-1</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show chassis"/>
+</ResponseMap>

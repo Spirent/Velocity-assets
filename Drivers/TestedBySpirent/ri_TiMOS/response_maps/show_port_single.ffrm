@@ -1,0 +1,728 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.1.0.201804110601">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show port 1/1/1</body>
+                </command>
+            </action>
+            <responseBody>
+===============================================================================
+Ethernet Interface
+===============================================================================
+Description        : To DSW01T2AWSCCC-GI0/4-CableID:8100
+Interface          : 1/1/1                      Oper Speed       : 1 Gbps
+Link-level         : Ethernet                   Config Speed     : 1 Gbps
+Admin State        : up                         Oper Duplex      : full
+Oper State         : up                         Config Duplex    : full
+Oper Grp           : disabled                   Monitor Oper Grp : disabled
+Physical Link      : Yes                        MTU              : 9212
+Single Fiber Mode  : No                         LoopBack Mode    : None
+IfIndex            : 35684352                   Hold time up     : 0 seconds
+Last State Change  : 09/16/2018 09:18:53        Hold time down   : 0 seconds
+Last Cleared Time  : N/A                        DDM Events       : Enabled
+Phys State Chng Cnt: 1                          
+
+Configured Mode    : access                     Encap Type       : QinQ
+Dot1Q Ethertype    : 0x8100                     QinQ Ethertype   : 0x8100
+PBB Ethertype      : 0x88e7                     
+Ing. Pool % Rate   : 100                        Egr. Pool % Rate : 100
+Net. Egr. Queue Pol: default                    Network Qos Pol  : 1
+Egr. Sched. Pol    : default                    Access Egr. Qos *: n/a
+Auto-negotiate     : false                      MDI/MDX          : MDI
+Accounting Policy  : None                       Collect-stats    : Disabled
+Egress Rate        : Default                    Max Burst        : Default
+LACP Tunnel        : Disabled                   DEI Classificati*: Disabled
+
+Uplink             : Yes                        
+Split Horizon Group: (Not Specified)
+Down-when-looped   : Disabled                   Keep-alive       : 10
+Loop Detected      : False                      Retry            : 120
+Use Broadcast Addr : False                      
+
+Sync. Status Msg.  : Disabled                   Rx Quality Level : N/A
+Tx DUS/DNU         : Disabled                   Tx Quality Level : N/A
+SSM Code Type      : sdh
+
+Down On Int. Error : Disabled
+
+CRC Mon SD Thresh  : Disabled                   CRC Mon Window   : 10 seconds
+CRC Mon SF Thresh  : Disabled                   
+
+Configured Address : 00:25:ba:0f:0a:32
+Hardware Address   : 00:25:ba:0f:0a:32
+
+Transceiver Data
+
+Transceiver Type   : SFP
+Model Number       : ALCATEL   3HE00028AA           
+TX Laser Wavelength: 1310 nm                    Diag Capable     : yes
+Connector Code     : LC                         Vendor OUI       : c8:de:51
+Manufacture date   : 2010/06/03                 Media            : Ethernet
+Serial Number      : EOSD8C260149    
+Part Number        : SFP-10-GD       
+Optical Compliance : GIGE-LX 
+Link Length support: 10km for SMF; 550m for OM2 50u MMF; 550m for OM1 62.5u M*
+
+===============================================================================
+Transceiver Digital Diagnostic Monitoring (DDM), Externally Calibrated
+===============================================================================
+                              Value High Alarm  High Warn   Low Warn  Low Alarm
+-------------------------------------------------------------------------------
+Temperature (C)               +83.2    +110.0      +95.0      -42.0      -45.0 
+Supply Voltage (V)             3.26      3.60       3.50       3.05       3.00 
+Tx Bias Current (mA)           26.6      80.0       70.0        3.0        2.0 
+Tx Output Power (dBm)         -7.92     -1.00      -2.00     -10.00     -11.00 
+Rx Optical Power (avg dBm)    -7.45     -3.00      -4.00     -23.01     -23.98 
+===============================================================================
+
+===============================================================================
+Traffic Statistics                    
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+Octets                                         103695693               35063976
+Packets                                          1433788                 448419
+Errors                                                 0                      0
+===============================================================================
+* indicates that the corresponding row element may have been truncated.
+
+===============================================================================
+Port Statistics
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+Unicast Packets                                    93974                 228697
+Multicast Packets                                 942116                      0
+Broadcast Packets                                 397747                 219816
+Discards                                               0                      0
+Unknown Proto Discards                                 0 
+===============================================================================
+
+===============================================================================
+Ethernet-like Medium Statistics
+===============================================================================
+
+Alignment Errors :                   0  Sngl Collisions  :                   0
+FCS Errors       :                   0  Mult Collisions  :                   0
+SQE Test Errors  :                   0  Late Collisions  :                   0
+CSE              :                   0  Excess Collisns  :                   0
+Too long Frames  :                   0  Int MAC Tx Errs  :                   0
+Symbol Errors    :                   0  Int MAC Rx Errs  :                   0
+===============================================================================</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;*A:esw04t2awsccc# &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;connClosed/&gt;
+        &lt;idleTime&gt;3.74&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+        <item name="sample2">
+            <action actionType="command">
+                <command>
+                    <body>show port 1/1/10</body>
+                </command>
+            </action>
+            <responseBody>
+===============================================================================
+Ethernet Interface
+===============================================================================
+Description        : ucpe-media-conversion:dstraub:oct18
+Interface          : 1/1/10                     Oper Speed       : N/A
+Link-level         : Ethernet                   Config Speed     : 1 Gbps
+Admin State        : up                         Oper Duplex      : N/A
+Oper State         : down                       Config Duplex    : full
+Oper Grp           : disabled                   Monitor Oper Grp : disabled
+Physical Link      : No                         MTU              : 9212
+Single Fiber Mode  : No                         LoopBack Mode    : None
+IfIndex            : 35979264                   Hold time up     : 0 seconds
+Last State Change  : 10/18/2018 10:39:35        Hold time down   : 0 seconds
+Last Cleared Time  : N/A                        
+Phys State Chng Cnt: 4                          
+
+Configured Mode    : access                     Encap Type       : null
+Dot1Q Ethertype    : 0x8100                     QinQ Ethertype   : 0x8100
+PBB Ethertype      : 0x88e7                     
+Ing. Pool % Rate   : 100                        Egr. Pool % Rate : 100
+Net. Egr. Queue Pol: default                    Network Qos Pol  : n/a
+Egr. Sched. Pol    : default                    Access Egr. Qos *: 1
+Auto-negotiate     : true                       MDI/MDX          : unknown
+Port-clock         : automatic                  
+Accounting Policy  : None                       Collect-stats    : Disabled
+Egress Rate        : Default                    Max Burst        : Default
+LACP Tunnel        : Disabled                   DEI Classificati*: Disabled
+
+Uplink             : No                         
+Split Horizon Group: (Not Specified)
+Down-when-looped   : Disabled                   Keep-alive       : 10
+Loop Detected      : False                      Retry            : 120
+Use Broadcast Addr : False                      
+
+Sync. Status Msg.  : Disabled                   Rx Quality Level : N/A
+Tx DUS/DNU         : Disabled                   Tx Quality Level : N/A
+SSM Code Type      : sdh              
+
+Down On Int. Error : Disabled
+
+CRC Mon SD Thresh  : Disabled                   CRC Mon Window   : 10 seconds
+CRC Mon SF Thresh  : Disabled                   
+
+Configured Address : 00:25:ba:0f:0a:3b
+Hardware Address   : 00:25:ba:0f:0a:3b
+
+===============================================================================
+Traffic Statistics
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+Octets                                               128                      0
+Packets                                                2                      0
+Errors                                                 0                      0
+===============================================================================
+* indicates that the corresponding row element may have been truncated.
+
+===============================================================================
+Port Statistics
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+Unicast Packets                                        0                      0
+Multicast Packets                                      0                      0
+Broadcast Packets                                      2                      0
+Discards                                               0                      0
+Unknown Proto Discards                                 0 
+===============================================================================
+
+===============================================================================
+Ethernet-like Medium Statistics
+===============================================================================
+
+Alignment Errors :                   0  Sngl Collisions  :                   0
+FCS Errors       :                   0  Mult Collisions  :                   0
+SQE Test Errors  :                   0  Late Collisions  :                   0
+CSE              :                   0  Excess Collisns  :                   0
+Too long Frames  :                   0  Int MAC Tx Errs  :                   0
+Symbol Errors    :                   0  Int MAC Rx Errs  :                   0
+===============================================================================
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;show port 1/1/10 &lt;/echo&gt;
+    &lt;prompt&gt;*A:esw04t2awsccc# &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>5.5</duration>
+        </item>
+        <item name="sample3">
+            <action actionType="command">
+                <command>
+                    <body>show port 1/1/5</body>
+                </command>
+            </action>
+            <responseBody>
+===============================================================================
+Ethernet Interface
+===============================================================================
+Description        : 10/100/Gig Ethernet SFP
+Interface          : 1/1/5                      Oper Speed       : 0 mbps
+Link-level         : Ethernet                   Config Speed     : 1 Gbps
+Admin State        : up                         Oper Duplex      : N/A
+Oper State         : down                       Config Duplex    : full
+Oper Grp           : disabled                   Monitor Oper Grp : disabled
+Physical Link      : No                         MTU              : 1514
+Single Fiber Mode  : No                         LoopBack Mode    : None
+IfIndex            : 35815424                   Hold time up     : 0 seconds
+Last State Change  : 09/16/2018 09:18:09        Hold time down   : 0 seconds
+Last Cleared Time  : N/A                        DDM Events       : Enabled
+Phys State Chng Cnt: 0                          
+
+Configured Mode    : access                     Encap Type       : null
+Dot1Q Ethertype    : 0x8100                     QinQ Ethertype   : 0x8100
+PBB Ethertype      : 0x88e7                     
+Ing. Pool % Rate   : 100                        Egr. Pool % Rate : 100
+Net. Egr. Queue Pol: default                    Network Qos Pol  : n/a
+Egr. Sched. Pol    : default                    Access Egr. Qos *: 1
+Auto-negotiate     : false                      MDI/MDX          : unknown
+Accounting Policy  : None                       Collect-stats    : Disabled
+Egress Rate        : Default                    Max Burst        : Default
+LACP Tunnel        : Disabled                   DEI Classificati*: Disabled
+
+Uplink             : No                         
+Split Horizon Group: (Not Specified)
+Down-when-looped   : Disabled                   Keep-alive       : 10
+Loop Detected      : False                      Retry            : 120
+Use Broadcast Addr : False                      
+
+Sync. Status Msg.  : Disabled                   Rx Quality Level : N/A
+Tx DUS/DNU         : Disabled                   Tx Quality Level : N/A
+SSM Code Type      : sdh
+                                      
+Down On Int. Error : Disabled
+
+CRC Mon SD Thresh  : Disabled                   CRC Mon Window   : 10 seconds
+CRC Mon SF Thresh  : Disabled                   
+
+Configured Address : 00:25:ba:0f:0a:36
+Hardware Address   : 00:25:ba:0f:0a:36
+
+===============================================================================
+Traffic Statistics
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+Octets                                                 0                      0
+Packets                                                0                      0
+Errors                                                 0                      0
+===============================================================================
+* indicates that the corresponding row element may have been truncated.
+                                      
+===============================================================================
+Port Statistics
+===============================================================================
+                                                   Input                 Output
+-------------------------------------------------------------------------------
+Unicast Packets                                        0                      0
+Multicast Packets                                      0                      0
+Broadcast Packets                                      0                      0
+Discards                                               0                      0
+Unknown Proto Discards                                 0 
+===============================================================================
+
+===============================================================================
+Ethernet-like Medium Statistics
+===============================================================================
+
+Alignment Errors :                   0  Sngl Collisions  :                   0
+FCS Errors       :                   0  Mult Collisions  :                   0
+SQE Test Errors  :                   0  Late Collisions  :                   0
+CSE              :                   0  Excess Collisns  :                   0
+Too long Frames  :                   0  Int MAC Tx Errs  :                   0
+Symbol Errors    :                   0  Int MAC Rx Errs  :                   0
+===============================================================================
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;show port 1/1/5 &lt;/echo&gt;
+    &lt;prompt&gt;*A:esw04t2awsccc# &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>7.6</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="link_up">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>Interface\\s+:\\s+</regex>
+                            <start>0</start>
+                            <end>21</end>
+                        </item>
+                        <item name="Interface">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>21</start>
+                            <end>26</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\s+Oper Speed\\s+:\\s+</regex>
+                            <start>26</start>
+                            <end>67</end>
+                        </item>
+                        <item name="Oper_Speed">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>67</start>
+                            <end>68</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>\\s+</regex>
+                            <start>68</start>
+                            <end>69</end>
+                        </item>
+                        <item name="Oper_Speed_Units">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>69</start>
+                            <end>73</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>\\s+Link-level\\s+:\\s+</regex>
+                            <start>73</start>
+                            <end>95</end>
+                        </item>
+                        <item name="Link_level">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>95</start>
+                            <end>103</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor4">
+                            <regex>\\s+Config Speed\\s+:\\s+</regex>
+                            <start>103</start>
+                            <end>141</end>
+                        </item>
+                        <item name="Config_Speed">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>141</start>
+                            <end>142</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor5">
+                            <regex>\\s+</regex>
+                            <start>142</start>
+                            <end>143</end>
+                        </item>
+                        <item name="Config_Speed_Units">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>143</start>
+                            <end>147</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor6">
+                            <regex>\\s+Admin State\\s+:\\s+</regex>
+                            <start>147</start>
+                            <end>169</end>
+                        </item>
+                        <item name="Admin_State">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>169</start>
+                            <end>171</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor7">
+                            <regex>\\s+Oper Duplex\\s+:\\s+</regex>
+                            <start>171</start>
+                            <end>215</end>
+                        </item>
+                        <item name="Oper_Duplex">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>215</start>
+                            <end>219</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor8">
+                            <regex>\\s+Oper State\\s+:\\s+</regex>
+                            <start>219</start>
+                            <end>241</end>
+                        </item>
+                        <item name="Oper_State">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>241</start>
+                            <end>243</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor9">
+                            <regex>\\s+Config Duplex\\s+:\\s+</regex>
+                            <start>243</start>
+                            <end>287</end>
+                        </item>
+                        <item name="Config_Duplex">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>287</start>
+                            <end>291</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>Interface          : 1/1/1                      Oper Speed       : 1 Gbps
+Link-level         : Ethernet                   Config Speed     : 1 Gbps
+Admin State        : up                         Oper Duplex      : full
+Oper State         : up                         Config Duplex    : full</sampleMatch>
+                    <optional>true</optional>
+                </item>
+                <item name="link_down">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>Interface\\s+:\\s+</regex>
+                            <start>0</start>
+                            <end>21</end>
+                        </item>
+                        <item name="Interface">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>21</start>
+                            <end>27</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\s+Oper Speed\\s+:\\s+</regex>
+                            <start>27</start>
+                            <end>67</end>
+                        </item>
+                        <item name="Oper_Speed">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>67</start>
+                            <end>70</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>\\s+Link-level\\s+:\\s+</regex>
+                            <start>70</start>
+                            <end>92</end>
+                        </item>
+                        <item name="Link_level">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>92</start>
+                            <end>100</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>\\s+Config Speed\\s+:\\s+</regex>
+                            <start>100</start>
+                            <end>138</end>
+                        </item>
+                        <item name="Config_Speed">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>138</start>
+                            <end>139</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor4">
+                            <regex>\\s+</regex>
+                            <start>139</start>
+                            <end>140</end>
+                        </item>
+                        <item name="Config_Speed_Units">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>140</start>
+                            <end>144</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor5">
+                            <regex>\\s+Admin State\\s+:\\s+</regex>
+                            <start>144</start>
+                            <end>166</end>
+                        </item>
+                        <item name="Admin_State">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>166</start>
+                            <end>168</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor6">
+                            <regex>\\s+Oper Duplex\\s+:\\s+</regex>
+                            <start>168</start>
+                            <end>212</end>
+                        </item>
+                        <item name="Oper_Duplex">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>212</start>
+                            <end>215</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor7">
+                            <regex>\\s+Oper State\\s+:\\s+</regex>
+                            <start>215</start>
+                            <end>237</end>
+                        </item>
+                        <item name="Oper_State">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>237</start>
+                            <end>241</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor8">
+                            <regex>\\s+Config Duplex\\s+:\\s+</regex>
+                            <start>241</start>
+                            <end>283</end>
+                        </item>
+                        <item name="Config_Duplex">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>283</start>
+                            <end>287</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>Interface          : 1/1/10                     Oper Speed       : N/A
+Link-level         : Ethernet                   Config Speed     : 1 Gbps
+Admin State        : up                         Oper Duplex      : N/A
+Oper State         : down                       Config Duplex    : full</sampleMatch>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show port *">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+            <item>com.fnfr.svt.applications.telnet</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

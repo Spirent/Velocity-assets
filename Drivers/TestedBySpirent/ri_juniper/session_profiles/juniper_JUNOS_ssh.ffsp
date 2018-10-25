@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<SessionTemplate version="7.1.0.201804110601">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <terminalSizeProperties>
+                <termWidth inherit="false">300</termWidth>
+            </terminalSizeProperties>
+            <captureProperties>
+                <commandBreakChars inherit="false">
+                    <item>[char Ctrl-C]</item>
+                    <item>[char Ctrl-D]</item>
+                </commandBreakChars>
+                <commandCompletionchars inherit="false">
+                    <item>[char TAB]</item>
+                    <item>?</item>
+                    <item>A</item>
+                </commandCompletionchars>
+            </captureProperties>
+            <prompts merge="true">
+                <item name="priv_prompt" MatchMethod="WILDCARD">
+                    <Content>*#</Content>
+                </item>
+                <item name="filename" MatchMethod="WILDCARD">
+                    <Content>Enter * filename:</Content>
+                </item>
+                <item name="tftp">
+                    <Content>Enter hostname for the tftp server:</Content>
+                </item>
+                <item name="username">
+                    <Content>Enter username:</Content>
+                </item>
+                <item name="vrf">
+                    <Content>Enter vrf (If no input, current vrf &apos;default&apos; is considered):</Content>
+                </item>
+                <item name="password" MatchMethod="WILDCARD" TypeOfPrompt="PASSWORD">
+                    <Content>*assword:</Content>
+                </item>
+                <item name="yes_no_prompt3">
+                    <Content>* (yes/no)?</Content>
+                </item>
+                <item name="type_yes_no">
+                    <Content>Please type &apos;yes&apos; or &apos;no&apos;:</Content>
+                </item>
+                <item name="yes_no_prompt2">
+                    <Content>Do you want to continue? (y/n) [n]</Content>
+                </item>
+                <item name="yes_no_prompt" MatchMethod="WILDCARD">
+                    <Content>*[y/n] :</Content>
+                </item>
+                <item name="confirm_prompt" MatchMethod="WILDCARD">
+                    <Content>* [confirm]</Content>
+                </item>
+                <item name="unpriv_prompt" MatchMethod="WILDCARD">
+                    <Content>*@*&gt;</Content>
+                </item>
+                <item name="more_prompt" MatchMethod="WILDCARD" TypeOfPrompt="MORE">
+                    <Content>---(more*)---</Content>
+                </item>
+                <item name="mastership">
+                    <Content>Toggle mastership between routing engines ? [yes,no] (no)</Content>
+                </item>
+                <item name="type_ctrl_d">
+                    <Content>[Type ^D at a new line to end input]</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <eventHandlers>
+        <item name="OnQueryExtractorInvalidQuery">
+            <item actionId="DeclareExecutionIssue">
+                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                    <message>Invalid query: {0}</message>
+                </actionProperties>
+            </item>
+            <item actionId="RepeatStep">
+                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="3" delayBetweenRepeats="2.0"/>
+            </item>
+            <item actionId="SkipRemainingRules">
+                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+            </item>
+        </item>
+        <item name="OnNoMatchesFound">
+            <item actionId="DeclareExecutionIssue">
+                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                    <message>No matches found for {type}: {info}</message>
+                </actionProperties>
+            </item>
+            <item actionId="RepeatStep">
+                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="3" delayBetweenRepeats="2.0"/>
+            </item>
+            <item actionId="SkipRemainingRules">
+                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+            </item>
+        </item>
+        <item name="OnMappingFail">
+            <item actionId="DeclareExecutionIssue">
+                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning"/>
+            </item>
+            <item actionId="RepeatStep">
+                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="1"/>
+            </item>
+            <item actionId="SkipRemainingRules">
+                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+            </item>
+        </item>
+        <item name="OnTerminalOpenConnectionFail">
+            <item actionId="DeclareExecutionIssue">
+                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                    <message>Error attempting to open connection to server: {0}</message>
+                </actionProperties>
+            </item>
+            <item actionId="FailTest">
+                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+            </item>
+        </item>
+    </eventHandlers>
+    <responseLibrary inherit="false">project://ri_juniper/</responseLibrary>
+    <analysisRules>
+        <item>
+            <extractorInfo extractorType="contains">
+                <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                    <searchString>% (Invalid|Incomplete)</searchString>
+                    <matchType>Regex</matchType>
+                </extractorProperties>
+            </extractorInfo>
+            <processorInfo ruleType="assert">
+                <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                    <expression>$value == 1</expression>
+                    <actionsWhenTrue>
+                        <item actionId="DeclareExecutionIssue">
+                            <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                <message>Configuration was not accepted</message>
+                            </actionProperties>
+                        </item>
+                        <item actionId="Eval">
+                            <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                <statement>set retCode &quot;FALSE&quot;</statement>
+                            </actionProperties>
+                        </item>
+                    </actionsWhenTrue>
+                </ruleProperties>
+            </processorInfo>
+        </item>
+        <item>
+            <extractorInfo extractorType="contains">
+                <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                    <searchString>retCode: FALSE</searchString>
+                </extractorProperties>
+            </extractorInfo>
+            <processorInfo ruleType="assert">
+                <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                    <expression>$value == 1</expression>
+                    <actionsWhenTrue>
+                        <item actionId="DeclareExecutionIssue">
+                            <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                <message>Quickcall commands were not successful</message>
+                            </actionProperties>
+                        </item>
+                        <item actionId="FailTest">
+                            <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item actionId="SkipRemainingRules">
+                            <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </actionsWhenTrue>
+                </ruleProperties>
+            </processorInfo>
+        </item>
+    </analysisRules>
+    <isReferenceProfile>true</isReferenceProfile>
+</SessionTemplate>

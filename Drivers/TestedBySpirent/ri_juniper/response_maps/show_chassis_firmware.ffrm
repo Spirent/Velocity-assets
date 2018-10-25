@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.1.0.201804110601">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show chassis firmware</body>
+                </command>
+            </action>
+            <responseBody>Part                     Type       Version
+FPC 0                    ROM        Juniper ROM Monitor Version 10.4b1         
+                         O/S        Version 15.1F2-S5.1 by builder on 2016-02-26 08:07:20 UTC
+FPC 1                    ROM        Juniper ROM Monitor Version 12.3b1         
+                         O/S        Version 15.1F2-S5.1 by builder on 2016-02-26 08:07:20 UTC
+FPC 3                    ROM        Juniper ROM Monitor Version 10.4b1         
+                         O/S        Version 15.1F2-S5.1 by builder on 2016-02-26 08:07:20 UTC
+FPC 4                    ROM        Juniper ROM Monitor Version 10.4b1         
+                         O/S        Version 15.1F2-S5.1 by builder on 2016-02-26 08:07:20 UTC
+FPC 5                    ROM        Juniper ROM Monitor Version 8.3b1          
+                         O/S        Version 15.1F2-S5.1 by builder on 2016-02-26 08:19:36 UTC
+FPC 11                   ROM        Juniper ROM Monitor Version 10.4b1         
+                         O/S        Version 15.1F2-S5.1 by builder on 2016-02-26 08:07:20 UTC
+
+{master}
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;prompt&gt;itest-ap@PE52&amp;gt; &lt;/prompt&gt;
+    &lt;echo&gt;show chassis firmware &lt;/echo&gt;
+    &lt;promptName&gt;normal&lt;/promptName&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.8</duration>
+        </item>
+        <item name="sample2">
+            <action actionType="command">
+                <command>
+                    <body>show chassis firmware</body>
+                </command>
+            </action>
+            <responseBody>Part                     Type       Version
+FPC 0                    ROM        PC Bios                                    
+                         O/S        Version 16.1R6-S3.1 by builder on 2018-03-30 11:42:41 UTC
+FPC 1                    ROM        Juniper ROM Monitor Version 10.1b3         
+                         O/S        Version 16.1R6-S3.1 by builder on 2018-03-30 11:36:29 UTC
+FPC 2                    ROM        Juniper ROM Monitor Version 10.1b3         
+                         O/S        Version 16.1R6-S3.1 by builder on 2018-03-30 11:36:29 UTC
+FPC 4                    ROM        Juniper ROM Monitor Version 13.3b2         
+                         O/S        Version 16.1R6-S3.1 by builder on 2018-03-30 11:36:03 UTC
+FPC 5                    ROM        Juniper ROM Monitor Version 12.3b1         
+                         O/S        Version 16.1R6-S3.1 by builder on 2018-03-30 11:36:29 UTC
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;lab@re0.CER01AWSCCC&amp;gt; &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;show chassis firmware&lt;/echo&gt;
+        &lt;idleTime&gt;0.182&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="rom_mon">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>FPC\\s+</regex>
+                            <start>0</start>
+                            <end>4</end>
+                        </item>
+                        <item name="FPC">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <key>true</key>
+                            <start>4</start>
+                            <end>5</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\s+ROM\\s+Juniper ROM Monitor Version\\s+</regex>
+                            <start>5</start>
+                            <end>64</end>
+                        </item>
+                        <item name="ROM_Juniper_ROM_Monitor_Version">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>64</start>
+                            <end>70</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>\\s+O/S\\s+Version\\s+</regex>
+                            <start>70</start>
+                            <end>124</end>
+                        </item>
+                        <item name="Version">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>124</start>
+                            <end>135</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>\\s+by builder on\\s+</regex>
+                            <start>135</start>
+                            <end>150</end>
+                        </item>
+                        <item name="by_builder_on">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>150</start>
+                            <end>169</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name=".{19}">exactly 19 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor4">
+                            <regex>\\s+UTC</regex>
+                            <start>169</start>
+                            <end>173</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>FPC 0                    ROM        Juniper ROM Monitor Version 10.4b1         
+                         O/S        Version 15.1F2-S5.1 by builder on 2016-02-26 08:07:20 UTC</sampleMatch>
+                    <optional>true</optional>
+                </item>
+                <item name="pc_bios">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>FPC\\s+</regex>
+                            <start>0</start>
+                            <end>4</end>
+                        </item>
+                        <item name="FPC">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <key>true</key>
+                            <start>4</start>
+                            <end>5</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\s+ROM\\s+PC Bios\\s+O/S\\s+Version\\s+</regex>
+                            <start>5</start>
+                            <end>124</end>
+                        </item>
+                        <item name="Version">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>124</start>
+                            <end>135</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>\\s+by builder on\\s+</regex>
+                            <start>135</start>
+                            <end>150</end>
+                        </item>
+                        <item name="build_date">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>150</start>
+                            <end>169</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name=".{19}">exactly 19 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>\\s+UTC</regex>
+                            <start>169</start>
+                            <end>173</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>FPC 0                    ROM        PC Bios                                    
+                         O/S        Version 16.1R6-S3.1 by builder on 2018-03-30 11:42:41 UTC</sampleMatch>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show chassis firmware">
+        <application>
+            <item>com.fnfr.svt.applications.cmd</item>
+            <item>com.fnfr.svt.applications.ssh</item>
+            <item>com.fnfr.svt.applications.telnet</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

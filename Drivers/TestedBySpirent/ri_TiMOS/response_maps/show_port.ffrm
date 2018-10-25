@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.1.0.201804110601">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show port </body>
+                </command>
+            </action>
+            <responseBody>
+===============================================================================
+Ports on Slot 1
+===============================================================================
+Port        Admin Link Port    Cfg  Oper LAG/ Port Port Port   C/QS/S/XFP/
+Id          State      State   MTU  MTU  Bndl Mode Encp Type   MDIMDX
+-------------------------------------------------------------------------------
+1/1/1       Up    Yes  Up      9212 9212    - l2up qinq xcme   MDI GIGE-LX  1*
+1/1/2       Up    No   Down    9212 9212    - accs dotq xcme   GIGE-LX  10KM
+1/1/3       Up    No   Down    9212 9212    - accs dotq xcme   GIGE-LX  10KM
+1/1/4       Up    Yes  Up      9212 9212    - accs null xcme   MDI GIGE-LX  1*
+1/1/5       Up    No   Down    1514 1514    - accs null xcme   
+1/1/6       Up    Yes  Up      9212 9212    - accs null xcme   MDI GIGE-LX  1*
+1/1/7       Up    Yes  Up      9212 9212    - accs dotq xcme   MDI
+1/1/8       Up    Yes  Up      9212 9212    - l2up qinq xcme   MDI
+1/1/9       Up    Yes  Up      9212 9212    - accs null xcme   MDI
+1/1/10      Up    No   Down    9212 9212    - accs null xcme   
+===============================================================================
+* indicates that the corresponding row element may have been truncated.</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;*A:esw04t2awsccc# &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;show port&lt;/echo&gt;
+        &lt;idleTime&gt;0.25&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <additionalBannerLineCount>1</additionalBannerLineCount>
+                    <banner>Id\\s+State\\s+State\\s+MTU\\s+MTU\\s+Bndl Mode Encp Type\\s+MDIMDX\\s*</banner>
+                    <footer>===============================================================================\\s*</footer>
+                    <bannerStructure>Regex</bannerStructure>
+                    <footerStructure>Regex</footerStructure>
+                    <minOccurences>0</minOccurences>
+                    <columns>
+                        <item name="Port_Id">
+                            <isKey>true</isKey>
+                            <width>12</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>b374ffc5-8c04-4f56-9a22-2b3f1da5a31a</uid>
+                        </item>
+                        <item name="Admin_State">
+                            <width>6</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>cc9a47f7-f301-40c7-8d26-a48ec0b96e25</uid>
+                        </item>
+                        <item name="Link_State">
+                            <width>5</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>62cdd6fc-b755-4051-85a1-71b3c97fe63d</uid>
+                        </item>
+                        <item name="Overall_State">
+                            <width>8</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>f08dbfa5-7627-4a0e-bbe9-0b3e24a74f21</uid>
+                        </item>
+                        <item name="confg_MTU">
+                            <width>5</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>b89dcc05-0019-4ec1-9e44-8351dc1e9041</uid>
+                        </item>
+                        <item name="Oper_MTU">
+                            <width>8</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>89e57758-b483-4a79-b2d7-dd2a2aa5b1b6</uid>
+                        </item>
+                        <item name="LAG_Bndl">
+                            <width>2</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>e4d31b3e-f709-4e43-b8eb-213c09f89692</uid>
+                        </item>
+                        <item name="Mode">
+                            <width>5</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>dbac9d4f-de05-4476-bfca-4fe3c2c0cf7d</uid>
+                        </item>
+                        <item name="Encp">
+                            <width>5</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>a537c17d-b403-4245-9fea-82b1b42759a2</uid>
+                        </item>
+                        <item name="Type">
+                            <width>7</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>db99ad29-0a6c-4e56-aa3b-7d52fb767a8e</uid>
+                        </item>
+                        <item name="MDIMDX">
+                            <width>999</width>
+                            <lastFullCell></lastFullCell>
+                            <uid>82105ac2-0a39-4faf-bded-46023c919001</uid>
+                        </item>
+                    </columns>
+                    <ignoreBlankLines>false</ignoreBlankLines>
+                    <autoUpdateNames>false</autoUpdateNames>
+                </item>
+            </tabularMaps>
+        </item>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>Ports on Slot\\s+</regex>
+                            <start>0</start>
+                            <end>14</end>
+                        </item>
+                        <item name="Ports_on_Slot">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>14</start>
+                            <end>15</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>Ports on Slot 1</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show port"/>
+</ResponseMap>

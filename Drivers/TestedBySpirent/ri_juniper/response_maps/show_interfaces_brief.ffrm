@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.1.0.201804110601">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show interfaces ae35 brief</body>
+                </command>
+            </action>
+            <responseBody>Physical interface: ae35, Enabled, Physical link is Down
+  Link-level type: Ethernet, MTU: 2000, Speed: Unspecified, Loopback: Disabled, Source filtering: Disabled, Flow control: Disabled
+  Device flags   : Present Running
+  Interface flags: Hardware-Down SNMP-Traps Internal: 0x4000
+
+  Logical interface ae35.0 
+    Flags: Hardware-Down Device-Down SNMP-Traps 0x4004000 Encapsulation: ENET2
+    inet  0.0.0.0/31    
+    iso
+    inet6 2001:0db8:85a3:0000:0000:8a2e:0370:733427
+          2001:0db8:85a3:0000:0000:8a2e:0370:73344
+    mpls
+    multiservice
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;prompt&gt;itest@google_D6&amp;gt; &lt;/prompt&gt;
+    &lt;echo&gt;show interfaces ae35 brief &lt;/echo&gt;
+    &lt;promptName&gt;unpriv_prompt&lt;/promptName&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.2</duration>
+        </item>
+        <item name="sample2">
+            <action actionType="command">
+                <command>
+                    <body>show interfaces ae94 brief</body>
+                </command>
+            </action>
+            <responseBody>Physical interface: ae94, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 2000, Speed: 80Gbps, Loopback: Disabled, Source filtering: Disabled, Flow control: Disabled
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+
+  Logical interface ae94.0 
+    Flags: SNMP-Traps 0x4004000 Encapsulation: ENET2
+    inet  0.0.0.0/31    
+    iso
+    inet6 2001:0db8:85a3:0000:0000:8a2e:0370:733427
+          2001:0db8:85a3:0000:0000:8a2e:0370:73344
+    mpls
+    multiservice
+
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;prompt&gt;itest@google_D4&amp;gt; &lt;/prompt&gt;
+    &lt;echo&gt;show interfaces ae94 brief &lt;/echo&gt;
+    &lt;promptName&gt;unpriv_prompt&lt;/promptName&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+            </aliases>
+            <duration>1.6</duration>
+        </item>
+        <item name="sample3">
+            <responseBody>Physical interface: xe-4/3/0, Enabled, Physical link is Up
+  Description: connected to Ixia 1/2
+  Link-level type: Ethernet, MTU: 1514, LAN-PHY mode, Speed: 10Gbps, Loopback: None, Source filtering: Disabled, Flow control: Enabled
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+  Logical interface xe-4/3/0.0 
+    Flags: SNMP-Traps 0x4004000 Encapsulation: ENET2
+    inet  0.0.0.0/31   
+    iso
+    inet6 2001:0db8:85a3:0000:0000:8a2e:0370:733427
+          2001:0db8:85a3:0000:0000:8a2e:0370:73344
+    multiservice</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>Physical interface:\\s+</regex>
+                            <start>0</start>
+                            <end>20</end>
+                        </item>
+                        <item name="interface">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <key>true</key>
+                            <start>20</start>
+                            <end>24</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>,\\s+</regex>
+                            <start>24</start>
+                            <end>26</end>
+                        </item>
+                        <item name="admin_state">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>26</start>
+                            <end>33</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>, Physical link is\\s+</regex>
+                            <start>33</start>
+                            <end>52</end>
+                        </item>
+                        <item name="link_state">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>52</start>
+                            <end>54</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>\\s+</regex>
+                            <start>54</start>
+                            <end>57</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>Physical interface: ae94, Enabled, Physical link is Up
+
+
+</sampleMatch>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties"/>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show interfaces *brief">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+            <item>com.fnfr.svt.applications.telnet</item>
+        </application>
+    </applicabilityProperties>
+    <aliases>
+        <item name="Interface_up_status_check">
+            <queryFormatString>count(mapped/Regex/Body/pattern1[enabled=&apos;Enabled&apos; and Physical_link=&apos;Up&apos;]/Physical_interface)</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>
