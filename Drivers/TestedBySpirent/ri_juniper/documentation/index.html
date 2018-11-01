@@ -10,16 +10,72 @@ H1,H2{padding-left:15px}
 .header2Text{font-size:20px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:5px}
 .header3Text{font-size:18px; color:darkblue; font-weight:bold; font-family:arial ;text-align:left; padding-left:10px}
 </style>
-<DIV class='normalText'>Juniper driver</DIV>
-<DIV class='normalText'><BR></DIV>
-<DIV class='normalText'>Juniper Management Driver</DIV>
-<DIV class='normalText'><BR></DIV>
-<DIV class='normalText'>The driver implements the management interface and requires the</DIV>
-<DIV class='normalText'>following resource properties:</DIV>
-<DIV class='normalText'>* ipAddress (optional, but either ipAddress or Hostname must be specified)</DIV>
-<DIV class='normalText'>* Hostname (optional, but either ipAddress or Hostname must be specified)</DIV>
-<DIV class='normalText'>* username</DIV>
-<DIV class='normalText'>* password</DIV>
-<DIV class='normalText'><BR></DIV>
-<DIV class='normalText'>The Juniper driver has been tested for model MX480</DIV>
-<DIV class='normalText'><BR></DIV>
+<br>
+<DIV class='header2Text'>Library: project://ri_juniper/juniper.fftc</DIV>
+<br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getProperties</DIV>
+<DIV class='procText'>Get available properties of the device. Each property has name and value.
+
+Returns: JSON
+
+Example:
+{
+  "properties": {
+    "physicalClass": "chassis",
+    "functionalClass": "Ethernet Switch",
+    "description": "Cisco Switch WS-C2960-24TT-L",
+    "Make": "Cisco",
+    "Model": "WS-C2960-24TT-L",
+    "Software Version": "15.0(1)SE3",
+    "Software Image": "C2960-LANBASEK9-M",
+    "numberPorts": "26",
+    "Serial Number": "FOC1050W2ZD"
+  },
+  "ports": [
+    {
+      "name": "Fa0/1",
+      "status": "offline"
+    },
+    {
+      "name": "Fa0/2",
+      "status": "offline"
+    },
+    {
+      "name": "Gi0/1",
+      "status": "online"
+    }
+  ]
+}
+</DIV><BR>
+<DIV class='normalText'><TABLE style='margin-left:30px; width=600px'>
+<TR><TH style='width:200px; padding:5px;color:darkblue;' class='normalText'>Argument</TH>
+<TH style='width:400px; padding:5px;color:darkblue;' class='normalText'>Description</TH></TR>
+<TR><TD style='width:200px; padding:5px;color:darkblue' class='normalText'>includePorts</TD>
+<TD style='width:400px; padding:5px;color:darkblue' class='normalText'>true | false<br><br>If true, getPorts output will also be included into returned JSON.<br><br></TD>
+</TR>
+</TABLE></DIV><br>
+<DIV style='margin-left:30px; font-size:18px;color:darkgreen;font-weight:bold; font-family:courier'>getPorts</DIV>
+<DIV class='procText'>Get information about device ports and their properties.
+
+This method is also used to determine whether the device is online. If this call ends up with an error, the device is considered offline. Otherwise, the device is considered online.
+
+Returns: JSON
+
+Example:
+{
+  "ports": [
+    {
+      "name": "Fa0/1",
+      "status": "offline"
+    },
+    {
+      "name": "Fa0/2",
+      "status": "offline"
+    },
+    {
+      "name": "Gi0/1",
+      "status": "online"
+    }
+  ]
+}</DIV><BR>
+<br>
