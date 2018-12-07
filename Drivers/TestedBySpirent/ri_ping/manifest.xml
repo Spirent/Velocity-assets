@@ -5,7 +5,7 @@
     <vendor>Spirent</vendor>     
     <language>itest</language>     
     <interface>Management</interface> 
-    <entryPoint>ping-1.1.0.fftc</entryPoint>
+    <entryPoint>ping.fftc</entryPoint>
     <resourceProperties>
         <property optional="true">
             <name>ipAddress</name>
