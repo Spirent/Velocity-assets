@@ -1,5 +1,5 @@
 ============General==================
-documentation="emulated l1"
+documentation="emulated L1"
 notes="Model a device called "Emulated L1 Switch 1” using the MRV template, associate it with this driver, and assign it an IP address of 127.0.0.1 (no other properties are required)
 Click “Discover” for the driver to auto-populate the port groups and ports
 Connect at least two inventory devices to this emulated L1 switch
@@ -14,17 +14,12 @@ Procedure main
 		useFieldsInCommand="false"
 	3 for {set i 0} {$i < [param call_count]} {incr i}
 		useFieldsInCommand="false"
-		3.1 eval set cl [split [param call_$i]]
-			useFieldsInCommand="false"
-		3.2 eval set params [lassign $cl proc]
-			useFieldsInCommand="false"
-		3.3 #message to user
+		3.1 #message to user
 			analyze
 				none 
-				message Information:Calling a proc called $proc with these parameters: $params
+				message Information:Calling [param call_$i]
 			useFieldsInCommand="false"
-		3.4 call $proc $params
-			useFieldsInCommand="false"
+		3.2 call [param call_$i]
 	4 return $ret
 Procedure getDeviceStatus
 	1 return "online"
@@ -49,7 +44,7 @@ Procedure getProperties
 		useFieldsInCommand="false"
 	10 eval set ret "\\"properties\\":{$ret}"
 		useFieldsInCommand="false"
-	11 if [llength arg] > 0 & ${arg[1]} == "true"
+	11 if $includePorts
 		useFieldsInCommand="false"
 		11.1 then 
 			useFieldsInCommand="false"
@@ -159,7 +154,7 @@ Procedure connect
 			none 
 			assert 1 == 1
 				When True
-					DeclareExecutionIssue OK:{auto_message_true}
+					DeclareExecutionIssue OK:connect called with args -firstPort $firstPort -secondPort $secondPort -directions $direction
 					PassTestIfNotAlreadyFailed 
 				When False
 					DeclareExecutionIssue Error:{auto_message_false}
@@ -171,14 +166,9 @@ Procedure disconnect
 			none 
 			assert 1 == 1
 				When True
-					DeclareExecutionIssue OK:{auto_message_true}
+					DeclareExecutionIssue OK:disconnect called with args -firstPort $firstPort -secondPort $secondPort -directions $direction
 					PassTestIfNotAlreadyFailed 
 				When False
 					DeclareExecutionIssue Error:{auto_message_false}
 					FailTest 
 		useFieldsInCommand="false"
-============Parameters===============
-parameters(escape="true")
-	parameters
-		call_count="1"
-		call_0="getPorts"

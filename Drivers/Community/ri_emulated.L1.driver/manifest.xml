@@ -6,6 +6,7 @@
     <language>itest</language>     
     <interface>Layer 1 Switch</interface> 
     <entryPoint>emulated.l1.switch.fftc</entryPoint>
+    <supportCustomArguments></supportCustomArguments>    
     <resourceProperties>     
         <property optional="true">
             <name>ipAddress</name>
