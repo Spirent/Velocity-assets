@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?><tbml xmlns="http://www.teslaalliance.org/trs/tbml/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.teslaalliance.org/trs/tbml/1.0/tbml-core.xsd">
+<header>
+<name>Tap-BiDir</name>
+<description/>
+</header>
+<illustration>
+<layer/>
+</illustration>
+<body>
+<resources>
+<resource guid="i07c498d8-8641-4a85-9b7c-be9770e44680" id="i07c498d8-8641-4a85-9b7c-be9770e44680" shared="true" type="device">
+<property isimportant="false" name="name">Splitter1</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=i07c498d8-8641-4a85-9b7c-be9770e44680</property>
+<property isimportant="false" name="ilo_shape">RECTANGLE</property>
+<property isimportant="false" name="ilo_iconId">d8530f78-a73b-49cf-8df9-21dc9fcab4ca</property>
+<boundary height="100" width="100" x="587.6062503610513" y="105.97404123232036"/>
+<propertyCollection name="System Identification">
+<property id="e02007cf-fb45-4d15-b85e-85249562d8be" name="ipAddress" type="text" valuelabel="">127.0.0.1</property>
+<property id="80023d4a-e23c-bded-8922-80e992d7feb9" name="Hostname" type="text" valuelabel=""/>
+<property id="4e7a3efd-ff4a-c843-29d7-77ba6bfd26c5" name="Make" type="text" valuelabel=""/>
+<property id="760cca6e-e593-79ba-f504-8b127c86b373" name="Model" type="text" valuelabel=""/>
+<property id="d8ac31c8-93e7-a0a0-881e-690685308b93" name="Serial Number" type="text" valuelabel=""/>
+</propertyCollection>
+<propertyCollection name="Location Information">
+<property id="0f4f0f79-606d-d5fc-ca74-45b268b2efce" name="Facility" type="text" valuelabel=""/>
+<property id="8e873c71-ddb8-716a-9e82-b8353dca5d69" name="Room" type="text" valuelabel=""/>
+<property id="0d467c72-a0e2-4c33-da6a-257bee3a2191" name="Floor Position" type="text" valuelabel=""/>
+</propertyCollection>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">template[Tap]</extensions>
+<resource guid="53857a90-3cd6-4249-98c8-6a9326fcf49f" id="ia2220de0-603b-4d36-b53d-efe65e0058bc" type="port">
+<property isimportant="false" name="name">p1</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="connectivity">connected</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">[Port Type] = 'monitor'</extensions>
+<property name="inventoryName"/>
+</resource>
+<resource guid="i68b13a57-68db-4162-ace4-19eae9e20781" id="i68b13a57-68db-4162-ace4-19eae9e20781" type="port">
+<property isimportant="false" name="name">p0</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="connectivity">connected</property>
+<property isimportant="false" name="keepOnRemoveConnection">true</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">[Port Type] = 'tap'</extensions>
+<property name="inventoryName"/>
+</resource>
+<property name="inventoryName"/>
+</resource>
+<resource guid="9162d694-6bbb-4b25-9a97-bc63c0f9c299" id="i7ba8cf17-ca6e-4993-bde0-9f6f3b1d9d37" shared="true" type="device">
+<property isimportant="false" name="name">Splitter2</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=9162d694-6bbb-4b25-9a97-bc63c0f9c299</property>
+<property isimportant="false" name="ilo_iconId"/>
+<property isimportant="false" name="ilo_shape">RECTANGLE</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">template[Tap]</extensions>
+<boundary height="100" width="100" x="587.6062503610513" y="264.97404123232036"/>
+<resource guid="53857a90-3cd6-4249-98c8-6a9326fcf49f" id="ic7a3894f-8f18-4e55-ab7d-d1198d30d4cb" type="port">
+<property isimportant="false" name="name">p1</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="connectivity">connected</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">[Port Type] = 'monitor'</extensions>
+<property name="inventoryName"/>
+</resource>
+<resource guid="i5a111635-b053-497e-a9d9-a47cf5192572" id="i5a111635-b053-497e-a9d9-a47cf5192572" type="port">
+<property isimportant="false" name="name">p0</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="connectivity">connected</property>
+<property isimportant="false" name="keepOnRemoveConnection">true</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">[Port Type] = 'tap'</extensions>
+<property name="inventoryName"/>
+</resource>
+<property name="inventoryName"/>
+</resource>
+<resource guid="22d278fd-5cfd-4dee-bb6d-4f1daae58686" id="i43db2949-2457-4ee2-b5ae-75544df9b0a7" shared="true" type="device">
+<property isimportant="false" name="name">Analyzer1</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=22d278fd-5cfd-4dee-bb6d-4f1daae58686</property>
+<property isimportant="false" name="ilo_iconId"/>
+<property isimportant="false" name="ilo_shape">RECTANGLE</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">template[Server]</extensions>
+<boundary height="100" width="100" x="743.6062503610513" y="105.97404123232036"/>
+<resource guid="i4c78f7d8-4fe1-4155-9b6e-2f7e5a7329e9" id="i4c78f7d8-4fe1-4155-9b6e-2f7e5a7329e9" type="port">
+<property isimportant="false" name="name">p0</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="connectivity">connected</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">any</extensions>
+<property name="inventoryName"/>
+</resource>
+<property name="inventoryName"/>
+</resource>
+<resource guid="22d278fd-5cfd-4dee-bb6d-4f1daae58686" id="i3f4aff19-56c0-40f1-8344-acdef72c2a0d" shared="true" type="device">
+<property isimportant="false" name="name">Analyzer2</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=22d278fd-5cfd-4dee-bb6d-4f1daae58686</property>
+<property isimportant="false" name="ilo_iconId"/>
+<property isimportant="false" name="ilo_shape">RECTANGLE</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">template[Server]</extensions>
+<boundary height="100" width="100" x="743.6062503610513" y="264.97404123232036"/>
+<resource guid="i17ed44f0-f6b3-4799-a44a-6e1eec7c00d6" id="i17ed44f0-f6b3-4799-a44a-6e1eec7c00d6" type="port">
+<property isimportant="false" name="name">p0</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="connectivity">connected</property>
+<extensions type="com.fnfr.rm.condition" xs:namespace="com.fnfr.rm.condition">any</extensions>
+<property name="inventoryName"/>
+</resource>
+<property name="inventoryName"/>
+</resource>
+<resource guid="i684c90ae-70fa-4500-a3c1-d44819f73a7a" id="i684c90ae-70fa-4500-a3c1-d44819f73a7a" shared="false" type="vlan">
+<property isimportant="false" name="name">Tap</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="iconURI">platform:/plugin/com.fnfr.itest.topology.tbml.edit/icons/full/topology/Device_generic_32.gif</property>
+<propertyCollection name="ID" order="null">
+<property description="VLAN ID. Example: 302" editable="true" id="id" iscloudspecific="false" isimportant="true" name="ID" order="0" required="false" type="VLAN_ID"/>
+</propertyCollection>
+<boundary height="100" width="130" x="368.6062503610513" y="205.97404123232036"/>
+</resource>
+</resources>
+<connectivity>
+<link id="ib4c69675-32b3-4988-8a50-45f62454f001">
+<property isimportant="false" name="name">Link 8</property>
+<property isimportant="false" name="type">L1</property>
+<property isimportant="false" name="abstractResourceId"/>
+<property isimportant="false" name="abstractResourceName"/>
+<endpoint direction="bidirectional" id="i4c78f7d8-4fe1-4155-9b6e-2f7e5a7329e9"/>
+<endpoint direction="bidirectional" id="ia2220de0-603b-4d36-b53d-efe65e0058bc"/>
+<extensions type="com.fnfr.rm.condition"/>
+<propertyCollection name="connectionType" order="0">
+<property isimportant="false" name="id">af2d479b-10a9-4d6d-9ad4-581612a61f04</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="kind">L2</property>
+<property isimportant="false" name="shortcut">L1</property>
+</propertyCollection>
+</link>
+<link id="idd14b8b1-bbd0-4c25-af7c-8dc3348fc153">
+<property isimportant="false" name="name">Link 10</property>
+<property isimportant="false" name="type">L1</property>
+<property isimportant="false" name="abstractResourceId"/>
+<property isimportant="false" name="abstractResourceName"/>
+<endpoint direction="bidirectional" id="i17ed44f0-f6b3-4799-a44a-6e1eec7c00d6"/>
+<endpoint direction="bidirectional" id="ic7a3894f-8f18-4e55-ab7d-d1198d30d4cb"/>
+<extensions type="com.fnfr.rm.condition"/>
+<propertyCollection name="connectionType" order="0">
+<property isimportant="false" name="id">af2d479b-10a9-4d6d-9ad4-581612a61f04</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="kind">L2</property>
+<property isimportant="false" name="shortcut">L1</property>
+</propertyCollection>
+</link>
+<link id="i0136f9a4-bebb-4d5d-825b-0b936516a624">
+<property isimportant="false" name="name">Link 11</property>
+<property isimportant="false" name="type">Tap</property>
+<property isimportant="false" name="abstractResourceId"/>
+<property isimportant="false" name="abstractResourceName"/>
+<endpoint direction="bidirectional" id="i68b13a57-68db-4162-ace4-19eae9e20781"/>
+<endpoint direction="bidirectional" id="i684c90ae-70fa-4500-a3c1-d44819f73a7a"/>
+<extensions type="com.fnfr.rm.condition"/>
+<propertyCollection name="connectionArguments" order="0">
+<property description="The transmitting port to tap, e.g. &quot;Router 1,Port 1&quot;" editable="true" id="6cd78bdb-f1b0-4f0f-a0d9-1cf719460abf" iscloudspecific="false" isimportant="false" name="TxPortToTap" order="0" required="false" type="TEXT"/>
+</propertyCollection>
+<propertyCollection name="connectionType" order="0">
+<property isimportant="false" name="id">93747483-a9c7-42a7-b98b-90442b18deaf</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="kind">L2</property>
+<property isimportant="false" name="shortcut">Tap</property>
+</propertyCollection>
+</link>
+<link id="i1414a902-6a4b-437f-b3e1-eda6873ea672">
+<property isimportant="false" name="name">Link 12</property>
+<property isimportant="false" name="type">Tap</property>
+<property isimportant="false" name="abstractResourceId"/>
+<property isimportant="false" name="abstractResourceName"/>
+<endpoint direction="bidirectional" id="i5a111635-b053-497e-a9d9-a47cf5192572"/>
+<endpoint direction="bidirectional" id="i684c90ae-70fa-4500-a3c1-d44819f73a7a"/>
+<extensions type="com.fnfr.rm.condition"/>
+<propertyCollection name="connectionArguments" order="0">
+<property description="The transmitting port to tap, e.g. &quot;Router 1,Port 1&quot;" editable="true" id="6cd78bdb-f1b0-4f0f-a0d9-1cf719460abf" iscloudspecific="false" isimportant="false" name="TxPortToTap" order="0" required="false" type="TEXT"/>
+</propertyCollection>
+<propertyCollection name="connectionType" order="0">
+<property isimportant="false" name="id">93747483-a9c7-42a7-b98b-90442b18deaf</property>
+<property isimportant="false" name="description"/>
+<property isimportant="false" name="kind">L2</property>
+<property isimportant="false" name="shortcut">Tap</property>
+</propertyCollection>
+</link>
+</connectivity>
+</body>
+</tbml>
