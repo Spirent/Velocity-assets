@@ -87,7 +87,7 @@
 </resource>
 </resource>
 <resource guid="22d278fd-5cfd-4dee-bb6d-4f1daae58686" id="i1e30f7a8-3ae2-455d-8c00-dcc971933419" shared="true" type="device">
-<property isimportant="false" name="name">Server</property>
+<property isimportant="false" name="name">ServerA</property>
 <property isimportant="false" name="description"/>
 <property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=22d278fd-5cfd-4dee-bb6d-4f1daae58686</property>
 <property isimportant="false" name="ilo_iconId"/>
@@ -104,7 +104,7 @@
 <property name="inventoryName"/>
 </resource>
 <resource guid="22d278fd-5cfd-4dee-bb6d-4f1daae58686" id="ia973453e-5602-45b3-9b6c-fb95c00b897a" shared="true" type="device">
-<property isimportant="false" name="name">Server (2)</property>
+<property isimportant="false" name="name">ServerB</property>
 <property isimportant="false" name="description"/>
 <property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=22d278fd-5cfd-4dee-bb6d-4f1daae58686</property>
 <property isimportant="false" name="ilo_iconId"/>
@@ -176,7 +176,7 @@
 <endpoint direction="bidirectional" id="i58dabb89-127f-43b3-923b-5040ecbf61d2--i684c90ae-70fa-4500-a3c1-d44819f73a7a"/>
 <extensions type="com.fnfr.rm.condition"/>
 <propertyCollection name="connectionArguments" order="0">
-<property description="The transmitting port to tap, e.g. &quot;Router 1,Port 1&quot;" editable="true" id="6cd78bdb-f1b0-4f0f-a0d9-1cf719460abf" iscloudspecific="false" isimportant="false" name="TxPortToTap" order="0" required="false" type="TEXT">Server,Port 1</property>
+<property description="The transmitting port to tap, e.g. &quot;Router 1,Port 1&quot;" editable="true" id="6cd78bdb-f1b0-4f0f-a0d9-1cf719460abf" iscloudspecific="false" isimportant="false" name="TxPortToTap" order="0" required="false" type="TEXT" valuelabel="Server,Port 1">ServerA,Port 1</property>
 </propertyCollection>
 <propertyCollection name="connectionType" order="0">
 <property isimportant="false" name="id">93747483-a9c7-42a7-b98b-90442b18deaf</property>

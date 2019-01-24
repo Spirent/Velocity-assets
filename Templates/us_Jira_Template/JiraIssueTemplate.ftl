@@ -1660,7 +1660,7 @@ POST_PROCESSING_COLUMN_NAMES=["#", "Action", "Description"]
 							break;
 					}
 				}
-				executionMsgTable = executionMsgTable + objCells.item(j).innerText.replace(/\n/g, '') + '|';
+				executionMsgTable = executionMsgTable + objCells.item(j).innerText.replace(/\n/g, '').replace(/\|/g, '\\|') + '|';
 			}
 		}
 		return headerFields + executionMsgTable;

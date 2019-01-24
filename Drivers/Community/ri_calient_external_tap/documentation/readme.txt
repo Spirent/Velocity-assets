@@ -13,3 +13,8 @@ Video available at: https://youtu.be/m8DL12m9D8U
 6) Discover the calient switch and ensure that ports are discovered
 7) Connect physical resources to the calient switch
 8) Use the attached TBML files as examples and start reservations using these sample topologies
+
+Other:
+When defining an abstract topology including a tap, the value of "TxPortToTap" should be "AbstractResourceName,AbstractPortName"
+When editing a live topology during a reservation and a tap is being added, the value of "TxPortToTap" should be "AbstractResourceName,PhysicalPortName"
+For concrete topologies, the value of "TxPortToTap" should be "PhysicalResourceName,PhysicalPortName"

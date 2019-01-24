@@ -1,0 +1,1133 @@
+============General==================
+defaultStepTimeout="300"============Steps====================
+Procedure main
+	1 #set up variables
+		useFieldsInCommand="false"
+		1.1 call getHostParameter
+			analyze
+				query isEmpty()
+				assert $value == "false"
+					When True
+						DeclareExecutionIssue OK:Found host information
+						PassTestIfNotAlreadyFailed 
+					When False
+						DeclareExecutionIssue Error:Error finding host information
+						FailTest 
+			useFieldsInCommand="false"
+		1.2 eval set port [param property_SSH_Port 22]
+			useFieldsInCommand="false"
+		1.3 eval set ret ""
+			useFieldsInCommand="false"
+		1.4 eval set velocityRestComplete 0
+			useFieldsInCommand="false"
+		1.5 eval set simplexConnectionList {} 
+			useFieldsInCommand="false"
+		1.6 dumpState 
+			useFieldsInCommand="false"
+	2 #opening the ssh session
+		useFieldsInCommand="false"
+		2.1 open s1 application:com.fnfr.svt.applications.ssh
+			completionProperties
+				idleChannel(inherit="false")="500"
+			TerminalProperties
+				terminalString(inherit="false")(defaultValue="")
+				useStandardFont(inherit="false")(defaultValue="")
+				terminalSizeProperties
+					termWidth(inherit="false")="4096"
+					widthSizing(inherit="false")="FIXED"
+				captureProperties
+					useSessionPrompts(inherit="false")(defaultValue="")
+					extractPromptFromResponse(inherit="false")(defaultValue="")
+					captureRawRequest(inherit="false")(defaultValue="")
+				style(inherit="false")="TL1"
+				prompts(inherit="false")(merge="true")
+					calientPrompt
+						Content="agent>"
+					prompt2(MatchMethod="WILDCARD")
+						Content="*:~]$"
+					prompt1
+						Content=";
+agent>"
+			ipAddress(inherit="false")="[get deviceHost]"
+			port(inherit="false")="[get port]"
+			user(inherit="false")="[param property_username]"
+			password(inherit="false")="Hu62+w4ez8VRjpeoxPozxOrYANzZETwjV/byLzrSGgo="
+		2.2 command s1 type tl1
+			analyze
+				contains telnet
+				store hasTelnetfalsetrue
+			analyze
+				regex ^tl\\d+\\s+is aliased to `telnet\\s+(((\\d+\\.)+\\d+))\\s+\\d+'$ false
+				store telnetIPAddressfalsetrue
+			analyze
+				regex ^tl\\d+\\s+is aliased to `telnet\\s+((\\d+\\.)+\\d+)\\s+(\\d+)'$ 3 false
+				store telnetPortfalsetrue
+			idleChannel(inherit="false")="500"
+		2.3 eval gset isTelnetConnection $hasTelnet
+			useFieldsInCommand="false"
+		2.4 if [gget isTelnetConnection]
+			useFieldsInCommand="false"
+			2.4.1 then 
+				useFieldsInCommand="false"
+				2.4.1.1 #Connect via SSH and enable port forwarding for telnet
+					useFieldsInCommand="false"
+				2.4.1.2 close s1 
+				2.4.1.3 #Checking device telnet response for correctness
+					analyze
+						none 
+						assert [get telnetIPAddress] != "" && [get telnetPort] != "" 
+							When True
+								DeclareExecutionIssue OK:"Using telnet to run driver commands"
+							When False
+								DeclareExecutionIssue Error:"Telnet is enabled, but no ip address or port specified in device response"
+								AbortExecution 
+					useFieldsInCommand="false"
+				2.4.1.4 open sPF application:com.fnfr.svt.applications.ssh
+					useFieldsInCommand="false"
+					TerminalProperties
+						terminalString(inherit="false")(defaultValue="")
+						useStandardFont(inherit="false")(defaultValue="")
+						terminalSizeProperties
+							termWidth(inherit="false")="4096"
+							widthSizing(inherit="false")="FIXED"
+						captureProperties
+							useSessionPrompts(inherit="false")(defaultValue="")
+							extractPromptFromResponse(inherit="false")(defaultValue="")
+							captureRawRequest(inherit="false")(defaultValue="")
+						prompts(inherit="false")
+							calientPrompt
+								Content="agent>"
+							prompt2(MatchMethod="WILDCARD")
+								Content="*:~]$"
+							prompt1
+								Content=";
+agent>"
+					ipAddress(inherit="false")="[get deviceHost]"
+					port(inherit="false")="[get port]"
+					user(inherit="false")="[param property_username]"
+					password(inherit="false")="Hu62+w4ez8VRjpeoxPozxOrYANzZETwjV/byLzrSGgo="
+					enable_local_fwd(inherit="false")="true"
+					local_fwd(inherit="false")="53031:127.0.0.1:$telnetPort"
+				2.4.1.5 open tn1 application:com.fnfr.svt.applications.telnet
+					useFieldsInCommand="false"
+					completionProperties
+						idleChannel(inherit="false")="500"
+					implicitCrWithLf(inherit="false")="true"
+					ipAddress(inherit="false")="127.0.0.1"
+					port(inherit="false")="53031"
+					TerminalProperties
+						prompts(merge="true")
+							agent
+								Content="agent>"
+			2.4.2 else 
+				useFieldsInCommand="false"
+				2.4.2.1 #No additional setup is needed without telnet enabled
+					useFieldsInCommand="false"
+	3 #login to the Calient switch and disable the autonomous messages
+		useFieldsInCommand="false"
+		3.1 if [gget isTelnetConnection]
+			useFieldsInCommand="false"
+			3.1.1 then 
+				useFieldsInCommand="false"
+				3.1.1.1 command tn1 ACT-USER::[param property_calientUsername]:::[param property_calientPassword];INH-MSG:::::,ALL
+					analyze
+						contains COMPLD
+						assert $value == 1
+							When False
+								FailTest 
+								AbortExecution 
+					idleChannel(inherit="false")="500"
+					promptExtraction(inherit="false")(defaultValue="")
+					screenMode(inherit="false")(defaultValue="")
+			3.1.2 else 
+				useFieldsInCommand="false"
+				3.1.2.1 command s1 ACT-USER::[param property_calientUsername]:::[param property_calientPassword];INH-MSG:::::,ALL
+					analyze
+						contains COMPLD
+						assert $value == 1
+							When False
+								FailTest 
+								AbortExecution 
+					idleChannel(inherit="false")="500"
+					promptExtraction(inherit="false")(defaultValue="")
+					screenMode(inherit="false")(defaultValue="")
+	4 #iterate through each procedure call
+		useFieldsInCommand="false"
+		4.1 for {set i 0} {$i < [param call_count]} {incr i}
+			useFieldsInCommand="false"
+			4.1.1 #determine command and arguments
+				useFieldsInCommand="false"
+				4.1.1.1 eval set command [lindex [param call_$i] 0]
+					useFieldsInCommand="false"
+				4.1.1.2 eval set argList [regsub -all {'} [lrange [param call_$i] 1 end] {"}]
+					useFieldsInCommand="false"
+				4.1.1.3 eval array set argArray $argList
+					useFieldsInCommand="false"
+			4.1.2 #intercept the procedure call for addToVlan and removeFromVlan and call the others
+				useFieldsInCommand="false"
+				4.1.2.1 if $command == "addToVlan"
+					useFieldsInCommand="false"
+					4.1.2.1.1 then 
+						useFieldsInCommand="false"
+						4.1.2.1.1.1 #this is an addToVlan procedure call
+							analyze
+								none 
+								assert 1
+									When True
+										DeclareExecutionIssue Information:
+										DeclareExecutionIssue Information:Processing addToVlan
+							useFieldsInCommand="false"
+						4.1.2.1.1.2 #make REST calls back to Velocity in order to discover which equipment ports are connected to switch ports
+							useFieldsInCommand="false"
+							4.1.2.1.1.2.1 if !$velocityRestComplete
+								useFieldsInCommand="false"
+								4.1.2.1.1.2.1.1 then 
+									useFieldsInCommand="false"
+									4.1.2.1.1.2.1.1.1 eval set token [velocity token]
+										useFieldsInCommand="false"
+									4.1.2.1.1.2.1.1.2 eval set url [velocity url]
+										useFieldsInCommand="false"
+									4.1.2.1.1.2.1.1.3 open r1 application:com.fnfr.itest.applications.webservices.restful
+										transferableToolId="com.fnfr.itest.applications.webservices.restful"
+										transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties"
+										url="$url"
+										url.inherit="false"
+										acceptAllCookies="true"
+										acceptAllCookies.inherit="false"
+										authentication(transferableToolId="com.fnfr.itest.applications.webservices.restful")(transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties")(acceptAllCertificates="true")(acceptAllCertificates.inherit="false")
+										httpHeader(inherit="false")(transferableToolId="com.fnfr.itest.applications.webservices.restful")
+											memberClasses
+												item="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry"
+											item(transferableToolId="com.fnfr.itest.applications.webservices.restful")(transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry")(header="X-Auth-Token")(header.inherit="false")(value="$token")(value.inherit="false")
+									4.1.2.1.1.2.1.1.4 eval set resourceList [tbml query //resource\\[@type='device'\\]/@guid]
+										useFieldsInCommand="false"
+									4.1.2.1.1.2.1.1.5 foreach resourceId $resourceList
+										useFieldsInCommand="false"
+										4.1.2.1.1.2.1.1.5.1 eval set portList [tbml query //resource\\[@guid='$resourceId'\\]/resource\\[@type='port'\\]/@guid]
+											useFieldsInCommand="false"
+										4.1.2.1.1.2.1.1.5.2 foreach id $portList
+											useFieldsInCommand="false"
+											4.1.2.1.1.2.1.1.5.2.1 GET r1 api/inventory/v7/device/$resourceId/port/$id
+												analyze
+													query mapped/Json/id
+													store equipmentPortIdfalsetrue
+												analyze
+													query mapped/Json/connectedPortName
+													store connectedPortNamefalsetrue
+												action="api/inventory/v7/device/$resourceId/port/$id"
+											4.1.2.1.1.2.1.1.5.2.2 eval set switchPortToEquipmentPort($connectedPortName) $equipmentPortId
+												useFieldsInCommand="false"
+											4.1.2.1.1.2.1.1.5.2.3 eval set equipmentPortToSwitchPort($equipmentPortId) $connectedPortName
+												useFieldsInCommand="false"
+									4.1.2.1.1.2.1.1.6 close r1 
+									4.1.2.1.1.2.1.1.7 eval set velocityRestComplete 1
+										useFieldsInCommand="false"
+						4.1.2.1.1.3 #discover topology contents and connectivity
+							useFieldsInCommand="false"
+							4.1.2.1.1.3.1 eval set switchPortNumber $argArray(-portNumber)
+								analyze
+									query group1()
+									message Information:Switch port name {value}
+								useFieldsInCommand="false"
+							4.1.2.1.1.3.2 eval set portGuid $switchPortToEquipmentPort($switchPortNumber)
+								analyze
+									query group1()
+									message Information:Physically connected to guid {value}
+								useFieldsInCommand="false"
+							4.1.2.1.1.3.3 eval set portId [tbml query //resource\\[@guid='$portGuid'\\]/@id]
+								analyze
+									query group1()
+									message Information:Known as id: {value} in topology
+								useFieldsInCommand="false"
+							4.1.2.1.1.3.4 eval set farEndId [tbml query //tbml/body/connectivity/link/endpoint\\[@id='$portId'\\]/../endpoint\\[@id!='$portId'\\]/@id]
+								analyze
+									query group1()
+									message Information:Whose far end id is: {value} in topology
+								useFieldsInCommand="false"
+							4.1.2.1.1.3.5 eval set isVlan [tbml query fn:count(//resource\\[@id='$farEndId'\\]\\[@type='vlan'\\])]
+								useFieldsInCommand="false"
+						4.1.2.1.1.4 #determine if far end is another device or a vlan cloud
+							useFieldsInCommand="false"
+							4.1.2.1.1.4.1 if $isVlan
+								useFieldsInCommand="false"
+								4.1.2.1.1.4.1.1 then 
+									useFieldsInCommand="false"
+									4.1.2.1.1.4.1.1.1 #message to user - this is a vlan
+										analyze
+											none 
+											assert 1
+												When True
+													DeclareExecutionIssue Information:This port is connected to a VLAN cloud
+										useFieldsInCommand="false"
+									4.1.2.1.1.4.1.1.2 eval set numNonTapPorts [tbml query fn:count(//tbml/body/connectivity/link/endpoint\\[@id='$farEndId'\\]/../propertyCollection/property\\[@name='shortcut'\\]\\[text()!='Tap'\\])]
+										analyze
+											query group1()
+											assert $value == 2
+												When True
+													PassTestIfNotAlreadyFailed 
+													DeclareExecutionIssue OK:VLAN $farEndId does have 2 connections that are not Tap connection types
+												When False
+													FailTest 
+													DeclareExecutionIssue Error:VLAN $farEndId does NOT have 2 connections that are not Tap connection types
+										useFieldsInCommand="false"
+									4.1.2.1.1.4.1.1.3 if [tbml query //tbml/body/connectivity/link/endpoint\\[@id='$portId'\\]/../propertyCollection/property\\[@name='shortcut'\\]/text()] == "Tap"
+										useFieldsInCommand="false"
+										4.1.2.1.1.4.1.1.3.1 then 
+											useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.1 #this is a tap port
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.2 eval set txPortToTap [tbml query //tbml/body/connectivity/link/endpoint\\[@id='$portId'\\]/../propertyCollection/property\\[@name='TxPortToTap'\\]/text()]
+												analyze
+													contains ^.+,.+$ Regex
+													assert $value == 1
+														When True
+															PassTestIfNotAlreadyFailed 
+															DeclareExecutionIssue OK:Tap port syntax of resource,port looks correct
+														When False
+															FailTest 
+															DeclareExecutionIssue Error:Tap port syntax should be resource,port
+												analyze
+													regex [^\\r\\n]+
+													message Information:This port should be used to tap {value}
+												analyze
+													regex ^(.+),.+$
+													store resourceToTapfalsetrue
+												analyze
+													regex ^.+,(.+)$
+													store portToTapfalsetrue
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.3 eval set guidToTap [tbml query //resource/property\\[@name='name'\\]\\[text()='$resourceToTap'\\]/../resource/property\\[@name='name'\\]\\[text()='$portToTap'\\]/../@guid ]
+												analyze
+													query isEmpty
+													assert $value == "false"
+														When True
+															DeclareExecutionIssue OK:Port to tap does exist in topology
+															PassTestIfNotAlreadyFailed 
+														When False
+															DeclareExecutionIssue Error:Port to tap does NOT exist in topology
+															FailTest 
+															ExitExecution 
+												analyze
+													query group1()
+													message Information:Port to be tapped guid: {value}
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.4 eval set farEndSwitchPortName $equipmentPortToSwitchPort($guidToTap)
+												analyze
+													query group1()
+													message Information:To be connected to: {value}
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.5 eval set simplexConnectionList [linsert $simplexConnectionList end "$farEndSwitchPortName $switchPortNumber"]
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.6 eval set idToTap [tbml query //resource\\[@guid='$guidToTap'\\]/@id]
+												analyze
+													query group1()
+													message Information:id of port to tap: {value}
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.7 dumpState 
+												analyze
+													query //tbml/body/connectivity/link/endpoint\\[@id='$farEndId'\\]/../propertyCollection/property\\[@name='shortcut'\\]\\[@value!='Tap'\\]/../..\\[not (endpoint/@id='$idToTap') \\]/endpoint\\[@id!='$farEndId'\\]/@id
+													store destIdfalsetrue
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.8 eval set destId [tbml query //resource\\[@id='$destId'\\]/@guid]
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.9 eval set destSwitchPortName $equipmentPortToSwitchPort($destId)
+												analyze
+													query group1()
+													message Information:Tap should send signal to: {value}
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.1.10 eval set simplexConnectionList [linsert $simplexConnectionList end "$switchPortNumber $destSwitchPortName"]
+												useFieldsInCommand="false"
+										4.1.2.1.1.4.1.1.3.2 else 
+											useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.2.1 #this is a regular non-tap port
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.2.2 dumpState 
+												analyze
+													query //tbml/body/connectivity/link/endpoint\\[@id='$farEndId'\\]/../propertyCollection/property\\[@name='shortcut'\\]\\[@value!='Tap'\\]/../..\\[not (endpoint/@id='$portId') \\]/endpoint\\[@id!='$farEndId'\\]/@id
+													store destIdfalsetrue
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.2.3 eval set destId [tbml query //resource\\[@id='$destId'\\]/@guid]
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.2.4 eval set destSwitchPortName $equipmentPortToSwitchPort($destId)
+												analyze
+													query group1()
+													message Information:To be connected to {value}
+												useFieldsInCommand="false"
+											4.1.2.1.1.4.1.1.3.2.5 eval set simplexConnectionList [linsert $simplexConnectionList 0 "$destSwitchPortName $switchPortNumber"]
+												useFieldsInCommand="false"
+									4.1.2.1.1.4.1.1.4 eval set farEndIds [tbml query //tbml/body/connectivity/link/endpoint\\[@id='$farEndId'\\]/../endpoint\\[@id!='$farEndId'\\]/@id]
+										useFieldsInCommand="false"
+									4.1.2.1.1.4.1.1.5 foreach farEndId $farEndIds
+										useFieldsInCommand="false"
+										4.1.2.1.1.4.1.1.5.1 #
+											analyze
+												none 
+												assert 1
+													When True
+														DeclareExecutionIssue Information:Port ID $farEndId is connected to VLAN cloud
+											useFieldsInCommand="false"
+								4.1.2.1.1.4.1.2 else 
+									useFieldsInCommand="false"
+									4.1.2.1.1.4.1.2.1 #message to user - this is direct connect
+										analyze
+											none 
+											assert 1
+												When True
+													DeclareExecutionIssue Information:This port is not connected to a VLAN cloud
+										useFieldsInCommand="false"
+									4.1.2.1.1.4.1.2.2 eval set farEndGuid [tbml query //resource\\[@id='$farEndId'\\]/@guid]
+										analyze
+											query group1()
+											message Information:Far end guid is: {value}
+										useFieldsInCommand="false"
+									4.1.2.1.1.4.1.2.3 eval set farEndSwitchPortName $equipmentPortToSwitchPort($farEndGuid)
+										analyze
+											query group1()
+											message Information:To be connected to: {value}
+										useFieldsInCommand="false"
+									4.1.2.1.1.4.1.2.4 eval set simplexConnectionList [linsert $simplexConnectionList end "$switchPortNumber $farEndSwitchPortName"]
+										useFieldsInCommand="false"
+					4.1.2.1.2 elseif $command == "removeFromVlan"
+						useFieldsInCommand="false"
+						4.1.2.1.2.1 #this is an removeFromVlan procedure call
+							analyze
+								none 
+								assert 1
+									When True
+										DeclareExecutionIssue Information:
+										DeclareExecutionIssue Information:Processing removeFromVlan
+							useFieldsInCommand="false"
+						4.1.2.1.2.2 #determine the existing crossconnects associated with this switch port
+							useFieldsInCommand="false"
+							4.1.2.1.2.2.1 eval set switchPortNumber $argArray(-portNumber)
+								analyze
+									query group1()
+									message Information:Switch port name {value}
+								useFieldsInCommand="false"
+							4.1.2.1.2.2.2 command s1 RTRV-PORT-SUM::$switchPortNumber\\;
+								analyze
+									query mapped/TL1/Response/Block/SubBlock/*[starts-with(name(), 'CONNNAME')]
+									store existingCrossConnectListfalsetrue
+							4.1.2.1.2.2.3 foreach cc $existingCrossConnectList
+								useFieldsInCommand="false"
+								4.1.2.1.2.2.3.1 eval set ccSrc [lindex [split $cc >] 0]
+									useFieldsInCommand="false"
+								4.1.2.1.2.2.3.2 eval set ccDst [lindex [split $cc >] 1]
+									useFieldsInCommand="false"
+								4.1.2.1.2.2.3.3 eval set simplexConnectionList [linsert $simplexConnectionList end "$ccSrc $ccDst"]
+									useFieldsInCommand="false"
+					4.1.2.1.3 else 
+						useFieldsInCommand="false"
+						4.1.2.1.3.1 #this procedure call is something other than addToVlan or removeFromVlan
+							analyze
+								none 
+								assert 1
+									When True
+										DeclareExecutionIssue Information:Command was something other than addToVlan or removeFromVlan
+							useFieldsInCommand="false"
+						4.1.2.1.3.2 call [param call_$i]
+	5 #process any intercepted procedure calls
+		useFieldsInCommand="false"
+		5.1 foreach connection $simplexConnectionList
+			useFieldsInCommand="false"
+			5.1.1 eval set simplexConnectionArray([lindex $connection 0]) [lindex $connection 1]
+				useFieldsInCommand="false"
+		5.2 if ([info issueCount error] + [info issueCount warning]) == 0
+			useFieldsInCommand="false"
+			5.2.1 then 
+				useFieldsInCommand="false"
+				5.2.1.1 if [info status] == "Pass"
+					useFieldsInCommand="false"
+					5.2.1.1.1 then 
+						useFieldsInCommand="false"
+						5.2.1.1.1.1 #pass verdict
+							useFieldsInCommand="false"
+						5.2.1.1.1.2 foreach from [array names simplexConnectionArray]
+							useFieldsInCommand="false"
+							5.2.1.1.1.2.1 eval set to $simplexConnectionArray($from)
+								useFieldsInCommand="false"
+							5.2.1.1.1.2.2 if $command == "addToVlan"
+								useFieldsInCommand="false"
+								5.2.1.1.1.2.2.1 then 
+									useFieldsInCommand="false"
+									5.2.1.1.1.2.2.1.1 call connect -port1 $from -port2 $to -direction to
+										useFieldsInCommand="false"
+								5.2.1.1.1.2.2.2 elseif $command == "removeFromVlan"
+									useFieldsInCommand="false"
+									5.2.1.1.1.2.2.2.1 call disconnect -port1 $from -port2 $to -direction to
+										useFieldsInCommand="false"
+					5.2.1.1.2 else 
+						useFieldsInCommand="false"
+						5.2.1.1.2.1 #no pass verdict
+							analyze
+								none 
+								assert 1 == 1
+									When True
+										DeclareExecutionIssue Error:No pass verdict found thus far
+										FailTest 
+										ExitExecution 
+							useFieldsInCommand="false"
+			5.2.2 else 
+				useFieldsInCommand="false"
+				5.2.2.1 #some warnings or errors detected
+					analyze
+						none 
+						assert 1 == 1
+							When True
+								DeclareExecutionIssue Error:Some warnings or errors detected thus far
+								FailTest 
+								ExitExecution 
+					useFieldsInCommand="false"
+	6 #close down connection(s)
+		useFieldsInCommand="false"
+		6.1 if [gget isTelnetConnection]
+			useFieldsInCommand="false"
+			6.1.1 then 
+				useFieldsInCommand="false"
+				6.1.1.1 close sPF 
+					analyze
+						none 
+						assert 1 == 1
+							When True
+								PassTestIfNotAlreadyFailed 
+				6.1.1.2 close tn1 
+					analyze
+						none 
+						assert 1 == 1
+							When True
+								PassTestIfNotAlreadyFailed 
+			6.1.2 else 
+				useFieldsInCommand="false"
+				6.1.2.1 close s1 
+					analyze
+						none 
+						assert 1 == 1
+							When True
+								PassTestIfNotAlreadyFailed 
+					useFieldsInCommand="false"
+	7 #return json response
+		useFieldsInCommand="false"
+		7.1 return $ret
+Procedure convertPortToCSPP
+	1 eval set port ${arg[1]}
+		useFieldsInCommand="false"
+	2 eval set fields [split $port .]
+		useFieldsInCommand="false"
+	3 return [format "%s%s%02s" [lindex $fields 0] [lindex $fields 1] [lindex $fields 2]]
+Procedure getConnections
+	1 #Obtain a list of all currently connected ports
+		useFieldsInCommand="false"
+	2 if [gget isTelnetConnection]
+		useFieldsInCommand="false"
+		2.1 then 
+			useFieldsInCommand="false"
+			2.1.1 command tn1 RTRV-CRS
+				analyze
+					regex (.*) false
+					store cmdResultfalsetrue
+				analyze
+					contains COMPLD
+					assert $value == 1True if all true
+						When True
+							PassTestIfNotAlreadyFailed 
+						When False
+							FailTest 
+							DeclareExecutionIssue Error:${cmdResult}
+				analyze
+					regex ^.*SRCPORT=([^,]*) false
+					store ports1truefalsetrue
+				analyze
+					regex ^.*DSTPORT=([^,]*) false
+					store ports2truefalsetrue
+				analyze
+					regex ^.*CONNTYPE=([^,]*) false
+					store typestruefalsetrue
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+		2.2 else 
+			useFieldsInCommand="false"
+			2.2.1 command s1 RTRV-CRS
+				analyze
+					regex (.*) false
+					store cmdResultfalsetrue
+				analyze
+					contains COMPLD
+					assert $value == 1True if all true
+						When True
+							PassTestIfNotAlreadyFailed 
+						When False
+							FailTest 
+							DeclareExecutionIssue Error:${cmdResult}
+				analyze
+					regex ^.*SRCPORT=([^,]*) false
+					store ports1truefalsetrue
+				analyze
+					regex ^.*DSTPORT=([^,]*) false
+					store ports2truefalsetrue
+				analyze
+					regex ^.*CONNTYPE=([^,]*) false
+					store typestruefalsetrue
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+	3 eval set ret "{\\"connections\\":\\["
+		useFieldsInCommand="false"
+	4 for {set i 0} {$i < [llength $ports1]} {incr i}
+		useFieldsInCommand="false"
+		4.1 eval set p1 [lindex $ports1 $i]
+			useFieldsInCommand="false"
+		4.2 eval set p2 [lindex $ports2 $i]
+			useFieldsInCommand="false"
+		4.3 eval set type [lindex $types $i]
+			useFieldsInCommand="false"
+		4.4 if $type == "2WAY"
+			useFieldsInCommand="false"
+			4.4.1 then 
+				useFieldsInCommand="false"
+				4.4.1.1 eval set type "bidir"
+					useFieldsInCommand="false"
+			4.4.2 else 
+				useFieldsInCommand="false"
+				4.4.2.1 eval set type "to"
+					useFieldsInCommand="false"
+		4.5 if $i != 0
+			useFieldsInCommand="false"
+			4.5.1 then 
+				useFieldsInCommand="false"
+				4.5.1.1 eval set ret "$ret,"
+					useFieldsInCommand="false"
+		4.6 eval set ret "$ret{\\"port1\\":\\"$p1\\",\\"port2\\":\\"$p2\\",\\"type\\":\\"$type\\"}"
+			useFieldsInCommand="false"
+	5 eval set ret "$ret\\]}"
+		useFieldsInCommand="false"
+	6 return $ret
+Procedure connect
+	1 eval set p ${arg[1]}
+		skip="true"
+		useFieldsInCommand="false"
+	2 eval set port1 [lindex $p 0]
+		skip="true"
+		useFieldsInCommand="false"
+	3 eval set port2 [lindex $p 1]
+		skip="true"
+		useFieldsInCommand="false"
+	4 eval set direction [lindex $p 2]
+		skip="true"
+		useFieldsInCommand="false"
+	5 #Translate direction to ENT-CRS and  ACT-CRS commands format
+		useFieldsInCommand="false"
+	6 if $direction == "to"
+		useFieldsInCommand="false"
+		6.1 then 
+			useFieldsInCommand="false"
+			6.1.1 eval set dirWay "1way"
+				useFieldsInCommand="false"
+			6.1.2 eval set dirSymbol ">"
+				useFieldsInCommand="false"
+		6.2 else 
+			useFieldsInCommand="false"
+			6.2.1 eval set dirWay "2way"
+				useFieldsInCommand="false"
+			6.2.2 eval set dirSymbol "-"
+				useFieldsInCommand="false"
+	7 if [gget isTelnetConnection]
+		useFieldsInCommand="false"
+		7.1 then 
+			useFieldsInCommand="false"
+			7.1.1 #Retrieve information about all connections
+				useFieldsInCommand="false"
+			7.1.2 command tn1 RTRV-CRS
+				analyze
+					contains ${port1}${dirSymbol}${port2}
+					store connectionAlreadyExistsfalsetrue
+				analyze
+					contains ${port2}${dirSymbol}${port1}
+					store reverseOrderConnectionExistsfalsetrue
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+			7.1.3 if ($dirSymbol == "-" & $connectionAlreadyExists == 0 &  $reverseOrderConnectionExists == 0) | ($dirSymbol == ">" & $connectionAlreadyExists == 0 )
+				useFieldsInCommand="false"
+				7.1.3.1 then 
+					useFieldsInCommand="false"
+					7.1.3.1.1 command tn1 ENT-CRS-ENH::${port1},${port2}:::,${dirWay}
+						analyze
+							regex (.*) false
+							store cmdResultfalsetrue
+						analyze
+							contains COMPLD
+							assert $value == 1True if all true
+								When True
+									PassTestIfNotAlreadyFailed 
+								When False
+									FailTest 
+									DeclareExecutionIssue Error:${cmdResult}
+						useAutoMap="false"
+						idleChannel(inherit="false")="500"
+			7.1.4 if $dirSymbol == "-" & $reverseOrderConnectionExists == 1
+				useFieldsInCommand="false"
+				7.1.4.1 then 
+					useFieldsInCommand="false"
+					7.1.4.1.1 command tn1 ACT-CRS:::::${port2}${dirSymbol}${port1}
+						analyze
+							regex (.*) false
+							store cmdResultfalsetrue
+						analyze
+							contains COMPLD
+							assert $value == 1True if all true
+								When True
+									PassTestIfNotAlreadyFailed 
+								When False
+									FailTest 
+									DeclareExecutionIssue Error:${cmdResult}
+						useAutoMap="false"
+						idleChannel(inherit="false")="500"
+				7.1.4.2 else 
+					useFieldsInCommand="false"
+					7.1.4.2.1 command tn1 ACT-CRS:::::${port1}${dirSymbol}${port2}
+						analyze
+							regex (.*) false
+							store cmdResultfalsetrue
+						analyze
+							contains COMPLD
+							assert $value == 1True if all true
+								When True
+									PassTestIfNotAlreadyFailed 
+								When False
+									FailTest 
+									DeclareExecutionIssue Error:${cmdResult}
+						useAutoMap="false"
+						idleChannel(inherit="false")="500"
+		7.2 else 
+			useFieldsInCommand="false"
+			7.2.1 #Retrieve information about all connections
+				useFieldsInCommand="false"
+			7.2.2 command s1 RTRV-CRS
+				analyze
+					contains ${port1}${dirSymbol}${port2}
+					store connectionAlreadyExistsfalsetrue
+				analyze
+					contains ${port2}${dirSymbol}${port1}
+					store reverseOrderConnectionExistsfalsetrue
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+			7.2.3 if ($dirSymbol == "-" & $connectionAlreadyExists == 0 &  $reverseOrderConnectionExists == 0) | ($dirSymbol == ">" & $connectionAlreadyExists == 0 )
+				useFieldsInCommand="false"
+				7.2.3.1 then 
+					useFieldsInCommand="false"
+					7.2.3.1.1 command s1 ENT-CRS-ENH::${port1},${port2}:::,${dirWay}
+						analyze
+							regex (.*) false
+							store cmdResultfalsetrue
+						analyze
+							contains COMPLD
+							assert $value == 1True if all true
+								When True
+									PassTestIfNotAlreadyFailed 
+								When False
+									FailTest 
+									DeclareExecutionIssue Error:${cmdResult}
+						useAutoMap="false"
+						idleChannel(inherit="false")="500"
+			7.2.4 if $dirSymbol == "-" & $reverseOrderConnectionExists == 1
+				useFieldsInCommand="false"
+				7.2.4.1 then 
+					useFieldsInCommand="false"
+					7.2.4.1.1 command s1 ACT-CRS:::::${port2}${dirSymbol}${port1}
+						analyze
+							regex (.*) false
+							store cmdResultfalsetrue
+						analyze
+							contains COMPLD
+							assert $value == 1True if all true
+								When True
+									PassTestIfNotAlreadyFailed 
+								When False
+									FailTest 
+									DeclareExecutionIssue Error:${cmdResult}
+						useAutoMap="false"
+						idleChannel(inherit="false")="500"
+				7.2.4.2 else 
+					useFieldsInCommand="false"
+					7.2.4.2.1 command s1 ACT-CRS:::::${port1}${dirSymbol}${port2}
+						analyze
+							regex (.*) false
+							store cmdResultfalsetrue
+						analyze
+							contains COMPLD
+							assert $value == 1True if all true
+								When True
+									PassTestIfNotAlreadyFailed 
+								When False
+									FailTest 
+									DeclareExecutionIssue Error:${cmdResult}
+						useAutoMap="false"
+						idleChannel(inherit="false")="500"
+	8 return 
+Procedure disconnect
+	1 eval set p ${arg[1]}
+		skip="true"
+		useFieldsInCommand="false"
+	2 eval set port1 [lindex $p 0]
+		skip="true"
+		useFieldsInCommand="false"
+	3 eval set port2 [lindex $p 1]
+		skip="true"
+		useFieldsInCommand="false"
+	4 eval set direction [lindex $p 2]
+		skip="true"
+		useFieldsInCommand="false"
+	5 #Translate direction to DLT-CRS command format
+		useFieldsInCommand="false"
+	6 if $direction == "to"
+		useFieldsInCommand="false"
+		6.1 then 
+			useFieldsInCommand="false"
+			6.1.1 eval set dirSymbol ">"
+				useFieldsInCommand="false"
+		6.2 else 
+			useFieldsInCommand="false"
+			6.2.1 eval set dirSymbol "-"
+				useFieldsInCommand="false"
+	7 if [gget isTelnetConnection]
+		useFieldsInCommand="false"
+		7.1 then 
+			useFieldsInCommand="false"
+			7.1.1 if $dirSymbol == "-"
+				useFieldsInCommand="false"
+				7.1.1.1 then 
+					useFieldsInCommand="false"
+					7.1.1.1.1 command tn1 RTRV-CRS
+						analyze
+							contains ${port2}${dirSymbol}${port1}
+							store reverseConnectionExistsfalsetrue
+						useAutoMap="false"
+						idleChannel(inherit="false")="500"
+					7.1.1.1.2 if $reverseConnectionExists == 1
+						7.1.1.1.2.1 then 
+							7.1.1.1.2.1.1 eval set tmpPort $port1
+								useFieldsInCommand="false"
+							7.1.1.1.2.1.2 eval set port1 $port2
+								useFieldsInCommand="false"
+							7.1.1.1.2.1.3 eval set port2 $tmpPort
+								useFieldsInCommand="false"
+			7.1.2 command tn1 DLT-CRS:::::${port1}${dirSymbol}${port2}
+				analyze
+					regex (.*) false
+					store cmdResultfalsetrue
+				analyze
+					contains COMPLD
+					assert $value == 1True if all true
+						When True
+							PassTestIfNotAlreadyFailed 
+						When False
+							FailTest 
+							DeclareExecutionIssue Error:${cmdResult}
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+		7.2 else 
+			useFieldsInCommand="false"
+			7.2.1 if $dirSymbol == "-"
+				useFieldsInCommand="false"
+				7.2.1.1 then 
+					useFieldsInCommand="false"
+					7.2.1.1.1 command s1 RTRV-CRS
+						analyze
+							contains ${port2}${dirSymbol}${port1}
+							store reverseConnectionExistsfalsetrue
+						useAutoMap="false"
+						idleChannel(inherit="false")="500"
+					7.2.1.1.2 if $reverseConnectionExists == 1
+						7.2.1.1.2.1 then 
+							7.2.1.1.2.1.1 eval set tmpPort $port1
+								useFieldsInCommand="false"
+							7.2.1.1.2.1.2 eval set port1 $port2
+								useFieldsInCommand="false"
+							7.2.1.1.2.1.3 eval set port2 $tmpPort
+								useFieldsInCommand="false"
+			7.2.2 command s1 DLT-CRS:::::${port1}${dirSymbol}${port2}
+				analyze
+					regex (.*) false
+					store cmdResultfalsetrue
+				analyze
+					contains COMPLD
+					assert $value == 1True if all true
+						When True
+							PassTestIfNotAlreadyFailed 
+						When False
+							FailTest 
+							DeclareExecutionIssue Error:${cmdResult}
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+	8 return 
+Procedure getPorts
+	1 call getUnwrappedPorts
+		useFieldsInCommand="false"
+	2 eval set ret "{$ret}"
+		useFieldsInCommand="false"
+	3 return $ret
+Procedure getUnwrappedPorts
+	1 if [gget isTelnetConnection]
+		useFieldsInCommand="false"
+		1.1 then 
+			useFieldsInCommand="false"
+			1.1.1 command tn1 RTRV-PORT-SUM::0
+				analyze
+					regex (.*) false
+					store cmdResultfalsetrue
+				analyze
+					contains COMPLD
+					assert $value == 1True if all true
+						When True
+							PassTestIfNotAlreadyFailed 
+						When False
+							FailTest 
+							DeclareExecutionIssue Error:${cmdResult}
+				analyze
+					regex ^\\s+"(\\d+)\\.\\d+\\.\\d+: false
+					store chassisfalsetrue
+				analyze
+					regex ^\\s+"\\d+\\.(\\d+)\\.\\d+: false
+					store bladesfalsetrue
+				analyze
+					regex ^\\s+"([^:]*): false
+					store portsfalsetrue
+				analyze
+					regex ^.*INPWR=([^,]*)
+					store statusesfalsetrue
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+		1.2 else 
+			useFieldsInCommand="false"
+			1.2.1 command s1 RTRV-PORT-SUM::0
+				analyze
+					regex (.*) false
+					store cmdResultfalsetrue
+				analyze
+					contains COMPLD
+					assert $value == 1True if all true
+						When True
+							PassTestIfNotAlreadyFailed 
+						When False
+							FailTest 
+							DeclareExecutionIssue Error:${cmdResult}
+				analyze
+					regex ^\\s+"(\\d+)\\.\\d+\\.\\d+: false
+					store chassisfalsetrue
+				analyze
+					regex ^\\s+"\\d+\\.(\\d+)\\.\\d+: false
+					store bladesfalsetrue
+				analyze
+					regex ^\\s+"([^:]*): false
+					store portsfalsetrue
+				analyze
+					regex ^.*INPWR=([^,]*)
+					store statusesfalsetrue
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+	2 eval set ret "\\"ports\\":\\["
+		useFieldsInCommand="false"
+	3 for {set i 0} {$i < [llength $ports]} {incr i}
+		useFieldsInCommand="false"
+		3.1 eval set chassi [lindex $chassis $i]
+			useFieldsInCommand="false"
+		3.2 eval set blade [lindex $blades $i]
+			useFieldsInCommand="false"
+		3.3 eval set name [lindex $ports $i]
+			useFieldsInCommand="false"
+		3.4 eval set status [lindex $statuses $i]
+			useFieldsInCommand="false"
+		3.5 if $chassi != "" && $blade != ""
+			useFieldsInCommand="false"
+			3.5.1 then 
+				useFieldsInCommand="false"
+				3.5.1.1 eval set group "Chassis $chassi/Blade $chassi.$blade"
+					useFieldsInCommand="false"
+			3.5.2 else 
+				useFieldsInCommand="false"
+				3.5.2.1 if $blade != ""
+					useFieldsInCommand="false"
+					3.5.2.1.1 then 
+						useFieldsInCommand="false"
+						3.5.2.1.1.1 eval set group "Blade $blade"
+							useFieldsInCommand="false"
+					3.5.2.1.2 else 
+						useFieldsInCommand="false"
+						3.5.2.1.2.1 eval set group ""
+							useFieldsInCommand="false"
+		3.6 if $status != "NONE"
+			useFieldsInCommand="false"
+			3.6.1 then 
+				useFieldsInCommand="false"
+				3.6.1.1 eval set status "online"
+					useFieldsInCommand="false"
+			3.6.2 else 
+				useFieldsInCommand="false"
+				3.6.2.1 eval set status "offline"
+					useFieldsInCommand="false"
+		3.7 if $i != 0
+			useFieldsInCommand="false"
+			3.7.1 then 
+				useFieldsInCommand="false"
+				3.7.1.1 eval set ret "$ret,"
+					useFieldsInCommand="false"
+		3.8 eval set ret "$ret{\\"name\\":\\"$name\\",\\"status\\":\\"$status\\",\\"container\\":\\"$group\\"}"
+			useFieldsInCommand="false"
+	4 eval set ret "$ret\\]"
+		useFieldsInCommand="false"
+	5 return $ret
+Procedure getDeviceStatus
+	1 return online
+Procedure getProperties
+	1 #fill known properties
+		useFieldsInCommand="false"
+	2 eval set ret "\\"Make\\":\\"CALIENT Technologies Inc .\\""
+		useFieldsInCommand="false"
+	3 #Retrieves the serial number and software version
+		useFieldsInCommand="false"
+	4 if [gget isTelnetConnection]
+		useFieldsInCommand="false"
+		4.1 then 
+			useFieldsInCommand="false"
+			4.1.1 command tn1 RTRV-NE
+				analyze
+					regex (.*) false
+					store cmdResultfalsetrue
+				analyze
+					contains COMPLD
+					assert $value == 1True if all true
+						When True
+							PassTestIfNotAlreadyFailed 
+						When False
+							FailTest 
+							DeclareExecutionIssue Error:${cmdResult}
+				analyze
+					regex ^.*SERIALNUMBER=([^,]*)
+					store serialNumberfalsetrue
+				analyze
+					regex ^.*SWPACKAGE=([^,]*)
+					store softwareVersionfalsetrue
+				analyze
+					regex ^.*CHASSISTYPE=([^,]*)
+					store modelfalsetrue
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+		4.2 else 
+			useFieldsInCommand="false"
+			4.2.1 command s1 RTRV-NE
+				analyze
+					regex (.*) false
+					store cmdResultfalsetrue
+				analyze
+					contains COMPLD
+					assert $value == 1True if all true
+						When True
+							PassTestIfNotAlreadyFailed 
+						When False
+							FailTest 
+							DeclareExecutionIssue Error:${cmdResult}
+				analyze
+					regex ^.*SERIALNUMBER=([^,]*)
+					store serialNumberfalsetrue
+				analyze
+					regex ^.*SWPACKAGE=([^,]*)
+					store softwareVersionfalsetrue
+				analyze
+					regex ^.*CHASSISTYPE=([^,]*)
+					store modelfalsetrue
+				useAutoMap="false"
+				idleChannel(inherit="false")="500"
+	5 call addPropToResult -json $ret -name "Serial Number" -val $serialNumber
+		useFieldsInCommand="false"
+	6 call addPropToResult -json $ret -name "Software Version" -val $softwareVersion
+		useFieldsInCommand="false"
+	7 call addPropToResult -json $ret -name "Model" -val $model
+		useFieldsInCommand="false"
+	8 eval set ret "\\"properties\\":{$ret}"
+		useFieldsInCommand="false"
+	9 if $includePorts == "true"
+		useFieldsInCommand="false"
+		9.1 then 
+			useFieldsInCommand="false"
+			9.1.1 #Insert steps here for when expression is true
+				useFieldsInCommand="false"
+			9.1.2 call getUnwrappedPorts
+				useFieldsInCommand="false"
+			9.1.3 eval set ret "$ret,$ports"
+				useFieldsInCommand="false"
+	10 eval set ret "{$ret}"
+		useFieldsInCommand="false"
+	11 return $ret
+Procedure addPropToResult
+	1 if $val != "" & $val != 0
+		useFieldsInCommand="false"
+		1.1 then 
+			useFieldsInCommand="false"
+			1.1.1 eval set delimeter ""
+				useFieldsInCommand="false"
+			1.1.2 if $json != ""
+				useFieldsInCommand="false"
+				1.1.2.1 then 
+					useFieldsInCommand="false"
+					1.1.2.1.1 eval set delimeter ","
+						useFieldsInCommand="false"
+			1.1.3 eval set json "$json$delimeter\\"$name\\":\\"$val\\""
+				useFieldsInCommand="false"
+	2 return $json
+Procedure getHostParameter
+	1 eval set host ""
+		useFieldsInCommand="false"
+	2 if [info exists param property_ipAddress] == 1
+		useFieldsInCommand="false"
+		2.1 then 
+			useFieldsInCommand="false"
+			2.1.1 if [param property_ipAddress] != ""
+				useFieldsInCommand="false"
+				2.1.1.1 then 
+					useFieldsInCommand="false"
+					2.1.1.1.1 eval set host [param property_ipAddress]
+						useFieldsInCommand="false"
+	3 if $host == "" && [info exists param property_Hostname]
+		useFieldsInCommand="false"
+		3.1 then 
+			useFieldsInCommand="false"
+			3.1.1 if [param property_Hostname] != ""
+				useFieldsInCommand="false"
+				3.1.1.1 then 
+					useFieldsInCommand="false"
+					3.1.1.1.1 eval set host [param property_Hostname]
+						useFieldsInCommand="false"
+	4 if $host == ""
+		useFieldsInCommand="false"
+		4.1 then 
+			useFieldsInCommand="false"
+			4.1.1 #Parameter ipAddress or Hostname should be specified
+				analyze
+					none 
+					assert 1 == 1
+						When True
+							DeclareExecutionIssue Error:Parameter ipAddress or Hostname should be specified.
+							FailTest 
+							AbortExecution 
+				useFieldsInCommand="false"
+	5 return $host
+Procedure createVlan
+	1 #return PASS
+		analyze
+			none 
+			assert 1 == 1
+				When True
+					PassTestIfNotAlreadyFailed 
+				When False
+					DeclareExecutionIssue Error:{auto_message_false}
+					FailTest 
+		useFieldsInCommand="false"
+Procedure destroyVlan
+	1 #return PASS
+		analyze
+			none 
+			assert 1 == 1
+				When True
+					PassTestIfNotAlreadyFailed 
+				When False
+					DeclareExecutionIssue Error:{auto_message_false}
+					FailTest 
+		useFieldsInCommand="false"
