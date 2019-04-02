@@ -36,6 +36,17 @@
   },
   "fileSets": [
     {
+      "fileNameMatch": ".*\\.bat",
+      "language": "batch",
+      "commandSequence": [
+        "%file% %param_build%"
+      ]
+    },
+    {
+      "fileNameMatch": "simple\\.ps1",
+      "language": "powershell"
+    },
+    {
       "fileNameMatch": "timeout\\.sh",
       "language": "bash",
       "timeout": 1
@@ -46,6 +57,45 @@
         {
           "name": "product.arch",
           "value": "x86"
+        }
+      ]
+    },
+    {
+      "fileNameMatch": ".*addTwoNumbersTogether\\.py",
+      "parameters": [
+        {
+          "description": "first number",
+          "name": "input_number1",
+          "type": "TEXT",
+          "value": "10"
+        },
+        {
+          "description": "second number",
+          "name": "input_number2",
+          "type": "TEXT",
+          "value": "5"
+        },
+        {
+          "description": "added numbers",
+          "name": "output_addedNumbers",
+          "type": "TEXT",
+          "value": "NA"
+        },
+        {
+          "description": "subtracted numbers",
+          "name": "output_subtractedNumbers",
+          "type": "TEXT",
+          "value": "NA"
+        }
+],
+      "extractedData": [
+        {
+        "pattern": "^Added: (.*)$",
+        "tag": "addedNumbers"
+        },
+        {
+        "pattern": "^Subtracted: (.*)$",
+        "tag": "subtractedNumbers"
         }
       ]
     },

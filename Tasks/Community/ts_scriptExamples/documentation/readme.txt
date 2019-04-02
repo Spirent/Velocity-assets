@@ -1,13 +1,13 @@
 Project: Script Examples
-Description: This project contains a set of example Python and Bash scripts that may be
-	helpful to users starting to run external scripts within Velocity. Here is a
-	brief description of its contents
+Description: This project contains a set of example Python, Bash, Batch, and
+Powershell scripts that may be helpful to users starting to run external
+scripts within Velocity. Here is a brief description of its contents
 Category: task
 Class: Community
 
-This project contains a set of example Python and Bash scripts that may be
-helpful to users starting to run external scripts within Velocity. Here is a
-brief description of its contents:
+This project contains a set of example Python, Bash, Batch, and Powershell
+scripts that may be helpful to users starting to run external scripts within
+Velocity. Here is a brief description of its contents:
 
 timeout.sh - default language and timeout values are over-written. this
 demonstrates that the agent aborts execution if not completed within 1 minute
@@ -53,8 +53,8 @@ topo.resources, the user can see the topology contents. this script requires
 showPythonVersion.py - this simply prints the Python version and takes all its
 properties from defaultData
 
-simple.py and simple.sh - these demonstrate the different execution messages
-that are classified during execution
+simple.py, simple.sh, simple.bat, simple.ps1 - these demonstrate the different
+execution messages that are classified during execution
 
 velocity_env.py - this demonstrates the ability to perform Velocity REST API
 methods on the calling Velocity instance. the script shows the profile of the
