@@ -20,7 +20,7 @@ Reserve the topology, and the connection light should go green.
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>includePorts</td><tr></tr></table>
 
-###getPorts
+### getPorts
 ###connect
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>firstPort</td><tr></tr>
