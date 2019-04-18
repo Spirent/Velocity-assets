@@ -1,4 +1,5 @@
-### Project Information:Project: Script Examples
+### Project Information:
+Project: Script Examples
 Description: This project contains a set of example Python, Bash, Batch, and Powershell scripts that may be helpful to users starting to run external scripts within Velocity
 Category: task
 Class: Community
