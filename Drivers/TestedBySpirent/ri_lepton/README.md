@@ -12,8 +12,8 @@ Class: TestedBySpirent
 1 test case in project
 ## Test Case File: lepton-1.0.0.fftc
 ### Lepton Systems (ColdFusion) L1 Switch Driver
-Model a device called using the Lepton ColdFusion Switch template, associate it with this driver, and assign all required properties.
-Click Discover for the driver to auto-populate the port groups and ports
+Model a device called using the "Lepton ColdFusion Switch" template, associate it with this driver, and assign all required properties.
+Click “Discover” for the driver to auto-populate the port groups and ports
 Connect at least two inventory devices to this switch.
 Create a topology connecting these two devices together with an Ethernet connection.
 Reserve the topology, and the connection light should go green.
