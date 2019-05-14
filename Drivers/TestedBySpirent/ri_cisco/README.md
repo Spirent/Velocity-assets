@@ -1,4 +1,5 @@
-### Project Information:Project: Cisco driver
+### Project Information:
+Project: Cisco driver
 Description: This default Cisco driver works for Cisco Catalyst 3550, 3750, 2960
 Category: driver
 Class: TestedBySpirent
@@ -20,33 +21,33 @@ The Cisco driver has been tested for models 3750 and 2960.
 
  ----
 1 test case in project
-##Test Case File: cisco.fftc
-###switchPortToAccessModeIfDynamic
-###getIsInTrunkModeByTaggedValue
-###parseSessionInfo
-###openSession
-###getProperties
-###addPropToResult
+## Test Case File: cisco.fftc
+### switchPortToAccessModeIfDynamic
+### getIsInTrunkModeByTaggedValue
+### parseSessionInfo
+### openSession
+### getProperties
+### addPropToResult
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>json</td><tr></tr>
 <tr><td>name</td><tr></tr>
 <tr><td>val</td><tr></tr></table>
 
-###getPorts
-###getUnwrappedPorts
-###openSessionSimple
-###openSessionTryHard
-###getDeviceStatus
-###createVlan
-###batchAddToVlan
-###batchRemoveFromVlan
-###destroyVlan
-###setConfig
-###setImage
-###reload
-###setConfigAndImage
-###isEnoughSpace
-###getCurrentImage
-###backupCurrentImage
-###copyFile
-###getHostParameter
+### getPorts
+### getUnwrappedPorts
+### openSessionSimple
+### openSessionTryHard
+### getDeviceStatus
+### createVlan
+### batchAddToVlan
+### batchRemoveFromVlan
+### destroyVlan
+### setConfig
+### setImage
+### reload
+### setConfigAndImage
+### isEnoughSpace
+### getCurrentImage
+### backupCurrentImage
+### copyFile
+### getHostParameter

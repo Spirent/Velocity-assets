@@ -1,80 +1,72 @@
 ### Project Information:
-BigSwitch L1 Driver  
-Provides basic commands for management of BigSwitch L1 switches.   
-<b>Tags:</b> L1  
-  
-___
-### 1 QuickCall Library in project://ri_l1_bigswitch
-1 Procedure Library in project://ri_l1_bigswitch
-### Library: project://ri_l1_bigswitch/session_profiles/big_switch_ssh_base.fftc
-___
+Project: BigSwitch L1 Driver
+Description: Provides basic commands for management of BigSwitch L1 switches.
+Category: driver
+Class: Community
+Tags: L1
+
+ ----
+1 quickcall library in project
+## Quickcall Library: big_switch_ssh_base.fftc
 ### connect
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>port1</td><tr></tr>
+<tr><td>port2</td><tr></tr>
+<tr><td>switch_id</td><tr></tr></table>
 
-Argument | Description
------------- | -------------
-port1 | 
-port2 | 
-switch_id | 
 ### disconnect
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>port1</td><tr></tr>
+<tr><td>port2</td><tr></tr>
+<tr><td>switch_id</td><tr></tr></table>
 
-Argument | Description
------------- | -------------
-port1 | 
-port2 | 
-switch_id | 
 ### getPorts
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>switch_id</td><tr></tr></table>
 
-Argument | Description
------------- | -------------
-switch_id | 
 ### getPortState
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>switch_id</td><tr></tr>
+<tr><td>interface</td><tr></tr></table>
 
-Argument | Description
------------- | -------------
-switch_id | 
-interface | 
 ### getPortsAndStates
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>switch_id</td><tr></tr></table>
 
-Argument | Description
------------- | -------------
-switch_id | 
 ### getProperties
 ### createChainName
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>port1</td><tr></tr>
+<tr><td>port2</td><tr></tr>
+<tr><td>switch_id</td><tr></tr></table>
 
-Argument | Description
------------- | -------------
-port1 | 
-port2 | 
-switch_id | 
-### Library: project://ri_l1_bigswitch/test_cases/driver.fftc
-___
-Headline: BigSwitch L1 Switch Driver
-Description:  
-How it works.  
-  
-The BigSwitch has a single controller with multiple switches.  Velocity needs to control the switches individually. To identify the different switches in the ssh session BigSwitch uses MAC addresses of the switches.  
-  
-The Manifist has the following properties  
-1. ipAddress : IP of the BigSwitch controller <required>  
-2. username : login credentials to controller <required>  
-3. password : login credentials to controller <required>  
-4. SSH Port : ssh port of BigSwitch controller <optional>  
-5. Switch Id : MAC address of individual switch managed by BigSwitch controller < required>  
-  
+1 test case in project
+## Procedure Library: driver.fftc
+### BigSwitch L1 Switch Driver
+How it works.
+
+The BigSwitch has a single controller with multiple switches.  Velocity needs to control the switches individually. To identify the different switches in the ssh session BigSwitch uses MAC addresses of the switches.
+
+The Manifist has the following properties
+1. ipAddress : IP of the BigSwitch controller <required>
+2. username : login credentials to controller <required>
+3. password : login credentials to controller <required>
+4. SSH Port : ssh port of BigSwitch controller <optional>
+5. Switch Id : MAC address of individual switch managed by BigSwitch controller < required>
 ### getPorts
-getPorts returns JSON-formatted port information.  For this driver, we are only concerned with ports in the "up" state.  It ignores any other state.  
 ### connect
 ### disconnect
 ### getProperties
 ### getPortContainer
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>switch_id</td><tr></tr></table>
 
-Argument | Description
------------- | -------------
-switch_id | 
 ### addPropToResult
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>json</td><tr></tr>
+<tr><td>name</td><tr></tr>
+<tr><td>val</td><tr></tr></table>
 
-Argument | Description
------------- | -------------
-json | 
-name | 
-val | 
+2 response maps in project
+## Response Map File: show_switch_all_interfaces.ffrm
+## Response Map File: show_version.ffrm
