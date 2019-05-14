@@ -1,0 +1,117 @@
+<testsuites>
+  
+  
+  
+          
+      
+  
+  
+          
+      
+  
+  
+  
+<testsuite name="master1" errors="0" tests="2" failures="0" time="00:00:05.524" timestamp="Apr 5, 2018 8:58:32 AM">
+  
+  
+    <testcase assertions="1" name="servant1.fftc" time="0.052" classname="master1.suite">
+    
+    <system-out>
+      <![CDATA[
+      
+        Completion Result: Pass
+      
+        Test Case:         servant1
+      
+        Location:          project://a_MasterServant/test_cases/servant1.fftc
+      
+        Owner:             
+      
+        Start Time:        Thu Apr 05 08:58:28 PDT 2018
+      
+        End Time:          Thu Apr 05 08:58:30 PDT 2018
+      
+        Duration:          00:00:02
+      
+        Total Issues:      0
+      
+        Report Id:         19
+      
+        
+      
+        
+      
+        
+      
+        Execution issues for this test case:
+      
+        Sev. Proc. Step Message                                                                             
+      
+        ------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+        info main       Execution started                                                                   
+      
+        info main       Testbed used in execution: project://a_MasterServant/topologies/ATS-NonVelocity.tbml
+      
+        pass main  2    Response contains &quot;Videos&quot;                                                          
+      
+        pass main  2    Test case servant1 has passed.                                                      
+      
+        info            Execution completed (2s)                                                            
+      
+      ]]>
+    </system-out>
+        </testcase>
+  
+  
+    <testcase assertions="1" name="servant2.fftc" time="3.111" classname="master1.suite">
+    
+    <system-out>
+      <![CDATA[
+      
+        Completion Result: Pass
+      
+        Test Case:         servant2
+      
+        Location:          project://a_MasterServant/test_cases/servant2.fftc
+      
+        Owner:             
+      
+        Start Time:        Thu Apr 05 08:58:31 PDT 2018
+      
+        End Time:          Thu Apr 05 08:58:32 PDT 2018
+      
+        Duration:          00:00:01
+      
+        Total Issues:      0
+      
+        Report Id:         28
+      
+        
+      
+        
+      
+        
+      
+        Execution issues for this test case:
+      
+        Sev. Proc. Step Message                                                                             
+      
+        ------------------------------------------------------------------------------------------------------------------------------------------------------
+      
+        info main       Execution started                                                                   
+      
+        info main       Testbed used in execution: project://a_MasterServant/topologies/ATS-NonVelocity.tbml
+      
+        pass main  2    Response contains &quot;Videos&quot;                                                          
+      
+        pass main  2    Test case servant2 has passed.                                                      
+      
+        info            Execution completed (1s)                                                            
+      
+      ]]>
+    </system-out>
+        </testcase>
+  
+</testsuite>
+</testsuites>
