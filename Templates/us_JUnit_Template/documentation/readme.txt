@@ -3,4 +3,4 @@ Description: Custom report template for Velocity that creates a JUnit XML report
 Category: template
 Class: Community
 
-Video available at: https://youtu.be/0FFbAGlEoOc
+
