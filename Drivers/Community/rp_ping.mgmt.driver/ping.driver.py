@@ -40,7 +40,7 @@ class pingSession:
         if ping == 0:
             returnDictionary = {"ports": []}
         else:
-            returnDictionary = {"status": "unreachable"}
+            sys.exit("unreachable")
             
         return returnDictionary
 
