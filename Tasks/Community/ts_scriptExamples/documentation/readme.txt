@@ -26,7 +26,7 @@ in defaultData. since there is one parameter defined in defaultData, this script
 ultimately will prompt the user for two input parameters. this script
 demonstrates how a Python script can be executed with custom argument syntax.
 
-robotDemo.rst - this demonstrates the execution of a Robot Framework script. the
+robotDemo.robot - this demonstrates the execution of a Robot Framework script. the
 commandSequence defined in defaultData is over-written with a custom command
 sequence with two items. the first command runs the robot script and the second
 command parses the debug file produced in the first step. this demonstrates how
