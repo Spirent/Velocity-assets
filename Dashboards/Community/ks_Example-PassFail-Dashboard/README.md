@@ -1,4 +1,5 @@
-### Project Information:Project: Testcase PassFail Dashboard
+### Project Information:
+Project: Testcase PassFail Dashboard
 Description: Example Kibana dashboard that displays testcase execution metrics
 Category: dashboard
 Class: Community

@@ -1,4 +1,5 @@
-### Project Information:Project: Calient Tap Driver
+### Project Information:
+Project: Calient Tap Driver
 Description: This is a specialized Calient driver that enables a circuit to be tapped via an external splitter
 Category: driver
 Class: Community
@@ -21,34 +22,34 @@ For concrete topologies, the value of "TxPortToTap" should be "PhysicalResourceN
 
  ----
 1 test case in project
-##Test Case File: calient-tap-driver.fftc
-###convertPortToCSPP
-###getConnections
-###connect
+## Test Case File: calient-tap-driver.fftc
+### convertPortToCSPP
+### getConnections
+### connect
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>port1</td><tr></tr>
 <tr><td>port2</td><tr></tr>
 <tr><td>direction</td><tr></tr></table>
 
-###disconnect
+### disconnect
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>port1</td><tr></tr>
 <tr><td>port2</td><tr></tr>
 <tr><td>direction</td><tr></tr></table>
 
-###getPorts
-###getUnwrappedPorts
-###getDeviceStatus
-###getProperties
+### getPorts
+### getUnwrappedPorts
+### getDeviceStatus
+### getProperties
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>includePorts</td><tr></tr></table>
 
-###addPropToResult
+### addPropToResult
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>json</td><tr></tr>
 <tr><td>name</td><tr></tr>
 <tr><td>val</td><tr></tr></table>
 
-###getHostParameter
-###createVlan
-###destroyVlan
+### getHostParameter
+### createVlan
+### destroyVlan
