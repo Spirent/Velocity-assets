@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="show_interfaces.ffrm"/>
+        <item name="show_vlan_port.ffrm"/>
+    </mapCatalog>
+</ResponseMapCatalog>

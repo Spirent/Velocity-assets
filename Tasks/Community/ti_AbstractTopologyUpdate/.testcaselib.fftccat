@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="7.1.0.201804110601">
+    <testCaseCatalog>
+        <item name="session_profiles/velocity_qc_lib.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="velocity_rest_api.ffsp"/>
+                </general>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

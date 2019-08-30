@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="7.1.0.201804110601">
+    <testCaseCatalog>
+        <item name="session_profiles/big_ip_base_qc.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="big_ip_base.ffsp"/>
+                </general>
+                <procedures>
+                    <item name="getActiveVersion" isPublic="true" isVBlock="true">
+                        <description>getActiveVersion</description>
+                        <version>1.0</version>
+                        <multilineDescription>This quickcall returns a JSON value corresponding to the version of the active image on the BigIP.</multilineDescription>
+                        <response>{&quot;activeVersion&quot;:null}</response>
+                    </item>
+                    <item name="getInterfaces" isPublic="true" isVBlock="true">
+                        <description>getInterfaces</description>
+                        <version>1.0</version>
+                        <multilineDescription>This quickcall returns a JSON list of interface names and statuses</multilineDescription>
+                        <response>{&quot;ports&quot;:&quot;&quot;}</response>
+                    </item>
+                    <item name="getRunningState" isPublic="true" isVBlock="true">
+                        <description>getRunningState</description>
+                        <version>1.0</version>
+                        <multilineDescription>getRunningState returns the status displayed in the prompt</multilineDescription>
+                        <response>{&quot;runningState&quot;:null}</response>
+                    </item>
+                    <item name="setVlan" isPublic="true" isVBlock="true">
+                        <description>setVlan</description>
+                        <version>1.0</version>
+                        <multilineDescription>setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values</multilineDescription>
+                        <arguments>
+                            <item name="vlanId">
+                                <description>VLAN ID to tag this interface to</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ifName">
+                                <description>interface to add to the VLAN e.g. &quot;1.2&quot;</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="hostname">
+                                <description>hostname of the current BigIP.  This should be retrieved from the topology, as the device may not be configured properly and will likely have &quot;localhost&quot; as the value.</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ipAddress">
+                                <description>ip address of the interface being added to the VLAN.</description>
+                                <defaultValue>10.10.0.0</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="cidr">
+                                <description>CIDR formatted netmask of the interface we&apos;re adding to the VLAN.</description>
+                                <defaultValue>16</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="vlanName">
+                                <description>name of the VLAN we&apos;re adding the interface to.</description>
+                                <defaultValue>external</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="dnsServers">
+                                <description>space-separated list of DNS server IP addresses</description>
+                                <defaultValue>172.27.1.1 172.27.2.1</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ntpServer">
+                                <description>hostname or IP address of ntp server</description>
+                                <defaultValue>time.f5net.com</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="fqdn">
+                                <description>fqdn for this device.  Well, everything but the hostname.</description>
+                                <defaultValue>sh.pdsea.f5net.com</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;statusCode&quot;:null}</response>
+                    </item>
+                    <item name="clearVlan" isPublic="true" isVBlock="true">
+                        <description>clearVlan</description>
+                        <version>1.0</version>
+                        <multilineDescription>clearVlan removes the specified VLAN.</multilineDescription>
+                        <arguments>
+                            <item name="vlanName">
+                                <description>Name of VLAN to remove.</description>
+                                <defaultValue>external</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;statusCode&quot;:null}</response>
+                    </item>
+                    <item name="getFirstActivePort" isPublic="true" isVBlock="true">
+                        <description>getFirstActivePort</description>
+                        <version>1.0</version>
+                        <multilineDescription>getFirstActivePort returns the name of the first port with the status of &quot;up&quot;</multilineDescription>
+                        <response>{&quot;firstPortName&quot;:null}</response>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="session_profiles/big_ip_chassis_qc.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="big_ip_chassis.ffsp"/>
+                </general>
+                <procedures>
+                    <item name="setVlan" isPublic="true" isVBlock="true">
+                        <description>setVlan</description>
+                        <version>1.0</version>
+                        <multilineDescription>setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values</multilineDescription>
+                        <arguments>
+                            <item name="vlanId">
+                                <description>VLAN ID to tag this interface to</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ifName">
+                                <description>interface to add to the VLAN e.g. &quot;1.2&quot;</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="hostname">
+                                <description>hostname of the current BigIP.  This should be retrieved from the topology, as the device may not be configured properly and will likely have &quot;localhost&quot; as the value.</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ipAddress">
+                                <description>ip address of the interface being added to the VLAN.</description>
+                                <defaultValue>10.10.0.0</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="cidr">
+                                <description>CIDR formatted netmask of the interface we&apos;re adding to the VLAN.</description>
+                                <defaultValue>16</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="vlanName">
+                                <description>name of the VLAN we&apos;re adding the interface to.</description>
+                                <defaultValue>external</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="trunkName">
+                                <description>name of trunk to create</description>
+                                <defaultValue>ext_trunk</defaultValue>
+                            </item>
+                            <item name="dnsServers">
+                                <description>space-separated list of DNS server IP addresses</description>
+                                <defaultValue>172.27.1.1 172.27.2.1</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="ntpServer">
+                                <description>hostname or IP address of ntp server</description>
+                                <defaultValue>time.f5net.com</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="fqdn">
+                                <description>fqdn for this device.  Well, everything but the hostname.</description>
+                                <defaultValue>sh.pdsea.f5net.com</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;statusCode&quot;:null}</response>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

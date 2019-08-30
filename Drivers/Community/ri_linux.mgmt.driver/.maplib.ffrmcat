@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.2.0.201901300819">
+    <mapCatalog>
+        <item name="response_maps/ifconfig-a-s.ffrm">
+            <applicability actionType="command" command="ifconfig -a -s*"/>
+        </item>
+        <item name="response_maps/list.nonVirtual.interfaces.ffrm">
+            <applicability actionType="command" command="ls -l /sys/class/net/ |grep --color=never -v /devices/virtual/net"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

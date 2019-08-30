@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/arp_a.ffrm">
+            <applicability actionType="command" command="*/sbin/arp -a*"/>
+        </item>
+        <item name="response_maps/cat_slot_config.ffrm">
+            <applicability actionType="command" command="cat slot*/.config"/>
+        </item>
+        <item name="response_maps/getUnwrappedPorts.ffrm">
+            <applicability actionType="call" command="getUnwrappedPorts"/>
+        </item>
+        <item name="response_maps/readTestModuleXml.ffrm">
+            <applicability actionType="readFile" command="project://*Default_TestModule.xml"/>
+        </item>
+        <item name="response_maps/serialno.ffrm">
+            <applicability actionType="command" command="serialno"/>
+        </item>
+        <item name="response_maps/version.ffrm">
+            <applicability actionType="command" command="version"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

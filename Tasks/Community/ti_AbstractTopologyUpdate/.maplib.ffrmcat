@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/AbstractTopology.ffrm">
+            <applicability actionType="GET" command="api/topology/*/topology/*?asFile=true"/>
+        </item>
+        <item name="response_maps/eof.ffrm">
+            <applicability actionType="command" command="eof">
+                <application>
+                    <item>com.fnfr.itest.applications.file</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/puts_line.ffrm">
+            <applicability actionType="eval" command="puts $line"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

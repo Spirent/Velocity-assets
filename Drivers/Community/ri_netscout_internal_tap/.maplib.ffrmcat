@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="connection-info-map.ffrm">
+            <applicability actionType="command" command="SHO CON .*" matchType="Regex"/>
+        </item>
+        <item name="port-info-map.ffrm">
+            <applicability actionType="command" command="SHOW PORT INFO .*" matchType="Regex"/>
+        </item>
+        <item name="switch-info-map.ffrm">
+            <applicability actionType="command" command="SHO SWI .*" matchType="Regex"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="7.1.0.201804110601">
+    <testCaseCatalog>
+        <item name="session_profiles/velocity_db_qc.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="velocity_db.ffsp"/>
+                </general>
+                <procedures>
+                    <item name="disableCalendarInvitations" isPublic="true">
+                        <arguments>
+                            <item name="userId">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="session_profiles/velocity_rest_qc.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="velocity_rest.ffsp"/>
+                </general>
+                <procedures>
+                    <item name="getUngroupedUsers" isPublic="true">
+                        <arguments>
+                            <item name="ignoredUsers">
+                                <description>a space-separated list of usernames to ignore</description>
+                                <defaultValue>_pdsvcacct</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;userInfo&quot;:{&quot;username&quot;:&quot;value&quot;,&quot;userId&quot;:&quot;value&quot;}}</response>
+                    </item>
+                    <item name="addUserToGroup" isPublic="true">
+                        <arguments>
+                            <item name="userId">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="groupId">
+                                <description>343282eb-a7f7-4dbe-ab2f-b1d25cf86d79 = shared harness users</description>
+                                <defaultValue>343282eb-a7f7-4dbe-ab2f-b1d25cf86d79</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="enableSystemMessageEmail" isPublic="true">
+                        <arguments>
+                            <item name="userId">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="setEmailAddress" isPublic="true">
+                        <arguments>
+                            <item name="userId">
+                                <description>ID of user to modify</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="username">
+                                <description>email handle.  The LDAP username is sufficient.</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="test_cases/unit_test.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                </general>
+                <procedures>
+                    <item name="basicFunctionality" isPublic="true"/>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

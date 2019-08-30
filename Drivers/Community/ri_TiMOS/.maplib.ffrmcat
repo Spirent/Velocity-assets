@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/show_chassis.ffrm">
+            <applicability actionType="command" command="show chassis"/>
+        </item>
+        <item name="response_maps/show_port.ffrm">
+            <applicability actionType="command" command="show port"/>
+        </item>
+        <item name="response_maps/show_port_single.ffrm">
+            <applicability actionType="command" command="show port *">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                    <item>com.fnfr.svt.applications.telnet</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/show_version.ffrm">
+            <applicability actionType="command" command="show version"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

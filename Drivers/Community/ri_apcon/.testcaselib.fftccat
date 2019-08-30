@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="7.1.0.201804110601">
+    <testCaseCatalog>
+        <item name="drivers/library.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <documentation>Library Procedures</documentation>
+                    <notes>THis is the supporting APCON procedure library</notes>
+                    <owner>David Parsons</owner>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                </general>
+                <procedures>
+                    <item name="displayInfoMsg" isPublic="true">
+                        <arguments>
+                            <item name="msg">
+                                <description>The execution message to display.</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="abortExecution" isPublic="true">
+                        <arguments>
+                            <item name="msg">
+                                <description>The execution message to display.</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="getDeviceHost" isPublic="true"/>
+                    <item name="validateRequiredProperties" isPublic="true">
+                        <arguments>
+                            <item name="propNameList">
+                                <description>List of property names to validate</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="getPortItemList" isPublic="true"/>
+                    <item name="getPortItem" isPublic="true" isVBlock="true">
+                        <arguments>
+                            <item name="portName">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="portStatus">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="portContainer"/>
+                        </arguments>
+                        <response>{&quot;name&quot;:&quot;port1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;Tray1/Slot1&quot;}</response>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="session_profiles/process_ref_qc.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="process_ref.ffsp"/>
+                </general>
+                <procedures>
+                    <item name="ping" isPublic="true">
+                        <multilineDescription>Determines if device is online. Returns &quot;online&quot;, &quot;offline&quot; or &quot;error&quot;.</multilineDescription>
+                        <arguments>
+                            <item name="host">
+                                <description>IP or Hostname to ping</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{}</response>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="session_profiles/ssh_ref_qc.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="ssh_ref.ffsp"/>
+                </general>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

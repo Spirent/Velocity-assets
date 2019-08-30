@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="7.1.0.201804110601">
+    <testCaseCatalog>
+        <item name="checkDeviceOnline.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                    <emulation enable="true"/>
+                </general>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

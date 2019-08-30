@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/show_blade_info_all.ffrm">
+            <applicability actionType="command" command="show blade info *"/>
+        </item>
+        <item name="response_maps/show_port_info.ffrm">
+            <applicability actionType="command" command="show port info *"/>
+        </item>
+        <item name="response_maps/show_port_names_A.ffrm">
+            <applicability actionType="command" command="show port names *"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

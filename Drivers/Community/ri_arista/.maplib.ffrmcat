@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/qcGetInterfaces.ffrm">
+            <applicability actionType="getInterfaces">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/show_interfaces_description.ffrm">
+            <applicability actionType="command" command="show interfaces description">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

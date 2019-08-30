@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/show_chassis_firmware.ffrm">
+            <applicability actionType="command" command="show chassis firmware">
+                <application>
+                    <item>com.fnfr.svt.applications.cmd</item>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                    <item>com.fnfr.svt.applications.telnet</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/show_chassis_hardware.ffrm">
+            <applicability actionType="command" command="sh* chas* hardware">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                    <item>com.fnfr.svt.applications.telnet</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/show_interfaces.ffrm">
+            <applicability actionType="command" command="show interfaces*"/>
+        </item>
+        <item name="response_maps/show_interfaces_brief.ffrm">
+            <applicability actionType="command" command="show interfaces *brief">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                    <item>com.fnfr.svt.applications.telnet</item>
+                </application>
+            </applicability>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

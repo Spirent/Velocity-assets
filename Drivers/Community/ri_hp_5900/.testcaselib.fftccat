@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="7.1.0.201804110601">
+    <testCaseCatalog>
+        <item name="session_profiles/hp_5900_ssh_qc.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="hp_5900_ssh.ffsp"/>
+                </general>
+                <procedures>
+                    <item name="addPortToVlan" isPublic="true" isVBlock="true">
+                        <arguments>
+                            <item name="portName">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="vlanId">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;addToVlanStatus&quot;:null}</response>
+                    </item>
+                    <item name="removePortFromVlan" isPublic="true" isVBlock="true">
+                        <arguments>
+                            <item name="portName">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="vlanId">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;removeFromVlanStatus&quot;:null}</response>
+                    </item>
+                    <item name="getFirmwareVersion" isPublic="true" isVBlock="true">
+                        <response>{&quot;firmwareVersion&quot;:null}</response>
+                    </item>
+                    <item name="getAllPortsStatus" isPublic="true" isVBlock="true">
+                        <response>{&quot;ports&quot;:null}</response>
+                    </item>
+                    <item name="getBridgeAggregateInterfaces" isPublic="true" isVBlock="true"/>
+                    <item name="addPortToBridgeAggregate" isPublic="true" isVBlock="true">
+                        <arguments>
+                            <item name="portName">
+                                <description>e.g. &quot;FortyGigE1/0/6:1&quot;</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="bridgeAggNum">
+                                <description>an integer</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="trunk_vlan">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;addPortToBridgeAggStatus&quot;:null}</response>
+                    </item>
+                    <item name="removePortFromBridgeAggregate" isPublic="true" isVBlock="true">
+                        <arguments>
+                            <item name="portName">
+                                <description>e.g. &quot;FortyGigE1/0/6:1&quot;</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="bridgeAggNum">
+                                <description>an integer</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;removePortFromBridgeAggStatus&quot;:null}</response>
+                    </item>
+                    <item name="enableBridgeAggregate" isPublic="true">
+                        <description>Enable Bridge Aggregate Group</description>
+                        <version>1.0 </version>
+                        <arguments>
+                            <item name="bagNum">
+                                <description>Number of bridge aggregate group to create
+</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="disableBridgeAggregate" isPublic="true">
+                        <description>Disable Bridge Aggregate Group</description>
+                        <version>1.0 </version>
+                        <arguments>
+                            <item name="bagNum">
+                                <description>Number of bridge aggregate group to shutdown
+</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

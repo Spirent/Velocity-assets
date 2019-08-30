@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/getUngroupedUsers.ffrm">
+            <applicability actionType="getUngroupedUsers"/>
+        </item>
+        <item name="response_maps/rest_put.ffrm">
+            <applicability actionType="PUT" command="user/v1/profile/*">
+                <application>
+                    <item>com.fnfr.itest.applications.webservices.restful</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/update_user.ffrm">
+            <applicability actionType="POST" command="user/v1/group/*/user/*">
+                <application>
+                    <item>com.fnfr.itest.applications.webservices.restful</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/user_v1_group_NONE_users.ffrm">
+            <applicability actionType="GET" command="user/v1/group/NONE/users"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

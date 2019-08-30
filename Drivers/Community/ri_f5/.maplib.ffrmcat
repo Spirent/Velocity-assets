@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/tmsh_show_net_interface_10_2_4.ffrm">
+            <applicability actionType="command" command="*tmsh show net interface" priority="49">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/qcGetActiveVersion.ffrm">
+            <applicability actionType="getActiveVersion"/>
+        </item>
+        <item name="response_maps/qcGetInterfaces.ffrm">
+            <applicability actionType="getInterfaces">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/tmsh_save_sys_config.ffrm">
+            <applicability actionType="command" command="tmsh save sys config">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/tmsh_show_net_interface.ffrm">
+            <applicability actionType="command" command="tmsh show net interface">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/tmsh_show_sys_mcp.ffrm">
+            <applicability actionType="command" command="tmsh show sys mcp"/>
+        </item>
+        <item name="response_maps/tmsh_show_sys_software.ffrm">
+            <applicability actionType="command" command="tmsh show sys software">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="7.1.0.201804110601">
+    <mapCatalog>
+        <item name="response_maps/display_device.ffrm">
+            <applicability actionType="command" command="display device">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/display_interface_Bridge-Aggregation_brief.ffrm">
+            <applicability actionType="command" command="display interface Bridge-Aggregation brief">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/display_interface_brief.ffrm">
+            <applicability actionType="command" command="display interface brief">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/display_version.ffrm">
+            <applicability actionType="command" command="display version">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                </application>
+            </applicability>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>

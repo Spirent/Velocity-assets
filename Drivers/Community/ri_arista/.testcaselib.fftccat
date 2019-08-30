@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="7.1.0.201804110601">
+    <testCaseCatalog>
+        <item name="session_profiles/arista_base_qc.fftc">
+            <tcDescriptor version="7.1.0.201804110601">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="arista_base.ffsp"/>
+                </general>
+                <procedures>
+                    <item name="getInterfaces" isPublic="true" isVBlock="true">
+                        <response>{&quot;ports&quot;:null}</response>
+                    </item>
+                    <item name="addPortToVlan" isPublic="true" isVBlock="true">
+                        <arguments>
+                            <item name="vlanId">
+                                <description>can be a single number, a range delimited by &quot;-&quot; or a set of numbers delimited by &quot;,&quot;
+e.g.
+    900
+    900-905
+    900,902,905</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="portName">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;vlanAddStatus&quot;:null}</response>
+                    </item>
+                    <item name="removePortFromVlan" isPublic="true" isVBlock="true">
+                        <arguments>
+                            <item name="vlanId">
+                                <description>can be a single number, a range delimited by &quot;-&quot; or a set of numbers delimited by &quot;,&quot;
+e.g.
+    900
+    900-905
+    900,902,905</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="portName">
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;vlanRemoveStatus&quot;:null}</response>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

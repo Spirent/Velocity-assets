@@ -192,6 +192,7 @@
                 "ok": "^.*(\\| PASS \\|).*",
                 "warning": "^.*(\\[WARNING\\]).*"
             },
+            "tags": ["robot", "example"],
             "parameters": [
                 {
                     "description": "Message to display",
@@ -212,10 +213,6 @@
             "hidden": true
         },
         {
-            "fileNameMatch": "robotQuickStart/.*",
-            "hidden": true
-        },
-        {
             "fileNameMatch": "legacy/smokeTest[0-9]+\\.tcl",
             "commandSequence": [
                 "-c '/usr/bin/tclsh %file%'"
@@ -225,6 +222,14 @@
             "language": "bash",
             "testCaseName": "Smoke test %file%",
             "timeout": 60
+        },
+        {
+            "fileNameMatch": "pipenv_project/convert\\.calendar\\.date\\.to\\.julian\\.py",
+            "description": "Example script using pipenv in a Python virtualenv. Requires pip to be installed on the Velocity agent host",
+            "commandSequence": [
+                "-c 'export PYTHONUNBUFFERED=1; MYNAME=$(basename `pwd`); VENV=/tmp/myscripts-$MYNAME; virtualenv $VENV; $VENV/bin/pip install -U pipenv; . $VENV/bin/activate; $VENV/bin/pipenv install --ignore-pipfile; $VENV/bin/pipenv run python %file%'"
+            ],
+            "language": "bash"
         },
         {
             "fileNameMatch": ".*\\.sh",
