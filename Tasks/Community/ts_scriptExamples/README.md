@@ -1,5 +1,4 @@
-### Project Information:
-Project: Script Examples
+### Project Information:Project: Script Examples
 Description: This project contains a set of example Python, Bash, Batch, and Powershell scripts that may be helpful to users starting to run external scripts within Velocity
 Category: task
 Class: Community
@@ -60,6 +59,14 @@ methods on the calling Velocity instance. the script shows the profile of the
 user who runs the script using the provided token and URI. if a topology and/or
 reservation are assocciated with the execution, that information will also be
 shown. this script requires 'requests' as an additional package
+
+parameter_types.py - this demonstrates the use of different parameter types
+(text, integer, float, boolean, enum) in a Python script
+
+pipenv_project/convert.calendar.date.to.julian.py - this demonstrates the use of 
+pipenv within a Velocity execution. Pip must be installed on the Velocity agent
+host in advance. The example script is a small example that shows the dependency
+of novas as the required Python package in velagent's virtualenv
 
 ## Installation
     Zip the contents of this directory (ensuring that velocity_manifest.json is located

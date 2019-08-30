@@ -1,5 +1,4 @@
-### Project Information:
-Project: Velocity Linux Bridge L2 Switch Driver
+### Project Information:Project: Velocity Linux Bridge L2 Switch Driver
 Description: L2 Switch Driver using Linux bridging written in Python
 Category: driver
 Class: Community

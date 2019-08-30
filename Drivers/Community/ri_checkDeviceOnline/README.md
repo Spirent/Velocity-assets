@@ -1,5 +1,4 @@
-### Project Information:
-Project: Simple Online Driver
+### Project Information:Project: Simple Online Driver
 Description: Check if device is online using management interface and ICMP
 Category: driver
 Class: Community
@@ -9,6 +8,6 @@ This driver uses the 'management' interface, where getPorts and getProperties me
 
  ----
 1 test case in project
-## Procedure Library: checkDeviceOnline.fftc
-### getProperties
-### getPorts
+##Procedure Library: checkDeviceOnline.fftc
+###getProperties
+###getPorts

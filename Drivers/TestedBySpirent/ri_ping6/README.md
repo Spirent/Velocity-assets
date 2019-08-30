@@ -1,5 +1,4 @@
-### Project Information:
-Project: Ping6 driver
+### Project Information:Project: Ping6 driver
 Description: A generic ICMP driver that implements the Management interface.
 Category: driver
 Class: TestedBySpirent
@@ -14,8 +13,8 @@ resource properties requires:
 
  ----
 1 test case in project
-## Test Case File: ping6.fftc
-### getDeviceStatus
-### getProperties
-### getPorts
-### getHostParameter
+##Test Case File: ping6.fftc
+###getDeviceStatus
+###getProperties
+###getPorts
+###getHostParameter

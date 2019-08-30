@@ -1,5 +1,4 @@
-### Project Information:
-Project: BigSwitch L1 Driver
+### Project Information:Project: BigSwitch L1 Driver
 Description: Provides basic commands for management of BigSwitch L1 switches.
 Category: driver
 Class: Community
@@ -7,42 +6,42 @@ Tags: L1
 
  ----
 1 quickcall library in project
-## Quickcall Library: big_switch_ssh_base.fftc
-### connect
+##Quickcall Library: big_switch_ssh_base.fftc
+###connect
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>port1</td><tr></tr>
 <tr><td>port2</td><tr></tr>
 <tr><td>switch_id</td><tr></tr></table>
 
-### disconnect
+###disconnect
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>port1</td><tr></tr>
 <tr><td>port2</td><tr></tr>
 <tr><td>switch_id</td><tr></tr></table>
 
-### getPorts
+###getPorts
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>switch_id</td><tr></tr></table>
 
-### getPortState
+###getPortState
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>switch_id</td><tr></tr>
 <tr><td>interface</td><tr></tr></table>
 
-### getPortsAndStates
+###getPortsAndStates
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>switch_id</td><tr></tr></table>
 
-### getProperties
-### createChainName
+###getProperties
+###createChainName
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>port1</td><tr></tr>
 <tr><td>port2</td><tr></tr>
 <tr><td>switch_id</td><tr></tr></table>
 
 1 test case in project
-## Procedure Library: driver.fftc
-### BigSwitch L1 Switch Driver
+##Procedure Library: driver.fftc
+###BigSwitch L1 Switch Driver
 How it works.
 
 The BigSwitch has a single controller with multiple switches.  Velocity needs to control the switches individually. To identify the different switches in the ssh session BigSwitch uses MAC addresses of the switches.
@@ -53,20 +52,20 @@ The Manifist has the following properties
 3. password : login credentials to controller <required>
 4. SSH Port : ssh port of BigSwitch controller <optional>
 5. Switch Id : MAC address of individual switch managed by BigSwitch controller < required>
-### getPorts
-### connect
-### disconnect
-### getProperties
-### getPortContainer
+###getPorts
+###connect
+###disconnect
+###getProperties
+###getPortContainer
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>switch_id</td><tr></tr></table>
 
-### addPropToResult
+###addPropToResult
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>json</td><tr></tr>
 <tr><td>name</td><tr></tr>
 <tr><td>val</td><tr></tr></table>
 
 2 response maps in project
-## Response Map File: show_switch_all_interfaces.ffrm
-## Response Map File: show_version.ffrm
+##Response Map File: show_switch_all_interfaces.ffrm
+##Response Map File: show_version.ffrm

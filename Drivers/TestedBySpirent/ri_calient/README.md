@@ -1,5 +1,4 @@
-### Project Information:
-Project: Calient
+### Project Information:Project: Calient
 Description: This is the default driver for Calient switches. The driver package contains the manifest file and a single fftc
 Category: driver
 Class: Community
@@ -70,19 +69,19 @@ create and delete cross-connects.
 
  ----
 1 test case in project
-## Test Case File: calient.fftc
-### convertPortToCSPP
-### getConnections
-### connect
-### disconnect
-### getPorts
-### getUnwrappedPorts
-### getDeviceStatus
-### getProperties
-### addPropToResult
+##Test Case File: calient.fftc
+###convertPortToCSPP
+###getConnections
+###connect
+###disconnect
+###getPorts
+###getUnwrappedPorts
+###getDeviceStatus
+###getProperties
+###addPropToResult
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>json</td><tr></tr>
 <tr><td>name</td><tr></tr>
 <tr><td>val</td><tr></tr></table>
 
-### getHostParameter
+###getHostParameter

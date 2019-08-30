@@ -1,5 +1,4 @@
-### Project Information:
-Project: Velocity Ansible Configurable Driver for Linux
+### Project Information:Project: Velocity Ansible Configurable Driver for Linux
 Description: This is a Velocity reference driver that implements an example Ansible driver in Velocity.
 Category: driver
 Class: Reference
@@ -67,24 +66,24 @@ HOWTO:
 
  ----
 1 test case in project
-## Test Case File: linux.ansible.driver.1.0.3.fftc
-### getProperties
-### getPorts
-### getPortList
-### addPortToJSON
+##Test Case File: linux.ansible.driver.1.0.3.fftc
+###getProperties
+###getPorts
+###getPortList
+###addPortToJSON
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>portContainer</td><tr></tr>
 <tr><td>portStatus</td><tr></tr>
 <tr><td>portName</td><tr></tr></table>
 
-### sendChangeMessageToAdmin
+###sendChangeMessageToAdmin
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>message</td><tr></tr>
 <tr><td>curlVersion</td><tr></tr>
 <tr><td>whatChanged</td><tr></tr></table>
 
-### setConfig
+###setConfig
 3 response maps in project
-## Response Map File: ifconfig-a-s.ffrm
-## Response Map File: cat_proc_net_dev.ffrm
-## Response Map File: ansible-playbook.ffrm
+##Response Map File: ifconfig-a-s.ffrm
+##Response Map File: cat_proc_net_dev.ffrm
+##Response Map File: ansible-playbook.ffrm

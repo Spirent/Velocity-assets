@@ -1,5 +1,4 @@
-### Project Information:
-Project: Python Ping Driver
+### Project Information:Project: Python Ping Driver
 Description: Python driver for Velocity that checks if a device is online
 Category: driver
 Class: Community

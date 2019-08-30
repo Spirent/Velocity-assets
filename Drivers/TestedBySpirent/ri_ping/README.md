@@ -1,5 +1,4 @@
-### Project Information:
-Project: Ping driver
+### Project Information:Project: Ping driver
 Description: A generic ICMP driver that implements the Management interface.
 Category: driver
 Class: TestedBySpirent
@@ -12,8 +11,8 @@ resource properties requires:
 
  ----
 1 test case in project
-## Test Case File: ping.fftc
-### getDeviceStatus
-### getProperties
-### getPorts
-### getHostParameter
+##Test Case File: ping.fftc
+###getDeviceStatus
+###getProperties
+###getPorts
+###getHostParameter

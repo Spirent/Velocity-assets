@@ -1,5 +1,4 @@
-### Project Information:
-Project: Abstract Topology Update
+### Project Information:Project: Abstract Topology Update
 Description: This task assigns a specific reference session profile to a very non-specific abstract resource.
 Category: task
 Class: Community
@@ -8,16 +7,16 @@ AbstractTopologyUpdate utility will update the tbml file of active reservation, 
 
  ----
 1 quickcall library in project
-## Quickcall Library: velocity_qc_lib.fftc
+##Quickcall Library: velocity_qc_lib.fftc
 2 test cases in project
-## Test Case File: AbstractTopologyWrapper.fftc
-## Test Case File: AbstractTopologyUpdate.fftc
-### modifyTBML
+##Test Case File: AbstractTopologyWrapper.fftc
+##Test Case File: AbstractTopologyUpdate.fftc
+###modifyTBML
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>origTopology</td><tr></tr>
 <tr><td>abstractResources</td><tr></tr></table>
 
 3 response maps in project
-## Response Map File: AbstractTopology.ffrm
-## Response Map File: eof.ffrm
-## Response Map File: puts_line.ffrm
+##Response Map File: AbstractTopology.ffrm
+##Response Map File: eof.ffrm
+##Response Map File: puts_line.ffrm

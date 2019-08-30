@@ -1,5 +1,4 @@
-### Project Information:
-Project: Velocity Linux Management Driver
+### Project Information:Project: Velocity Linux Management Driver
 Description: Velocity Linux Management Driver
 Category: driver
 Class: Community
@@ -41,11 +40,11 @@ Discover the switch's ports
 
  ----
 1 test case in project
-## Test Case File: linux.mgmt.driver.fftc
-### linux driver
+##Test Case File: linux.mgmt.driver.fftc
+###linux driver
 requires iTest 7.0 or above
-### getProperties
-### getPorts
+###getProperties
+###getPorts
 2 response maps in project
-## Response Map File: list.nonVirtual.interfaces.ffrm
-## Response Map File: ifconfig-a-s.ffrm
+##Response Map File: list.nonVirtual.interfaces.ffrm
+##Response Map File: ifconfig-a-s.ffrm
