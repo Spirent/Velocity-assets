@@ -64,7 +64,7 @@ parameter_types.py - this demonstrates the use of different parameter types
 (text, integer, float, boolean, enum) in a Python script
 
 pipenv_project/convert.calendar.date.to.julian.py - this demonstrates the use of 
-pipenv within a Velocity execution. Pip must be installed on the Velocity agent
+pipenv within a Velocity execution. python-pip and python-virtualenv must be installed on the Velocity agent
 host in advance. The example script is a small example that shows the dependency
 of novas as the required Python package in velagent's virtualenv
 
