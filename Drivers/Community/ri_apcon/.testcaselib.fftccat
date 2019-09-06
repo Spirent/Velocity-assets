@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="7.1.0.201804110601">
+<TestCaseCatalog version="8.0.0.201908290812">
     <testCaseCatalog>
         <item name="drivers/library.fftc">
-            <tcDescriptor version="7.1.0.201804110601">
+            <tcDescriptor version="8.0.0.201908290812">
                 <general>
                     <documentation>Library Procedures</documentation>
                     <notes>THis is the supporting APCON procedure library</notes>
@@ -52,7 +52,7 @@
             </tcDescriptor>
         </item>
         <item name="session_profiles/process_ref_qc.fftc">
-            <tcDescriptor version="7.1.0.201804110601">
+            <tcDescriptor version="8.0.0.201908290812">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="process_ref.ffsp"/>
                 </general>
@@ -71,7 +71,7 @@
             </tcDescriptor>
         </item>
         <item name="session_profiles/ssh_ref_qc.fftc">
-            <tcDescriptor version="7.1.0.201804110601">
+            <tcDescriptor version="8.0.0.201908290812">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="ssh_ref.ffsp"/>
                 </general>

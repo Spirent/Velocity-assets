@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="7.1.0.201804110601">
+<TestCaseCatalog version="8.0.0.201908290812">
     <testCaseCatalog>
         <item name="session_profiles/big_switch_ssh_base.fftc">
-            <tcDescriptor version="7.1.0.201804110601">
+            <tcDescriptor version="8.0.0.201908290812">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="project://ri_l1_bigswitch/session_profiles/big_switch_ssh_base.ffsp"/>
                 </general>
@@ -75,7 +75,7 @@
             </tcDescriptor>
         </item>
         <item name="test_cases/driver.fftc">
-            <tcDescriptor version="7.1.0.201804110601">
+            <tcDescriptor version="8.0.0.201908290812">
                 <general>
                     <documentation>BigSwitch L1 Switch Driver</documentation>
                     <notes>How it works.

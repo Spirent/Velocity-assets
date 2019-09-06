@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="7.1.0.201804110601">
+<TestCaseCatalog version="8.0.0.201908290812">
     <testCaseCatalog>
         <item name="session_profiles/big_ip_base_qc.fftc">
-            <tcDescriptor version="7.1.0.201804110601">
+            <tcDescriptor version="8.0.0.201908290812">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="big_ip_base.ffsp"/>
                 </general>
@@ -98,7 +98,7 @@
             </tcDescriptor>
         </item>
         <item name="session_profiles/big_ip_chassis_qc.fftc">
-            <tcDescriptor version="7.1.0.201804110601">
+            <tcDescriptor version="8.0.0.201908290812">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="big_ip_chassis.ffsp"/>
                 </general>
