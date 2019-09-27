@@ -1,0 +1,18 @@
+{
+   "name":"Reservation Activity",
+   "shortDescription": "Activity represents a demo on some markdown elements Immediate reservation of two VMs Velocity VM and VDS VM",
+   "icon":"/activity/customActivity/test.gif",
+   "descriptionMarkdown":"customActivity/customActivity.md",
+   "topology": [{
+      "name": "Topology 1",
+      "actionTitle":"Reserve",
+      "description": "This is an existing topology called Topology 1",
+      "reservationDuration":""
+    },
+	{
+      "name": "Topology 2",
+      "actionTitle":"Reserve",
+      "description": "This is an existing topology called Topology 2",
+      "reservationDuration":"120"
+    }]
+}
