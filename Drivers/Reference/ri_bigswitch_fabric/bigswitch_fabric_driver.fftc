@@ -29,7 +29,7 @@
         </parameters>
     </execution>
     <procedures>
-        <item name="main">
+        <item name="main" isPublic="true">
             <steps>
                 <item guid="b0a7d6c6-1209-483f-835d-3de460a9ed7d" action="comment" useFieldsInCommand="false">
                     <command>
