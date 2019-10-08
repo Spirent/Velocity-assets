@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<testCase version="7.0.0.9d01ac1">
+<testCase version="8.0.0.201908290812">
     <general>
         <notes>This requires access to the STC Lab Server. The driver connects to an STC chassis via the lab server to discover what modules are installed and determine if the chassis is online or offline. The driver is not able to detect link on each port. 
 
 This driver requires a property called STC_Lab_Server to be present in the resource&apos;s template. The value of this property is the IP address or hostname of the STC Lab Server.</notes>
     </general>
     <execution executionTimeout="240">
-        <parameters version="7.0.0.9d01ac1">
+        <parameters version="8.0.0.201908290812">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
                     <call_count>1</call_count>
@@ -20,14 +20,14 @@ This driver requires a property called STC_Lab_Server to be present in the resou
     <procedures>
         <item name="main">
             <steps>
-                <item guid="a41dd28d-75f4-45af-80d6-a210a9a1eb67" action="comment">
+                <item guid="a41dd28d-75f4-45af-80d6-a210a9a1eb67" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>open STC Lab Server REST connection</body>
                     </command>
                     <nestedSteps>
-                        <item guid="7effa9f6-c0ee-4d8b-8a43-34af812df56e" action="open" session="s2">
+                        <item guid="7effa9f6-c0ee-4d8b-8a43-34af812df56e" action="open" session="s2" useFieldsInCommand="false">
                             <command>
-                                <body>project://ri_STC_Driver/session_profiles/stcRest.ffsp</body>
+                                <body>project://ri_STC_Labserver/session_profiles/stcRest.ffsp</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                                 <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
@@ -35,18 +35,16 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                 <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                             </applicationProperties>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="a28ce0eb-31ad-4382-a346-bb5b214e61e8" action="comment">
+                <item guid="a28ce0eb-31ad-4382-a346-bb5b214e61e8" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>set random value to be used for session number</body>
                     </command>
                     <nestedSteps>
-                        <item guid="6ece6bba-57f6-4314-8720-3cec9f73f9a6" action="eval">
+                        <item guid="6ece6bba-57f6-4314-8720-3cec9f73f9a6" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>set rndNum  [math.round [expr 10000 * [math.rand]]]</body>
                             </command>
@@ -59,19 +57,18 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                         <processorInfo ruleType="message">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                 <message>Creating session $rndNum on STC Lab Server</message>
+                                                <tag sub="false" defaultValue=""/>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
                                 </analysisRules>
                             </postProcessing>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="52c45c7a-25cb-444a-b645-46575dcdff1f" action="comment">
+                <item guid="52c45c7a-25cb-444a-b645-46575dcdff1f" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>create session on STC Lab Server</body>
                     </command>
@@ -129,9 +126,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="f8466d02-f383-4e99-bd3d-a543f33021d9" action="comment">
+                <item guid="f8466d02-f383-4e99-bd3d-a543f33021d9" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>connect to STC chassis through the Lab Server</body>
                     </command>
@@ -195,51 +191,46 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="7d791827-9c77-4577-b0bf-361ce58324dd" action="comment">
+                <item guid="7d791827-9c77-4577-b0bf-361ce58324dd" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>run each called procedure called from Velocity</body>
                     </command>
                     <nestedSteps>
-                        <item guid="b18fce2a-8ac6-4e4b-a418-bb6e737d3d01" action="for">
+                        <item guid="b18fce2a-8ac6-4e4b-a418-bb6e737d3d01" action="for" useFieldsInCommand="false">
                             <command>
                                 <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
                             </command>
                             <nestedSteps>
-                                <item guid="4aa9fc4d-1c25-4bdf-b1f5-c4f4ee33c113" action="comment">
+                                <item guid="4aa9fc4d-1c25-4bdf-b1f5-c4f4ee33c113" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>create a list out of the contents of call_$i</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="bfa3767a-b252-40d3-8eca-2d7167c5eb72" action="eval">
+                                        <item guid="bfa3767a-b252-40d3-8eca-2d7167c5eb72" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>set cl [split [param call_$i]]</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
-                                <item guid="e9e88286-5c3f-401e-a865-bd47356760dc" action="comment">
+                                <item guid="e9e88286-5c3f-401e-a865-bd47356760dc" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>set a variable called proc to the first element in the list and set params to the remaining list elements</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="0152045b-3de4-4157-87c0-d79fcb3580a4" action="eval">
+                                        <item guid="0152045b-3de4-4157-87c0-d79fcb3580a4" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>set params [lassign $cl proc]</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
-                                <item guid="ce5a21f6-cbf8-4ee3-89bb-6978ff097bc1" action="comment">
+                                <item guid="ce5a21f6-cbf8-4ee3-89bb-6978ff097bc1" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>message to user</body>
                                     </command>
@@ -252,6 +243,7 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                                 <processorInfo ruleType="message">
                                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                         <message>Calling a proc called $proc with these parameters: $params</message>
+                                                        <tag sub="false" defaultValue=""/>
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
@@ -262,20 +254,20 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                                 <processorInfo ruleType="message">
                                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                         <message>Resource IP address: [param property_ipAddress]</message>
+                                                        <tag sub="false" defaultValue=""/>
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
                                         </analysisRules>
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
-                                <item guid="91e6b585-dec1-409d-bac4-578bff0bc213" action="comment">
+                                <item guid="91e6b585-dec1-409d-bac4-578bff0bc213" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>call the procedure with ordered and named arguments</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="57e996ea-b390-49ec-af78-51cfa698fcf1" action="call">
+                                        <item guid="57e996ea-b390-49ec-af78-51cfa698fcf1" action="call" useFieldsInCommand="false">
                                             <command>
                                                 <body>$proc $params -rndNum $rndNum</body>
                                             </command>
@@ -284,7 +276,6 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                                 <storeResponseText>true</storeResponseText>
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                             <emulation>
                                                 <behavior>
                                                     <response>{
@@ -307,33 +298,28 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="5aeb33f8-5874-4779-80a9-e716272a692e" action="comment">
+                <item guid="5aeb33f8-5874-4779-80a9-e716272a692e" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>close STC Lab Server session</body>
                     </command>
                     <nestedSteps>
-                        <item guid="385fb383-b8fd-4c5d-a873-a47e1beea86c" action="call">
+                        <item guid="385fb383-b8fd-4c5d-a873-a47e1beea86c" action="call" useFieldsInCommand="false">
                             <command>
                                 <body>deleteLabServerConnection -rndNum $rndNum</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="d2102ee4-3194-4896-bd9e-9ec680bfb59a" action="comment">
+                <item guid="d2102ee4-3194-4896-bd9e-9ec680bfb59a" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>return JSON payload to Velocity</body>
                     </command>
@@ -346,7 +332,6 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
         </item>
@@ -368,6 +353,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>chassisOS</storageLocation>
                                         <query>[return properties/Software_Version]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -381,6 +368,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>serialno</storageLocation>
                                         <query>[return properties/Serial_Number]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -394,6 +383,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>model</storageLocation>
                                         <query>[return properties/Model]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -406,6 +397,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>slotCount</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -420,7 +413,7 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                         </httpHeader>
                     </applicationProperties>
                 </item>
-                <item guid="d4de4b6f-8b28-4275-b30d-949f161bd886" action="call" useResponseMapLibraryApplicability="false">
+                <item guid="d4de4b6f-8b28-4275-b30d-949f161bd886" action="call" responseMap="response_maps/getUnwrappedPorts.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
                     <command>
                         <body>getPortList -slotCount $slotCount -rndNum $rndNum</body>
                     </command>
@@ -438,6 +431,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                         <storageLocation>jsonPortList</storageLocation>
                                         <storeInAList>true</storeInAList>
                                         <query>[return ports]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -450,15 +445,15 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>moduleList</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <responseMap>response_maps/getUnwrappedPorts.ffrm</responseMap>
                     <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                     <emulation>
                         <behavior>
                             <response>{&quot;name&quot;:&quot;//10.108.32.17/1/1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group1_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group1_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group2_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group2_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/5&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group3_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/6&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group3_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/7&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group4_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/8&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group4_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/9&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group5_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/10&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group5_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/11&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group6_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group6_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group1_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group1_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group2_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group2_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/5&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group3_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/6&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group3_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/7&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group4_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/8&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group4_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/9&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group5_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/10&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group5_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/11&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;}</response>
@@ -500,6 +495,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>slotCount</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -514,7 +511,7 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                         </httpHeader>
                     </applicationProperties>
                 </item>
-                <item guid="a0468655-9134-46de-8f07-8be386652d9c" action="call" useResponseMapLibraryApplicability="false">
+                <item guid="a0468655-9134-46de-8f07-8be386652d9c" action="call" responseMap="response_maps/getUnwrappedPorts.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
                     <command>
                         <body>getPortList -slotCount $slotCount -rndNum $rndNum</body>
                     </command>
@@ -533,6 +530,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                         <storageLocation>jsonPortList</storageLocation>
                                         <storeInAList>true</storeInAList>
                                         <query>[return ports]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -567,15 +566,15 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>moduleList</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <responseMap>response_maps/getUnwrappedPorts.ffrm</responseMap>
                     <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                     <emulation>
                         <behavior>
                             <response>{&quot;name&quot;:&quot;//10.108.32.17/1/1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group1_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group1_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group2_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group2_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/5&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group3_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/6&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group3_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/7&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group4_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/8&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group4_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/9&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group5_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/10&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group5_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/11&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group6_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group6_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group1_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group1_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group2_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group2_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/5&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group3_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/6&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group3_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/7&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group4_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/8&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group4_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/9&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group5_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/10&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group5_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/11&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;}</response>
@@ -599,24 +598,22 @@ This driver requires a property called STC_Lab_Server to be present in the resou
         </item>
         <item name="getPortList">
             <steps>
-                <item guid="2b665f54-8e8a-41be-81e7-8ca59a97fb0c" action="eval">
+                <item guid="2b665f54-8e8a-41be-81e7-8ca59a97fb0c" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set jsonPortList &quot;&quot;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="717b56f6-c0cd-4d6c-a4f2-81cdb2a8b262" action="for">
+                <item guid="717b56f6-c0cd-4d6c-a4f2-81cdb2a8b262" action="for" useFieldsInCommand="false">
                     <command>
                         <body>{set slotNum 1} {$slotNum &lt;= $slotCount} {incr slotNum}</body>
                     </command>
                     <nestedSteps>
-                        <item guid="946ca81a-a23a-4eb3-9ebe-923f168f63cc" action="eval">
+                        <item guid="946ca81a-a23a-4eb3-9ebe-923f168f63cc" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>set portNum 1</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                         <item guid="efe08535-ad82-4195-bb5f-fbc2d7f84099" action="GET" session="s2" estimatedStepExecutionTime="0.226">
                             <command>
@@ -633,6 +630,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                         <processorInfo ruleType="store">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                                 <storageLocation>portGroupCount</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
@@ -645,6 +644,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                         <processorInfo ruleType="store">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                                 <storageLocation>portCount</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
@@ -657,6 +658,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                         <processorInfo ruleType="store">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                                 <storageLocation>modelNum</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
@@ -669,6 +672,8 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                         <processorInfo ruleType="store">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                                 <storageLocation>serialNum</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
@@ -683,17 +688,17 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                 </httpHeader>
                             </applicationProperties>
                         </item>
-                        <item guid="61dee2fa-97e6-4b18-a67c-e397df0487f2" action="for">
+                        <item guid="61dee2fa-97e6-4b18-a67c-e397df0487f2" action="for" useFieldsInCommand="false">
                             <command>
                                 <body>{set groupNum 1} {$groupNum &lt;= $portGroupCount} {incr groupNum}</body>
                             </command>
                             <nestedSteps>
-                                <item guid="9474f45d-04d1-40c6-9e6a-75030ce84c75" action="for">
+                                <item guid="9474f45d-04d1-40c6-9e6a-75030ce84c75" action="for" useFieldsInCommand="false">
                                     <command>
                                         <body>{set i 0} {$i &lt; [expr $portCount / $portGroupCount]} {incr i}</body>
                                     </command>
                                     <nestedSteps>
-                                        <item guid="fab1f7d1-347a-4599-8634-860705fc2e8e" action="call">
+                                        <item guid="fab1f7d1-347a-4599-8634-860705fc2e8e" action="call" useFieldsInCommand="false">
                                             <command>
                                                 <body>addPortToJSON -portContainer slot[format %02i $slotNum]_${modelNum}_${serialNum}/group[format %02i $groupNum]_$serialNum -portStatus online -portName //[param property_ipAddress]/$slotNum/$portNum</body>
                                             </command>
@@ -702,7 +707,6 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                                 <storeResponseText>true</storeResponseText>
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                             <emulation>
                                                 <behavior>
                                                     <response>{&quot;name&quot;:&quot;//10.108.32.17/2/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;}</response>
@@ -720,31 +724,26 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                                 </behavior>
                                             </emulation>
                                         </item>
-                                        <item guid="6df843ac-34b2-463b-b313-d9c8107cd994" action="eval">
+                                        <item guid="6df843ac-34b2-463b-b313-d9c8107cd994" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>set jsonPortList [concat $jsonPortList $portJSON]</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                         </item>
-                                        <item guid="fed97346-c4dc-40fa-9a52-af98e2983f8a" action="eval">
+                                        <item guid="fed97346-c4dc-40fa-9a52-af98e2983f8a" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>incr portNum</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="ff62e481-fb02-48dd-9a0d-e5185172e59a" action="return">
                     <command>
@@ -760,7 +759,7 @@ This driver requires a property called STC_Lab_Server to be present in the resou
         </item>
         <item name="addPortToJSON" isVBlock="true">
             <steps>
-                <item guid="304bab69-ebb3-4860-aebd-43e5025fba97" action="eval">
+                <item guid="304bab69-ebb3-4860-aebd-43e5025fba97" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>puts &quot;portName: $portName&quot;</body>
                     </command>
@@ -776,15 +775,16 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>portName</storageLocation>
                                         <query>[return name]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="5bf258e2-1d7b-4dc1-a72f-17004d8c84b6" action="eval">
+                <item guid="5bf258e2-1d7b-4dc1-a72f-17004d8c84b6" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>puts &quot;portStatus: $portStatus&quot;</body>
                     </command>
@@ -800,15 +800,16 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>portStatus</storageLocation>
                                         <query>[return status]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="0d9813f2-8d23-41bc-a23a-034e718a2dab" action="eval">
+                <item guid="0d9813f2-8d23-41bc-a23a-034e718a2dab" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>puts &quot;portContainer: $portContainer&quot;</body>
                     </command>
@@ -824,13 +825,14 @@ This driver requires a property called STC_Lab_Server to be present in the resou
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>portContainer</storageLocation>
                                         <query>[return container]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>

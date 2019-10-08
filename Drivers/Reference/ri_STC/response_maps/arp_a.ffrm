@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.4.1.be355a6">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>arp -a</body>
+                </command>
+            </action>
+            <responseBody>mcpu.card8 (169.254.24.1) at 00:60:F3:00:18:01 [ether] on eth0
+mcpu.card6 (169.254.22.1) at 00:60:F3:00:16:01 [ether] on eth0
+mcpu.card7 (169.254.23.1) at 00:60:F3:00:17:01 [ether] on eth0
+mcpu.card0 (169.254.16.1) at 00:60:F3:00:10:01 [ether] on eth0
+mcpu.card1 (169.254.17.1) at 00:60:F3:00:11:01 [ether] on eth0
+mcpu.card2 (169.254.18.1) at 00:60:F3:00:12:01 [ether] on eth0
+nat (169.254.0.3) at 00:60:F3:00:00:01 [ether] on eth0
+nfs (169.254.0.2) at 00:60:F3:00:00:02 [ether] on eth0
+80-000722.E12230496:debug$ </responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;80-000722.E12230496:debug$ &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;arp -a&lt;/echo&gt;
+        &lt;idleTime&gt;98.787&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+        <item name="sample2">
+            <responseBody>? (169.254.0.70) at &lt;incomplete&gt; on backplane
+? (10.75.236.161) at 00:04:23:d3:68:22 [ether] on eth0
+? (10.75.228.159) at fa:16:3e:0c:83:bd [ether] on eth0
+ccpu1.card4 (169.254.20.16) at 00:60:f4:01:14:50 [ether] on backplane
+ccpu4.card5 (169.254.21.19) at 00:60:f3:00:15:13 [ether] on backplane
+? (10.75.224.1) at 5c:26:0a:a0:bd:ce [ether] on eth0
+ccpu7.card9 (169.254.25.22) at 00:60:f3:00:19:16 [ether] on backplane
+ccpu2.card6 (169.254.22.17) at &lt;incomplete&gt; on backplane
+ccpu5.card10 (169.254.26.20) at 00:60:f3:00:1a:14 [ether] on backplane
+ccpu3.card1 (169.254.17.18) at 00:60:f4:00:11:12 [ether] on backplane
+ccpu6.card5 (169.254.21.21) at 00:60:f3:00:15:15 [ether] on backplane
+ccpu1.card2 (169.254.18.16) at 00:60:f4:00:12:10 [ether] on backplane
+mcpu.card5 (169.254.21.1) at 00:60:f3:00:15:01 [ether] on backplane
+ccpu2.card4 (169.254.20.17) at 00:60:f4:02:14:b0 [ether] on backplane
+? (10.75.228.158) at fa:16:3e:0c:83:bd [ether] on eth0
+ccpu5.card1 (169.254.17.20) at 00:60:f4:00:11:14 [ether] on backplane
+ccpu8.card9 (169.254.25.23) at 00:60:f3:00:19:17 [ether] on backplane
+? (10.75.236.91) at 00:15:b2:a1:08:dc [ether] on eth0
+ccpu3.card6 (169.254.22.18) at &lt;incomplete&gt; on backplane
+ccpu1.card0 (169.254.16.16) at 00:60:f4:00:10:10 [ether] on backplane
+ccpu1.card11 (169.254.27.16) at 00:60:f3:00:1b:10 [ether] on backplane
+ccpu4.card1 (169.254.17.19) at 00:60:f4:00:11:13 [ether] on backplane
+ccpu7.card5 (169.254.21.22) at 00:60:f3:00:15:16 [ether] on backplane
+mcpu.card3 (169.254.19.1) at 00:60:f3:00:13:01 [ether] on backplane
+mcpu.card10 (169.254.26.1) at 00:60:f3:00:1a:01 [ether] on backplane
+ccpu2.card2 (169.254.18.17) at 00:60:f4:00:12:11 [ether] on backplane
+ccpu5.card6 (169.254.22.20) at &lt;incomplete&gt; on backplane
+? (169.254.0.64) at &lt;incomplete&gt; on backplane
+? (169.254.0.63) at &lt;incomplete&gt; on backplane
+ccpu6.card1 (169.254.17.21) at 00:60:f4:00:11:15 [ether] on backplane
+ccpu1.card9 (169.254.25.16) at 00:60:f3:00:19:10 [ether] on backplane
+ccpu4.card6 (169.254.22.19) at &lt;incomplete&gt; on backplane
+mcpu.card1 (169.254.17.1) at 00:60:f3:00:11:01 [ether] on backplane
+mcpu.card8 (169.254.24.1) at &lt;incomplete&gt; on backplane
+ccpu2.card11 (169.254.27.17) at 00:60:f3:00:1b:11 [ether] on backplane
+ccpu2.card0 (169.254.16.17) at 00:60:f4:00:10:11 [ether] on backplane
+ccpu8.card5 (169.254.21.23) at 00:60:f3:00:15:17 [ether] on backplane
+ccpu6.card6 (169.254.22.21) at &lt;incomplete&gt; on backplane
+? (10.75.228.161) at fa:16:3e:0c:83:bd [ether] on eth0
+? (169.254.25.48) at 00:60:f3:01:19:10 [ether] on backplane
+mcpu.card6 (169.254.22.1) at &lt;incomplete&gt; on backplane
+ccpu2.card9 (169.254.25.17) at 00:60:f3:00:19:11 [ether] on backplane
+ccpu3.card11 (169.254.27.18) at 00:60:f3:00:1b:12 [ether] on backplane
+ccpu3.card0 (169.254.16.18) at 00:60:f4:00:10:12 [ether] on backplane
+ccpu1.card5 (169.254.21.16) at 00:60:f3:00:15:10 [ether] on backplane
+ccpu7.card6 (169.254.22.22) at &lt;incomplete&gt; on backplane
+ccpu5.card0 (169.254.16.20) at 00:60:f4:00:10:14 [ether] on backplane
+? (169.254.25.49) at 00:60:f3:02:19:14 [ether] on backplane
+ccpu3.card9 (169.254.25.18) at 00:60:f3:00:19:12 [ether] on backplane
+ccpu1.card3 (169.254.19.16) at 00:60:f3:00:13:10 [ether] on backplane
+? (169.254.0.73) at &lt;incomplete&gt; on backplane
+? (10.75.236.3) at 00:0c:29:fe:97:a7 [ether] on eth0
+ccpu1.card10 (169.254.26.16) at 00:60:f3:00:1a:10 [ether] on backplane
+? (169.254.21.48) at 00:60:f3:01:15:10 [ether] on backplane
+ccpu4.card0 (169.254.16.19) at 00:60:f4:00:10:13 [ether] on backplane
+? (169.254.0.68) at &lt;incomplete&gt; on backplane
+ccpu4.card11 (169.254.27.19) at 00:60:f3:00:1b:13 [ether] on backplane
+chassis (169.254.0.1) at 00:60:f3:00:00:01 [ether] on backplane
+mcpu.card2 (169.254.18.1) at 00:60:f3:00:12:01 [ether] on backplane
+? (10.75.233.10) at 78:2b:cb:68:89:40 [ether] on eth0
+ccpu2.card5 (169.254.21.17) at 00:60:f3:00:15:11 [ether] on backplane
+ccpu5.card9 (169.254.25.20) at 00:60:f3:00:19:14 [ether] on backplane
+ccpu8.card6 (169.254.22.23) at &lt;incomplete&gt; on backplane
+ccpu6.card0 (169.254.16.21) at 00:60:f4:00:10:15 [ether] on backplane
+ccpu1.card1 (169.254.17.16) at 00:60:f4:00:11:10 [ether] on backplane
+ccpu4.card9 (169.254.25.19) at 00:60:f3:00:19:13 [ether] on backplane
+mcpu.card0 (169.254.16.1) at 00:60:f3:00:10:01 [ether] on backplane
+ccpu2.card3 (169.254.19.17) at 00:60:f3:00:13:11 [ether] on backplane
+mcpu.card11 (169.254.27.1) at 00:60:f3:00:1b:01 [ether] on backplane
+? (169.254.21.49) at 00:60:f3:02:15:14 [ether] on backplane
+ccpu3.card5 (169.254.21.18) at 00:60:f3:00:15:12 [ether] on backplane
+ccpu6.card9 (169.254.25.21) at 00:60:f3:00:19:15 [ether] on backplane
+ccpu9.card10 (169.254.26.24) at 00:60:f3:00:1a:18 [ether] on backplane
+ccpu1.card6 (169.254.22.16) at &lt;incomplete&gt; on backplane
+mcpu.card9 (169.254.25.1) at 00:60:f3:00:19:01 [ether] on backplane
+ccpu2.card1 (169.254.17.17) at 00:60:f4:00:11:11 [ether] on backplane
+? (169.254.0.106) at 02:0e:11:36:11:29 [ether] on backplane
+ccpu5.card5 (169.254.21.20) at 00:60:f3:00:15:14 [ether] on backplane
+</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties"/>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>mcpu\\.card</regex>
+                            <start>0</start>
+                            <end>9</end>
+                        </item>
+                        <item name="slot">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>9</start>
+                            <end>10</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\s+\\(((\\d+\\.)+\\d+)\\) at\\s+\\S+\\s+\\[ether] on\\s+</regex>
+                            <start>10</start>
+                            <end>58</end>
+                        </item>
+                        <item name="where">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>58</start>
+                            <end>63</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>mcpu.card8 (169.254.24.1) at 00:60:F3:00:18:01 [ether] on where</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="*arp -a"/>
+</ResponseMap>

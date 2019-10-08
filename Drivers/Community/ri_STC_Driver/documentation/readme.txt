@@ -1,4 +1,4 @@
-Project: Spirent Test Center Management Driver
+Project: Spirent Test Center Management Driver (Lab Server version)
 Description: STC management driver supporting discovery and online check
 Category: driver
 Class: Community

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>1.0.2</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Management</interface> 
+    <entryPoint>stc_driver.fftc</entryPoint>
+    <resourceProperties>     
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>IP address of the remote device</description>
+        </property>
+        <property optional="false">
+            <name>Module_List</name>
+            <description>Ordered list of module serial numbers in the chassis</description>
+        </property>
+        <property optional="false">
+            <name>Chassis_Serial_Number</name>
+            <description>Serial number of the chassis</description>
+        </property>
+        <property optional="false">
+            <name>Software_Version</name>
+            <description>Software version of the chassis</description>
+        </property>    
+    </resourceProperties>
+</resourceDriver>

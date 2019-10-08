@@ -3,15 +3,14 @@
     <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
     <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
         <TerminalProperties>
+            <captureProperties>
+                <commandBreakChars inherit="false">
+                    <item>[char Ctrl-C]</item>
+                </commandBreakChars>
+            </captureProperties>
             <prompts merge="true">
-                <item name="dollar" MatchMethod="WILDCARD">
+                <item name="prompt1" MatchMethod="WILDCARD">
                     <Content>*$</Content>
-                </item>
-                <item name="password">
-                    <Content>Password:</Content>
-                </item>
-                <item name="admin">
-                    <Content>admin&gt;</Content>
                 </item>
             </prompts>
         </TerminalProperties>
@@ -19,6 +18,6 @@
         <user inherit="false">debug</user>
         <password inherit="false">MwNQK8kiUvohOI4hubynxQ==</password>
     </sessionProperties>
-    <responseLibrary inherit="false">project://ri_STC_Labserver/</responseLibrary>
-    <formMapLibrary inherit="false">project://ri_STC_Labserver/</formMapLibrary>
+    <responseLibrary inherit="false">project://ri_STC/</responseLibrary>
+    <formMapLibrary inherit="false">project://ri_STC/</formMapLibrary>
 </SessionTemplate>
