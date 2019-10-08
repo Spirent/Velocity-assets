@@ -3,7 +3,7 @@ This is a Velocity Layer 2 driver for the Bigswitch <a href="https://www.bigswit
 
 Project: Bigswitch Big Cloud Fabric L2 Driver
 Category: driver
-Class: Community xxx
+Class: Community
  ----
 # Installation & Configuration
 ## Installing the Drivers
