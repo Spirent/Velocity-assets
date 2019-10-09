@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ResponseMapCatalog version="8.0.0.201908290812">
+<ResponseMapCatalog version="7.3.0.201903220921">
     <mapCatalog>
         <item name="response_maps/show_blade_info_all.ffrm">
             <applicability actionType="command" command="show blade info *"/>
