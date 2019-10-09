@@ -1,5 +1,5 @@
-Project: Big Switch L1 Driver
-Description: L1 Velocity driver for Big Switch switches
+Project: BigSwitch L1 Driver
+Description: Provides basic commands for management of BigSwitch L1 switches.
 Category: driver
 Class: Community
 Tags: L1
