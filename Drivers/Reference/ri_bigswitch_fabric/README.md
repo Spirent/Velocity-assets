@@ -1,10 +1,3 @@
-### Project Information
-This is a Velocity Layer 2 driver for the Bigswitch <a href="https://www.bigswitch.com/products/big-cloud-fabric">Big Cloud Fabric(tm)</a> SDN controller. As the name suggests, this combination of Velocity driver and SDN controller allow you to create a BIG network of leaf switches that can connect devices in Velocity.
-
-Project: Bigswitch Big Cloud Fabric L2 Driver
-Category: driver
-Class: Community
- ----
 # Installation & Configuration
 ## Installing the Drivers
 This L2 infrastructure for Bigswitch Big Cloud Fabric requires TWO driver they are:
@@ -25,7 +18,7 @@ This is a simple port that is shared by default. The steps to create it are:
 <ol>
   <li>Create a new template named "Virtual Shared" using "Port" as the parent</li>
   <li>Set the "Reservation Type" to "Shared"</li>
-<ol>
+</ol>
 ### Leaf Switch Template
 This template describes the leaf/ToR switches that will be connected to Velocity inventory. The steps to build this template are:
 <ol>
