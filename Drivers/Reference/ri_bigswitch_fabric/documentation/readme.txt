@@ -1,8 +1,8 @@
-Project: Big Switch Cloud Fabric Driver
-Description: Velocity driver for Big Switch Cloud Fabric
+Project: Big Switch Cloud Fabric L2 Driver
+Description: L2 Velocity driver for Big Switch Cloud Fabric
 Category: driver
 Class: Reference
-This is a Velocity Layer 2 driver for the Bigswitch <a target="_blank" rel="noopener noreferrer" href="https://www.bigswitch.com/products/big-cloud-fabric">Big Cloud Fabric(tm)</a> SDN controller. As the name suggests, this combination of Velocity driver and SDN controller allow you to create a BIG network of leaf switches that can connect devices in Velocity.
+This is a Velocity Layer 2 driver for the Bigswitch <a href="https://www.bigswitch.com/products/big-cloud-fabric">Big Cloud Fabric(tm)</a> SDN controller. As the name suggests, this combination of Velocity driver and SDN controller allow you to create a BIG network of leaf switches that can connect devices in Velocity.
 # Installation & Configuration
 ## Installing the Drivers
 This L2 infrastructure for Bigswitch Big Cloud Fabric requires TWO driver they are:
