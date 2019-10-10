@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.0.0.201908290812">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <captureProperties>
+                <commandBreakChars inherit="false">
+                    <item>[char Ctrl-C]</item>
+                </commandBreakChars>
+            </captureProperties>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content>*$</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+        <ipAddress inherit="false">[param property_ipAddress]</ipAddress>
+        <user inherit="false">debug</user>
+        <password inherit="false">MwNQK8kiUvohOI4hubynxQ==</password>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_STC/</responseLibrary>
+    <formMapLibrary inherit="false">project://ri_STC/</formMapLibrary>
+</SessionTemplate>

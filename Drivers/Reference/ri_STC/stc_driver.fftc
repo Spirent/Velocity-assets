@@ -1,0 +1,1622 @@
+<?xml version="1.0"?>
+<testCase version="8.0.0.201908290812">
+    <general>
+        <emulation enable="true"/>
+    </general>
+    <execution>
+        <parameters version="8.0.0.201908290812">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <call_count>1</call_count>
+                    <call_0>getPorts</call_0>
+                    <property_ipAddress>10.75.235.51</property_ipAddress>
+                    <property_Module_List>slot1_cm-1g-d12_E10210259 slot2_cm-1g-d12_E10220545</property_Module_List>
+                    <property_NotifyUser>tsimal</property_NotifyUser>
+                    <property_Chassis_Serial_Number>E14320080</property_Chassis_Serial_Number>
+                    <property_Software_Version>4.49</property_Software_Version>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="cf444664-ebea-42b3-93c6-f07a2739ce26" action="open" session="stc">
+                    <command>
+                        <body>project://ri_STC/session_profiles/ssh.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="b18fce2a-8ac6-4e4b-a418-bb6e737d3d01" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="bfa3767a-b252-40d3-8eca-2d7167c5eb72" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>set cl [split [param call_$i]]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0152045b-3de4-4157-87c0-d79fcb3580a4" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>set params [lassign $cl proc]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ce5a21f6-cbf8-4ee3-89bb-6978ff097bc1" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>message to user</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="none">
+                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>Calling a proc called $proc with these parameters: $params</message>
+                                                <tag sub="false" defaultValue=""/>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="57e996ea-b390-49ec-af78-51cfa698fcf1" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>$proc $params</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>ret</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="65e01a8c-7de8-4e44-9c4e-0981f76b6ecd" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="getProperties">
+            <steps>
+                <item guid="7cb58418-adad-41a6-a4f1-f7d3bae9ad62" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>check if we are in C2 or C3</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="1d7fe729-9a00-40b1-95a3-511e5352ff72" action="command" session="stc">
+                            <command>
+                                <body>serialno</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Error:</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>set CVersion C3</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>set CVersion C2</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e4e12648-f61a-4489-a880-56b8c281b46f" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>$CVersion == &quot;C2&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="3eb7f889-4d69-4615-945d-53909d8fb181" action="then" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="414bfdae-75d5-472a-9231-be80c4be7713" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>C2</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="60bf0b21-7661-4690-a436-43d71d7087f1" action="command" session="stc">
+                                            <command>
+                                                <body>serialno</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>serialno()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>serialno</storageLocation>
+                                                                <query>[return properties/Chassis_Serial_Number]</query>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                        <item guid="8d3ae6b3-fa49-4776-af39-36fc6603e35a" action="command" session="stc">
+                                            <command>
+                                                <body>version</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="regex">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                                                <regex>Chassis OS = ([\\d]+(\\.[\\d]+))</regex>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>chassisOs</storageLocation>
+                                                                <query>[return properties/Software_Version]</query>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d127b44e-e1c7-4bcc-b90e-051c9d29c0a1" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="c0e42c47-919b-4a9b-a367-7e7963a61de4" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>C3</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="e66a77d0-27a4-43c9-bda1-9e0b74e5afaa" action="command" session="stc">
+                                            <command>
+                                                <body>cat /mnt/spirent/chassis/conf/hwinfo.ini</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>SERIAL()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>serialno</storageLocation>
+                                                                <query>[return properties/Chassis_Serial_Number]</query>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                        <item guid="12600a9e-be9c-4e44-9c42-363e2dd74e80" action="command" session="stc">
+                                            <command>
+                                                <body>cat /mnt/spirent/.version</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>group1()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>chassisOs</storageLocation>
+                                                                <query>[return properties/Software_Version]</query>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d4de4b6f-8b28-4275-b30d-949f161bd886" action="call" responseMap="response_maps/getUnwrappedPorts.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
+                    <command>
+                        <body>getUnwrappedPorts -chassisVersion $CVersion</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>moduleList()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>moduleList</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                        <storeResponseAt>jsonPortList</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                </item>
+                <item guid="8d58268c-d259-4555-a5db-f3b945a2cc34" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>set ret &quot;\\{\\&quot;properties\\&quot;:\\{\\&quot;Make\\&quot;:\\&quot;Spirent Communications Inc.\\&quot;,\\&quot;Chassis_Serial_Number\\&quot;:\\&quot;$serialno\\&quot;,\\&quot;Software_Version\\&quot;:\\&quot;$chassisOs\\&quot;,\\&quot;Module_List\\&quot;:\\&quot;$moduleList\\&quot;},\\&quot;ports\\&quot;:\\[$jsonPortList\\]\\}&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7f33126d-63b5-4fde-af03-f9bd7f8ffebc" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{&quot;properties&quot;:{&quot;Make&quot;:&quot;Spirent Communications Inc.&quot;,&quot;Chassis_Serial_Number&quot;:&quot;3315&quot;,&quot;Software_Version&quot;:&quot;2.1&quot;,&quot;Model&quot;:&quot;&quot;,&quot;Module_List&quot;:&quot;module1 module2&quot;},&quot;ports&quot;:[]}</response>
+        </item>
+        <item name="getPorts">
+            <steps>
+                <item guid="cd5a24d6-0a18-465c-8e8b-51c8215937ad" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>check if we are in C2 or C3</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="caf1977a-239c-45aa-8481-4180322a6e3a" action="command" session="stc">
+                            <command>
+                                <body>serialno</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Error:</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>set CVersion C3</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>set CVersion C2</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="27421d8d-ddef-44d3-bad0-afd4bfadf7c6" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>$CVersion == &quot;C2&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="95137a14-dc8e-4fc2-a974-3c9bc838be6d" action="then" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="a98e4800-7ab5-47ad-aee2-dae7b6b11b91" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>C2</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="da3ecd3f-8c84-4469-b3fa-fad06b8c9aae" action="command" session="stc">
+                                    <command>
+                                        <body>serialno</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>serialno()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>serialno</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                                <item guid="7a321dda-c097-4ef6-9dc6-1298b8829cd9" action="command" session="stc">
+                                    <command>
+                                        <body>version</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="regex">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
+                                                        <regex>Chassis OS = ([\\d]+(\\.[\\d]+))</regex>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>chassisOs</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2f13c1d4-e0d7-49c7-97c5-c1dece04407b" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="225f52ad-1242-44f9-b1c9-2ffd0e8352f1" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>C3</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="ad1183b0-655f-4e52-90e6-8bbdc6cd045b" action="command" session="stc">
+                                            <command>
+                                                <body>cat /mnt/spirent/chassis/conf/hwinfo.ini</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>SERIAL()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>serialno</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                        <item guid="4b43e604-5435-4391-aa2b-edc538387783" action="command" session="stc">
+                                            <command>
+                                                <body>cat /mnt/spirent/.version</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>group1()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>chassisOs</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7a50daff-985d-418c-8aba-087636aaf7ff" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>$chassisOs != [param property_Software_Version]</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="24054923-3e8f-4773-a6c1-261c2a6451eb" action="then" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="dfb46370-acc1-404f-a927-79b3582b8a85" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>software version has changed</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message>The current software version list has changed</message>
+                                                        <tag sub="false" defaultValue=""/>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="832bb985-379b-4539-8181-3cd3517debf2" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>sendStcChangeMessageToAdmin -message &quot;The STC driver has detected that chassis $serialno software version has changed from [param property_Software_Version] to $chassisOs&quot; -softwareVersion $chassisOs -whatChanged softwareVersion</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="fc2ac943-3492-48ec-8895-cc10c02883c7" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="defddc1e-c11e-4c09-9311-583a8d51a744" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>software version has not changed</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message>The current software version list has not changed</message>
+                                                        <tag sub="false" defaultValue=""/>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a0468655-9134-46de-8f07-8be386652d9c" action="call" responseMap="response_maps/getUnwrappedPorts.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
+                    <command>
+                        <body>getUnwrappedPorts -chassisVersion $CVersion</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>moduleList()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>moduleList</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                        <storeResponseAt>jsonPortList</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                </item>
+                <item guid="5a98024e-b7a3-4b20-92d5-a403599c70f3" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>$moduleList == [param  property_Module_List]</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="aacd9eff-d01d-41ba-9a18-6a5e7ec603ed" action="then" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="d6c2951e-b081-482d-a68b-6986a9048031" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>module list is unchanged</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message>The list of installed modules has not changed</message>
+                                                        <tag sub="false" defaultValue=""/>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9b05d3fb-cd0b-41fa-b757-6de02b6e7f2c" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="84f804cd-64ef-42c6-94a3-9d20839dcb70" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>module list has changed</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message>The list of installed modules list has changed</message>
+                                                        <tag sub="false" defaultValue=""/>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="388559d3-a4cf-4d45-9adf-6527c2f04ec4" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>set listFoundModules &quot;&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="1c04080d-1deb-45d8-a8eb-95b238a423cd" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>set listMissingModules &quot;&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="92614367-6b0b-4e59-92a6-83adf575dd3a" action="foreach" useFieldsInCommand="false">
+                                    <command>
+                                        <body>foundModule $moduleList</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="fd59d912-dc9a-4939-b3d8-fc581dae4816" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>[lsearch [param property_Module_List] $foundModule] == -1</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="34471f11-b9d4-4466-b76a-964c86d389d0" action="then" useFieldsInCommand="false">
+                                                    <nestedSteps>
+                                                        <item guid="28842a7f-e9e1-4373-a3e2-d614efeb8334" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>module that suddenly appears</body>
+                                                            </command>
+                                                            <postProcessing>
+                                                                <analysisRules>
+                                                                    <item>
+                                                                        <extractorInfo extractorType="none">
+                                                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                                        </extractorInfo>
+                                                                        <processorInfo ruleType="message">
+                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                                                <message>    STC driver discovered new module: $foundModule</message>
+                                                                                <tag sub="false" defaultValue=""/>
+                                                                            </ruleProperties>
+                                                                        </processorInfo>
+                                                                    </item>
+                                                                </analysisRules>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="3495b995-c3d0-4f2a-8cf0-043f695ab608" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>lappend listFoundModules $foundModule</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="b800d61a-86a4-433b-8472-3b729598c61b" action="foreach" useFieldsInCommand="false">
+                                    <command>
+                                        <body>previousModule [param property_Module_List]</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="c9b80bcd-b581-4bb7-ba23-0d7b76ae6a1d" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>[lsearch $moduleList $previousModule] == -1</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="19bf9e27-9e6f-4e62-9c85-070f54d44143" action="then" useFieldsInCommand="false">
+                                                    <nestedSteps>
+                                                        <item guid="3b94fc5a-c097-4a23-a29b-1192196bb502" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>module that suddenly disappears</body>
+                                                            </command>
+                                                            <postProcessing>
+                                                                <analysisRules>
+                                                                    <item>
+                                                                        <extractorInfo extractorType="none">
+                                                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                                        </extractorInfo>
+                                                                        <processorInfo ruleType="message">
+                                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                                                <message>    STC driver discovered module: $previousModule is no longer present</message>
+                                                                                <tag sub="false" defaultValue=""/>
+                                                                            </ruleProperties>
+                                                                        </processorInfo>
+                                                                    </item>
+                                                                </analysisRules>
+                                                            </postProcessing>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="ef172843-690b-4788-bad2-724fb46e75e3" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>lappend listMissingModules $previousModule</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="5a8acfc6-9860-4428-9c34-f5adebcdb804" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>[llength $listFoundModules] &gt; 0</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="8adbca90-57b0-4b07-b888-6f58a69d5a6a" action="then" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="e30fb53f-421e-4404-ba13-b4cb20b21ebb" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>[llength $listMissingModules] &gt; 0</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="c92dcf99-ef96-45f2-97ee-7f0751e21cb5" action="then" useFieldsInCommand="false">
+                                                            <nestedSteps>
+                                                                <item guid="b4461ece-5baf-4d8d-b6ab-98223481b84c" action="comment" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>found new modules and missing modules</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="bae1aad3-2cc1-40a4-928c-95e64d0f24b0" action="call" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>sendStcChangeMessageToAdmin -message &quot;The STC driver has detected that chassis $serialno found the following new module(s) inserted: $listFoundModules and the following module(s) missing: $listMissingModules&quot; -moduleList $moduleList -whatChanged moduleList</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="10a250e9-165f-479c-b95c-04d456fd4a6c" action="else" useFieldsInCommand="false">
+                                                            <nestedSteps>
+                                                                <item guid="a2322204-1d87-4f03-81a0-9596d46f78e0" action="comment" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>just found new modules</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="9900838d-3e4c-49a9-bd4a-0a55db878cd4" action="call" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>sendStcChangeMessageToAdmin -message &quot;The STC driver has detected that chassis $serialno found the following new module(s) inserted: $listFoundModules&quot; -moduleList $moduleList -whatChanged moduleList</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="848e8db3-7df6-42ec-8e25-2507a6562be9" action="else" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="5bffc2cb-4ebc-4e2e-9d99-641277ff28a1" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>[llength $listMissingModules] &gt; 0</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="9a5cc107-e442-465b-9528-5e4bac1abd07" action="then" useFieldsInCommand="false">
+                                                            <nestedSteps>
+                                                                <item guid="616b3a36-242d-4e09-8cac-51f44153331f" action="comment" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>just found missing modules</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                                <item guid="2b55f7d1-45e8-474e-8f09-652fe3794852" action="call" useFieldsInCommand="false">
+                                                                    <command>
+                                                                        <body>sendStcChangeMessageToAdmin -message &quot;The STC driver has detected that chassis $serialno found the following module(s) missing: $listMissingModules&quot; -moduleList $moduleList -whatChanged moduleList</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6da29503-9375-4ef6-8279-e31966143f0e" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>set ret &quot;\\{\\&quot;ports\\&quot;:\\[$jsonPortList\\]\\}&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f7cfd6e8-cf70-474f-82ca-fa1f6924f9ef" action="return">
+                    <command>
+                        <body>$ret</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{&quot;ports&quot;:[{&quot;name&quot;:&quot;port0&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;Chassis EmulatedL1Switch/Blade EmulatedL1Switch.1&quot;},{&quot;name&quot;:&quot;port1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;Chassis EmulatedL1Switch/Blade EmulatedL1Switch.1&quot;}]}</response>
+        </item>
+        <item name="addPortToJSON" isVBlock="true">
+            <steps>
+                <item guid="304bab69-ebb3-4860-aebd-43e5025fba97" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>puts &quot;portName: $portName&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>portName()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>portName</storageLocation>
+                                        <query>[return name]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5bf258e2-1d7b-4dc1-a72f-17004d8c84b6" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>puts &quot;portStatus: $portStatus&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>portStatus()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>portStatus</storageLocation>
+                                        <query>[return status]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0d9813f2-8d23-41bc-a23a-034e718a2dab" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>puts &quot;portContainer: $portContainer&quot;</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>portContainer()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>portContainer</storageLocation>
+                                        <query>[return container]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="portContainer"/>
+                <item name="portStatus"/>
+                <item name="portName"/>
+            </arguments>
+            <response>{&quot;name&quot;:&quot;port0&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;Chassis EmulatedL1Switch/Blade EmulatedL1Switch.1&quot;}</response>
+        </item>
+        <item name="getUnwrappedPorts">
+            <steps>
+                <item guid="2b665f54-8e8a-41be-81e7-8ca59a97fb0c" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>set jsonPortList &quot;&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ef67c5f7-2620-44fb-a77d-0167175782a7" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>$chassisVersion == &quot;C2&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2dc0a940-32f4-4f7b-adcf-9eed43d475a0" action="then" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="c384012f-44ab-45cf-8b22-72d23f25eaca" action="command" session="stc" estimatedStepExecutionTime="99.452">
+                                    <command>
+                                        <body>arp -a</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>slot()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>slotList</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <completionProperties expectedIdleTime="98.787" expectedIdleTime.inherit="false"/>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a16062c0-8b19-4732-8950-d409d818eb03" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="a046e16f-eea2-48bc-8e0e-bba21ebeff9b" action="command" session="stc" estimatedStepExecutionTime="99.452">
+                                    <command>
+                                        <body>/sbin/arp -a</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>slot()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>slotList</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <completionProperties expectedIdleTime="98.787" expectedIdleTime.inherit="false"/>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="64a6adc0-963c-4c7f-887b-2ae55c6fd654" action="command" session="stc" estimatedStepExecutionTime="0.186">
+                    <command>
+                        <body>cd /mnt/spirent/testmodule</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.572" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="717b56f6-c0cd-4d6c-a4f2-81cdb2a8b262" action="foreach" useFieldsInCommand="false">
+                    <command>
+                        <body>slotNum $slotList</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a97358f0-2dd3-4b2f-b88a-4524bfbd5072" action="command" session="stc">
+                            <command>
+                                <body>cat slot$slotNum/.config</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>slotNum()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>Information about slot number {value}</message>
+                                                <tag sub="false" defaultValue=""/>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>modelNum()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>    Model Number: {value}</message>
+                                                <tag sub="false" defaultValue=""/>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>modelNum()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>modelNum</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>serialNum()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>    Serial Number: {value}</message>
+                                                <tag sub="false" defaultValue=""/>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>serialNum()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>serialNum</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <completionProperties expectedIdleTime="0.572" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="03556a87-9283-47dd-9043-6cf3ca4ab8ca" action="command" session="stc" responseMap="response_maps/catTestModuleXml.ffrm" useResponseMapLibraryApplicability="false">
+                            <command>
+                                <body>cat /mnt/spirent/chassis/conf/Profiles/[string toupper $modelNum]_Default_DMCP.xml</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>No such file </searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>set fileOnChassis 0</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="SkipRemainingRules">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>set fileOnChassis 1</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>numOfPortGroups()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>numOfPortGroups</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>numOfPorts()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>numOfPorts</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <eventHandlers>
+                                <item name="OnResponseMappingIssue"/>
+                                <item name="OnMappingFail"/>
+                            </eventHandlers>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <completionProperties expectedIdleTime="0.572" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                            <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                        </item>
+                        <item guid="946ca81a-a23a-4eb3-9ebe-923f168f63cc" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>set portNum 1</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="61dee2fa-97e6-4b18-a67c-e397df0487f2" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>{set groupNum 1} {$groupNum &lt;= $numOfPortGroups} {incr groupNum}</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="9474f45d-04d1-40c6-9e6a-75030ce84c75" action="for" useFieldsInCommand="false">
+                                    <command>
+                                        <body>{set i 0} {$i &lt; [expr $numOfPorts / $numOfPortGroups]} {incr i}</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="fab1f7d1-347a-4599-8634-860705fc2e8e" action="call" useFieldsInCommand="false">
+                                            <command>
+                                                <body>addPortToJSON -portContainer slot[expr $slotNum + 1]_${modelNum}_${serialNum}/group${groupNum}_$serialNum -portStatus online -portName //[param property_ipAddress]/[expr 1 + $slotNum]/$portNum</body>
+                                            </command>
+                                            <postProcessing>
+                                                <storeResponseAt>portJSON</storeResponseAt>
+                                                <storeResponseText>true</storeResponseText>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="6df843ac-34b2-463b-b313-d9c8107cd994" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>set jsonPortList [concat $jsonPortList &quot;,&quot; $portJSON]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="fed97346-c4dc-40fa-9a52-af98e2983f8a" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>incr portNum</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="25c96a38-c32e-4aeb-9f6b-cab95cb7ab00" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>puts [string range $jsonPortList 1 end]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ff62e481-fb02-48dd-9a0d-e5185172e59a" action="return">
+                    <command>
+                        <body>[string range $jsonPortList 1 end]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="chassisVersion">
+                    <defaultValue>C3</defaultValue>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="sendStcChangeMessageToAdmin">
+            <steps>
+                <item guid="07fda854-471d-48ad-a0df-634fbd4004a0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>token</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="bbbe0cbb-37fe-40ab-b603-13bb14ebf4d7" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>set url [velocity url]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="88401076-f4a5-44b3-8dd8-8e63d073ecc1" action="open" session="s0">
+                            <command>
+                                <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="$url" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="bc3b6cec-0225-4fe9-a76a-3744764fd490" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>set token [velocity token]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0d872955-598a-44aa-90b4-22b96816c66a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>open rest session, get userId of notify user, send message</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="66e05a2c-1c75-49ae-ab45-63222cfc042c" action="GET" session="s0">
+                            <command>
+                                <body>api/user/v3/profiles?filter=name::[param property_NotifyUser]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/profiles/item/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>notifyUserId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/user/v3/profiles?filter=name::[param property_NotifyUser]" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="ad0c9058-d10a-4f33-8043-c77e593e7775" action="GET" session="s0">
+                            <command>
+                                <body>api/inventory/v3/devices?searchString=[param property_Chassis_Serial_Number]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/devices/item/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>resourceId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/inventory/v3/devices?searchString=[param property_Chassis_Serial_Number]" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="e1815b51-53d2-4997-b2c6-61666e047fcd" action="switch" useFieldsInCommand="false">
+                            <command>
+                                <body>$whatChanged</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ec0f1bdc-bdb3-45ee-be06-5d2f3e7bd7d4" action="case" useFieldsInCommand="false">
+                                    <command>
+                                        <body>&quot;moduleList&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="42d449dc-730b-4307-8637-2b70d3f0b6d5" action="GET" session="s0">
+                                            <command>
+                                                <body>api/inventory/v3/device/$resourceId</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/properties/item[name=&apos;Module_List&apos;]/definitionId</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>propertyId</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/inventory/v3/device/$resourceId" action.inherit="false">
+                                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="64c71316-e95c-4027-b0a0-af200eafffbf" action="PUT" session="s0">
+                                            <command>
+                                                <body>api/inventory/v3/device/$resourceId</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/id</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="assert">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                <expression>$value eq $resourceId</expression>
+                                                                <actionsWhenTrue>
+                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                            <message>Updated module list</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenTrue>
+                                                                <actionsWhenFalse>
+                                                                    <item actionId="FailTest">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                            <message>Failed to update module list</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenFalse>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/inventory/v3/device/$resourceId" action.inherit="false">
+                                                <message inherit="false">{
+    &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;Module_List&quot;,
+          &quot;value&quot;: &quot;$moduleList&quot;,
+          &quot;definitionId&quot;: &quot;$propertyId&quot;
+        }
+        \\]
+}</message>
+                                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="f20219b6-c76b-441f-8f3b-8ca39f289d29" action="POST" session="s0">
+                                            <command>
+                                                <body>api/message/v3/message</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/message/v3/message" action.inherit="false">
+                                                <message inherit="false">{
+  &quot;subject&quot;: &quot;STC driver detected a module relocation&quot;,
+  &quot;message&quot;: &quot;$message&quot;,
+  &quot;origin&quot;: &quot;STC Driver&quot;,
+  &quot;userId&quot;: &quot;$notifyUserId&quot;,
+  &quot;selfCopy&quot;: &quot;false&quot;
+}</message>
+                                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="8057fdb8-80dd-4e90-ae64-f8b80cf98fef" action="case" useFieldsInCommand="false">
+                                    <command>
+                                        <body>&quot;softwareVersion&quot;</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="2eececb5-c71c-4faa-99f2-f56617b0e443" action="GET" session="s0">
+                                            <command>
+                                                <body>api/inventory/v3/device/$resourceId</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/properties/item[name=&apos;Software_Version&apos;]/definitionId</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>propertyId</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/inventory/v3/device/$resourceId" action.inherit="false">
+                                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="08d4f866-def4-4fd5-b268-710c479e3f6b" action="PUT" session="s0">
+                                            <command>
+                                                <body>api/inventory/v3/device/$resourceId</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/id</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="assert">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                <expression>$value eq $resourceId</expression>
+                                                                <actionsWhenTrue>
+                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                            <message>Updated module list</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenTrue>
+                                                                <actionsWhenFalse>
+                                                                    <item actionId="FailTest">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                            <message>Failed to update module list</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenFalse>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/inventory/v3/device/$resourceId" action.inherit="false">
+                                                <message inherit="false">{
+    &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;Software_Version&quot;,
+          &quot;value&quot;: &quot;$softwareVersion&quot;,
+          &quot;definitionId&quot;: &quot;$propertyId&quot;
+        }
+        \\]
+}</message>
+                                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="be7252dd-3a52-4ff3-8270-a2254897faf4" action="POST" session="s0">
+                                            <command>
+                                                <body>api/message/v3/message</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/message/v3/message" action.inherit="false">
+                                                <message inherit="false">{
+  &quot;subject&quot;: &quot;STC driver detected a software version change&quot;,
+  &quot;message&quot;: &quot;$message&quot;,
+  &quot;origin&quot;: &quot;STC Driver&quot;,
+  &quot;userId&quot;: &quot;$notifyUserId&quot;,
+  &quot;selfCopy&quot;: &quot;false&quot;
+}</message>
+                                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d7926595-897d-4b2f-9a49-060352c56e43" action="close" session="s0" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="message">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="moduleList"/>
+                <item name="softwareVersion"/>
+                <item name="whatChanged">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+    </procedures>
+</testCase>

@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.4.1.be355a6">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>cat slot8/.config</body>
+                </command>
+            </action>
+            <responseBody>CONTEXT=8:E09100433:80-001404:SHADOWCAT:cm-1g-d12
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;cat slot8/.config&lt;/echo&gt;
+    &lt;prompt&gt;80-000722.E12230496:testmodule$ &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.4</duration>
+        </item>
+        <item name="C3">
+            <responseBody>CONTEXT=morphphase2:5:E16320476:80-002342:apocalypse:mx3-100gq-t2</responseBody>
+        </item>
+        <item name="sample2">
+            <responseBody>CONTEXT=morphphase2:3:S13340055:80-002377:iceman:mx-100g-p2</responseBody>
+        </item>
+        <item name="sample3">
+            <responseBody>CONTEXT=morphphase2:5:E16320476:80-002342:apocalypse:mx3-100gq-t2</responseBody>
+        </item>
+        <item name="sample4">
+            <responseBody>CONTEXT=1:M06480033:80-000026:RAVEN:edm-2003b</responseBody>
+        </item>
+        <item name="sample5">
+            <responseBody>CONTEXT=1:M06480033:80-000026:RAVEN:edm-2003b</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="colon_auto1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>CONTEXT=</regex>
+                            <start>0</start>
+                            <end>8</end>
+                        </item>
+                        <item name="slotNum">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>8</start>
+                            <end>9</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>:</regex>
+                            <start>9</start>
+                            <end>10</end>
+                        </item>
+                        <item name="serialNum">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>10</start>
+                            <end>19</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>:</regex>
+                            <start>19</start>
+                            <end>20</end>
+                        </item>
+                        <item name="SHADOWCAT">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>20</start>
+                            <end>29</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{9}">exactly 9 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>:</regex>
+                            <start>29</start>
+                            <end>30</end>
+                        </item>
+                        <item name="group0">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>30</start>
+                            <end>39</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor4">
+                            <regex>:</regex>
+                            <start>39</start>
+                            <end>40</end>
+                        </item>
+                        <item name="modelNum">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>40</start>
+                            <end>49</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>CONTEXT=8:E09100433:80-001404:SHADOWCAT:cm-1g-d12</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>CONTEXT=</regex>
+                            <start>0</start>
+                            <end>8</end>
+                        </item>
+                        <item name="CONTEXT">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>8</start>
+                            <end>19</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>:</regex>
+                            <start>19</start>
+                            <end>20</end>
+                        </item>
+                        <item name="slotNum">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>20</start>
+                            <end>21</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>:</regex>
+                            <start>21</start>
+                            <end>22</end>
+                        </item>
+                        <item name="serialNum">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>22</start>
+                            <end>31</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>:</regex>
+                            <start>31</start>
+                            <end>32</end>
+                        </item>
+                        <item name="group0">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>32</start>
+                            <end>41</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{9}">exactly 9 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor4">
+                            <regex>:</regex>
+                            <start>41</start>
+                            <end>42</end>
+                        </item>
+                        <item name="group1">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>42</start>
+                            <end>52</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor5">
+                            <regex>:</regex>
+                            <start>52</start>
+                            <end>53</end>
+                        </item>
+                        <item name="modelNum">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>53</start>
+                            <end>65</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>CONTEXT=morphphase2:5:E16320476:80-002342:apocalypse:mx3-100gq-t2</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="cat slot*/.config"/>
+</ResponseMap>

@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<ResponseMap version="5.4.1.be355a6">
+    <responseStructure>text/xml</responseStructure>
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="readFile">
+                <command>
+                    <body>cat /mnt/spirent/chassis/conf/Profiles//CM-1G-D12_Default/CM-1G-D12_Default_TestModule.xml</body>
+                </command>
+            </action>
+            <responseBody>&lt;?xml version=&quot;1.0&quot; ?&gt;
+&lt;rcm:RcmService version=&quot;2.0.1&quot; xmlns:rcm=&quot;urn:www.spirentcom.com:rcmAuto.xsd&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;urn:www.spirentcom.com:rcmAuto.xsd StcRcmAuto.xsd&quot;&gt;
+\t
+  
+\t&lt;rcm:resourceList category=&quot;DMCP&quot; doc=&quot;Dynamic Multi-core Processing Capabilities&quot; fullFileName=&quot;MX3-100GQ-T2_Default_DMCP&quot; instances=&quot;2&quot; name=&quot;DMCP&quot; testMode=&quot;&quot;&gt;
+\t\t
+  
+\t\t&lt;rcm:resource name=&quot;Profile&quot;&gt;
+\t\t\t&lt;rcm:capability name=&quot;name&quot; type=&quot;str&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:str value=&quot;Default&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;description&quot; type=&quot;str&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:str value=&quot;STC Functional Profile&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;default&quot; type=&quot;str&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:str value=&quot;Y&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;factorySupplied&quot; type=&quot;str&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:str value=&quot;Y&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;availableCores&quot; type=&quot;num&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:num value=&quot;0&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;availableMemSize&quot; type=&quot;num&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:num value=&quot;0&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;availablePorts&quot; type=&quot;num&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:num value=&quot;0&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;availablePortList&quot; type=&quot;str&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:str value=&quot;,&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;availablePortSpeedList&quot; type=&quot;str&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:str value=&quot;,&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t&lt;/rcm:resource&gt;
+\t\t&lt;rcm:resource name=&quot;Total Resources&quot;&gt;
+\t\t\t&lt;rcm:capability name=&quot;totalNumCores&quot; type=&quot;num&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:num value=&quot;40&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;totalMemSize&quot; type=&quot;num&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:num value=&quot;32768&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;rcm:capability name=&quot;totalNumPorts&quot; type=&quot;num&quot;&gt;
+\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t&lt;rcm:num value=&quot;8&quot;/&gt;
+\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t&lt;/rcm:capability&gt;
+\t\t&lt;/rcm:resource&gt;
+\t\t&lt;rcm:resource name=&quot;Networks&quot;&gt;
+\t\t\t&lt;rcm:resource name=&quot;Network&quot;&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;networkName&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;admin-network&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;networkLabel&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;Admin Network&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t&lt;/rcm:resource&gt;
+\t\t&lt;/rcm:resource&gt;
+\t\t&lt;rcm:resource name=&quot;NatRules&quot;/&gt;
+\t\t&lt;rcm:instance instance=&quot;1&quot; name=&quot;PortGroup&quot;&gt;
+\t\t\t&lt;rcm:resource name=&quot;PortGroup&quot;&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;enabled&quot; type=&quot;bool&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:bool value=&quot;true&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;numCores&quot; type=&quot;num&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:num value=&quot;20&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;memSize&quot; type=&quot;num&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:num value=&quot;16384&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;portList&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;1&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;portSpeedList&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;100G&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;testPackage&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;stc-lxc&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;fpga&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:resource name=&quot;NetworkBridges&quot;&gt;
+\t\t\t\t\t&lt;rcm:resource name=&quot;NetworkBridge&quot;&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;networkName&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;admin-network&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;model&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;e1000&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;macType&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;stc&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;macAddress&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;ipAddress&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;interface&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;br0&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t&lt;/rcm:resource&gt;
+\t\t\t\t&lt;/rcm:resource&gt;
+\t\t\t&lt;/rcm:resource&gt;
+\t\t&lt;/rcm:instance&gt;
+\t\t&lt;rcm:instance instance=&quot;2&quot; name=&quot;PortGroup&quot;&gt;
+\t\t\t&lt;rcm:resource name=&quot;PortGroup&quot;&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;enabled&quot; type=&quot;bool&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:bool value=&quot;true&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;numCores&quot; type=&quot;num&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:num value=&quot;20&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;memSize&quot; type=&quot;num&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:num value=&quot;16384&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;portList&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;5&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;portSpeedList&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;100G&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;testPackage&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;stc-lxc&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:capability name=&quot;fpga&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t&lt;rcm:str value=&quot;&quot;/&gt;
+\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t&lt;rcm:resource name=&quot;NetworkBridges&quot;&gt;
+\t\t\t\t\t&lt;rcm:resource name=&quot;NetworkBridge&quot;&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;networkName&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;admin-network&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;model&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;e1000&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;macType&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;stc&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;macAddress&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;ipAddress&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t\t&lt;rcm:capability name=&quot;interface&quot; type=&quot;str&quot;&gt;
+\t\t\t\t\t\t\t&lt;rcm:value&gt;
+\t\t\t\t\t\t\t\t&lt;rcm:str value=&quot;br0&quot;/&gt;
+\t\t\t\t\t\t\t&lt;/rcm:value&gt;
+\t\t\t\t\t\t&lt;/rcm:capability&gt;
+\t\t\t\t\t&lt;/rcm:resource&gt;
+\t\t\t\t&lt;/rcm:resource&gt;
+\t\t\t&lt;/rcm:resource&gt;
+\t\t&lt;/rcm:instance&gt;
+\t&lt;/rcm:resourceList&gt;
+\t
+
+&lt;/rcm:RcmService&gt;
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+    </sampleDictionary>
+    <applicabilityProperties actionType="readFile" command="project://*Default_TestModule.xml"/>
+    <aliases>
+        <item name="numOfPortGroups">
+            <queryFormatString>count(//rcm:resource[@name=&apos;PortGroup&apos;])</queryFormatString>
+        </item>
+        <item name="numOfPorts">
+            <queryFormatString>//rcm:capability[@name=&apos;totalNumPorts&apos;]/rcm:value/rcm:num/@value</queryFormatString>
+        </item>
+    </aliases>
+</ResponseMap>
