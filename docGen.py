@@ -57,7 +57,6 @@ def main():
         try:
             readmeFile = codecs.open(projectRoot + '/documentation/readme.txt', encoding='utf-8')
             readme = readmeFile.read()
-            readme = re.sub(r'\n(?=\w)', '\\' + '\n', readme)
             output = output + '### Project Information:\n' + readme + '\n ----'
         except Exception as e:
             print("Error opening readme file for project " + projectRoot + ". Project will be ignored")
