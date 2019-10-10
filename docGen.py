@@ -2,11 +2,11 @@
 # Creates a README.md file for every iTest project in a directory. Projects must contain a file in documentation/readme.txt to be used
 # Alex Orr
 #
-# Latest change: fixed Github display issues (Github needs a space after # heading chars) and Unicode output issues
-# 4/18/19
+# Latest change: Fixed issue in markdown files were newlines were not displayed correctly
+# 8/10/19
 
 
-import os, codecs
+import os, codecs, re
 from lxml import etree
 
 ### Create title text for a file.
@@ -56,7 +56,9 @@ def main():
         output = ''
         try:
             readmeFile = codecs.open(projectRoot + '/documentation/readme.txt', encoding='utf-8')
-            output = output + '### Project Information:\n' + readmeFile.read() + '\n ----'
+            readme = readmeFile.read()
+            readme = re.sub(r'\n(?=\w)', '\\' + '\n', readme)
+            output = output + '### Project Information:\n' + readme + '\n ----'
         except Exception as e:
             print("Error opening readme file for project " + projectRoot + ". Project will be ignored")
             print(e)
