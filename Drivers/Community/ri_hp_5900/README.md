@@ -1,9 +1,9 @@
 ### Project Information:
-Project: HP Device Project
-Description: Provides basic commands for management of HP servers.
-Category: driver
-Class: Community
-Tags: Management
+Project: HP Device Project  
+Description: Provides basic commands for management of HP servers.  
+Category: driver  
+Class: Community  
+Tags: Management  
 
  ----
 1 quickcall library in project

@@ -1,8 +1,8 @@
 ### Project Information:
-Project: USB Master
-Description: L1 switch driver for USB Master switch
-Category: driver
-Class: Community
+Project: USB Master  
+Description: L1 switch driver for USB Master switch  
+Category: driver  
+Class: Community  
 
  ----
 1 test case in project

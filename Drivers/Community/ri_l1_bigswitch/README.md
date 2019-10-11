@@ -1,9 +1,9 @@
 ### Project Information:
-Project: BigSwitch L1 Driver
-Description: Provides basic commands for management of BigSwitch L1 switches.
-Category: driver
-Class: Community
-Tags: L1
+Project: BigSwitch L1 Driver  
+Description: Provides basic commands for management of BigSwitch L1 switches.  
+Category: driver  
+Class: Community  
+Tags: L1  
 
  ----
 1 quickcall library in project

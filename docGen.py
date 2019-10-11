@@ -3,7 +3,7 @@
 # Alex Orr
 #
 # Latest change: Fixed issue in markdown files were newlines were not displayed correctly
-# 8/10/19
+# 8/11/19
 
 
 import os, codecs, re
@@ -53,15 +53,15 @@ def main():
 
     for projectRoot in projectRoots:
         qcLibs, testCases, responseMaps, procLibs = [],[],[],[]
-        output = ''
         try:
             readmeFile = codecs.open(projectRoot + '/documentation/readme.txt', encoding='utf-8')
-            readme = readmeFile.read()
-            output = output + '### Project Information:\n' + readme + '\n ----'
         except Exception as e:
             print("Error opening readme file for project " + projectRoot + ". Project will be ignored")
             print(e)
             continue
+        readme = readmeFile.read()
+        readme = re.sub(r'\r?\n','  \n',readme)
+        output = '### Project Information:\n' + readme + '\n ----'
         for subdir, dirs, files in os.walk(projectRoot):
             # loop through files in project
             for file in files:
