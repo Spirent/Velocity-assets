@@ -1,9 +1,9 @@
 ### Project Information:
-Project: Cytec
-Description: Cytec RF switch driver for Velocity
-Category: driver
-Class: Community
-
+Project: Cytec  
+Description: Cytec RF switch driver for Velocity  
+Category: driver  
+Class: Community  
+  
 
  ----
 1 test case in project

@@ -1,9 +1,9 @@
 ### Project Information:
-Project: F5 Device Project
-Description: Provides basic commands for management of F5 equipment.
-Category: driver
-Class: Community
-Tags: Management
+Project: F5 Device Project  
+Description: Provides basic commands for management of F5 equipment.  
+Category: driver  
+Class: Community  
+Tags: Management  
 
  ----
 2 quickcall libraries in project

@@ -1,9 +1,9 @@
 ### Project Information:
-Project: HP ProCurve
-Description: HP ProCurve L2 driver for Velocity VLAN management
-Category: driver
-Class: Community
-
+Project: HP ProCurve  
+Description: HP ProCurve L2 driver for Velocity VLAN management  
+Category: driver  
+Class: Community  
+  
 
  ----
 1 test case in project

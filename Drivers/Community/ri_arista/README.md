@@ -1,9 +1,9 @@
 ### Project Information:
-Project: Arista L2 Driver
-Description: Provides basic commands for management of Arista L2 switches.
-Category: driver
-Class: Community
-Tags: L2
+Project: Arista L2 Driver  
+Description: Provides basic commands for management of Arista L2 switches.  
+Category: driver  
+Class: Community  
+Tags: L2  
 
  ----
 1 quickcall library in project
