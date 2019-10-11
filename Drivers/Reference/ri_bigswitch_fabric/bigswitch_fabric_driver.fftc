@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<testCase version="7.3.0.201903220921">
+<testCase version="7.3.5.0">
     <execution>
-        <parameters version="7.3.0.201903220921">
+        <parameters version="7.3.5.0">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
                     <reservationId>accda199-b3b3-498e-8470-fce9c6abfc3c</reservationId>
@@ -774,12 +774,16 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>This procedure is called by Velocity to add ports to VNIs</multilineDescription>
             <arguments>
                 <item name="topo_info">
+                    <description>JSON info about the connections to the switch from getTopologyInfo proc</description>
                     <defaultValue>0</defaultValue>
                     <isMandatory>true</isMandatory>
                 </item>
-                <item name="switch_name"/>
+                <item name="switch_name">
+                    <description>Name of the leaf switch</description>
+                </item>
             </arguments>
             <response>{}</response>
         </item>
@@ -1119,12 +1123,16 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>This procedure is called by Velocity to remove ports from VNIs</multilineDescription>
             <arguments>
                 <item name="topo_info">
+                    <description>JSON info about the connections to the switch from getTopologyInfo proc</description>
                     <defaultValue>0</defaultValue>
                     <isMandatory>true</isMandatory>
                 </item>
-                <item name="switch_name"/>
+                <item name="switch_name">
+                    <description>Name of the leaf switch</description>
+                </item>
             </arguments>
             <response>{}</response>
         </item>
@@ -1134,12 +1142,7 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
-            <arguments>
-                <item name="vlanId"/>
-                <item name="tagged">
-                    <defaultValue>0</defaultValue>
-                </item>
-            </arguments>
+            <multilineDescription>Called by Velocity, but not used by this driver</multilineDescription>
             <response>{}</response>
         </item>
         <item name="destroyVlan">
@@ -1148,6 +1151,7 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>Called by Velocity, but not used by this driver</multilineDescription>
         </item>
         <item name="getProperties">
             <steps>
@@ -1158,9 +1162,38 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>Called by Velocity but returns empy string of ports and properties</multilineDescription>
         </item>
         <item name="getPorts">
             <steps>
+                <item guid="d37e676e-96b9-4243-980a-e82a1eb2a157" action="write" useFieldsInCommand="false">
+                    <command>
+                        <body>{&quot;ports&quot;: []}</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>1 == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="01d431ea-2fc6-4b76-b214-e0938548fff3" action="return">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="a6d55e77-4cda-4d95-8eb7-c36d65256132" action="open" session="proc" useFieldsInCommand="false">
                     <command>
                         <body>application:com.fnfr.svt.applications.process</body>
@@ -1242,13 +1275,8 @@
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="d37e676e-96b9-4243-980a-e82a1eb2a157" action="write" useFieldsInCommand="false">
-                    <command>
-                        <body>{&quot;ports&quot;: []}</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
             </steps>
+            <multilineDescription>Called by Velocity but simply returns empty port list</multilineDescription>
         </item>
         <item name="getAllResources">
             <steps>
@@ -1428,11 +1456,14 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>Returns a complete JSON list of devices in the reservation.</multilineDescription>
             <arguments>
                 <item name="reservationId">
+                    <description>ID of the reservation</description>
                     <isMandatory>true</isMandatory>
                 </item>
                 <item name="vel_token">
+                    <description>Token to communicate with Velocity</description>
                     <isMandatory>true</isMandatory>
                 </item>
             </arguments>
@@ -2676,8 +2707,11 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>Returns a list of connection widgets (line, cloud or multi-vlan cloud) and their child Big Switch Leaf ports and associated VLANs.</multilineDescription>
             <arguments>
-                <item name="reservationId"/>
+                <item name="reservationId">
+                    <description>ID of the reservation</description>
+                </item>
             </arguments>
             <response>{&quot;connections&quot;:{&quot;id&quot;:&quot;value&quot;,&quot;items&quot;:{&quot;vlan&quot;:&quot;value&quot;,&quot;key&quot;:&quot;value&quot;}}}</response>
         </item>
@@ -2838,6 +2872,7 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>Not used</multilineDescription>
             <response>{}</response>
         </item>
         <item name="getDeviceStatus">
@@ -3082,30 +3117,12 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>Not used</multilineDescription>
             <arguments>
                 <item name="deviceHost">
+                    <description>Host name or IP address</description>
                     <isMandatory>true</isMandatory>
                 </item>
-            </arguments>
-            <response>{}</response>
-        </item>
-        <item name="convertToTclHtmlEscaped">
-            <steps>
-                <item guid="d132bc5e-560b-4694-9c08-5ff26b6e01ea" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>set x [string map {{&quot;} &apos;  \\n {&lt;/p&gt;&lt;p&gt;}} &quot;&lt;pre&gt;&lt;p&gt;[string trim $string]&lt;/p&gt;&lt;/pre&gt;&quot;]</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="a09b534e-6bd6-46fb-9cb8-ddc46fec1374" action="return">
-                    <command>
-                        <body>$x</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-            <arguments>
-                <item name="string"/>
             </arguments>
             <response>{}</response>
         </item>
@@ -3182,8 +3199,10 @@
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+            <multilineDescription>Converts a vlan list like &quot;100,200-203,1100&quot; to &quot;100 200 201 202 203 1100&quot;</multilineDescription>
             <arguments>
                 <item name="vlan_list">
+                    <description>List of vlans using commas and dashes (example 100,200-203,3002)</description>
                     <isMandatory>true</isMandatory>
                 </item>
             </arguments>
