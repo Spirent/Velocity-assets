@@ -3,12 +3,12 @@ Description: L2 Velocity driver for Big Switch Cloud Fabric
 Category: Driver  
 Class: Reference  
 This is a Velocity Layer 2 driver for the Bigswitch [Big Cloud Fabric(tm)](https://www.bigswitch.com/products/big-cloud-fabric) SDN controller. As the name suggests, this combination of Velocity driver and SDN controller allow you to create a BIG network of leaf switches that can connect devices in Velocity.  
-# Driver Download & Installation
-## Download the Drivers
+## Driver Download & Installation
+### Download the Drivers
 This L2 infrastructure for Bigswitch Big Cloud Fabric requires TWO driver they are:  
 * [Bigswitch Big Cloud Fabric driver](https://developer.spirent.com/zips/velocity/ri_bigswitch_fabric.zip)
 * [Emulated L2 driver](https://developer.spirent.com/zips/velocity/ri_emulated.L2.driver.zip)  
-## Install and  Drivers
+### Install and  Drivers
 The steps to install the above drivers on your Velocity instance are as follows  
 1. Download the two drivers mentioned above
 1. Create a new driver named "Big Cloud Fabric L2" and choose the downloaded file "ri_bigswitch_fabric.zip"
@@ -24,9 +24,9 @@ This template describes the leaf/ToR switches that will be connected to Velocity
 1. Create a new template named "Big Cloud Leaf Switch" using "Layer 2 Switch" as the parent
 1. Set the template to use "Big Cloud Fabric L2" driver
 1. Set the following default values in the template:
-  - ipAddress: IP address or hostname of Bigswitch Fabric controller
-  - username: username for Big Cloud Fabric controller (admin rights)
-  - password: password for Big Cloud Fabric controller
+  + ipAddress: IP address or hostname of Bigswitch Fabric controller
+  + username: username for Big Cloud Fabric controller (admin rights)
+  + password: password for Big Cloud Fabric controller
 1. Add a port group named "Virtual", and add one port named "virtual" of template "Virtual Shared"
 1. Add a port group named "Ethernet", but don't add any ports to the template
 ### Virtual Spine Template
