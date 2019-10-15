@@ -1,0 +1,233 @@
+<?xml version="1.0" ?><ResponseMap version="6.0.0.18638fa">
+    <notes>1/28/13: NJL inital version.  This is a pretty basic table which is keyed on &quot;item,&quot; but there are some things nested under others.  Not sure if this is going to be a problem or not.  For example:
+
+FPC 0            REV 30   750-028467   ABBF8978          MPC 3D 16x 10GE
+  CPU            REV 10   711-029089   ABBJ4398          AMPC PMB
+  PIC 0                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803100654      SFP+-10G-LR</notes>
+    <headline>show chassis hardware for juniper</headline>
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>show chassis hardware</body>
+                </command>
+            </action>
+            <responseBody>Hardware inventory:
+Item             Version  Part number  Serial number     Description
+Chassis                                JN10C7F5EAFB      MX480
+Midplane         REV 04   710-017414   TR1686            MX480 Midplane
+FPM Board        REV 02   710-017254   KB2067            Front Panel Display
+PEM 0            Rev 05   740-027736   QCS1224T0DT       DC 2.4kW Power Entry Module
+PEM 1            Rev 05   740-027736   QCS1224T086       DC 2.4kW Power Entry Module
+PEM 2            Rev 05   740-027736   QCS1224T0EN       DC 2.4kW Power Entry Module
+PEM 3            Rev 05   740-027736   QCS1224T05W       DC 2.4kW Power Entry Module
+Routing Engine 0 REV 07   740-013063   9009009448        RE-S-2000
+Routing Engine 1 REV 07   740-013063   1000731665        RE-S-2000
+CB 0             REV 07   710-021523   XG0199            MX SCB
+CB 1             REV 07   710-013385   KA8728            MX SCB
+FPC 0            REV 30   750-028467   ABBF8978          MPC 3D 16x 10GE
+  CPU            REV 10   711-029089   ABBJ4398          AMPC PMB
+  PIC 0                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803100654      SFP+-10G-LR
+  PIC 1                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803100786      SFP+-10G-LR
+  PIC 2                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803101315      SFP+-10G-LR
+  PIC 3                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803100653      SFP+-10G-LR
+FPC 1            REV 03   750-020220   KA8731            DPCE 40x 1GE X
+  CPU            REV 06   710-013713   AB8054            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 02   740-011614   PHF83Y0           SFP-LX10
+    Xcvr 1       REV 02   740-011614   PHF830M           SFP-LX10
+    Xcvr 2       REV 02   740-011614   PHF5WL4           SFP-LX10
+    Xcvr 3       REV 02   740-011614   PHF82YD           SFP-LX10
+    Xcvr 4       REV 02   740-011614   PHF5WQP           SFP-LX10
+    Xcvr 5       REV 01   740-011783   PBM0M7V           SFP-LX10
+    Xcvr 6       REV 01   740-011783   PBH3DE5           SFP-LX10
+    Xcvr 7       REV 01   740-011783   PA216C0           SFP-LX10
+    Xcvr 8       REV 01   740-011783   PBM0M7S           SFP-LX10
+    Xcvr 9       REV 01   740-011783   PBK4BVN           SFP-LX10
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 1       REV 01   740-011614   E06H03167         SFP-LX10
+    Xcvr 4       REV 01   740-011614   C08F00059         SFP-LX10
+    Xcvr 5       REV 01   740-011783   PBM1970           SFP-LX10
+    Xcvr 6       REV 01   740-011783   PBM19AA           SFP-LX10
+    Xcvr 7       REV 01   740-011783   PBM18Y1           SFP-LX10
+    Xcvr 8       REV 01   740-011783   PBL02S3           SFP-LX10
+    Xcvr 9       REV 01   740-011783   PBM18XN           SFP-LX10
+  PIC 2                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011614   AC0810S0155       SFP-LX10
+    Xcvr 1       REV 03   740-017726   8ZT500000391      SFP-EX
+    Xcvr 3       REV 03   740-017726   8ZT500000390      SFP-EX
+    Xcvr 6       REV 01   740-011783   PBK4BR5           SFP-LX10
+    Xcvr 7       REV 01   740-011783   PBM1BS6           SFP-LX10
+    Xcvr 8       REV 01   740-011783   PBH3D9V           SFP-LX10
+    Xcvr 9       REV 01   740-011783   PBM18Y2           SFP-LX10
+  PIC 3                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011782   P8621JC           SFP-SX
+    Xcvr 1       REV 01   740-011614   AC0810S0158       SFP-LX10
+    Xcvr 5                NON-JNPR                       UNSUPPORTED
+    Xcvr 6       REV 01   740-011783   PBH3DD0           SFP-LX10
+    Xcvr 7       REV 01   740-011783   PBH3DGE           SFP-LX10
+    Xcvr 8       REV 01   740-011783   PBM1BT4           SFP-LX10
+    Xcvr 9       REV 01   740-011783   PBK4GS7           SFP-LX10
+FPC 2            REV 25   750-020456   ABBK3809          DPCE 4x 10GE X EQ
+  CPU            REV 08   710-013713   ABBH1265          DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+    Xcvr 0       REV 01   740-014279   6Z3019A00212      XFP-10G-LR
+  PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+  PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+    Xcvr 0       REV 01   740-014279   913019B00773      XFP-10G-LR
+  PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+    Xcvr 0       REV 01   740-031833   0ZT670102695      XFP-10G-LR
+FPC 3            REV 13   750-021680   ABBA1041          DPCE 40x 1GE X
+  CPU            REV 03   710-022351   KG8760            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011783   PBH3DGC           SFP-LX10
+    Xcvr 1       REV 01   740-011783   PBM1BPT           SFP-LX10
+    Xcvr 2       REV 01   740-011783   PBM1BTL           SFP-LX10
+    Xcvr 3       REV 01   740-011783   PBM1BT8           SFP-LX10
+    Xcvr 4       REV 01   740-011783   PBM197L           SFP-LX10
+    Xcvr 6       REV 01   740-017726   85S184N30333      SFP-EX
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011783   PBH3DA9           SFP-LX10
+    Xcvr 1       REV 01   740-011612   790016D00443      SFP-LH
+    Xcvr 2       REV 01   740-011783   PBL1A53           SFP-LX10
+    Xcvr 3       REV 01   740-011783   PBM19NT           SFP-LX10
+  PIC 2                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011783   PBL1A2G           SFP-LX10
+    Xcvr 1       REV 01   740-011612   790016D00441      SFP-LH
+    Xcvr 2       REV 01   740-011783   PBK4GYX           SFP-LX10
+    Xcvr 3       REV 01   740-011783   PBH3DA8           SFP-LX10
+    Xcvr 4       REV 01   740-011614   94T407003148      SFP-LX10
+    Xcvr 6       REV 01   740-011784   6Z0016D00178      SFP-LH
+    Xcvr 7       REV 01   740-011784   790016D00219      SFP-LH
+    Xcvr 9       REV 01   740-011783   PBM1BU1           SFP-LX10
+  PIC 3                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011783   PBH3DF1           SFP-LX10
+    Xcvr 1       REV 01   740-011783   PBM199C           SFP-LX10
+    Xcvr 3       REV 01   740-011783   PBM1BN4           SFP-LX10
+    Xcvr 4       REV 01   740-011783   PBL02SA           SFP-LX10
+    Xcvr 8       REV 01   740-011784   6Z0016D00051      SFP-LH
+    Xcvr 9       REV 01   740-017726   85S184N30335      SFP-EX
+FPC 4            REV 04   750-020221   KA7502            DPCE 4x 10GE X
+  CPU            REV 06   710-013713   KB8043            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 01   740-014279   913019B00116      XFP-10G-LR
+  PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 01   740-014279   913019B00772      XFP-10G-LR
+  PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 01   740-014279   773019B00356      XFP-10G-LR
+  PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 01   740-014279   913019B00761      XFP-10G-LR
+FPC 5            REV 17   750-020452   KG6849            DPCE 40x 1GE X EQ
+  CPU            REV 07   710-013713   KG6697            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+    Xcvr 0       REV 01   740-011783   PBK4BVL           SFP-LX10
+    Xcvr 1       REV 02   740-011614   PHE2ZBV           SFP-LX10
+    Xcvr 2       REV 02   740-011614   PHE155B           SFP-LX10
+    Xcvr 3       REV 02   740-011614   PHF82K1           SFP-LX10
+    Xcvr 4       REV 01   740-011614   AC0810S01PS       SFP-LX10
+    Xcvr 5       REV 01   740-011783   PBA0R6C           SFP-LX10
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+    Xcvr 4       REV 01   740-011783   PBK4GRZ           SFP-LX10
+    Xcvr 5       REV 01   740-011783   PBM1978           SFP-LX10
+  PIC 2                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+    Xcvr 0                NON-JNPR     FNS104714D4       SFP-LX10
+    Xcvr 1       REV 02   740-011614   PDJ37VB           SFP-LX10
+    Xcvr 2       REV 02   740-011614   PHF6066           SFP-LX10
+    Xcvr 3       REV 02   740-011614   PHF60QT           SFP-LX10
+    Xcvr 4       REV 01   740-011614   84S491N15449      SFP-LX10
+    Xcvr 5       REV 02   740-011614   PHF82YG           SFP-LX10
+  PIC 3                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+    Xcvr 2       REV 01   740-011783   PBH3DEP           SFP-LX10
+Fan Tray                                                 Enhanced Left Fan Tray
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;spirentdev1@sfcca304ia1-PE10&amp;gt; &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;show chassis hardware&lt;/echo&gt;
+        &lt;idleTime&gt;19.112&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R_SLASH_N&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <duration>21.0</duration>
+        </item>
+        <item name="sample2">
+            <action>
+                <command>
+                    <body>shw chassis hardware models</body>
+                </command>
+            </action>
+            <responseBody>Hardware inventory:
+Item             Version  Part number  Serial number     FRU model number
+Midplane         REV 04   710-017414   TR1197            CHAS-BP-MX480-S
+FPM Board        REV 02   710-017254   KB2084            CRAFT-MX480-S
+PEM 0            Rev 05   740-027736   QCS1224T0DR       PWR-MX480-2400-DC-S
+PEM 1            Rev 05   740-027736   QCS1224T0B2       PWR-MX480-2400-DC-S
+PEM 2            Rev 05   740-027736   QCS1224T0B8       PWR-MX480-2400-DC-S
+PEM 3            Rev 05   740-027736   QCS1224T08E       PWR-MX480-2400-DC-S
+Routing Engine 0 REV 06   740-013063   1000729864        RE-S-2000-4096-S
+Routing Engine 1 REV 06   740-013063   1000729930        RE-S-2000-4096-S
+CB 0             REV 02   710-021523   KB8922            SCB-MX960-S
+CB 1             REV 02   710-021523   KB8899            SCB-MX960-S
+FPC 0            REV 10   750-020221   KG0807            DPCE-X-4XGE-XFP
+FPC 1            REV 03   750-020220   KB7500            DPCE-X-40GE-SFP
+FPC 3            REV 03   750-020220   KC2208            DPCE-X-40GE-SFP
+FPC 4            REV 04   750-020221   KB4848            DPCE-X-4XGE-XFP
+Fan Tray                                                 FFANTRAY-MX480-HC-S
+</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <additionalBannerLineCount>1</additionalBannerLineCount>
+                    <banner>Hardware inventory:</banner>
+                    <bannerStructure>CaseInsensitive</bannerStructure>
+                    <footerStructure>End</footerStructure>
+                    <columnBoundaries>Positional</columnBoundaries>
+                    <minOccurences>0</minOccurences>
+                    <maxOccurences>1</maxOccurences>
+                    <columns>
+                        <item name="item">
+                            <isKey>true</isKey>
+                            <width>17</width>
+                            <lastFullCell/>
+                        </item>
+                        <item name="version">
+                            <width>9</width>
+                            <lastFullCell/>
+                        </item>
+                        <item name="part_number">
+                            <width>13</width>
+                            <lastFullCell/>
+                        </item>
+                        <item name="serial_number">
+                            <width>18</width>
+                            <lastFullCell/>
+                        </item>
+                        <item name="description">
+                            <width>0</width>
+                            <lastFullCell/>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="sh* chas* hardware">
+        <application>
+            <item>com.fnfr.svt.applications.ssh</item>
+            <item>com.fnfr.svt.applications.telnet</item>
+        </application>
+    </applicabilityProperties>
+</ResponseMap>

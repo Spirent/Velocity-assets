@@ -1,9 +1,9 @@
-Project: Layer 2 Switch Driver Template
-Description: A template to be used when developing new layer 2 interface drivers
+Project: Configurable Layer 2 Switch Driver Template
+Description: A template to be used when developing new configurable layer 2 interface drivers
 Category: driver
 Class: Reference
 
-The driver implements the layer 2 interface and requires the
+The driver implements the configurable layer 2 interface and requires the
 following resource properties:
 * ipAddress (optional, but either ipAddress or Hostname must be specified)
 * Hostname (optional, but either ipAddress or Hostname must be specified)

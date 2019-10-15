@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<ResponseMap version="7.1.0.201804110601">
+    <sampleDictionary>
+        <item name="lc">
+            <action actionType="command">
+                <command>
+                    <body>show interfaces lc-0/0/0</body>
+                </command>
+            </action>
+            <responseBody>Physical interface: lc-0/0/0, Enabled, Physical link is Up
+  Interface index: 164, SNMP ifIndex: 593
+  Speed: 800mbps
+  Device flags   : Present Running
+  Link flags     : None
+  Last flapped   : Never
+    Input packets : 0
+    Output packets: 0
+
+  Logical interface lc-0/0/0.32769 (Index 360) (SNMP ifIndex 594)
+    Flags: Encapsulation: ENET2
+    Bandwidth: 0
+    Input packets : 0
+    Output packets: 0
+    Protocol vpls, MTU: Unlimited
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;lab@re0.CER01AWSCCC&amp;gt; &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;show interfaces lc-0/0/0&lt;/echo&gt;
+        &lt;idleTime&gt;0.501&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+        </item>
+        <item name="ethernet">
+            <action actionType="command">
+                <command>
+                    <body>show interface et-0/0/2</body>
+                </command>
+            </action>
+            <responseBody>Physical interface: et-0/0/2, Enabled, Physical link is Up
+  Interface index: 231, SNMP ifIndex: 726
+  Link-level type: Ethernet, MTU: 9192, MRU: 9200, Speed: 100Gbps, BPDU Error: None, Loop Detect PDU Error: None, Loopback: Disabled, Source filtering: Disabled, Flow control: Disabled
+  Pad to minimum frame size: Disabled
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+  CoS queues     : 8 supported, 8 maximum usable queues
+  Schedulers     : 0
+  Current address: de:38:e1:cc:1c:f1, Hardware address: dc:38:e1:cc:12:08
+  Last flapped   : 2018-10-04 20:11:17 UTC (5d 21:20 ago)
+  Input rate     : 0 bps (0 pps)
+  Output rate    : 0 bps (0 pps)
+  Active alarms  : None
+  Active defects : None
+  PCS statistics                      Seconds
+    Bit errors                            16
+    Errored blocks                        17
+  Interface transmit statistics: Disabled
+
+  Logical interface et-0/0/2.0 (Index 392) (SNMP ifIndex 881)
+    Flags: Up SNMP-Traps 0x4004000 Encapsulation: ENET2
+    Input packets : 41529448140
+    Output packets: 53417003815
+    Protocol aenet, AE bundle: ae500.0
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;terminal RequiredForRendering=&quot;true&quot;&gt;
+        &lt;prompt&gt;lab@re0.CER01AWSCCC&amp;gt; &lt;/prompt&gt;
+        &lt;promptExtraction&gt;LAST_LINE&lt;/promptExtraction&gt;
+        &lt;echo&gt;show interfaces et-0/0/2&lt;/echo&gt;
+        &lt;idleTime&gt;0.271&lt;/idleTime&gt;
+        &lt;contentType&gt;text&lt;/contentType&gt;
+        &lt;terminator&gt;SLASH_R&lt;/terminator&gt;
+    &lt;/terminal&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.5</duration>
+        </item>
+        <item name="vtep">
+            <action actionType="command">
+                <command>
+                    <body>show interfaces vtep</body>
+                </command>
+            </action>
+            <responseBody>Physical interface: vtep, Enabled, Physical link is Up
+  Interface index: 139, SNMP ifIndex: 506
+  Type: Software-Pseudo, Link-level type: VxLAN-Tunnel-Endpoint, MTU: Unlimited, Speed: Unlimited
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps
+  Link type      : Full-Duplex
+  Link flags     : None
+  Last flapped   : Never
+    Input packets : 0
+    Output packets: 0
+
+n/an/a</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;promptName&gt;unpriv_prompt&lt;/promptName&gt;
+    &lt;echo&gt;show interfaces vtep &lt;/echo&gt;
+    &lt;prompt&gt;lab@re0.CER01AWSCCC&amp;gt; &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>0.7</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="name_and_status">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>Physical interface:\\s+</regex>
+                            <start>0</start>
+                            <end>20</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="interface">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <key>true</key>
+                            <start>20</start>
+                            <end>24</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>,\\s+</regex>
+                            <start>24</start>
+                            <end>26</end>
+                        </item>
+                        <item name="admin_state">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>26</start>
+                            <end>33</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>, Physical link is\\s+</regex>
+                            <start>33</start>
+                            <end>52</end>
+                        </item>
+                        <item name="Physical_link">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>52</start>
+                            <end>54</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>\\s+</regex>
+                            <start>54</start>
+                            <end>57</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>Physical interface: ae94, Enabled, Physical link is Up
+
+
+</sampleMatch>
+                </item>
+                <item name="Speed_line">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>Speed:\\s+</regex>
+                            <start>0</start>
+                            <end>7</end>
+                        </item>
+                        <item name="speed">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>7</start>
+                            <end>10</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="speed_units">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>10</start>
+                            <end>14</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>Speed: 800mbps</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="type_line">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>Type:\\s+</regex>
+                            <start>0</start>
+                            <end>6</end>
+                        </item>
+                        <item name="Type">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>6</start>
+                            <end>21</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{15}">exactly 15 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>,</regex>
+                            <start>21</start>
+                            <end>22</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>Type: Software-Pseudo,</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="show interfaces*"/>
+</ResponseMap>
