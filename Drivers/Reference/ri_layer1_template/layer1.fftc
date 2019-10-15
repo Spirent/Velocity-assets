@@ -172,7 +172,7 @@ Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
                 </item>
                 <item guid="81aad28c-cff6-4cb8-85a5-215f82e0ea0a" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>Execute procedures listed in call_X parameters. The procedure &apos;getPorts&apos; is called by Velocity&apos;s regular health check, or by a user clicking the refresh button on a device. The &apos;getProperties&apos; procedure is called when a user clicks the Discover button on a resource. </body>
+                        <body>Execute procedures listed in call_X parameters.</body>
                     </command>
                     <nestedSteps>
                         <item guid="cbf467a3-b34a-4754-b611-78cb8fae9d11" action="for" useFieldsInCommand="false">
@@ -184,10 +184,6 @@ Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
                                     <command>
                                         <body>[param(&apos;call_&apos;+ str(i))]</body>
                                     </command>
-                                    <postProcessing>
-                                        <storeResponseAt>returnString</storeResponseAt>
-                                        <storeResponseText>true</storeResponseText>
-                                    </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
@@ -196,12 +192,12 @@ Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="0198f140-885d-4510-a458-26a3577fd2de" action="comment" useFieldsInCommand="false">
+                <item guid="ee4a51a2-209b-416c-b734-fb5af8b0da19" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Return result to Velocity</body>
                     </command>
                     <nestedSteps>
-                        <item guid="1600b388-0e78-41c2-b467-e80dbf4f087c" action="return">
+                        <item guid="d5f2420e-7492-41db-97ef-c3927691b1dd" action="return">
                             <command>
                                 <body>[returnString]</body>
                             </command>
@@ -211,6 +207,220 @@ Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
+        </item>
+        <item name="connect">
+            <steps>
+                <item guid="91786b3b-52a4-4a6a-a2f7-942867eef801" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology requiring layer 1 connections is reserved</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f26882a0-9314-4619-a7d6-4af9c5fd1867" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Store arguments. The procedure is called with three unnamed arguments, with the first two representing the names of the ports to connect on the L1 switch, and the third denoting the desired direction, either &apos;to&apos; or &apos;bidir&apos;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7404ef55-472b-484f-9e01-0db425714328" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>import sys</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1371fc5e-2e2f-4554-adcc-4f9d05a26aa0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port1 = sys.argv[1]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5fd9f0d3-7c9b-46a6-87b0-4dc0d2e1540b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port2 = sys.argv[2]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b6a1b125-eee5-44bf-9ef3-34259a93827f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>direction = sys.argv[3]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="689047c3-ad4b-449e-8bc0-35977dce9b96" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue command to the L1 switch to make the connection</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9c92d010-7901-40c3-be46-c915471f2860" action="command" session="ssh">
+                            <command>
+                                <body>connect [port1] [port2]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="disconnect">
+            <steps>
+                <item guid="b10b5c98-dbd7-45b5-aab0-99bb75d9aa5e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology reservation requiring layer 1 connections ends</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="db42c320-af44-4945-b9ac-5d08ec7395d1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Store arguments. The procedure is called with three unnamed arguments, with the first two representing the names of the ports to connect on the L1 switch, and the third denoting the desired direction, either &apos;to&apos; or &apos;bidir&apos;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="3defcf7f-5fdd-4943-9b2e-e2773c510acb" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>import sys</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2b7f94dc-6f33-4f96-8093-2cc4575e12d7" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port1 = sys.argv[1]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="86db9be7-bf13-45d4-9e61-338528755e74" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port2 = sys.argv[2]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="38530a76-f999-4ee9-a6c3-02f83e5269c0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue command to the L1 switch to disconnect the ports</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4e43c7f7-6b88-45fe-a2ea-1ff6951528e1" action="command" session="ssh">
+                            <command>
+                                <body>disconnect [port1] [port2]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getConnections" isVBlock="true">
+            <steps>
+                <item guid="fb26b60b-3b48-4841-a315-947d8071afe4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure takes no arguments and simply returns a JSON string representing current connections</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="02847c12-ac87-466d-9530-a98836b7677a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get list of connections from the switch</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="17ecb1d5-8268-4c4e-b6e2-8e90bec4048d" action="command" session="ssh">
+                            <command>
+                                <body>show connections</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>port1_all()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>port1List</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>port2_all()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>port2List</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>direction_all()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>directionList</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="30327d17-aff1-44d3-9e3d-6323f532743c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Loop through results and create JSON string</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4e8c2191-04c1-4e44-9e34-29c9a28caebe" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>port1, port2, direction in zip(port1List, port2List, directionList):</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="927aea39-f519-4577-8a71-06c2722c4749" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Note: When editing the -pathValue, edit via the Json Step Properties.</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="0f50c6ed-94f5-45b3-9559-5a8235b5de3b" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=&apos;true&apos;, pathValue=&apos;{&quot;connections/\\\\[0]&quot;:\\\\[{&quot;port1&quot;:&quot;[port1]&quot;,&quot;port2&quot;:&quot;[port2]&quot;,&quot;type&quot;:&quot;[direction]&quot;}]}&apos;</body>
+                                            </command>
+                                            <postProcessing>
+                                                <storeResponseAt>portsJson</storeResponseAt>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">addJsonNode</action>
+                                                <pathValue inherit="false" sub="true">{&quot;connections/\\[0]&quot;:\\[{&quot;port1&quot;:&quot;[port1]&quot;,&quot;port2&quot;:&quot;[port2]&quot;,&quot;type&quot;:&quot;[direction]&quot;}]}</pathValue>
+                                                <editResponseStructure inherit="false">true</editResponseStructure>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{&quot;connections&quot;:&quot;value&quot;}</response>
         </item>
         <item name="getProperties" isVBlock="true">
             <steps>
@@ -862,7 +1072,7 @@ Physical interface: xe-2/0/7, Enabled, Physical link is Up
                             <nestedSteps>
                                 <item guid="f068687d-cc1b-40cc-b1d9-703641ae0902" action="comment" useFieldsInCommand="false">
                                     <command>
-                                        <body>Set online status to &apos;online&apos; or &apos;offline&apos; as Velocity requires</body>
+                                        <body>set online status</body>
                                     </command>
                                     <nestedSteps>
                                         <item guid="5b74b543-0493-420c-8b9e-3040d71246b3" action="if" useFieldsInCommand="false">
