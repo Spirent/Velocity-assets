@@ -184,6 +184,10 @@ Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
                                     <command>
                                         <body>[param(&apos;call_&apos;+ str(i))]</body>
                                     </command>
+                                    <postProcessing>
+                                        <storeResponseAt>returnString</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
@@ -192,12 +196,12 @@ Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="ee4a51a2-209b-416c-b734-fb5af8b0da19" action="comment" useFieldsInCommand="false">
+                <item guid="b18af2ce-f059-4ad8-b0d7-d0da89aee14d" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>Return result to Velocity</body>
                     </command>
                     <nestedSteps>
-                        <item guid="d5f2420e-7492-41db-97ef-c3927691b1dd" action="return">
+                        <item guid="48ae8eaf-7de7-4ddb-96c3-7ed6c7ad4e23" action="return">
                             <command>
                                 <body>[returnString]</body>
                             </command>
@@ -208,28 +212,34 @@ Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
                 </item>
             </steps>
         </item>
-        <item name="connect">
+        <item name="createVlan">
             <steps>
-                <item guid="91786b3b-52a4-4a6a-a2f7-942867eef801" action="comment" useFieldsInCommand="false">
+                <item guid="f1adb52b-f266-45ab-b12b-e2c2461395d9" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>This procedure is called when a topology requiring layer 1 connections is reserved</body>
+                        <body>This procedure is called when a topology requiring layer 2 connections is reserved. Its accepts one argument called &apos;vlanId&apos;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="f26882a0-9314-4619-a7d6-4af9c5fd1867" action="comment" useFieldsInCommand="false">
+                <item guid="78c345a8-782b-4db8-a7a3-4609222b7b5b" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>The procedure is called with three named arguments, firstPort, secondPort, and direction. The port arguments are names of the ports to be connected. The direction argument can have values &apos;to&apos; or &apos;bidir&apos;.</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="689047c3-ad4b-449e-8bc0-35977dce9b96" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Issue command to the L1 switch to make the connection</body>
+                        <body>Issue commands to create the VLAN on the layer 2 switch</body>
                     </command>
                     <nestedSteps>
-                        <item guid="9c92d010-7901-40c3-be46-c915471f2860" action="command" session="ssh">
+                        <item guid="d23e69f5-dcd0-4e4d-a0ab-064a0408115c" action="command" session="ssh">
                             <command>
-                                <body>connect [firstPort] [secondPort]</body>
+                                <body>confgure</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="c37b8066-023c-45de-a94a-49801e97d971" action="command" session="ssh">
+                            <command>
+                                <body>vlan [vlanId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="9510f480-0dd1-4f64-ab2e-cd8c4e18a234" action="command" session="ssh">
+                            <command>
+                                <body>exit</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                         </item>
@@ -237,144 +247,6 @@ Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
-        </item>
-        <item name="disconnect">
-            <steps>
-                <item guid="b10b5c98-dbd7-45b5-aab0-99bb75d9aa5e" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>This procedure is called when a topology reservation requiring layer 1 connections ends</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="db42c320-af44-4945-b9ac-5d08ec7395d1" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>The procedure is called with three named arguments, firstPort, secondPort, and direction. The port arguments are names of the ports to be disconnected. The direction argument can have values &apos;to&apos; or &apos;bidir&apos;.</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="38530a76-f999-4ee9-a6c3-02f83e5269c0" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Issue command to the L1 switch to disconnect the ports</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="4e43c7f7-6b88-45fe-a2ea-1ff6951528e1" action="command" session="ssh">
-                            <command>
-                                <body>disconnect [firstPort] [secondPort]</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-        </item>
-        <item name="getConnections" isVBlock="true">
-            <steps>
-                <item guid="fb26b60b-3b48-4841-a315-947d8071afe4" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>This procedure takes no arguments and simply returns a JSON string representing current connections</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="02847c12-ac87-466d-9530-a98836b7677a" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Get list of connections from the switch</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="17ecb1d5-8268-4c4e-b6e2-8e90bec4048d" action="command" session="ssh">
-                            <command>
-                                <body>show connections</body>
-                            </command>
-                            <postProcessing>
-                                <analysisRules>
-                                    <item>
-                                        <extractorInfo extractorType="query">
-                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                <query>port1_all()</query>
-                                            </extractorProperties>
-                                        </extractorInfo>
-                                        <processorInfo ruleType="store">
-                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                                <storageLocation>port1List</storageLocation>
-                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
-                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
-                                            </ruleProperties>
-                                        </processorInfo>
-                                    </item>
-                                    <item>
-                                        <extractorInfo extractorType="query">
-                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                <query>port2_all()</query>
-                                            </extractorProperties>
-                                        </extractorInfo>
-                                        <processorInfo ruleType="store">
-                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                                <storageLocation>port2List</storageLocation>
-                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
-                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
-                                            </ruleProperties>
-                                        </processorInfo>
-                                    </item>
-                                    <item>
-                                        <extractorInfo extractorType="query">
-                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                <query>direction_all()</query>
-                                            </extractorProperties>
-                                        </extractorInfo>
-                                        <processorInfo ruleType="store">
-                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                                <storageLocation>directionList</storageLocation>
-                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
-                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
-                                            </ruleProperties>
-                                        </processorInfo>
-                                    </item>
-                                </analysisRules>
-                            </postProcessing>
-                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="30327d17-aff1-44d3-9e3d-6323f532743c" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>Loop through results and create JSON string</body>
-                    </command>
-                    <nestedSteps>
-                        <item guid="4e8c2191-04c1-4e44-9e34-29c9a28caebe" action="for" useFieldsInCommand="false">
-                            <command>
-                                <body>port1, port2, direction in zip(port1List, port2List, directionList):</body>
-                            </command>
-                            <nestedSteps>
-                                <item guid="927aea39-f519-4577-8a71-06c2722c4749" action="comment" useFieldsInCommand="false">
-                                    <command>
-                                        <body>Note: When editing the -pathValue, edit via the Json Step Properties.</body>
-                                    </command>
-                                    <nestedSteps>
-                                        <item guid="0f50c6ed-94f5-45b3-9559-5a8235b5de3b" action="json" useFieldsInCommand="false">
-                                            <command>
-                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=&apos;true&apos;, pathValue=&apos;{&quot;connections/\\\\[0]&quot;:\\\\[{&quot;port1&quot;:&quot;[port1]&quot;,&quot;port2&quot;:&quot;[port2]&quot;,&quot;type&quot;:&quot;[direction]&quot;}]}&apos;</body>
-                                            </command>
-                                            <postProcessing>
-                                                <storeResponseAt>portsJson</storeResponseAt>
-                                            </postProcessing>
-                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
-                                                <action inherit="false">addJsonNode</action>
-                                                <pathValue inherit="false" sub="true">{&quot;connections/\\[0]&quot;:\\[{&quot;port1&quot;:&quot;[port1]&quot;,&quot;port2&quot;:&quot;[port2]&quot;,&quot;type&quot;:&quot;[direction]&quot;}]}</pathValue>
-                                                <editResponseStructure inherit="false">true</editResponseStructure>
-                                            </applicationProperties>
-                                        </item>
-                                    </nestedSteps>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                            </nestedSteps>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                    </nestedSteps>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-            <response>{&quot;connections&quot;:&quot;value&quot;}</response>
         </item>
         <item name="getProperties" isVBlock="true">
             <steps>
@@ -683,6 +555,176 @@ Fan Tray                                                 Enhanced Left Fan Tray
                 </item>
             </steps>
             <response>{&quot;properties&quot;:{}}</response>
+        </item>
+        <item name="addToVlan">
+            <steps>
+                <item guid="c1ada046-f863-4cef-9eb5-635d5680a8b1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology requiring layer 2 connections is reserved. Its accepts one three arguments, &apos;vlanId&apos;, &apos;portNumber&apos;, and &apos;tagging&apos; </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="45e8b994-99cc-400f-9694-dfde0a52454c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to add the specified port to the specified vlan</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="adad8fb2-d183-4e45-9762-b72c5c61783f" action="command" session="ssh">
+                            <command>
+                                <body>configure</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="a94ff6fd-23c9-4caa-b2e8-10559d11c43e" action="command" session="ssh">
+                            <command>
+                                <body>interface [portNumber]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="0e4c0279-2a1f-45b4-87e8-291ca467bb30" action="command" session="ssh">
+                            <command>
+                                <body>vlan [vlanId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="b434dc64-e44a-48e7-acd0-a2ab4e4909bc" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>tagging == &apos;tagged&apos;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ba7fc253-5637-4749-8e9c-2635c3ac7b8b" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert commands here to handle VLAN tagging</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="df7ac606-0499-45b7-9a9c-c4ffe6b1711c" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="dcf243b7-91c2-4593-bd83-01a19326ecd0" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert steps here for when expression is false</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2400d020-8ff3-4bdc-9905-b2adae9f06a7" action="command" session="ssh">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="removeFromVlan">
+            <steps>
+                <item guid="400132f7-d20c-4ffb-9c6f-867cb3c7bdc4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology reservation requiring layer 2 connections ends. Its accepts one three arguments, &apos;vlanId&apos;, &apos;portNumber&apos;, and &apos;tagging&apos; </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="921c38d1-be3a-4982-ac07-3c97c2803ebc" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to remove the specified port from the specified vlan</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6cd867b1-5a90-4cea-a840-7c71b6db6a0b" action="command" session="ssh">
+                            <command>
+                                <body>configure</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="660e54a0-c327-431e-9af8-eee42ed98b9d" action="command" session="ssh">
+                            <command>
+                                <body>interface [portNumber]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="2940e61f-5220-4de5-a32d-d241494b1c38" action="command" session="ssh">
+                            <command>
+                                <body>no vlan [vlanId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="f5d96516-379a-42a0-85b8-c549c583e905" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>tagging == &apos;tagged&apos;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="7e1a0f69-0b93-43fd-ae8b-af5b4cf8a5bc" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert commands here to handle VLAN tagging</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c0a200cf-9456-44ed-8044-77b3d5d4e20d" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="f434f6ca-1d43-49d3-835a-d50e64d8e369" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert steps here for when expression is false</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5ff7b67b-9b9a-49ce-8a73-909db60cb1d7" action="command" session="ssh">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="destroyVlan">
+            <steps>
+                <item guid="d1d64885-22b1-4941-940d-c71dda8db7cd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology reservation requiring layer 2 connections ends. Its accepts one argument called &apos;vlanId&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d2745522-36e4-4754-96b5-febf5fa967a5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to remove the VLAN from the layer 2 switch</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="120cd03b-a76d-42f8-b9bc-34815fa9af11" action="command" session="ssh">
+                            <command>
+                                <body>confgure</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="c70e2869-9444-4c7c-93e4-21dbba33b281" action="command" session="ssh">
+                            <command>
+                                <body>no vlan [vlanId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="e98ceedd-64ec-4df3-b725-32a370a175d9" action="command" session="ssh">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
         </item>
         <item name="getPorts" defaultSessionProfile="application:com.fnfr.svt.applications.ssh" isVBlock="true">
             <description>Device Status and Port Status/Info</description>
