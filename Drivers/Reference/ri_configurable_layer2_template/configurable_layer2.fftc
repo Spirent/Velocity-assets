@@ -1,0 +1,1461 @@
+<?xml version="1.0"?>
+<testCase version="8.0.0.201908290812">
+    <general>
+        <emulation enable="true"/>
+        <language>Python</language>
+    </general>
+    <execution>
+        <parameters version="8.0.0.201908290812">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <property_ipAddress>localhost</property_ipAddress>
+                    <property_username>foo</property_username>
+                    <property_password>bar</property_password>
+                    <call_count>1</call_count>
+                    <call_0>getProperties -includePorts true</call_0>
+                    <property_SSH_port>46001</property_SSH_port>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="13318dc6-17ab-4ad2-a9d3-c2bba7e6ce8d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get hostname or IP address from velocity properties</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b23a8cdd-e203-4503-bd02-3a1bf29dcb08" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>info(&apos;exists&apos;,&apos;param&apos;,&apos;property_ipAddress&apos;) == 1:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="6b54cde5-603a-4a68-822c-d43eed594b2c" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>host = param(&apos;property_ipAddress&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e1af1050-7e16-4b0e-b994-b587a76bdc7f" action="elif" useFieldsInCommand="false">
+                            <command>
+                                <body>info(&apos;exists&apos;,&apos;param&apos;,&apos;property_Hostname&apos;) == 1:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="4ddcd6eb-d0db-4f65-bb79-166ac9881743" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>host = param(&apos;property_Hostname&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2ab7b0f0-37e4-4954-85d7-9245672a3490" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="3a202af1-ac28-4236-aa5c-68a219cd1496" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>print(&apos;error&apos;)</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>1 = 1</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>No IP Address or Hostname property given. Ensure resource has a property defined as ipAddress or Hostname defined. </message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                            <item actionId="ExitExecution">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8ae5ac35-16d0-4bbe-a6cb-441760726ddc" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get SSH port property or use default of 22</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b2020bd6-0348-4d7e-a331-074c7beab8f7" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port = param(&apos;property_SSH_Port&apos;, &apos;22&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1af34720-c3ba-4a6f-8dbf-663f8da8df4b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open SSH session to device</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0cda26a3-d683-4605-bf53-5e8170cdf6be" action="open" session="ssh" useFieldsInCommand="false">
+                            <command>
+                                <body>application:com.fnfr.svt.applications.ssh</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                                    <ipAddress inherit="false">[host]</ipAddress>
+                                    <user inherit="false">[param(property(&apos;username&apos;))]</user>
+                                    <password inherit="false">lWuaumUxRC+pgYC9+DJNgEr0gJOM/CKqIFvkHXiN9nY=</password>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                            <emulation emulate="ALWAYS" useExternalSource="false">
+                                <behavior>
+                                    <responseType>text</responseType>
+                                    <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;true&lt;/isEmpty&gt;
+    &lt;responseLine/&gt;
+    &lt;retries&gt;0&lt;/retries&gt;
+    &lt;connectStatus&gt;false&lt;/connectStatus&gt;
+    &lt;connectInfo&gt;Unable to connect to 0.0.0.0.
+Reason:Socket exception: Connection refused: connect&lt;/connectInfo&gt;
+    &lt;connectError&gt;Unable to connect to 0.0.0.0.
+Reason:Socket exception: Connection refused: connect&lt;/connectError&gt;
+&lt;/structure&gt;
+</structuredData>
+                                    <aliases>
+                                        <item name="isEmpty">
+                                            <queryFormatString>.//isEmpty</queryFormatString>
+                                        </item>
+                                        <item name="responseLine">
+                                            <queryFormatString>.//responseLine</queryFormatString>
+                                        </item>
+                                        <item name="retries">
+                                            <queryFormatString>.//retries</queryFormatString>
+                                        </item>
+                                        <item name="connectStatus">
+                                            <queryFormatString>.//connectStatus</queryFormatString>
+                                        </item>
+                                        <item name="connectInfo">
+                                            <queryFormatString>.//connectInfo</queryFormatString>
+                                        </item>
+                                        <item name="connectError">
+                                            <queryFormatString>.//connectError</queryFormatString>
+                                        </item>
+                                    </aliases>
+                                    <duration>32.2</duration>
+                                </behavior>
+                            </emulation>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="81aad28c-cff6-4cb8-85a5-215f82e0ea0a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Execute procedures listed in call_X parameters.</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="cbf467a3-b34a-4754-b611-78cb8fae9d11" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>i in range(0, int(param(&apos;call_count&apos;))):</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="d26b0f19-a8de-40d2-8388-b88bc2e10f33" action="call">
+                                    <command>
+                                        <body>[param(&apos;call_&apos;+ str(i))]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>returnString</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b18af2ce-f059-4ad8-b0d7-d0da89aee14d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Return result to Velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="48ae8eaf-7de7-4ddb-96c3-7ed6c7ad4e23" action="return">
+                            <command>
+                                <body>[returnString]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="isEnoughSpace">
+            <steps>
+                <item guid="646404b2-0e21-4977-9db0-d9346579fff9" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This is a helper procedure used to determine if the device has enough free space before downloading a config or firmware file. It accepts one argument, &apos;fileSize&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d00aed17-bd40-4a3c-a49e-fc391b93c1d1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue a command to the device to get the amount of free space</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="22f25443-8e18-4043-9284-cbd250371f3b" action="command" session="ssh" useAutoMap="false">
+                            <command>
+                                <body>dir</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>free_space()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>freeBytes</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e6ff04b2-19cb-437a-ae58-cca4808c6c93" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Return True if there is enough space, False if not</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="269917a4-9bd5-47a9-96db-9ed2ca7adc56" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>freeBytes &gt; fileSize:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="50c23440-9ab2-4498-be8a-1477dfc8377a" action="return">
+                                    <command>
+                                        <body>&apos;True&apos;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5dc42af3-29d7-4284-a49c-4bec3e2abd71" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="16583321-50be-4773-8cb3-1a956fff8e61" action="return">
+                                    <command>
+                                        <body>&apos;False&apos;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="fileSize">
+                    <description>Size of the desired file in bytes. Will return True if available space is greater than this argument, False otherwise.</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="setConfig">
+            <steps>
+                <item guid="fe9713de-93eb-445c-bd29-211aa7061baa" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a user changes the device&apos;s config in the resources view or when a reservation that sets the device&apos;s config starts. It accepts two arguments, &apos;fileSize&apos;, and &apos;url&apos;.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bcce16ac-6bef-4661-95fb-cb1f4f3b6c3f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Check if there is enough free space to download the desired config.</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="30dfc8c9-32c1-4f88-9c8c-c09c118e597b" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>isEnoughSpace(fileSize=[fileSize])</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &apos;True&apos;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Not enough space to download config. Driver will abort.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="ExitExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2d819082-bdd9-422e-bea9-0e3a324c5544" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Download the config</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="22cb5f31-226c-4b2f-95cd-5ef2fcb122e8" action="command" session="ssh" useAutoMap="false">
+                            <command>
+                                <body>copy [url] startup-config</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <promptProperties>
+                                    <stepPrompts>
+                                        <item name="Confirmation">
+                                            <Content>Destination filename [startup-config]?</Content>
+                                        </item>
+                                    </stepPrompts>
+                                </promptProperties>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="setImage">
+            <steps>
+                <item guid="4e925f52-1a52-4c57-b3ff-019a6052820e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a user changes the device&apos;s software image in the resources view or when a reservation that sets the device&apos;s image starts. It accepts two arguments, &apos;fileSize&apos;, and &apos;url&apos;.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="af996994-ec68-4ce0-964f-0694e6c20b31" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Check if there is enough free space to download the desired image.</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="48898a16-629f-4fb7-92c6-4cadd443813c" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>isEnoughSpace(fileSize=[fileSize])</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &apos;True&apos;</expression>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Not enough space to download image. Driver will abort.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="ExitExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d0aba04e-dede-4c8b-ad7e-f341b49f0429" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Download the image</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="72be2c5f-60f3-4164-986a-585892b01b85" action="command" session="ssh" timeout="180" useAutoMap="false">
+                            <command>
+                                <body>copy [url] flash:</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <promptProperties>
+                                    <stepPrompts>
+                                        <item name="Confirmation" MatchMethod="WILDCARD" TypeOfPrompt="MORE">
+                                            <Content>* [*]? </Content>
+                                            <MoreNextCommand> \\n</MoreNextCommand>
+                                            <MoreQuitCommand></MoreQuitCommand>
+                                        </item>
+                                        <item name="Copying1" TypeOfPrompt="MORE">
+                                            <Content>!</Content>
+                                            <MoreQuitCommand></MoreQuitCommand>
+                                        </item>
+                                        <item name="Copying2" TypeOfPrompt="MORE">
+                                            <Content>0</Content>
+                                            <MoreQuitCommand></MoreQuitCommand>
+                                        </item>
+                                    </stepPrompts>
+                                </promptProperties>
+                                <completionProperties promptLearnUserResponseTime="180" promptLearnUserResponseTime.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getConfig">
+            <steps>
+                <item guid="e007944d-e8a4-4cf6-a3d8-bdbe5a023d70" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called during a Velocity scheduled backup task. It accepts one argument named &apos;url&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2660e020-daf7-45a4-8c24-25c1a7953889" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Upload the config to the specified URL</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="16afe245-660e-480c-aae9-3448d93d2d4e" action="command" session="ssh">
+                            <command>
+                                <body>copy startup-config [url]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getImage">
+            <steps>
+                <item guid="8737a0bc-899a-48bf-aff4-81bddcf7e9ad" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called during a Velocity scheduled backup task. It accepts one argument named &apos;url&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="037336bb-65d0-44d5-8f82-b18192afe3f6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Determine current image file</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="747be2df-5c92-4f1b-ab50-23eebae64ddc" action="command" session="ssh">
+                            <command>
+                                <body>show version</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="928c18aa-f7cd-4bfc-8e2b-74814fe2e14c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Upload the image to the specified URL</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="afc7226f-a818-4853-88ce-a7f0fdd41e8b" action="command" session="ssh">
+                            <command>
+                                <body>copy [image] [url]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="createVlan">
+            <steps>
+                <item guid="f1adb52b-f266-45ab-b12b-e2c2461395d9" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology requiring layer 2 connections is reserved. Its accepts one argument called &apos;vlanId&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="78c345a8-782b-4db8-a7a3-4609222b7b5b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to create the VLAN on the layer 2 switch</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d23e69f5-dcd0-4e4d-a0ab-064a0408115c" action="command" session="ssh">
+                            <command>
+                                <body>confgure</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="c37b8066-023c-45de-a94a-49801e97d971" action="command" session="ssh">
+                            <command>
+                                <body>vlan [vlanId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="9510f480-0dd1-4f64-ab2e-cd8c4e18a234" action="command" session="ssh">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getProperties" isVBlock="true">
+            <steps>
+                <item guid="7ce884e3-4851-42c1-b12a-00aece57f1d9" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called by Velocity when a driver is run as the result of the user clicking the discover button on a resource</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="76546bb5-c2b6-47f0-9f40-fee45bf5a371" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>It is set to return a list of properties in JSON format. The base of this JSON string is configured in the response area of the procedure properties </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="45ff0bf5-f045-4695-906e-810004db2eb3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Example showing how to add a node to the JSON return string. Edit this step to use the actual make of your device.</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="dd136f58-ed81-4daf-b264-2adc58d2964a" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=&apos;true&apos;, pathValue=&apos;{&quot;properties/&quot;:{&quot;Make&quot;:&quot;Manufacturer&quot;}}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">addJsonNode</action>
+                                <pathValue inherit="false">{&quot;properties/&quot;:{&quot;Make&quot;:&quot;Manufacturer&quot;}}</pathValue>
+                                <editResponseStructure inherit="false">true</editResponseStructure>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3f7660bb-5387-4bb7-bc82-df250ce36422" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Example showing how to issue a command to a device, store information from the response, and add that information to the JSON string. The property names used here must match exactly with the property names in Velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6a16c869-4218-4e9a-882a-35d82be1ae5d" action="command" session="ssh" responseMap="response_maps/show_chassis_hardware.ffrm" useResponseMapLibraryApplicability="false" useFieldsInCommand="false">
+                            <command>
+                                <body>show chassis hardware</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>serial_number_by_item(&quot;Chassis&quot;)</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>serialNum</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                            <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                            <emulation emulate="ALWAYS" useExternalSource="false">
+                                <behavior>
+                                    <response>
+Hardware inventory:
+Item             Version  Part number  Serial number     Description
+Chassis                                JN10C7F5EAFB      MX480
+Midplane         REV 04   710-017414   TR1686            MX480 Midplane
+FPM Board        REV 02   710-017254   KB2067            Front Panel Display
+PEM 0            Rev 05   740-027736   QCS1224T0DT       DC 2.4kW Power Entry Module
+PEM 1            Rev 05   740-027736   QCS1224T086       DC 2.4kW Power Entry Module
+PEM 2            Rev 05   740-027736   QCS1224T0EN       DC 2.4kW Power Entry Module
+PEM 3            Rev 05   740-027736   QCS1224T05W       DC 2.4kW Power Entry Module
+Routing Engine 0 REV 07   740-013063   9009009448        RE-S-2000
+Routing Engine 1 REV 07   740-013063   1000731665        RE-S-2000
+CB 0             REV 07   710-021523   XG0199            MX SCB
+CB 1             REV 07   710-013385   KA8728            MX SCB
+FPC 0            REV 30   750-028467   ABBF8978          MPC 3D 16x 10GE
+  CPU            REV 10   711-029089   ABBJ4398          AMPC PMB
+  PIC 0                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803100654      SFP+-10G-LR
+  PIC 1                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803100786      SFP+-10G-LR
+  PIC 2                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803101315      SFP+-10G-LR
+  PIC 3                   BUILTIN      BUILTIN           4x 10GE(LAN) SFP+
+    Xcvr 0       REV 01   740-031981   17T803100653      SFP+-10G-LR
+FPC 1            REV 03   750-020220   KA8731            DPCE 40x 1GE X
+  CPU            REV 06   710-013713   AB8054            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 02   740-011614   PHF83Y0           SFP-LX10
+    Xcvr 1       REV 02   740-011614   PHF830M           SFP-LX10
+    Xcvr 2       REV 02   740-011614   PHF5WL4           SFP-LX10
+    Xcvr 3       REV 02   740-011614   PHF82YD           SFP-LX10
+    Xcvr 4       REV 02   740-011614   PHF5WQP           SFP-LX10
+    Xcvr 5       REV 01   740-011783   PBM0M7V           SFP-LX10
+    Xcvr 6       REV 01   740-011783   PBH3DE5           SFP-LX10
+    Xcvr 7       REV 01   740-011783   PA216C0           SFP-LX10
+    Xcvr 8       REV 01   740-011783   PBM0M7S           SFP-LX10
+    Xcvr 9       REV 01   740-011783   PBK4BVN           SFP-LX10
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 1       REV 01   740-011614   E06H03167         SFP-LX10
+    Xcvr 4       REV 01   740-011614   C08F00059         SFP-LX10
+    Xcvr 5       REV 01   740-011783   PBM1970           SFP-LX10
+    Xcvr 6       REV 01   740-011783   PBM19AA           SFP-LX10
+    Xcvr 7       REV 01   740-011783   PBM18Y1           SFP-LX10
+    Xcvr 8       REV 01   740-011783   PBL02S3           SFP-LX10
+    Xcvr 9       REV 01   740-011783   PBM18XN           SFP-LX10
+  PIC 2                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011614   AC0810S0155       SFP-LX10
+    Xcvr 1       REV 03   740-017726   8ZT500000391      SFP-EX
+    Xcvr 3       REV 03   740-017726   8ZT500000390      SFP-EX
+    Xcvr 6       REV 01   740-011783   PBK4BR5           SFP-LX10
+    Xcvr 7       REV 01   740-011783   PBM1BS6           SFP-LX10
+    Xcvr 8       REV 01   740-011783   PBH3D9V           SFP-LX10
+    Xcvr 9       REV 01   740-011783   PBM18Y2           SFP-LX10
+  PIC 3                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011782   P8621JC           SFP-SX
+    Xcvr 1       REV 01   740-011614   AC0810S0158       SFP-LX10
+    Xcvr 5                NON-JNPR                       UNSUPPORTED
+    Xcvr 6       REV 01   740-011783   PBH3DD0           SFP-LX10
+    Xcvr 7       REV 01   740-011783   PBH3DGE           SFP-LX10
+    Xcvr 8       REV 01   740-011783   PBM1BT4           SFP-LX10
+    Xcvr 9       REV 01   740-011783   PBK4GS7           SFP-LX10
+FPC 2            REV 25   750-020456   ABBK3809          DPCE 4x 10GE X EQ
+  CPU            REV 08   710-013713   ABBH1265          DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+    Xcvr 0       REV 01   740-014279   6Z3019A00212      XFP-10G-LR
+  PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+  PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+    Xcvr 0       REV 01   740-014279   913019B00773      XFP-10G-LR
+  PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN) EQ
+    Xcvr 0       REV 01   740-031833   0ZT670102695      XFP-10G-LR
+FPC 3            REV 13   750-021680   ABBA1041          DPCE 40x 1GE X
+  CPU            REV 03   710-022351   KG8760            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011783   PBH3DGC           SFP-LX10
+    Xcvr 1       REV 01   740-011783   PBM1BPT           SFP-LX10
+    Xcvr 2       REV 01   740-011783   PBM1BTL           SFP-LX10
+    Xcvr 3       REV 01   740-011783   PBM1BT8           SFP-LX10
+    Xcvr 4       REV 01   740-011783   PBM197L           SFP-LX10
+    Xcvr 6       REV 01   740-017726   85S184N30333      SFP-EX
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011783   PBH3DA9           SFP-LX10
+    Xcvr 1       REV 01   740-011612   790016D00443      SFP-LH
+    Xcvr 2       REV 01   740-011783   PBL1A53           SFP-LX10
+    Xcvr 3       REV 01   740-011783   PBM19NT           SFP-LX10
+  PIC 2                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011783   PBL1A2G           SFP-LX10
+    Xcvr 1       REV 01   740-011612   790016D00441      SFP-LH
+    Xcvr 2       REV 01   740-011783   PBK4GYX           SFP-LX10
+    Xcvr 3       REV 01   740-011783   PBH3DA8           SFP-LX10
+    Xcvr 4       REV 01   740-011614   94T407003148      SFP-LX10
+    Xcvr 6       REV 01   740-011784   6Z0016D00178      SFP-LH
+    Xcvr 7       REV 01   740-011784   790016D00219      SFP-LH
+    Xcvr 9       REV 01   740-011783   PBM1BU1           SFP-LX10
+  PIC 3                   BUILTIN      BUILTIN           10x 1GE(LAN)
+    Xcvr 0       REV 01   740-011783   PBH3DF1           SFP-LX10
+    Xcvr 1       REV 01   740-011783   PBM199C           SFP-LX10
+    Xcvr 3       REV 01   740-011783   PBM1BN4           SFP-LX10
+    Xcvr 4       REV 01   740-011783   PBL02SA           SFP-LX10
+    Xcvr 8       REV 01   740-011784   6Z0016D00051      SFP-LH
+    Xcvr 9       REV 01   740-017726   85S184N30335      SFP-EX
+FPC 4            REV 04   750-020221   KA7502            DPCE 4x 10GE X
+  CPU            REV 06   710-013713   KB8043            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 01   740-014279   913019B00116      XFP-10G-LR
+  PIC 1                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 01   740-014279   913019B00772      XFP-10G-LR
+  PIC 2                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 01   740-014279   773019B00356      XFP-10G-LR
+  PIC 3                   BUILTIN      BUILTIN           1x 10GE(LAN/WAN)
+    Xcvr 0       REV 01   740-014279   913019B00761      XFP-10G-LR
+FPC 5            REV 17   750-020452   KG6849            DPCE 40x 1GE X EQ
+  CPU            REV 07   710-013713   KG6697            DPC PMB
+  PIC 0                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+    Xcvr 0       REV 01   740-011783   PBK4BVL           SFP-LX10
+    Xcvr 1       REV 02   740-011614   PHE2ZBV           SFP-LX10
+    Xcvr 2       REV 02   740-011614   PHE155B           SFP-LX10
+    Xcvr 3       REV 02   740-011614   PHF82K1           SFP-LX10
+    Xcvr 4       REV 01   740-011614   AC0810S01PS       SFP-LX10
+    Xcvr 5       REV 01   740-011783   PBA0R6C           SFP-LX10
+  PIC 1                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+    Xcvr 4       REV 01   740-011783   PBK4GRZ           SFP-LX10
+    Xcvr 5       REV 01   740-011783   PBM1978           SFP-LX10
+  PIC 2                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+    Xcvr 0                NON-JNPR     FNS104714D4       SFP-LX10
+    Xcvr 1       REV 02   740-011614   PDJ37VB           SFP-LX10
+    Xcvr 2       REV 02   740-011614   PHF6066           SFP-LX10
+    Xcvr 3       REV 02   740-011614   PHF60QT           SFP-LX10
+    Xcvr 4       REV 01   740-011614   84S491N15449      SFP-LX10
+    Xcvr 5       REV 02   740-011614   PHF82YG           SFP-LX10
+  PIC 3                   BUILTIN      BUILTIN           10x 1GE(LAN) EQ
+    Xcvr 2       REV 01   740-011783   PBH3DEP           SFP-LX10
+Fan Tray                                                 Enhanced Left Fan Tray
+</response>
+                                    <responseType>text</responseType>
+                                    <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;responseLine/&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;show chassis hardware&lt;/echo&gt;
+    &lt;prompt&gt;training@junos-emu#&lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+                                    <aliases>
+                                        <item name="isEmpty">
+                                            <queryFormatString>.//isEmpty</queryFormatString>
+                                        </item>
+                                        <item name="responseLine">
+                                            <queryFormatString>.//responseLine</queryFormatString>
+                                        </item>
+                                        <item name="promptName">
+                                            <queryFormatString>.//promptName</queryFormatString>
+                                        </item>
+                                        <item name="echo">
+                                            <queryFormatString>.//echo</queryFormatString>
+                                        </item>
+                                        <item name="prompt">
+                                            <queryFormatString>.//prompt</queryFormatString>
+                                        </item>
+                                    </aliases>
+                                    <duration>1.1</duration>
+                                </behavior>
+                            </emulation>
+                        </item>
+                        <item guid="cf64453c-152d-49fe-ad70-664e14f80ec5" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=&apos;true&apos;, pathValue=&apos;{&quot;properties/&quot;:{&quot;Serial Number&quot;:&quot;[serialNum]&quot;}}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">addJsonNode</action>
+                                <pathValue inherit="false" sub="true">{&quot;properties/&quot;:{&quot;Serial Number&quot;:&quot;[serialNum]&quot;}}</pathValue>
+                                <editResponseStructure inherit="false">true</editResponseStructure>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1b35da89-c2c5-4fa4-acd6-912bfc52eb52" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get list of ports if the includePorts argument is set</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="dda70519-6d17-465e-a859-8c7037acf3d6" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>info(&apos;exists&apos;, &apos;local&apos;, &apos;includePorts&apos;):</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="21a199d5-cfbc-4da9-a3bd-b1d57ffec640" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>includePorts == &apos;true&apos;:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="5e6e6ad3-e322-4746-8742-5e1ef2388931" action="call" useFieldsInCommand="false">
+                                            <command>
+                                                <body>getPorts</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="regex">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                                                <regex>^\\{&quot;ports&quot;:\\[(\\S+)\\]}$</regex>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>portString</storageLocation>
+                                                                <query>properties/ports</query>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="85efac29-4d29-4208-a098-eca99a7de5cb" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=&apos;true&apos;, pathValue=&apos;{&quot;properties/&quot;:{&quot;ports&quot;:\\\\[[portString]]}}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">addJsonNode</action>
+                                                <pathValue inherit="false" sub="true">{&quot;properties/&quot;:{&quot;ports&quot;:\\[[portString]]}}</pathValue>
+                                                <editResponseStructure inherit="false">true</editResponseStructure>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="6d609145-02de-4145-a71c-aea12aea3a89" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>When doing variable substitution in a JSON step, you must escape any opening square brackets to be printed literally with a backslash.</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{&quot;properties&quot;:{}}</response>
+        </item>
+        <item name="addToVlan">
+            <steps>
+                <item guid="c1ada046-f863-4cef-9eb5-635d5680a8b1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology requiring layer 2 connections is reserved. Its accepts one three arguments, &apos;vlanId&apos;, &apos;portNumber&apos;, and &apos;tagging&apos; </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="45e8b994-99cc-400f-9694-dfde0a52454c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to add the specified port to the specified vlan</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="adad8fb2-d183-4e45-9762-b72c5c61783f" action="command" session="ssh">
+                            <command>
+                                <body>configure</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="a94ff6fd-23c9-4caa-b2e8-10559d11c43e" action="command" session="ssh">
+                            <command>
+                                <body>interface [portNumber]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="0e4c0279-2a1f-45b4-87e8-291ca467bb30" action="command" session="ssh">
+                            <command>
+                                <body>vlan [vlanId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="b434dc64-e44a-48e7-acd0-a2ab4e4909bc" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>tagging == &apos;tagged&apos;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ba7fc253-5637-4749-8e9c-2635c3ac7b8b" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert commands here to handle VLAN tagging</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="df7ac606-0499-45b7-9a9c-c4ffe6b1711c" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="dcf243b7-91c2-4593-bd83-01a19326ecd0" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert steps here for when expression is false</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2400d020-8ff3-4bdc-9905-b2adae9f06a7" action="command" session="ssh">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="removeFromVlan">
+            <steps>
+                <item guid="400132f7-d20c-4ffb-9c6f-867cb3c7bdc4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology reservation requiring layer 2 connections ends. Its accepts one three arguments, &apos;vlanId&apos;, &apos;portNumber&apos;, and &apos;tagging&apos; </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="921c38d1-be3a-4982-ac07-3c97c2803ebc" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to remove the specified port from the specified vlan</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6cd867b1-5a90-4cea-a840-7c71b6db6a0b" action="command" session="ssh">
+                            <command>
+                                <body>configure</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="660e54a0-c327-431e-9af8-eee42ed98b9d" action="command" session="ssh">
+                            <command>
+                                <body>interface [portNumber]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="2940e61f-5220-4de5-a32d-d241494b1c38" action="command" session="ssh">
+                            <command>
+                                <body>no vlan [vlanId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="f5d96516-379a-42a0-85b8-c549c583e905" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>tagging == &apos;tagged&apos;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="7e1a0f69-0b93-43fd-ae8b-af5b4cf8a5bc" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert commands here to handle VLAN tagging</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c0a200cf-9456-44ed-8044-77b3d5d4e20d" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="f434f6ca-1d43-49d3-835a-d50e64d8e369" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert steps here for when expression is false</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5ff7b67b-9b9a-49ce-8a73-909db60cb1d7" action="command" session="ssh">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="destroyVlan">
+            <steps>
+                <item guid="d1d64885-22b1-4941-940d-c71dda8db7cd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology reservation requiring layer 2 connections ends. Its accepts one argument called &apos;vlanId&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d2745522-36e4-4754-96b5-febf5fa967a5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to remove the VLAN from the layer 2 switch</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="120cd03b-a76d-42f8-b9bc-34815fa9af11" action="command" session="ssh">
+                            <command>
+                                <body>confgure</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="c70e2869-9444-4c7c-93e4-21dbba33b281" action="command" session="ssh">
+                            <command>
+                                <body>no vlan [vlanId]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="e98ceedd-64ec-4df3-b725-32a370a175d9" action="command" session="ssh">
+                            <command>
+                                <body>exit</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getPorts" defaultSessionProfile="application:com.fnfr.svt.applications.ssh" isVBlock="true">
+            <description>Device Status and Port Status/Info</description>
+            <steps>
+                <item guid="05678068-d08f-4240-ad15-442965b4b7ec" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called by Velocity when a driver is run as the result of the user clicking the refresh button on a resource or during a periodic health check</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f602743f-7a4b-4a4d-9e2e-e0497bba00b1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>It is set to return a list of ports in JSON format. The base of this JSON string is configured in the response area of the procedure properties </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9071ef3a-837d-4700-8c02-0214f781ae14" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get ports and add them to the JSON response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="971b4a7d-0c8d-4861-9ff1-15d4875bf39e" action="command" session="ssh" estimatedStepExecutionTime="4.345" responseMap="response_maps/show_interfaces.ffrm" useResponseMapLibraryApplicability="false">
+                            <command>
+                                <body>show interfaces brief</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>interface()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>nameList</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>Physical_link()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>statusList</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <completionProperties expectedIdleTime="0.856" expectedIdleTime.inherit="false"/>
+                            </applicationProperties>
+                            <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
+                            <emulation emulate="ALWAYS" useExternalSource="false">
+                                <behavior>
+                                    <response>
+
+
+Physical interface: ge-0/0/0, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-0/0/1, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/0, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/1, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/2, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/3, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/4, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/5, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/6, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/7, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/8, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/9, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/10, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/11, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/12, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/13, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/14, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/15, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/16, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/17, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/18, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/19, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/20, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/21, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/22, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: ge-1/0/23, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: xe-2/0/0, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: xe-2/0/1, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: xe-2/0/2, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: xe-2/0/3, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: xe-2/0/4, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: xe-2/0/5, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: xe-2/0/6, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+
+Physical interface: xe-2/0/7, Enabled, Physical link is Up
+  Link-level type: Ethernet, MTU: 1514, Speed: 1000mbps, Loopback: Disabled, Source filtering: Disabled,
+  Flow control: Enabled, Auto-negotiation: Enabled, Remote fault: Online
+  Device flags   : Present Running
+  Interface flags: SNMP-Traps Internal: 0x4000
+  Link flags     : None
+</response>
+                                    <responseType>text</responseType>
+                                    <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;responseLine/&gt;
+    &lt;promptName&gt;prompt1&lt;/promptName&gt;
+    &lt;echo&gt;show interfaces brief&lt;/echo&gt;
+    &lt;prompt&gt;training@junos-emu#&lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+                                    <aliases>
+                                        <item name="isEmpty">
+                                            <queryFormatString>.//isEmpty</queryFormatString>
+                                        </item>
+                                        <item name="responseLine">
+                                            <queryFormatString>.//responseLine</queryFormatString>
+                                        </item>
+                                        <item name="promptName">
+                                            <queryFormatString>.//promptName</queryFormatString>
+                                        </item>
+                                        <item name="echo">
+                                            <queryFormatString>.//echo</queryFormatString>
+                                        </item>
+                                        <item name="prompt">
+                                            <queryFormatString>.//prompt</queryFormatString>
+                                        </item>
+                                    </aliases>
+                                    <duration>1.1</duration>
+                                </behavior>
+                            </emulation>
+                        </item>
+                        <item guid="5cd843d8-f9c2-47cc-a085-f060a6037822" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>name, status in zip(nameList, statusList):</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="f068687d-cc1b-40cc-b1d9-703641ae0902" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>set online status</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="5b74b543-0493-420c-8b9e-3040d71246b3" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>status == &quot;Up&quot;:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="246a51f5-5acf-4b9f-a07a-5016601c971c" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>status = &apos;online&apos;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="bc4105d6-7682-41f6-82a3-db5a179ecb01" action="else" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="fff6e84a-23c9-4ca0-a5d3-92ce48fb2763" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>status = &apos;offline&apos;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="60cd48b6-f12b-4e93-85c8-bcf50e41dbef" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Note: When editing the -pathValue, edit via the Json Step Properties.</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="33a4f9e1-1bc4-40fe-a2a1-60d7b9c4f128" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=&apos;true&apos;, pathValue=&apos;{&quot;ports/\\\\[0]&quot;:\\\\[{&quot;name&quot;:&quot;[name]&quot;,&quot;status&quot;:&quot;[status]&quot;}]}&apos;</body>
+                                            </command>
+                                            <postProcessing>
+                                                <storeResponseAt>portsJson</storeResponseAt>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">addJsonNode</action>
+                                                <pathValue inherit="false" sub="true">{&quot;ports/\\[0]&quot;:\\[{&quot;name&quot;:&quot;[name]&quot;,&quot;status&quot;:&quot;[status]&quot;}]}</pathValue>
+                                                <editResponseStructure inherit="false">true</editResponseStructure>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <author>Malcom Terry</author>
+            <multilineDescription>Get information about device ports and their properties.
+
+This method is also used to determine whether the device is online. If this call ends up with an error, the device is considered offline. Otherwise, the device is considered online.
+
+Returns: JSON
+
+Example:
+{
+  &quot;ports&quot;: [
+    {
+      &quot;name&quot;: &quot;Fa0/1&quot;,
+      &quot;status&quot;: &quot;offline&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Fa0/2&quot;,
+      &quot;status&quot;: &quot;offline&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Gi0/1&quot;,
+      &quot;status&quot;: &quot;online&quot;
+    }
+  ]
+}</multilineDescription>
+            <response>{&quot;ports&quot;:[]}</response>
+        </item>
+    </procedures>
+</testCase>
