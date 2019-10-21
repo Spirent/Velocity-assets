@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <testCase version="8.0.0.201908290812">
     <general>
+        <documentation>Configurable Layer 1 Switch Driver Template</documentation>
+        <notes>Read the full guide on driver development here:
+https://support.spirent.com/SpirentCSC/SC_KnowledgeView?id=DOC10679</notes>
         <language>Python</language>
     </general>
     <execution>
