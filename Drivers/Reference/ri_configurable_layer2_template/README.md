@@ -4,6 +4,9 @@ Description: A template to be used when developing new configurable layer 2 inte
 Category: driver  
 Class: Reference  
   
+Read the full guide on driver development here:  
+https://support.spirent.com/SpirentCSC/SC_KnowledgeView?id=DOC10679  
+  
 The driver implements the configurable layer 2 interface and requires the  
 following resource properties:  
 * ipAddress (optional, but either ipAddress or Hostname must be specified)  
@@ -14,6 +17,9 @@ following resource properties:
  ----
 1 test case in project
 ## Test Case File: configurable_layer2.fftc
+### Configurable Layer 2 Driver Template
+Read the full guide on driver development here:
+https://support.spirent.com/SpirentCSC/SC_KnowledgeView?id=DOC10679
 ### isEnoughSpace
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>fileSize</td><td>Size of the desired file in bytes. Will return True if available space is greater than this argument, False otherwise.</tr></td></table>
