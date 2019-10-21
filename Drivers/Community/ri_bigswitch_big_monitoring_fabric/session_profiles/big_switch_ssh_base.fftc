@@ -1,27 +1,25 @@
 <?xml version="1.0"?>
-<testCase version="6.1.0.e2e4ec0">
+<testCase version="8.0.0.201908290812">
     <general>
-        <sessionClass includeTestCase="true" sessionType="project://ri_l1_bigswitch/session_profiles/big_switch_ssh_base.ffsp"/>
+        <sessionClass includeTestCase="true" sessionType="project://ri_bigswitch_big_monitoring_fabric/session_profiles/big_switch_ssh_base.ffsp"/>
     </general>
     <procedures>
         <item name="main">
             <steps>
-                <item guid="d233395a-035c-49f9-af17-d8f11503cce2" action="comment">
+                <item guid="d233395a-035c-49f9-af17-d8f11503cce2" action="comment" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
         </item>
         <item name="connect" isPublic="true" isVBlock="true">
             <steps>
-                <item guid="b1f0e57e-2a77-432e-8d47-d788b3390d69" action="eval">
+                <item guid="b1f0e57e-2a77-432e-8d47-d788b3390d69" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set retval OK</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="804fc1a1-5e7c-4f06-a945-bcf9fe661278" action="createChainName" session="$session">
+                <item guid="804fc1a1-5e7c-4f06-a945-bcf9fe661278" action="createChainName" session="$session" useFieldsInCommand="false">
                     <command>
                         <body>-port1 $port1 -port2 $port2 -switch_id $switch_id</body>
                     </command>
@@ -36,13 +34,14 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>chain_name</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="0c5271da-1e76-4afd-84bc-64a7a7237f5f" action="command" session="$session">
                     <command>
@@ -126,7 +125,7 @@
                     </command>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="34d6899d-3a71-4bb8-a6ce-5794d43dfc5f" action="eval">
+                <item guid="34d6899d-3a71-4bb8-a6ce-5794d43dfc5f" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set retval</body>
                     </command>
@@ -141,13 +140,14 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <query>status</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>
@@ -165,14 +165,13 @@
         </item>
         <item name="disconnect" isPublic="true" isVBlock="true">
             <steps>
-                <item guid="a7fef9f7-7926-4e8e-b171-93c9e48fcd34" action="eval">
+                <item guid="a7fef9f7-7926-4e8e-b171-93c9e48fcd34" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set retval OK</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="2c3e9abc-36da-472e-82c5-8049f4ee2ba3" action="createChainName" session="$session">
+                <item guid="2c3e9abc-36da-472e-82c5-8049f4ee2ba3" action="createChainName" session="$session" useFieldsInCommand="false">
                     <command>
                         <body>-port1 $port1 -port2 $port2 -switch_id $switch_id</body>
                     </command>
@@ -187,13 +186,14 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>chain_name</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="cf6af143-82c5-4dfd-a8fe-d5350fb36c5b" action="command" session="$session">
                     <command>
@@ -248,7 +248,7 @@
                     </command>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="d4aa713b-cf76-4430-903a-7533bb2c74a5" action="eval">
+                <item guid="d4aa713b-cf76-4430-903a-7533bb2c74a5" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set retval</body>
                     </command>
@@ -263,13 +263,14 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <query>status</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>
@@ -302,6 +303,8 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>interfaces</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -309,7 +312,7 @@
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="8c7dbecc-9a2c-4175-a6e2-b81cc5f17cb3" action="eval">
+                <item guid="8c7dbecc-9a2c-4175-a6e2-b81cc5f17cb3" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set interfaces</body>
                     </command>
@@ -325,13 +328,14 @@
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>var1</storageLocation>
                                         <query>ports</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>
@@ -356,6 +360,8 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>state</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -363,14 +369,14 @@
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="34f553bc-6b72-42f0-a842-5a9b8982911a" action="if">
+                <item guid="34f553bc-6b72-42f0-a842-5a9b8982911a" action="if" useFieldsInCommand="false">
                     <command>
                         <body>$state == &quot;up&quot;</body>
                     </command>
                     <nestedSteps>
-                        <item guid="2f691bff-d905-4511-ba83-dbc349cd7818" action="then">
+                        <item guid="2f691bff-d905-4511-ba83-dbc349cd7818" action="then" useFieldsInCommand="false">
                             <nestedSteps>
-                                <item guid="df4fc23d-c9d6-4dfc-80a7-6702bd137434" action="eval">
+                                <item guid="df4fc23d-c9d6-4dfc-80a7-6702bd137434" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>set x online</body>
                                     </command>
@@ -385,21 +391,21 @@
                                                 <processorInfo ruleType="store">
                                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                                         <query>state</query>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
                                         </analysisRules>
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
-                        <item guid="09813d27-20ff-4a66-9df6-3ee08108e480" action="else">
+                        <item guid="09813d27-20ff-4a66-9df6-3ee08108e480" action="else" useFieldsInCommand="false">
                             <nestedSteps>
-                                <item guid="33de58cc-e8d4-405c-9048-0247c681f08b" action="eval">
+                                <item guid="33de58cc-e8d4-405c-9048-0247c681f08b" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>set x offline</body>
                                     </command>
@@ -414,21 +420,20 @@
                                                 <processorInfo ruleType="store">
                                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                                         <query>state</query>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
                                         </analysisRules>
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>
@@ -454,6 +459,8 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>interfaces</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -466,6 +473,8 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>states</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -473,7 +482,7 @@
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="56f9ce3b-a5a8-4f40-af76-14d40f81a0e2" action="eval">
+                <item guid="56f9ce3b-a5a8-4f40-af76-14d40f81a0e2" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set interfaces</body>
                     </command>
@@ -488,15 +497,16 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <query>interfaces</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="bf2ae93e-01d5-4997-8f98-3fd47192a150" action="eval">
+                <item guid="bf2ae93e-01d5-4997-8f98-3fd47192a150" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set states</body>
                     </command>
@@ -511,13 +521,14 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <query>states</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>
@@ -542,6 +553,8 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <query>model</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -554,6 +567,8 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <query>version</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -566,7 +581,7 @@
         </item>
         <item name="createChainName" isPublic="true" isVBlock="true">
             <steps>
-                <item guid="213d1c37-ccbf-440b-8341-3cdc033070df" action="eval">
+                <item guid="213d1c37-ccbf-440b-8341-3cdc033070df" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set retval ch_[string map {{:} {}} $switch_id]_[string map {{ethernet} {}} $port1]_[string map {{ethernet} {}} $port2]</body>
                     </command>
@@ -581,13 +596,14 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <query>chain_name</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>
