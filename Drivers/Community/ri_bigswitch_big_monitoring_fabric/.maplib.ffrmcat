@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="8.0.1.0">
+    <mapCatalog>
+        <item name="response_maps/show_switch_all_interfaces.ffrm">
+            <applicability actionType="command" command="show switch all interfaces"/>
+        </item>
+        <item name="response_maps/show_version.ffrm">
+            <applicability actionType="command" command="show version"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>
