@@ -26,4 +26,4 @@ _Put an `x` in the boxes that apply. You can also fill these out after creating 
       Class: ("Community" | "Tested by Spirent" | "Reference")  
       
      Other info like user instructions, a description of the intended use case, etc. can be added to the readme.txt after the 4 required lines.  
-     _**Note:** A README.md file will be automatically generated including everything in the readme.txt file and a list of files, QuickCalls, and procedures with info from iTest's documentation fields. Do not create a README.md file, it will be overwritten. For the best possible documentation, use fill out the description fields in each test case, procedure and QuickCall._
+     _**Note:** A README.md file will be automatically generated including everything in the readme.txt file and a list of files, QuickCalls, and procedures with info from iTest's documentation fields. Do not create a README.md file, it will be overwritten. For the best possible documentation, fill out the description fields in each test case, procedure and QuickCall._
