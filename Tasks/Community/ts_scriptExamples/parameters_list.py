@@ -9,5 +9,5 @@ parser.add_argument('--testCaseSpecificParameter', action='store', dest='specifi
 results, unknown = parser.parse_known_args()
 
 print("[INFO] Param build from defaultData: " + results.build)
-print("[INFO] Param testCaseSpecificParamer from fileNameMatch: " + results.specificParam)
+print("[INFO] Param testCaseSpecificParameter from fileNameMatch: " + results.specificParam)
 print("[INFO] All arguments: " + str(sys.argv[1:]))
