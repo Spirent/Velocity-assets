@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.0.0.201908290812">
+<TestCaseCatalog version="8.0.1.0">
     <testCaseCatalog>
         <item name="session_profiles/hp_5900_ssh_qc.fftc">
-            <tcDescriptor version="8.0.0.201908290812">
+            <tcDescriptor version="8.0.1.0">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="hp_5900_ssh.ffsp"/>
                 </general>

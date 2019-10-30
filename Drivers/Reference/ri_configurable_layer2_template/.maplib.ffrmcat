@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ResponseMapCatalog version="8.0.1.0">
+    <mapCatalog>
+        <item name="response_maps/show_chassis_hardware.ffrm">
+            <applicability actionType="command" command="sh* chas* hardware">
+                <application>
+                    <item>com.fnfr.svt.applications.ssh</item>
+                    <item>com.fnfr.svt.applications.telnet</item>
+                </application>
+            </applicability>
+        </item>
+        <item name="response_maps/show_interfaces.ffrm">
+            <applicability actionType="command" command="show interfaces*"/>
+        </item>
+    </mapCatalog>
+</ResponseMapCatalog>
