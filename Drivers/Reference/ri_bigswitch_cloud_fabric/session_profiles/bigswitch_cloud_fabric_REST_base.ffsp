@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<SessionTemplate version="7.3.0.201903220921">
+<SessionTemplate version="8.0.0.201908290812">
     <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
-    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[get switch_url https://34.227.100.11:8443]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false">
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" acceptAllCookies="true" acceptAllCookies.inherit="false">
         <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="[get username admin]" user.inherit="false" password.masked="true" password="1xuOt5DLBjgOp/f2GAHXBns/IpuurvIR" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
         <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
             <memberClasses>
@@ -10,7 +10,7 @@
             <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
         </httpHeader>
     </sessionProperties>
-    <responseLibrary inherit="false">project://ri_bigswitch_fabric</responseLibrary>
-    <formMapLibrary inherit="false">project://ri_bigswitch_fabric</formMapLibrary>
+    <responseLibrary inherit="false">project://ri_bigswitch_cloud_fabric/</responseLibrary>
+    <formMapLibrary inherit="false">project://ri_bigswitch_cloud_fabric/</formMapLibrary>
     <isReferenceProfile>true</isReferenceProfile>
 </SessionTemplate>

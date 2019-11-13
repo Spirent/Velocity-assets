@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<testCase version="7.3.5.0">
+<testCase version="8.0.0.201908290812">
     <execution>
-        <parameters version="7.3.5.0">
+        <parameters version="8.0.0.201908290812">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
                     <reservationId>accda199-b3b3-498e-8470-fce9c6abfc3c</reservationId>
@@ -157,6 +157,7 @@
                                                                         <processorInfo ruleType="message">
                                                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                                                 <message>Velocity reservationId not available to automation.</message>
+                                                                                <tag sub="false" defaultValue=""/>
                                                                             </ruleProperties>
                                                                         </processorInfo>
                                                                     </item>
@@ -248,11 +249,11 @@
                         </item>
                         <item guid="f5f65d65-5fdd-4ec6-9be6-f5d2a2689758" action="open" session="switch" useFieldsInCommand="false">
                             <command>
-                                <body>project://ri_bigswitch_fabric/session_profiles/bigswitch_fabric.ffsp</body>
+                                <body>project://ri_bigswitch_cloud_fabric/session_profiles/bigswitch_cloud_fabric_REST_base.ffsp</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                                 <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="$switch_url" url.inherit="false"/>
                                 <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                             </applicationProperties>
@@ -340,6 +341,7 @@
                                         <processorInfo ruleType="message">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                 <message> Switch info :[param property_Hostname], [param property_ipAddress]</message>
+                                                <tag sub="false" defaultValue=""/>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
@@ -364,6 +366,7 @@
                                                         <processorInfo ruleType="message">
                                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                                 <message> Call $i : [param call_$i]</message>
+                                                                <tag sub="false" defaultValue=""/>
                                                             </ruleProperties>
                                                         </processorInfo>
                                                     </item>
@@ -516,6 +519,7 @@
                                                                 <processorInfo ruleType="message">
                                                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                                         <message>Velocity reservationId not available to automation.</message>
+                                                                        <tag sub="false" defaultValue=""/>
                                                                     </ruleProperties>
                                                                 </processorInfo>
                                                             </item>
@@ -840,6 +844,7 @@
                                                                 <processorInfo ruleType="message">
                                                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                                         <message>Velocity reservationId not available to automation.</message>
+                                                                        <tag sub="false" defaultValue=""/>
                                                                     </ruleProperties>
                                                                 </processorInfo>
                                                             </item>
@@ -1485,7 +1490,7 @@
                                 </item>
                                 <item guid="5e5fb176-3bd4-487b-bb7a-c0cc5adb23e3" action="open" session="vel" useFieldsInCommand="false">
                                     <command>
-                                        <body>project://ri_bigswitch_fabric/session_profiles/velocity_REST.ffsp</body>
+                                        <body>project://ri_bigswitch_cloud_fabric/session_profiles/velocity_REST_base.ffsp</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                                         <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
