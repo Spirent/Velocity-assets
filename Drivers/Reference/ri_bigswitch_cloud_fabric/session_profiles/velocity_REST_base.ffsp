@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<SessionTemplate version="7.3.0.201903220921">
+<SessionTemplate version="8.0.0.201908290812">
     <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
     <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[velocity url]" url.inherit="false">
         <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
     </sessionProperties>
-    <responseLibrary inherit="false">project://ri_bigswitch_fabric</responseLibrary>
-    <formMapLibrary inherit="false">project://ri_bigswitch_fabric</formMapLibrary>
+    <responseLibrary inherit="false">project://ri_bigswitch_cloud_fabric/</responseLibrary>
+    <formMapLibrary inherit="false">project://ri_bigswitch_cloud_fabric/</formMapLibrary>
 </SessionTemplate>

@@ -6,7 +6,7 @@
     <language>itest</language>     
     <interface>Layer 2 Switch</interface> 
     <supportCustomArguments></supportCustomArguments>
-    <entryPoint>bigswitch_fabric_driver.fftc</entryPoint>
+    <entryPoint>bigswitch_cloud_fabric_driver.fftc</entryPoint>
     <resourceProperties>
         <property optional="true">
             <name>ipAddress</name>

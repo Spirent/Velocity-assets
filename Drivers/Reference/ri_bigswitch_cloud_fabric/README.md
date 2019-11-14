@@ -59,7 +59,7 @@ Now that the inventory is complete you can connect the leaf switches to the virt
 1. For each port named "virtual_<n>" connect it to a corresponding Leaf switches' "virtual" port. There should be one connection per leaf switch.
  ----
 1 test case in project
-## Test Case File: bigswitch_fabric_driver.fftc
+## Test Case File: bigswitch_cloud_fabric_driver.fftc
 ### addToVlan
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>topo_info</td><td>JSON info about the connections to the switch from getTopologyInfo proc</tr></td>
