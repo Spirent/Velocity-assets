@@ -8,6 +8,9 @@ if os.environ.has_key('VELOCITY_PARAM_TMBL_FILE') is True:
 if os.environ.has_key('VELOCITY_PARAM_RESERVATION_ID') is True:
   print("[INFO] RESERVATION ID: " + os.environ['VELOCITY_PARAM_RESERVATION_ID'])
 
+if os.environ.has_key('VELOCITY_PARAM_REPORT_ID') is True:
+  print("[INFO] REPORT_ID: " + os.environ['VELOCITY_PARAM_REPORT_ID'])
+
 print("[INFO] VELOCITY API ROOT: " + os.environ['VELOCITY_PARAM_VELOCITY_API_ROOT'])
 print("[INFO] VELOCITY TOKEN: " + os.environ['VELOCITY_PARAM_VELOCITY_TOKEN'])
 print("[INFO] BUILD PARAMETER: " + os.environ['VELOCITY_PARAM_build'])
