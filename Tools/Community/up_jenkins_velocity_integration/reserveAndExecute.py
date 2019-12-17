@@ -1,7 +1,12 @@
 #!/usr/bin/python3 -u
+# Dec 17 completion 
+# Enhancements to complete
+#
+
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from io import BytesIO
+import os
 import time
 import json
 import urllib.parse
@@ -10,27 +15,32 @@ from requests.auth import HTTPBasicAuth
 import argparse
 import sys
 
+
 #parse the input arguments
 parser = argparse.ArgumentParser()
-parser.add_argument('--topologyId', action='store', dest='topologyId', help='velocity topology id')
+parser.add_argument('--topologyName', action='store', dest='topologyName', help='velocity name')
 parser.add_argument('--automationPathList', nargs='+', action='store', dest='path', help='velocity automation path list')
 parser.add_argument('--user', action='store', dest='user', help='Username')
 parser.add_argument('--password', action='store', dest='password', help='Password')
 parser.add_argument('--baseUrl', action='store', dest='baseUrl', help='velocity base Url')
-parser.add_argument('--agentPoolName', action='store', dest='poolname', help='agent pool')
-parser.add_argument('--agentCallBackUrl', action='store', dest='callbackUrl', help='agent call back Url')
-
+parser.add_argument('--reportdetailLevel', action='store', dest='detailLevel', help='velocity report detailLevel')
+parser.add_argument('--testcasetimeout', action='store', dest='timeout', help='time out in min for test execution')
 results, unknown = parser.parse_known_args()
 
 #Variable declaration of parsed arguments
 user = results.user
 password = results.password
 baseUrl = results.baseUrl
-topologyId = results.topologyId
-poolname = results.poolname
-callbackUrl = results.callbackUrl
+topologyName = results.topologyName
+detailLevel = results.detailLevel
 path = results.path
+timeout = results.timeout
 
+#determine what hostname for the callback URL
+stream = os.popen('hostname -f')
+callbackhost = stream.read()
+callbackhost = callbackhost.rstrip("\n")
+callbackURL = 'http://' + callbackhost + ':'
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -63,9 +73,24 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
 headers={}
 
-    
+#Validate detail level is correct
+validDetailLevel = ['ALL_ISSUES_ALL_STEPS', 'ALL_ISSUES_ERROR_STEPS', 'LAST_RESPONSE', 'ERROR_ISSUES_ONLY', 'ERROR_ISSUES_WITH_STEPS', 'REPORT_ONLY']
+if detailLevel in validDetailLevel:
+    print("Detail level is " + detailLevel)
+else:
+    print("detailLevel is not recognized" + detailLevel)
+    detailLevel = 'ALL_ISSUES_ERROR_STEPS'
+    print("detailLevel " + detailLevel + "will be used")
+
+
+#Get/Validate Token for Velocity REST session
 tResponse = requests.get(baseUrl + '/velocity/api/auth/v2/token', auth=HTTPBasicAuth(user, password))
 token_data = json.loads(tResponse.text)
+if 'errorId' in token_data:
+    print("Login Credentials invalid for " + baseUrl)
+    sys.exit(1)
+else:
+    print("Token was successfully retrieved")
 token = token_data['token']
 
 # start callback server
@@ -75,38 +100,56 @@ executionID = ''
 callbackPort = httpd.server_port
 exitFail = False
 
-# form the reservation invocation
+callback = callbackURL + str(callbackPort)
+# form the header
 headers['X-Auth-Token']=token
 headers['content-type']='application/json'
+
+#Get/Validate topologyID from Topology Name
+tpResponse = requests.get(baseUrl + '/velocity/api/topology/v10/topologies/?filter=name::' + topologyName, headers=headers)
+tpJson = json.loads(tpResponse.text)
+if tpJson['total'] == 0:
+    print("Topology does not exist on " + baseUrl)
+    sys.exit(1)
+topologyId = tpJson['topologies'][0]['id']
+print("TopologyID is " + topologyId)
+
+# form the reservation invocation
 postData={}
 postData['topologyId']=topologyId
 postData['description']='Invoked from reserveAndExecute'
 postData['duration']=300
 postData['name']='Python reserveAndExecute'
 
+print("CallbackURL = " + callbackURL + str(callbackPort))
+
 # Start reservation in Velocity
 rlResponse = requests.post(baseUrl + '/velocity/api/reservation/v13/reservation', data=json.dumps(postData), headers=headers)
-assert rlResponse.status_code == 200
 reservationJson = json.loads(rlResponse.text)
+if 'errorId' in reservationJson:
+    print("Reservation Failed due to " + reservationJson['errorId'])
+    sys.exit(1)
 reservationId = reservationJson['id']
+print("Reservation ID is "  + reservationId)
 
 # form the execution invocation
 exPostData={}
 exPostData['reservationID']=reservationId
-exPostData['detailLevel']='ALL_ISSUES_ALL_STEPS'
-exPostData['callbackURL']=callbackUrl + str(callbackPort)
-exPostData['requirements']=[]
+exPostData['detailLevel']=detailLevel
+exPostData['callbackURL']=callback
 requirements={}
-requirements['name']='pool'
-requirements['value']=poolname
-exPostData['requirements'].append(requirements)
 
 # Start execution in Velocity
 for exePath in path:
   exPostData['testPath']=exePath
   exResponse = requests.post(baseUrl + '/ito/executions/v1/executions', data=json.dumps(exPostData), headers=headers)
+  exResponseJson = json.loads(exResponse.text)
+  if 'errorId' in exResponseJson:
+      print("Warning: Execution Failed to launch due to " + exResponseJson['errorId'])
   # listen for an incoming webhook that indicates execution complete
-  timeout = time.time() + 60*30  # 30 minutes from now
+  else:
+      print("Executing test " + exePath)
+  timeout = time.time() + 60*float(timeout)
   while True:
       httpd.handle_request()
       if exitFail:
