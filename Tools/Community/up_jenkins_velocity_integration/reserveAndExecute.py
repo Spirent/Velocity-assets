@@ -79,7 +79,7 @@ if detailLevel in validDetailLevel:
     print("Detail level is " + detailLevel)
 else:
     print("detailLevel is not recognized" + detailLevel)
-    detailLevel = 'ALL_ISSUES_ERROR_STEPS'
+    detailLevel = 'ALL_ISSUES_ALL_STEPS'
     print("detailLevel " + detailLevel + "will be used")
 
 
