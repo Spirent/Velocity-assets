@@ -20,15 +20,15 @@ Class: Community
 
 
 ## reserveAndExecute.py Functionality Overview
-Validate input arguments
-Log on to Velocity with provided user/password - report/exit on failure
-Determine the callback url based on system hostname 
-Determine callback port 
-Determine TopologyID based on TopologyName from Velocity - report/exit on failure
-Reserve Topology - report/exit on failure
-Execute test cases against reservation in serial 
-Return passed/failed test case status
-cancel reservation
+Validate input arguments  
+Log on to Velocity with provided user/password - report/exit on failure  
+Determine the callback url based on system hostname  
+Determine callback port  
+Determine TopologyID based on TopologyName from Velocity - report/exit on failure  
+Reserve Topology - report/exit on failure  
+Execute test cases against reservation in serial   
+Return passed/failed test case status  
+cancel reservation  
 
 
 
