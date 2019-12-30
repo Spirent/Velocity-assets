@@ -22,7 +22,7 @@ parser.add_argument('--topologyName', action='store', dest='topologyName', help=
 parser.add_argument('--automationPathList', nargs='+', action='store', dest='path', help='velocity automation path list')
 parser.add_argument('--user', action='store', dest='user', help='Username')
 parser.add_argument('--password', action='store', dest='password', help='Password')
-parser.add_argument('--baseUrl', action='store', dest='baseUrl', help='velocity base Url')
+parser.add_argument('--baseUrl', action='store', dest='baseUrl', help='https://VelocityUrl.com')
 parser.add_argument('--reportdetailLevel', action='store', dest='detailLevel', help='velocity report detailLevel')
 parser.add_argument('--testcasetimeout', action='store', dest='timeout', help='time out in min for test execution')
 results, unknown = parser.parse_known_args()
@@ -105,6 +105,7 @@ callback = callbackURL + str(callbackPort)
 headers['X-Auth-Token']=token
 headers['content-type']='application/json'
 
+# TODO: URL encode toplogy name - Velocity topology name with special characters or spaces
 #Get/Validate topologyID from Topology Name
 tpResponse = requests.get(baseUrl + '/velocity/api/topology/v10/topologies/?filter=name::' + topologyName, headers=headers)
 tpJson = json.loads(tpResponse.text)
@@ -119,9 +120,10 @@ postData={}
 postData['topologyId']=topologyId
 postData['description']='Invoked from reserveAndExecute'
 postData['duration']=300
-postData['name']='Python reserveAndExecute'
+postData['name']='Velocity Reserve and Execute script - Reservation'
 
 print("CallbackURL = " + callbackURL + str(callbackPort))
+
 
 # Start reservation in Velocity
 rlResponse = requests.post(baseUrl + '/velocity/api/reservation/v13/reservation', data=json.dumps(postData), headers=headers)
@@ -143,6 +145,8 @@ requirements={}
 for exePath in path:
   exPostData['testPath']=exePath
   exResponse = requests.post(baseUrl + '/ito/executions/v1/executions', data=json.dumps(exPostData), headers=headers)
+  # TODO Capture execution ID to put URL in console output
+  # TODO
   exResponseJson = json.loads(exResponse.text)
   if 'errorId' in exResponseJson:
       print("Warning: Execution Failed to launch due to " + exResponseJson['errorId'])
