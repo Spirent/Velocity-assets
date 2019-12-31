@@ -1,4 +1,3 @@
-### Project Information:
 Project: Jenkins Velocity Integration  
 Description: These scripts will allow Jenking CI/CD developers to reserve a Topology and execute test cases.  
 Category: task  
