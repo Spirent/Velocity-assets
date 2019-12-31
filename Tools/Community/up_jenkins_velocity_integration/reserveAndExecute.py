@@ -148,6 +148,7 @@ for exePath in path:
   # TODO Capture execution ID to put URL in console output
   # TODO
   exResponseJson = json.loads(exResponse.text)
+  exID = exResponsJson['executionID']
   if 'errorId' in exResponseJson:
       print("Warning: Execution Failed to launch due to " + exResponseJson['errorId'])
   # listen for an incoming webhook that indicates execution complete
