@@ -52,6 +52,21 @@
             "timeout": 1
         },
         {
+            "fileNameMatch": "vbot\\.example\\.py",
+            "commandSequence": [
+              "%file% --ipAddress %param_property_ipAddress% --resourceId %param_resourceId%"
+            ],
+            "description": "This vBot will appear in the topology editor of an active reservation and will be associated with each resource whose tag is either foo or bar",
+            "headline": "Example vBot",
+            "tags": ["foo", "bar"],
+            "parameters": [
+                {
+                    "description": "Name begins with property_ so user is not prompted for value. Value is auto-populated by Velocity",
+                    "name": "property_ipAddress"
+                }
+            ]
+        },
+        {
             "fileNameMatch": "execution_env\\.py",
             "requirements": [
                 {
@@ -129,7 +144,7 @@
         {
             "fileNameMatch": "parameter_types\\.py",
             "commandSequence": [
-                "%file% --text %param_text% --boolean %param_boolean% --double %param_double% --integer %param_integer% --custom %param_custom%"
+                "%file% --text %param_text% --masked %param_masked% --boolean %param_boolean% --double %param_double% --integer %param_integer% --custom %param_custom%"
             ],
             "customParameterTypes": [
                 {
@@ -152,6 +167,12 @@
                     "name": "text",
                     "type": "TEXT",
                     "value": "textVal"
+                },
+                {
+                    "description": "masked type introduced in 8.0",
+                    "name": "masked",
+                    "type": "TEXT",
+                    "masked": true
                 },
                 {
                     "description": "boolean type introduced in 8.0",
