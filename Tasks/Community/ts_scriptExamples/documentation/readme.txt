@@ -22,6 +22,9 @@ Velocity.
     working directory, the files in that directory, and the environment variables.
     parameters added at time of execution will appear as environment variables.
 
+    extractedData.py - example script that parses output for measurements and values
+    that need to be stored in Elasticsearch for trend analysis and data mining
+
     parameters_list.py - this demonstrates how to build a custom command using
     specific argument notation, for example --build and --testCaseSpecificParameter.
     it also demonstrates how parameters are merged / added with parameters defined
@@ -40,6 +43,9 @@ Velocity.
     mode by running 'python -i parseTopologyExample.py', and by typing commands like
     topo.resources, the user can see the topology contents. this script requires
     'lxml' as an additional package
+
+    pythonLogging.py - this demonstrates how Velocity displays execution messages
+    for different logging levels in Python
 
     robotDemo.robot - this demonstrates the execution of a Robot Framework script. the
     commandSequence defined in defaultData is over-written with a custom command
