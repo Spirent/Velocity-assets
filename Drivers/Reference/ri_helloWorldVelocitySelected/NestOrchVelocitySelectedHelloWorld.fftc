@@ -399,11 +399,11 @@ Returns: nothing</multilineDescription>
                     <nestedSteps>
                         <item guid="74842f54-495b-4ea8-8fea-a500204fcab5" action="json" useFieldsInCommand="false">
                             <command>
-                                <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=&apos;false&apos;, jsonString=&apos;{&quot;reservationProperties&quot;:{&quot;returnedProperty&quot;:&quot;returnedProperty1&quot;,&quot;anotherProperty&quot;:&quot;still works&quot;}}&apos;</body>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=&apos;false&apos;, jsonString=&apos;{&quot;reservationProperties&quot;:{&quot;returnedProperty&quot;:&quot;Hello......World&quot;,&quot;anotherProperty&quot;:&quot;Jello World?&quot;}}&apos;</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
                                 <action inherit="false">createJson</action>
-                                <jsonString inherit="false" sub="true">{&quot;reservationProperties&quot;:{&quot;returnedProperty&quot;:&quot;returnedProperty1&quot;,&quot;anotherProperty&quot;:&quot;still works&quot;}}</jsonString>
+                                <jsonString inherit="false" sub="true">{&quot;reservationProperties&quot;:{&quot;returnedProperty&quot;:&quot;Hello......World&quot;,&quot;anotherProperty&quot;:&quot;Jello World?&quot;}}</jsonString>
                                 <documentName inherit="false">response</documentName>
                             </applicationProperties>
                         </item>
