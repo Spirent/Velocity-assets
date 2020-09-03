@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>  
+    <version>1.0.0</version>  
+    <vendor>Spirent</vendor>
+    <supportCustomArguments>true</supportCustomArguments>
+    <language>itest</language>  
+    <interface>Orchestration</interface>
+    <entryPoint>NestOrchVelocityOrchestratedHelloWorld.fftc</entryPoint>
+    <timeout>1800</timeout>
+    <initializationOrder>CONFIGURE_THEN_INITIALIZE</initializationOrder>
+    <resourceProperties>
+        <property optional="false">
+            <name>passed_property</name>
+            <description>property passed from Velocity to driver</description>
+        </property>
+    </resourceProperties>    
+</resourceDriver>
