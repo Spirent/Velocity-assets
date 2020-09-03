@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 Project: Jenkins Velocity Integration  
 Description: Allows Jenkins CI/CD developers to reserve a Velocity topology and execute test cases
+=======
+### Project Information:
+Project: Jenkins Velocity Integration  
+Description: These scripts will allow Jenking CI/CD developers to reserve a Topology and execute test cases.  
+>>>>>>> c8781533ade029f8bb3610fb566a9d28481f6127
 Category: task  
 Class: Community  
 
@@ -19,10 +25,17 @@ Class: Community
 
 
 ## Usage
+<<<<<<< HEAD
 This script is used to execute a series of automated test cases in Velocity against a specified topology.  It will return an failed exit code based any input errors or test case failures.  A passed code will result in all test cases executing with a PASSED result.
 
 ## Limitations
  - currently does not support spaces in topology name
+=======
+This script is used to execute a series of Automated test cases in velocity against a specified topology.  It will return an failed exit code based any input errors or test case failures.  A passed code will result in all test cases executing with a PASSED result.
+
+## Limitations
+ - currently does not support spaces in Topology name
+>>>>>>> c8781533ade029f8bb3610fb566a9d28481f6127
 
 ## reserveAndExecute.py Functionality Overview
  - Validate input arguments  
