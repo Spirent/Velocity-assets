@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ParameterTree version="8.3.0.202008130718">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <call_count pt:datatype="INTEGER">1</call_count>
+            <proc_name pt:datatype="init">initOrchestratedResource</proc_name>
+            <topologyResourceId>1234567</topologyResourceId>
+            <resourceId>456789</resourceId>
+            <property_passed_property>passedIntoDriver</property_passed_property>
+        </parameters>
+    </parameters>
+    <parametersTypes>
+        <item name="init">
+            <items>
+                <item name="initOrchestratedResource"/>
+                <item name="initVelocitySelected"/>
+            </items>
+        </item>
+    </parametersTypes>
+</ParameterTree>

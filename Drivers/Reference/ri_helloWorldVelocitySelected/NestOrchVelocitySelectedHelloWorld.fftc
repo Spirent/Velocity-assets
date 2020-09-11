@@ -1,0 +1,525 @@
+<?xml version="1.0"?>
+<testCase version="8.3.0.202008130718">
+    <general>
+        <documentation>Nested Orchestration Velocity Selected</documentation>
+        <notes>The resource driver  enables Velocity to communicate with a resource—Velocity resources, AWS
+resources, Kubernetes resource, when gathering information about the resource or while configuring the resource for a
+reservation. A driver is defined by the files that make up its driver package. This Velocity Selected sample driver contains all the procedure calls for a Nested Orchestration Velocity Selected resource.</notes>
+        <language>Python</language>
+    </general>
+    <requirements>
+        <requirement key="orchdebug">true</requirement>
+    </requirements>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="c2aa064a-2d7f-4a7f-bcfa-d1a35f2676b3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Information:Call procedure</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5302cb1d-b98a-4631-b994-f8d899a83e35" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>The file_uriToPath function explodes the contents of the entire project into a tmp directory on the agent. This is necessary in order for the Python automation to gain access to modules. If you rename this project, make sure to rename the line below.</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="f7fd64d1-bdfa-4d58-89f1-85257bf4618a" action="eval" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>print(file_uriToPath(&apos;project://VMwareCloneVmFromTemplate&apos;))</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="09e1525a-a478-426b-89e3-1d3ba8ec9cd2" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Run each procedure call listed as a parameter</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="f4f593c1-4f0f-4146-b055-da78814d90eb" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i = 0</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="58945922-d252-4555-b0d0-7cac1c894bb1" action="while" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i &lt; int(param(&apos;call_count&apos;)):</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="a2d2f6b0-32e7-49df-9bb8-37a038b524ad" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>proc_name = &apos;call_{0}&apos;.format(i)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="5a35650f-ffd3-40a0-900b-ae00f007d826" action="message" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Information:Calling [param(proc_name)]</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="ad328930-7cf8-4940-955b-463912aaeb38" action="call">
+                                                    <command>
+                                                        <body>[param(proc_name)]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <storeResponseAt>response</storeResponseAt>
+                                                        <storeResponseText>true</storeResponseText>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                <message inherit="false">Calling [param(proc_name)]</message>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="8ff843cf-3c4c-407f-8185-9d068c426fd6" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>i = i + 1</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a1d0caea-6787-4c4c-9a4a-ec965f72bf31" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Pass test case if not already failed</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="none">
+                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>1 == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a9fd893e-419e-4dff-b7e1-f3abfada94bc" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Return JSON response to Velocity</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="47d9e785-78e1-40a1-89df-2ab039bfd0d9" action="return">
+                                    <command>
+                                        <body>[response]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="getConfig" isPublic="true">
+            <steps>
+                <item guid="3deee3cd-945f-45a2-b928-f8945bf3749d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Uploads the resource&apos;s configuration file to a URL provided</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Name: getConfig
+
+Description: Uploads the resource&apos;s configuration file to a URL provided
+
+Arguments
+• url - target URL for the configuration file
+
+examples:
+getConfig tftp://10.1.1.1/config.txt
+getConfig -url tftp://10.1.1.1/config.txt
+
+Returns: file size in bytes</multilineDescription>
+        </item>
+        <item name="getImage" isPublic="true">
+            <steps>
+                <item guid="f6414195-4a5a-4ab4-8f83-250054e4ce85" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Uploads the resource&apos;s image file to a URL provided</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Name: getImage
+Description: Uploads the resource&apos;s image file to a URL provided
+
+Arguments:
+• url - target URL for the image file
+
+examples:
+getImage tftp://10.1.1.1/image.bin
+getImage -url tftp://10.1.1.1/image.bin
+
+
+Returns: file size in bytes</multilineDescription>
+        </item>
+        <item name="getPorts">
+            <steps>
+                <item guid="ddd56089-c04c-4ffb-bf5a-d39eb790fee4" action="open" session="proc" useFieldsInCommand="false">
+                    <command>
+                        <body>application:com.fnfr.svt.applications.process</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.applications.process.ProcessSessionProperties"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="ccb16d40-443e-49fb-9f2e-9fa67599685a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Linux and MacOS ping command, send 3 packets with 3 second timeout</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2d01c068-6a14-4053-8029-a2f094d1fa2d" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>ret = &quot;offline&quot;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="02d8d47a-9392-4d03-a10c-58d10e56033a" action="command" session="proc">
+                    <command>
+                        <body>run ping -c 3 -W 3 [gget(&apos;deviceHost&apos;, &apos;8.8.8.8&apos;)]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="90eda7db-2608-43fd-b94e-574ce332ca0a" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>ret == &quot;offline&quot;:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="373c57c0-6482-459c-87ba-d13545e16434" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Windows ping command, send 3 packets with 3 second timeout</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="72afa294-6900-459b-95d8-77ca4c3ece5f" action="command" session="proc">
+                            <command>
+                                <body>run ping -n 3 -w 3000  [gget(&apos;deviceHost&apos;, &apos;8.8.8.8&apos;)]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="96094fd6-b39b-4555-ab50-e95ee261fdfc" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ret = &quot;online&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="dbe8cceb-b6af-4bb9-8dc4-df78ddb222a2" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>ret == &quot;online&quot;:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="07ebb88f-d296-4a5b-8553-143f97c857cb" action="return" useFieldsInCommand="false">
+                            <command>
+                                <body>{&quot;ports&quot;:[]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getProperties" isPublic="true">
+            <steps>
+                <item guid="7919be6a-e566-4773-86ae-96096035215f" action="json" useFieldsInCommand="false">
+                    <command>
+                        <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=&apos;false&apos;, jsonString=&apos;{&quot;ports&quot;:[],&quot;properties&quot;:[]}&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                        <action inherit="false">createJson</action>
+                        <jsonString inherit="false">{&quot;ports&quot;:[],&quot;properties&quot;:[]}</jsonString>
+                        <documentName inherit="false">response</documentName>
+                    </applicationProperties>
+                </item>
+                <item guid="1c09373c-e06d-43fa-bb93-8ca4aeef40b9" action="return">
+                    <command>
+                        <body>[response]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="includePorts">
+                    <defaultValue>false</defaultValue>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="setConfig" isPublic="true">
+            <steps>
+                <item guid="b9bb7e86-71db-44e7-98b0-101cce29f012" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Sets the resource&apos;s configuration using a specified configuration file</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Name: setConfig
+
+Description: Sets the resource&apos;s configuration using a specified configuration file
+
+Arguments:
+• fileSize - length of file in bytes
+• url - configuration file URL
+
+examples:
+setConfig 0 tftp://10.1.1.1/config.txt
+setConfig -fileSize 0 -url tftp://10.1.1.1/config.txt
+
+Returns: nothing</multilineDescription>
+        </item>
+        <item name="setImage" isPublic="true">
+            <steps>
+                <item guid="f7f8e79a-a3f4-4d85-81ac-188cebb90ee1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Sets the resource&apos;s software image using a specified image file</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Name: setImage
+
+Description: Sets the resource&apos;s software image using a specified image file
+
+Arguments:
+• fileSize - length of file in bytes
+• url - image file URL
+
+examples:
+setImage 0 tftp://10.1.1.1/image.bin
+setImage -fileSize 0 -url tftp://10.1.1.1/image.bin
+
+Returns: nothing</multilineDescription>
+        </item>
+        <item name="initVelocitySelected" isPublic="true">
+            <steps>
+                <item guid="eb6f609d-a810-450b-a9f6-dbe8d415ed64" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Run during topology activation on Velocity orchestrated resources with interface type “selected”.</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="133d724a-9a51-45fc-834e-2490eda145dd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Display all properties passed by default from velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="1947a61d-29b5-416f-bccb-f44929095037" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>uuid of the selected resourceId in the inventory</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="357a75bc-f360-476b-a85a-e3c8f451b88a" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>print(param(&apos;resourceId&apos;))</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3663fb3a-f128-47c4-964a-761eeba3829a" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>uuid of the selected resourceId in the reserved topology</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="0a96e71c-074e-4858-955c-2df9ce3d5689" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>print(param(&apos;topologyResourceId&apos;))</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="18ab5e4a-ca50-48f1-ac70-e0ed7452d6e3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Display a property passed into the procedure</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="308acbf2-f24c-43e2-b7eb-801896c2459b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(param(&apos;property_passed_property&apos;))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f231f872-4355-46d7-a37a-c0d8f84787d1" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Display a TBML property - the entire toplogy TBML structure is passed into this procedure</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4d72048d-0c84-40af-b275-885ceeb35ece" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(tbml(&apos;property&apos;, &apos;-id&apos;, param(&apos;topologyResourceId&apos;), &apos;name&apos;))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a916a9ee-3628-4a3a-bc47-58144787ba51" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create a JSON variable to return from the procedure as  Reservation Properties - These will be available in the TBML and displayed in the resource  properties</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="74842f54-495b-4ea8-8fea-a500204fcab5" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=&apos;false&apos;, jsonString=&apos;{&quot;reservationProperties&quot;:{&quot;returnedProperty&quot;:&quot;Hello......World&quot;,&quot;anotherProperty&quot;:&quot;Jello World?&quot;}}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false" sub="true">{&quot;reservationProperties&quot;:{&quot;returnedProperty&quot;:&quot;Hello......World&quot;,&quot;anotherProperty&quot;:&quot;Jello World?&quot;}}</jsonString>
+                                <documentName inherit="false">response</documentName>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="086db3b2-727a-4fa4-9b10-f66766db6bfc" action="return">
+                    <command>
+                        <body>[response]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>Arguments:
+o id – the id of the topology resource (Topology context) being initialized
+o Properties:
+• All properties that the driver needs (defined in the driver manifest file as currently implemented)
+Values should be property defaults as defined in the source template
+o Standard runtime data:
+o Velocity reservationId, token, url, reportId</multilineDescription>
+        </item>
+        <item name="termVelocitySelected" isPublic="true">
+            <steps>
+                <item guid="0d91e65a-d5bc-4e67-9c7a-003a1d506360" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Run during topology deactivation on Velocity orchestrated resources with interface type “orchestration”</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="838d641f-48a9-43e8-a949-cb60aca96bd7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Display all properties passed by default from velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5425f879-cec0-41c1-a34b-6ca17eaedc26" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(param(&apos;resourceId&apos;))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="52210a86-cd80-4a78-8906-b5e1a2c37ad3" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(param(&apos;topologyResourceId&apos;))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4776a995-9e7f-47e2-8a28-075b9ad78c60" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Display a property passed into the procedure</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a90464a0-f951-4916-8e97-2be4b20c1434" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(param(&apos;property_passed_property&apos;))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="54dc5bf7-6354-40d2-8f86-ec95608c7056" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Display a TBML property - the entire toplogy TBML structure is passed into this procedure</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b5c116b4-74c6-4d69-a1e8-6f2079fe7d3f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(tbml(&apos;property&apos;, &apos;-id&apos;, param(&apos;topologyResourceId&apos;), &apos;name&apos;))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c355f366-9dc0-443b-9d8e-20d62618c240" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Clean up Orchestrated Resource - Pass the test if cleanup was successfull</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>1 == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <multilineDescription>• Arguments:
+• id – the id of the topology resource (Topology context) being terminated
+• Properties:
+o All properties that the driver needs (defined in the driver manifest file as currently
+implemented).
+Values should be property defaults as defined in the source template
+o Standard runtime data:
+o Velocity reservationId, token, url, reportId</multilineDescription>
+        </item>
+    </procedures>
+</testCase>
