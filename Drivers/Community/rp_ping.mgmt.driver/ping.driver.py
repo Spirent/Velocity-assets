@@ -55,7 +55,7 @@ class pingSession:
         # include ports in response if argument is true
         if args[0] == 'true':
             portList = self.getPorts()
-            if portList.has_key('ports'):
+            if 'ports' in portList:
                 returnDictionary['ports'] = portList['ports']
             else:
                 returnDictionary = { "status" : "unreachable"}
