@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>  
+    <version>1.0.0</version>  
+    <vendor>Spirent</vendor>
+    <supportCustomArguments>true</supportCustomArguments>
+    <language>itest</language>  
+    <interface>Orchestration</interface>
+    <entryPoint>NestedOrchestrationExample.fftc</entryPoint>
+    <timeout>1800</timeout>
+    <initializationOrder>CONFIGURE_THEN_INITIALIZE</initializationOrder>
+    <resourceProperties>
+        <property optional="false">
+            <name>property_toDriver</name>
+            <description>property passed from Velocity to driver</description>
+        </property>
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>ip address returned from init and used by getPorts</description>
+        </property>    
+    </resourceProperties>    
+</resourceDriver>
