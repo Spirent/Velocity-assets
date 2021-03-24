@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ParameterTree version="8.5.0.202103021747">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <call_count pt:datatype="INTEGER">1</call_count>
+            <call_0>initOrchestratedResource</call_0>
+            <topologyResourceId pt:description="sent on init and term">i01530b61-5568-4417-9952-c3ccff1bef6c</topologyResourceId>
+            <resourceId pt:description="sent on init and term (velocity selected) and term (orchestrated)">456789</resourceId>
+            <property_property_toDriver pt:description="requested in manifest file">passedIntoDriver</property_property_toDriver>
+            <property_ipAddress pt:description="requested in manifest file">127.0.0.1</property_ipAddress>
+        </parameters>
+    </parameters>
+    <headline>when running from iTest</headline>
+    <description>Set this as the global params file when running this driver from iTest during development. Velocity does not use parameter files for driver executions.</description>
+    <parametersTypes>
+        <item name="init">
+            <items>
+                <item name="initOrchestratedResource"/>
+                <item name="initVelocitySelected"/>
+            </items>
+        </item>
+    </parametersTypes>
+</ParameterTree>
