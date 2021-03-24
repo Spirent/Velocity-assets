@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="8.5.0.202103021747">
+<testCase version="8.4.0.202012071239">
     <general>
         <documentation>Velocity Nested Orchestration Examples</documentation>
         <notes>This example driver can be used to develop an understanding of &apos;orchestrated resources&apos; in Velocity. Upon activation, it instantiates the orchestrated resources in the topology, creates their ports, switch ports and connections. For Velocity selected resources, it initiates the resources selected for the reservation. Upon de-activation, it removes the connections, switch ports, ports, and orchestrated resources. For Velocity selected resources, it terminates the resources selected for the reservation.</notes>
@@ -592,7 +592,7 @@ Returns: nothing</multilineDescription>
                 </item>
                 <item guid="3d1aa155-6232-4ba0-a22b-a0edd65da5a4" action="comment" useFieldsInCommand="false">
                     <command>
-                        <body>Query the TBML for the ports accociated with the topolgyResourceID</body>
+                        <body>Query the TBML for the ports associated with the topolgyResourceID</body>
                     </command>
                     <nestedSteps>
                         <item guid="fae1afb9-6385-4813-89e6-1ce2bd0ffad5" action="dumpState" useFieldsInCommand="false">
