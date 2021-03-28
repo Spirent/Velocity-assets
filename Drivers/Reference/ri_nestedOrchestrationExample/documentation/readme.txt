@@ -16,6 +16,10 @@ properties:
 When using this example for orchestrated resources that contain one or more ports, an L2 switch and driver will need to be implemented
 A resource group called "Group1" must be defined in Velocity already
 
+To try out configuration management on orchestrated resources, either use the orchestratedConfig.json file provided, use https://httpbin.org/anything/uri
+as a custom URI, or create a file store using https://httpbin.org/anything as a base and { "file1": {}, "file2": {} } as the file map. The driver will
+either read the config file or wget the config file and then place a couple of values from that config in the reservation properties in the topology.
+
 Optionally, under Inventory/Resources, import the nested.orch.example.1.zip file followed by the nested.orch.example.2.zip file.
 Included in the above is the orchestrated driver, an emulated L2 driver, templates, orchestrated resources, and topologies.
 At the time of this authoring, there were still features being implemented in Velocity to import orchestrated resources, so there are some inconsistencies.

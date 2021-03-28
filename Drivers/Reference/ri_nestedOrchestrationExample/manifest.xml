@@ -8,7 +8,7 @@
     <interface>Orchestration</interface>
     <entryPoint>NestedOrchestrationExample.fftc</entryPoint>
     <timeout>1800</timeout>
-    <initializationOrder>CONFIGURE_THEN_INITIALIZE</initializationOrder>
+    <initializationOrder>INITIALIZE_THEN_CONFIGURE</initializationOrder>
     <resourceProperties>
         <property optional="false">
             <name>property_toDriver</name>
