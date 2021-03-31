@@ -474,54 +474,6 @@ Returns: nothing</multilineDescription>
                                 </analysisRules>
                             </postProcessing>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <emulation>
-                                <behavior>
-                                    <response>{&quot;K8s_Cluster_Name&quot;:&quot;&quot;,&quot;K8s_Cluster_API_URL&quot;:&quot;&quot;,&quot;K8s_API_Client_Cert&quot;:&quot;&quot;,&quot;K8s_API_Client_Key&quot;:&quot;&quot;,&quot;Username&quot;:&quot;&quot;,&quot;Password&quot;:&quot;&quot;,&quot;ConfigFile&quot;:&quot;/var/folders/w5/pz82m2s92jn3pfvkdp74j_fc0000gq/T/deployment_d34d5697-ad5d-4866-af11-41ed5c557ec5/s2&quot;,&quot;K8s_Node_Name&quot;:&quot;&quot;,&quot;ResourceName&quot;:&quot;&quot;}</response>
-                                    <responseType>text</responseType>
-                                    <structuredData>
-&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
-    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
-    &lt;responseLine&gt;{&amp;quot;K8s_Cluster_Name&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;K8s_Cluster_API_URL&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;K8s_API_Client_Cert&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;K8s_API_Client_Key&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Username&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Password&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;ConfigFile&amp;quot;:&amp;quot;/var/folders/w5/pz82m2s92jn3pfvkdp74j_fc0000gq/T/deployment_d34d5697-ad5d-4866-af11-41ed5c557ec5/s2&amp;quot;,&amp;quot;K8s_Node_Name&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;ResourceName&amp;quot;:&amp;quot;&amp;quot;}&lt;/responseLine&gt;
-&lt;/structure&gt;
-</structuredData>
-                                    <aliases>
-                                        <item name="isEmpty">
-                                            <queryFormatString>.//isEmpty</queryFormatString>
-                                        </item>
-                                        <item name="responseLine">
-                                            <queryFormatString>.//responseLine</queryFormatString>
-                                        </item>
-                                        <item name="K8s_API_Client_Cert">
-                                            <queryFormatString>mapped/Json/K8s_API_Client_Cert</queryFormatString>
-                                        </item>
-                                        <item name="K8s_Cluster_API_URL">
-                                            <queryFormatString>mapped/Json/K8s_Cluster_API_URL</queryFormatString>
-                                        </item>
-                                        <item name="K8s_Cluster_Name">
-                                            <queryFormatString>mapped/Json/K8s_Cluster_Name</queryFormatString>
-                                        </item>
-                                        <item name="K8s_API_Client_Key">
-                                            <queryFormatString>mapped/Json/K8s_API_Client_Key</queryFormatString>
-                                        </item>
-                                        <item name="Username">
-                                            <queryFormatString>mapped/Json/Username</queryFormatString>
-                                        </item>
-                                        <item name="ConfigFile">
-                                            <queryFormatString>mapped/Json/ConfigFile</queryFormatString>
-                                        </item>
-                                        <item name="ResourceName">
-                                            <queryFormatString>mapped/Json/ResourceName</queryFormatString>
-                                        </item>
-                                        <item name="Password">
-                                            <queryFormatString>mapped/Json/Password</queryFormatString>
-                                        </item>
-                                        <item name="K8s_Node_Name">
-                                            <queryFormatString>mapped/Json/K8s_Node_Name</queryFormatString>
-                                        </item>
-                                    </aliases>
-                                    <duration>7.4</duration>
-                                </behavior>
-                            </emulation>
                         </item>
                         <item guid="879caf8f-420b-4d5a-9c26-e90adfb82261" action="eval" useFieldsInCommand="false">
                             <command>
@@ -1225,54 +1177,6 @@ Values should be property defaults as defined in the source template
                                 </analysisRules>
                             </postProcessing>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <emulation>
-                                <behavior>
-                                    <response>{&quot;K8s_Cluster_Name&quot;:&quot;&quot;,&quot;K8s_Cluster_API_URL&quot;:&quot;&quot;,&quot;K8s_API_Client_Cert&quot;:&quot;&quot;,&quot;K8s_API_Client_Key&quot;:&quot;&quot;,&quot;Username&quot;:&quot;&quot;,&quot;Password&quot;:&quot;&quot;,&quot;ConfigFile&quot;:&quot;/var/folders/w5/pz82m2s92jn3pfvkdp74j_fc0000gq/T/deployment_d34d5697-ad5d-4866-af11-41ed5c557ec5/s1&quot;,&quot;K8s_Node_Name&quot;:&quot;&quot;,&quot;ResourceName&quot;:&quot;&quot;}</response>
-                                    <responseType>text</responseType>
-                                    <structuredData>
-&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
-    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
-    &lt;responseLine&gt;{&amp;quot;K8s_Cluster_Name&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;K8s_Cluster_API_URL&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;K8s_API_Client_Cert&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;K8s_API_Client_Key&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Username&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;Password&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;ConfigFile&amp;quot;:&amp;quot;/var/folders/w5/pz82m2s92jn3pfvkdp74j_fc0000gq/T/deployment_d34d5697-ad5d-4866-af11-41ed5c557ec5/s1&amp;quot;,&amp;quot;K8s_Node_Name&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;ResourceName&amp;quot;:&amp;quot;&amp;quot;}&lt;/responseLine&gt;
-&lt;/structure&gt;
-</structuredData>
-                                    <aliases>
-                                        <item name="isEmpty">
-                                            <queryFormatString>.//isEmpty</queryFormatString>
-                                        </item>
-                                        <item name="responseLine">
-                                            <queryFormatString>.//responseLine</queryFormatString>
-                                        </item>
-                                        <item name="K8s_API_Client_Cert">
-                                            <queryFormatString>mapped/Json/K8s_API_Client_Cert</queryFormatString>
-                                        </item>
-                                        <item name="K8s_Cluster_API_URL">
-                                            <queryFormatString>mapped/Json/K8s_Cluster_API_URL</queryFormatString>
-                                        </item>
-                                        <item name="K8s_Cluster_Name">
-                                            <queryFormatString>mapped/Json/K8s_Cluster_Name</queryFormatString>
-                                        </item>
-                                        <item name="K8s_API_Client_Key">
-                                            <queryFormatString>mapped/Json/K8s_API_Client_Key</queryFormatString>
-                                        </item>
-                                        <item name="Username">
-                                            <queryFormatString>mapped/Json/Username</queryFormatString>
-                                        </item>
-                                        <item name="ConfigFile">
-                                            <queryFormatString>mapped/Json/ConfigFile</queryFormatString>
-                                        </item>
-                                        <item name="ResourceName">
-                                            <queryFormatString>mapped/Json/ResourceName</queryFormatString>
-                                        </item>
-                                        <item name="Password">
-                                            <queryFormatString>mapped/Json/Password</queryFormatString>
-                                        </item>
-                                        <item name="K8s_Node_Name">
-                                            <queryFormatString>mapped/Json/K8s_Node_Name</queryFormatString>
-                                        </item>
-                                    </aliases>
-                                    <duration>6.8</duration>
-                                </behavior>
-                            </emulation>
                         </item>
                         <item guid="f4c64a4f-5301-4027-8d4a-4e078f5d8aba" action="eval" useFieldsInCommand="false">
                             <command>
@@ -2468,27 +2372,6 @@ Values should be property defaults as defined in the source template
                                         <storeResponseText>true</storeResponseText>
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <emulation>
-                                        <behavior>
-                                            <response>/var/folders/w5/pz82m2s92jn3pfvkdp74j_fc0000gq/T/deployment_d34d5697-ad5d-4866-af11-41ed5c557ec5/s2</response>
-                                            <responseType>text</responseType>
-                                            <structuredData>
-&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
-    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
-    &lt;responseLine&gt;/var/folders/w5/pz82m2s92jn3pfvkdp74j_fc0000gq/T/deployment_d34d5697-ad5d-4866-af11-41ed5c557ec5/s2&lt;/responseLine&gt;
-&lt;/structure&gt;
-</structuredData>
-                                            <aliases>
-                                                <item name="isEmpty">
-                                                    <queryFormatString>.//isEmpty</queryFormatString>
-                                                </item>
-                                                <item name="responseLine">
-                                                    <queryFormatString>.//responseLine</queryFormatString>
-                                                </item>
-                                            </aliases>
-                                            <duration>2.1</duration>
-                                        </behavior>
-                                    </emulation>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
@@ -2552,7 +2435,7 @@ Values should be property defaults as defined in the source template
                     <isMandatory>true</isMandatory>
                 </item>
             </arguments>
-            <response>{&quot;K8s_Cluster_Name&quot;:&quot;&quot;,&quot;K8s_Cluster_API_URL&quot;:&quot;&quot;,&quot;K8s_API_Client_Cert&quot;:&quot;&quot;,&quot;K8s_API_Client_Key&quot;:&quot;&quot;,&quot;Username&quot;:&quot;&quot;,&quot;Password&quot;:&quot;&quot;,&quot;ConfigFile&quot;:&quot;&quot;,&quot;K8s_Node_Name&quot;:&quot;&quot;,&quot;ResourceName&quot;:&quot;&quot;}</response>
+            <response>{&quot;ConfigFile&quot;:&quot;&quot;}</response>
         </item>
         <item name="downloadConfigurationFile" isPublic="true" defaultSessionProfile="application:com.fnfr.itest.applications.webservices.restful">
             <steps>
