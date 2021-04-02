@@ -373,6 +373,7 @@ Returns: file size in bytes</multilineDescription>
             </steps>
             <arguments>
                 <item name="includePorts">
+                    <description>true or false; currently stubbed out</description>
                     <defaultValue>false</defaultValue>
                 </item>
             </arguments>
@@ -2421,9 +2422,11 @@ Values should be property defaults as defined in the source template
             </steps>
             <arguments>
                 <item name="reservationId">
+                    <description>Velocity reservation ID</description>
                     <isMandatory>true</isMandatory>
                 </item>
                 <item name="init_topologyResourceId">
+                    <description>Resource ID in topology</description>
                     <isMandatory>true</isMandatory>
                 </item>
                 <item name="url">
