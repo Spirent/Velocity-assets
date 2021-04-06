@@ -34,6 +34,32 @@ https://support.spirent.com/SpirentCSC/SC_KnowledgeView?id=DOC10679
 ### removeFromVlan
 ### destroyVlan
 ### getPorts
+```
+Get information about device ports and their properties.
+
+This method is also used to determine whether the device is online. If this call ends up with an error, the device is considered offline. Otherwise, the device is considered online.
+
+Returns: JSON
+
+Example:
+{
+  "ports": [
+    {
+      "name": "Fa0/1",
+      "status": "offline"
+    },
+    {
+      "name": "Fa0/2",
+      "status": "offline"
+    },
+    {
+      "name": "Gi0/1",
+      "status": "online"
+    }
+  ]
+}
+```
+
 2 response maps in project
 ## Response Map File: show_interfaces.ffrm
 ## Response Map File: show_chassis_hardware.ffrm

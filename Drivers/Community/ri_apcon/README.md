@@ -9,6 +9,10 @@ Class: Community
 ## Quickcall Library: ssh_ref_qc.fftc
 ## Quickcall Library: process_ref_qc.fftc
 ### ping
+```
+Determines if device is online. Returns "online", "offline" or "error".
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>host</td><td>IP or Hostname to ping</tr></td></table>
 

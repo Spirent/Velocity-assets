@@ -19,6 +19,10 @@ Tags: Management
 <tr><td>vlanId</td><tr></tr></table>
 
 ### formatPortStatus
+```
+Returns JSON formatted string for port status usable by Velocity
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>portName</td><tr></tr>
 <tr><td>status</td><tr></tr></table>

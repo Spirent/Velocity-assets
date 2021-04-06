@@ -9,9 +9,25 @@ Tags: Management
 2 quickcall libraries in project
 ## Quickcall Library: big_ip_base_qc.fftc
 ### getActiveVersion
+```
+This quickcall returns a JSON value corresponding to the version of the active image on the BigIP.
+```
+
 ### getInterfaces
+```
+This quickcall returns a JSON list of interface names and statuses
+```
+
 ### getRunningState
+```
+getRunningState returns the status displayed in the prompt
+```
+
 ### setVlan
+```
+setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>vlanId</td><td>VLAN ID to tag this interface to</tr></td>
 <tr><td>ifName</td><td>interface to add to the VLAN e.g. "1.2"</tr></td>
@@ -24,12 +40,24 @@ Tags: Management
 <tr><td>fqdn</td><td>fqdn for this device.  Well, everything but the hostname.</tr></td></table>
 
 ### clearVlan
+```
+clearVlan removes the specified VLAN.
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>vlanName</td><td>Name of VLAN to remove.</tr></td></table>
 
 ### getFirstActivePort
+```
+getFirstActivePort returns the name of the first port with the status of "up"
+```
+
 ## Quickcall Library: big_ip_chassis_qc.fftc
 ### setVlan
+```
+setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>vlanId</td><td>VLAN ID to tag this interface to</tr></td>
 <tr><td>ifName</td><td>interface to add to the VLAN e.g. "1.2"</tr></td>
@@ -46,7 +74,15 @@ Tags: Management
 ## Test Case File: unit_test.fftc
 ## Test Case File: driver.fftc
 ### getProperties
+```
+getProperties returns JSON-formatted properties for the device.  It also returns the port data.  The properties gathered will be populated back into velocity for the device.  This is a good way of keeping your inventory up-to-date.
+```
+
 ### getPorts
+```
+getPorts returns JSON-formatted port information.  For this driver, we are only concerned with ports in the "up" state.  It ignores any other state.  
+```
+
 7 response maps in project
 ## Response Map File: tmsh_save_sys_config.ffrm
 ## Response Map File: tmsh_show_sys_mcp.ffrm

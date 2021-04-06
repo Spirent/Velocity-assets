@@ -30,7 +30,15 @@ e.g.
 1 test case in project
 ## Test Case File: driver.fftc
 ### getProperties
+```
+getProperties returns JSON-formatted properties for the device.  It also returns the port data.  The properties gathered will be populated back into velocity for the device.  This is a good way of keeping your inventory up-to-date.
+```
+
 ### getPorts
+```
+getPorts returns JSON-formatted port information.  For this driver, we are only concerned with ports in the "up" state.  It ignores any other state.  
+```
+
 ### createVlan
 ### addToVlan
 ### removeFromVlan

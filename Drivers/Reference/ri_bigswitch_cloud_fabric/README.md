@@ -61,33 +61,77 @@ Now that the inventory is complete you can connect the leaf switches to the virt
 1 test case in project
 ## Test Case File: bigswitch_cloud_fabric_driver.fftc
 ### addToVlan
+```
+This procedure is called by Velocity to add ports to VNIs
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>topo_info</td><td>JSON info about the connections to the switch from getTopologyInfo proc</tr></td>
 <tr><td>switch_name</td><td>Name of the leaf switch</tr></td></table>
 
 ### removeFromVlan
+```
+This procedure is called by Velocity to remove ports from VNIs
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>topo_info</td><td>JSON info about the connections to the switch from getTopologyInfo proc</tr></td>
 <tr><td>switch_name</td><td>Name of the leaf switch</tr></td></table>
 
 ### createVlan
+```
+Called by Velocity, but not used by this driver
+```
+
 ### destroyVlan
+```
+Called by Velocity, but not used by this driver
+```
+
 ### getProperties
+```
+Called by Velocity but returns empy string of ports and properties
+```
+
 ### getPorts
+```
+Called by Velocity but simply returns empty port list
+```
+
 ### getAllResources
+```
+Returns a complete JSON list of devices in the reservation.
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>reservationId</td><td>ID of the reservation</tr></td>
 <tr><td>vel_token</td><td>Token to communicate with Velocity</tr></td></table>
 
 ### getTopologyInfo
+```
+Returns a list of connection widgets (line, cloud or multi-vlan cloud) and their child Big Switch Leaf ports and associated VLANs.
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>reservationId</td><td>ID of the reservation</tr></td></table>
 
 ### getHostParameter
+```
+Not used
+```
+
 ### getDeviceStatus
+```
+Not used
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>deviceHost</td><td>Host name or IP address</tr></td></table>
 
 ### cleanVlanList
+```
+Converts a vlan list like "100,200-203,1100" to "100 200 201 202 203 1100"
+```
+
 <table><tr><th>Argument</th><th>Description</th></tr>
 <tr><td>vlan_list</td><td>List of vlans using commas and dashes (example 100,200-203,3002)</tr></td></table>

@@ -54,6 +54,10 @@ The Manifist has the following properties
 4. SSH Port : ssh port of BigSwitch controller <optional>
 5. Switch Id : MAC address of individual switch managed by BigSwitch controller < required>
 ### getPorts
+```
+getPorts returns JSON-formatted port information.  For this driver, we are only concerned with ports in the "up" state.  It ignores any other state.  
+```
+
 ### connect
 ### disconnect
 ### getProperties
