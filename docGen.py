@@ -28,6 +28,13 @@ def getProcs(procedures):
         procName = proc.xpath('@name')[0]
         if procName != 'main':
             outputString = outputString + '\n### ' + procName
+            # include the procedure's description, if present and insert into a code block (cwhitty 4/2/21)
+            multilineDescription = proc.xpath('multilineDescription')
+            if len(multilineDescription) > 0:
+              outputString = outputString + "\n```\n"
+              outputString = outputString + multilineDescription[0].text
+              outputString = outputString + "\n```\n"
+
             # get arguments if they exist
             arguments = proc.xpath('arguments/item')
             if len(arguments) > 0:
