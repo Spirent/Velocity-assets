@@ -63,7 +63,7 @@ class velTopology():
         return getattr(self, fullName)
 
 # set the topology name
-if os.environ.has_key('VELOCITY_PARAM_TMBL_FILE') is True:
+if 'VELOCITY_PARAM_TMBL_FILE' in os.environ:
   topologyFile = os.environ['VELOCITY_PARAM_TMBL_FILE']
 else:
   topologyFile = 'exampleTopo.xml'
@@ -144,7 +144,7 @@ for i in links:
     print('\n\nERROR: Link was found without two endpoints')
 
 # display examples of object notation based on the sample topology file
-if os.environ.has_key('VELOCITY_PARAM_TMBL_FILE') is False:
+if 'VELOCITY_PARAM_TMBL_FILE' not in os.environ:
   print('\n\nSOME EXAMPLES OF USING TOPOLOGY OBJECT NOTATION...\n')
   print('topology name: ' + topo.name)
   # topology name: Any 2 Servers
