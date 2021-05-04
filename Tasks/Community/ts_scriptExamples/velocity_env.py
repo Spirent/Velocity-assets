@@ -2,13 +2,13 @@ import os
 import requests
 import json
 
-if os.environ.has_key('VELOCITY_PARAM_TMBL_FILE') is True:
+if 'VELOCITY_PARAM_TMBL_FILE' in os.environ:
   print("[INFO] TOPOLOGY FILE: " + os.environ['VELOCITY_PARAM_TMBL_FILE'])
 
-if os.environ.has_key('VELOCITY_PARAM_RESERVATION_ID') is True:
+if 'VELOCITY_PARAM_RESERVATION_ID' in os.environ:
   print("[INFO] RESERVATION ID: " + os.environ['VELOCITY_PARAM_RESERVATION_ID'])
 
-if os.environ.has_key('VELOCITY_PARAM_REPORT_ID') is True:
+if 'VELOCITY_PARAM_REPORT_ID' in os.environ:
   print("[INFO] REPORT_ID: " + os.environ['VELOCITY_PARAM_REPORT_ID'])
 
 print("[INFO] VELOCITY API ROOT: " + os.environ['VELOCITY_PARAM_VELOCITY_API_ROOT'])
