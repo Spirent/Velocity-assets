@@ -10,11 +10,6 @@
                     <property_Kernel_Release>3.13.0-32-generic</property_Kernel_Release>
                     <property_Hostname>foobar</property_Hostname>
                     <property_Curl_Version>1</property_Curl_Version>
-                    <property_SSH_Username>spirent</property_SSH_Username>
-                    <property_SSH_Password>spirent</property_SSH_Password>
-                    <property_velocityURL>https://velocity60a-cal-lab.spirenteng.com/velocity/api</property_velocityURL>
-                    <property_velocityAdminUser>admin49</property_velocityAdminUser>
-                    <property_velocityAdminPwd>spirent</property_velocityAdminPwd>
                 </parameters>
             </parameters>
         </parameters>
@@ -33,7 +28,10 @@
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                                 <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                                <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties"/>
+                                <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                                    <user inherit="false">[param property_username]</user>
+                                    <password inherit="false">Hu62+w4ez8VRjpeoxPozxOrYANzZETwjSBzQGhgYreQ=</password>
+                                </sessionProperties>
                                 <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                             </applicationProperties>
