@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ResponseMap version="5.2.0.95bb698">
+<ResponseMap version="8.5.0.202103021747">
     <sampleDictionary>
         <item name="sample1">
             <action actionType="command">
@@ -38,6 +38,12 @@ lo        65536 0   1211930      0      0 0       1211930      0      0      0 L
                 </item>
             </aliases>
             <duration>0.4</duration>
+        </item>
+        <item name="sample2">
+            <responseBody>Iface   MTU Met   RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+docker0    1500 0         0      0      0 0             0      0      0      0 BMU
+ens160     1500 0  69708881      0      0 0       2283418      0      0      0 BMRU
+lo        65536 0    711277      0      0 0        711277      0      0      0 LRU</responseBody>
         </item>
     </sampleDictionary>
     <mapperProperties>
@@ -115,5 +121,5 @@ lo        65536 0   1211930      0      0 0       1211930      0      0      0 L
             </tabularMaps>
         </item>
     </mapperProperties>
-    <applicabilityProperties actionType="command" command="ifconfig -s*"/>
+    <applicabilityProperties actionType="command" command="ifconfig -a -s*"/>
 </ResponseMap>

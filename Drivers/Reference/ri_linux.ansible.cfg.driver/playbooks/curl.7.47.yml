@@ -1,0 +1,17 @@
+---
+- hosts: velocity_hosts
+  tasks:
+    - name: Install libcurl
+      become: true
+      apt:
+        name: libcurl3-gnutls=7.47.0-1ubuntu2.19
+        state: present
+        force: yes
+    - name: Install curl
+      become: true
+      apt:
+        name: curl=7.47*
+        state: present
+        force: yes
+    - name: Message to all
+      shell: "echo \"Curl version 7.47 installed via Velocity's Ansible driver...\" | /usr/bin/wall"
