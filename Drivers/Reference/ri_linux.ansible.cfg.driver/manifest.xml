@@ -5,7 +5,7 @@
     <vendor>Spirent</vendor>     
     <language>itest</language>     
     <interface>Configurable</interface> 
-    <entryPoint>linux.ansible.driver.1.0.3.fftc</entryPoint>
+    <entryPoint>linux.ansible.driver.1.0.4.fftc</entryPoint>
     <resourceProperties>     
         <property optional="false">
             <name>ipAddress</name>
@@ -20,28 +20,16 @@
             <description>Host name of the system</description>
         </property>
         <property optional="false">
-            <name>SSH_Username</name>
+            <name>username</name>
             <description>Username for ssh access</description>
         </property>
         <property optional="false">
-            <name>SSH_Password</name>
+            <name>password</name>
             <description>Password for ssh access</description>
         </property>        
         <property optional="false">
             <name>Curl_Version</name>
             <description>Version of curl installed</description>
-        </property>        
-        <property optional="false">
-            <name>velocityURL</name>
-            <description>Velocity URL</description>
-        </property>        
-        <property optional="false">
-            <name>velocityAdminUser</name>
-            <description>Velocity user</description>
-        </property>        
-        <property optional="false">
-            <name>velocityAdminPwd</name>
-            <description>Velocity password</description>
-        </property>        
+        </property>            
     </resourceProperties>
 </resourceDriver>

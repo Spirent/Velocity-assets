@@ -1,20 +1,15 @@
 <?xml version="1.0"?>
-<testCase version="7.0.1.201802131446">
+<testCase version="8.5.0.202103021747">
     <execution>
-        <parameters version="7.0.1.201802131446">
+        <parameters version="8.5.0.202103021747">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
                     <call_count>1</call_count>
-                    <call_0>setConfig 276 tftp://ite61a-cal-lab.spirenteng.com:69/cfg-YoW0uwsWR42GRxisUX82sw.yml</call_0>
-                    <property_ipAddress>10.108.37.122</property_ipAddress>
+                    <call_0>setConfig 313 tftp://cw-vel-ite.spirenteng.com:69/cfg-cKbbtblJTO-nBhWoKK5AAw.yml</call_0>
+                    <property_ipAddress>cw-vel-agent.spirenteng.com</property_ipAddress>
                     <property_Kernel_Release>3.13.0-32-generic</property_Kernel_Release>
                     <property_Hostname>foobar</property_Hostname>
                     <property_Curl_Version>1</property_Curl_Version>
-                    <property_SSH_Username>spirent</property_SSH_Username>
-                    <property_SSH_Password>spirent</property_SSH_Password>
-                    <property_velocityURL>https://velocity60a-cal-lab.spirenteng.com/velocity/api</property_velocityURL>
-                    <property_velocityAdminUser>admin49</property_velocityAdminUser>
-                    <property_velocityAdminPwd>spirent</property_velocityAdminPwd>
                 </parameters>
             </parameters>
         </parameters>
@@ -22,7 +17,7 @@
     <procedures>
         <item name="main">
             <steps>
-                <item guid="df4b1883-0f90-4ac4-902d-0c623aceac70" action="comment">
+                <item guid="df4b1883-0f90-4ac4-902d-0c623aceac70" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>open ssh session to linux</body>
                     </command>
@@ -33,7 +28,10 @@
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                                 <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                                <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties"/>
+                                <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                                    <user inherit="false">[param property_username]</user>
+                                    <password inherit="false">Hu62+w4ez8VRjpeoxPozxOrYANzZETwjSBzQGhgYreQ=</password>
+                                </sessionProperties>
                                 <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                             </applicationProperties>
@@ -51,33 +49,30 @@
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="d1539304-15a0-42dd-a908-53af9f5a75c8" action="comment">
+                <item guid="d1539304-15a0-42dd-a908-53af9f5a75c8" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>call each procedure in call_count</body>
                     </command>
                     <nestedSteps>
-                        <item guid="a867356e-5daf-4f90-9588-364389cbd77b" action="for">
+                        <item guid="a867356e-5daf-4f90-9588-364389cbd77b" action="for" useFieldsInCommand="false">
                             <command>
                                 <body>{set i 0} {$i &lt; [param call_count]} {incr i}</body>
                             </command>
                             <nestedSteps>
-                                <item guid="06b32480-bbe6-48b9-b0e3-34773158e17c" action="eval">
+                                <item guid="06b32480-bbe6-48b9-b0e3-34773158e17c" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>set cl [split [param call_$i]]</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
-                                <item guid="0550d34e-5adf-4736-a532-0db59b54467a" action="eval">
+                                <item guid="0550d34e-5adf-4736-a532-0db59b54467a" action="eval" useFieldsInCommand="false">
                                     <command>
                                         <body>set params [lassign $cl proc]</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
-                                <item guid="0e9d68ff-c8c2-4b6d-8f27-9fa62b1fd2e1" action="comment">
+                                <item guid="0e9d68ff-c8c2-4b6d-8f27-9fa62b1fd2e1" action="comment" useFieldsInCommand="false">
                                     <command>
                                         <body>message to user</body>
                                     </command>
@@ -90,6 +85,7 @@
                                                 <processorInfo ruleType="message">
                                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                         <message>Calling a proc called $proc with these parameters: $params</message>
+                                                        <tag sub="false" defaultValue=""/>
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
@@ -100,15 +96,15 @@
                                                 <processorInfo ruleType="message">
                                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                         <message>Resource IP address: [param property_ipAddress]</message>
+                                                        <tag sub="false" defaultValue=""/>
                                                     </ruleProperties>
                                                 </processorInfo>
                                             </item>
                                         </analysisRules>
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
-                                <item guid="60fd504b-771a-4066-9370-05977de89004" action="call">
+                                <item guid="60fd504b-771a-4066-9370-05977de89004" action="call" useFieldsInCommand="false">
                                     <command>
                                         <body>$proc $params</body>
                                     </command>
@@ -117,7 +113,6 @@
                                         <storeResponseText>true</storeResponseText>
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                     <emulation>
                                         <behavior>
                                             <response>{
@@ -140,23 +135,20 @@
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="08061fb3-85b7-4195-ba61-a97be8ae89dc" action="comment">
+                <item guid="08061fb3-85b7-4195-ba61-a97be8ae89dc" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>show and return JSON response</body>
                     </command>
                     <nestedSteps>
-                        <item guid="b2dd0fd5-4d89-4a56-9282-1b66eb6a369b" action="eval">
+                        <item guid="b2dd0fd5-4d89-4a56-9282-1b66eb6a369b" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>puts $ret</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                         <item guid="7337a47b-a9f8-45b0-8213-896b19c5e191" action="return">
                             <command>
@@ -166,9 +158,9 @@
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
+            <response>{}</response>
         </item>
         <item name="getProperties" isVBlock="true">
             <steps>
@@ -188,6 +180,9 @@
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>kernel</storageLocation>
                                         <query>[return properties/Kernel_Release]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -211,6 +206,9 @@
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>hostname</storageLocation>
                                         <query>[return properties/Hostname]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -218,7 +216,7 @@
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="9a9da6e0-6aa0-45f4-b2a7-6f801ae56e55" action="command" session="s1">
+                <item guid="9a9da6e0-6aa0-45f4-b2a7-6f801ae56e55" action="command" session="s1" useFieldsInCommand="false">
                     <command>
                         <body>echo &quot;curl_version: `curl -V | head -1 | awk &apos;{print $2}&apos;`&quot;</body>
                     </command>
@@ -234,40 +232,25 @@
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>curl_version</storageLocation>
                                         <query>[return properties/Curl_Version]</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="e6a12127-8f3e-4a8e-a0db-9def76571680" action="call">
+                <item guid="e6a12127-8f3e-4a8e-a0db-9def76571680" action="call" useFieldsInCommand="false">
                     <command>
                         <body>getPortList</body>
                     </command>
                     <postProcessing>
-                        <analysisRules>
-                            <item>
-                                <extractorInfo extractorType="regex">
-                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
-                                        <regex>\\S+</regex>
-                                        <extractionType>full_match</extractionType>
-                                        <declareNoMatchIssue>false</declareNoMatchIssue>
-                                    </extractorProperties>
-                                </extractorInfo>
-                                <processorInfo ruleType="store">
-                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                        <storageLocation>jsonPortList</storageLocation>
-                                        <storeInAList>true</storeInAList>
-                                        <query>[return ports]</query>
-                                    </ruleProperties>
-                                </processorInfo>
-                            </item>
-                        </analysisRules>
+                        <storeResponseAt>portList</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                     <emulation>
                         <behavior>
                             <response>{&quot;name&quot;:&quot;//10.108.32.17/1/1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group1_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group1_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group2_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group2_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/5&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group3_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/6&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group3_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/7&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group4_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/8&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group4_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/9&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group5_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/10&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group5_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/11&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group6_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group6_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group1_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group1_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group2_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group2_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/5&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group3_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/6&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group3_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/7&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group4_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/8&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group4_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/9&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group5_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/10&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group5_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/11&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;}</response>
@@ -286,12 +269,22 @@
                         </behavior>
                     </emulation>
                 </item>
+                <item guid="0cc99a7d-bb7c-4271-bade-cf8e5cd38865" action="json" useFieldsInCommand="false">
+                    <command>
+                        <body>-action addJsonNode -editResponseStructure true -pathValue {\\{&quot;/&quot;:$portList\\}}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                        <action inherit="false">addJsonNode</action>
+                        <pathValue inherit="false" sub="true">{&quot;/&quot;:$portList}</pathValue>
+                        <editResponseStructure inherit="false">true</editResponseStructure>
+                    </applicationProperties>
+                </item>
             </steps>
-            <response>{&quot;properties&quot;:{&quot;Hostname&quot;:&quot;unknown&quot;,&quot;Kernel_Release&quot;:&quot;unknown&quot;,&quot;Curl_Version&quot;:&quot;unknown&quot;},&quot;ports&quot;:[{&quot;name&quot;:&quot;port0&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;group0&quot;},{&quot;name&quot;:&quot;port1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;group0&quot;}]}</response>
+            <response>{&quot;properties&quot;:{&quot;Hostname&quot;:&quot;unknown&quot;,&quot;Kernel_Release&quot;:&quot;unknown&quot;,&quot;Curl_Version&quot;:&quot;unknown&quot;}}</response>
         </item>
-        <item name="getPorts" isVBlock="true">
+        <item name="getPorts">
             <steps>
-                <item guid="a5b3fce9-890b-42c8-abaf-79364ba729a2" action="command" session="s1">
+                <item guid="a5b3fce9-890b-42c8-abaf-79364ba729a2" action="command" session="s1" useFieldsInCommand="false">
                     <command>
                         <body>echo &quot;curl_version: `curl -V | head -1 | awk &apos;{print $2}&apos;`&quot;</body>
                     </command>
@@ -306,13 +299,15 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>curl_version</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="86d2006a-8b9d-4d93-8251-bade4d7502b8" action="command" session="s1">
                     <command>
@@ -329,6 +324,9 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>hostname</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -336,19 +334,19 @@
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="810f37b8-73aa-46d6-b17a-dd73dd8433b5" action="comment">
+                <item guid="810f37b8-73aa-46d6-b17a-dd73dd8433b5" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>compare the current version of curl to the curl version stored as a property</body>
                     </command>
                     <nestedSteps>
-                        <item guid="6c7f867a-5961-463a-85c4-2c35f7e25058" action="if">
+                        <item guid="6c7f867a-5961-463a-85c4-2c35f7e25058" action="if" useFieldsInCommand="false">
                             <command>
                                 <body>$curl_version != [param property_Curl_Version]</body>
                             </command>
                             <nestedSteps>
-                                <item guid="4f902edc-0291-4d1d-b1ef-ca0809f01de5" action="then">
+                                <item guid="4f902edc-0291-4d1d-b1ef-ca0809f01de5" action="then" useFieldsInCommand="false">
                                     <nestedSteps>
-                                        <item guid="0199fc1b-8328-4401-9f0d-c462c3d98d15" action="comment">
+                                        <item guid="0199fc1b-8328-4401-9f0d-c462c3d98d15" action="comment" useFieldsInCommand="false">
                                             <command>
                                                 <body>curl software version has changed</body>
                                             </command>
@@ -361,20 +359,19 @@
                                                         <processorInfo ruleType="message">
                                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                                 <message>The current curl software version list has changed</message>
+                                                                <tag sub="false" defaultValue=""/>
                                                             </ruleProperties>
                                                         </processorInfo>
                                                     </item>
                                                 </analysisRules>
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                         </item>
-                                        <item guid="d7d4f869-7685-4aaa-902d-3e707104eed6" action="call">
+                                        <item guid="d7d4f869-7685-4aaa-902d-3e707104eed6" action="call" useFieldsInCommand="false">
                                             <command>
                                                 <body>sendChangeMessageToAdmin -message &quot;The Velocity driver has detected that the curl software version on chassis $hostname has changed from [param property_Curl_Version] to $curl_version&quot; -curlVersion $curl_version -whatChanged curlVersion</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                             <emulation>
                                                 <behavior>
                                                     <responseType>text</responseType>
@@ -394,11 +391,10 @@
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
-                                <item guid="fd0fde01-752a-4674-8380-bd0ba7a8101c" action="else">
+                                <item guid="fd0fde01-752a-4674-8380-bd0ba7a8101c" action="else" useFieldsInCommand="false">
                                     <nestedSteps>
-                                        <item guid="c8bed985-f306-4a19-828a-7934f960bc95" action="comment">
+                                        <item guid="c8bed985-f306-4a19-828a-7934f960bc95" action="comment" useFieldsInCommand="false">
                                             <command>
                                                 <body>software version has not changed</body>
                                             </command>
@@ -411,52 +407,47 @@
                                                         <processorInfo ruleType="message">
                                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                                 <message>The current software version list has not changed</message>
+                                                                <tag sub="false" defaultValue=""/>
                                                             </ruleProperties>
                                                         </processorInfo>
                                                     </item>
                                                 </analysisRules>
                                             </postProcessing>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="6c6aa1e2-d218-464a-884e-6804cc9d0291" action="call">
+                <item guid="6c6aa1e2-d218-464a-884e-6804cc9d0291" action="call" useFieldsInCommand="false">
                     <command>
                         <body>getPortList</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
                             <item>
-                                <extractorInfo extractorType="regex">
-                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup">
-                                        <regex>\\S+</regex>
-                                        <extractionType>full_match</extractionType>
-                                        <declareNoMatchIssue>false</declareNoMatchIssue>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>responseLine</query>
                                     </extractorProperties>
                                 </extractorInfo>
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                        <storageLocation>jsonPortList</storageLocation>
-                                        <storeInAList>true</storeInAList>
-                                        <query>[return ports]</query>
+                                        <storageLocation>portList</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                     <emulation>
                         <behavior>
                             <response>{&quot;name&quot;:&quot;//10.108.32.17/1/1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group1_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group1_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group2_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group2_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/5&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group3_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/6&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group3_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/7&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group4_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/8&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group4_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/9&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group5_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/10&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group5_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/11&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group6_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/1/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot1_cm-1g-d12_E10210259/group6_E10210259&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group1_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/2&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group1_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/3&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group2_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/4&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group2_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/5&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group3_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/6&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group3_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/7&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group4_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/8&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group4_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/9&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group5_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/10&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group5_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/11&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;} {&quot;name&quot;:&quot;//10.108.32.17/2/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;}</response>
@@ -475,12 +466,18 @@
                         </behavior>
                     </emulation>
                 </item>
+                <item guid="ae8d59af-9379-4a7e-b079-af97b3ec01ee" action="return">
+                    <command>
+                        <body>$portList</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
             </steps>
-            <response>{&quot;ports&quot;:[{&quot;name&quot;:&quot;port0&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;group0&quot;},{&quot;name&quot;:&quot;port1&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;group0&quot;}]}</response>
+            <response>{&quot;key&quot;:&quot;value&quot;}</response>
         </item>
-        <item name="getPortList">
+        <item name="getPortList" isVBlock="true">
             <steps>
-                <item guid="8ac0a538-2ba0-4032-8e0d-ee77ed371b9a" action="command" session="s1">
+                <item guid="ea2c5a1a-859c-4efd-8f8b-428d16ee2066" action="command" session="s1">
                     <command>
                         <body>ifconfig -a -s</body>
                     </command>
@@ -495,6 +492,9 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>portList</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -502,25 +502,24 @@
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="eb64b909-0761-42e2-b25b-e47a041630e3" action="command" session="s1">
+                <item guid="5d892571-4c12-4de1-b3b7-aed8ce24e52b" action="command" session="s1">
                     <command>
                         <body>cd /sys/class/net</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                 </item>
-                <item guid="1f2543ca-3f58-4449-ae9d-36c4581d4728" action="eval">
+                <item guid="ba748ce4-15c1-4959-8d41-5e7d442a6729" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set jsonPortList &quot;&quot;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="8d0fdf5e-deff-4377-aa0b-625930a7d288" action="foreach">
+                <item guid="9d5ecab0-2e5c-4790-a117-68445e0e9305" action="foreach" useFieldsInCommand="false">
                     <command>
                         <body>port $portList</body>
                     </command>
                     <nestedSteps>
-                        <item guid="4ef3d46c-4153-4327-80d3-421523c4d42b" action="command" session="s1">
+                        <item guid="c45e9d74-511e-4afc-a5e5-2e0ac473c327" action="command" session="s1">
                             <command>
                                 <body>if \\[ `more $port/carrier` \\] ; then echo linkState: `more $port/carrier` ; else echo linkState: 0 ; fi</body>
                             </command>
@@ -556,137 +555,25 @@
                             </postProcessing>
                             <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                         </item>
-                        <item guid="746ba719-b105-4c2d-97c0-d1e2913997f7" action="call">
+                        <item guid="71be0848-8865-42f4-95c8-354451444c55" action="json" useFieldsInCommand="false">
                             <command>
-                                <body>addPortToJSON -portContainer ports -portStatus $portStatus -portName $port</body>
+                                <body>-action addJsonNode -editResponseStructure true -pathValue {\\{&quot;ports/\\[0\\]&quot;:\\[\\{&quot;container&quot;:&quot;group1&quot;,&quot;name&quot;:&quot;$port&quot;,&quot;status&quot;:&quot;$portStatus&quot;\\}\\]\\}}</body>
                             </command>
-                            <postProcessing>
-                                <storeResponseAt>portJSON</storeResponseAt>
-                                <storeResponseText>true</storeResponseText>
-                            </postProcessing>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
-                            <emulation>
-                                <behavior>
-                                    <response>{&quot;name&quot;:&quot;//10.108.32.17/2/12&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;slot2_cm-1g-d12_E10220545/group6_E10220545&quot;}</response>
-                                    <responseType>text</responseType>
-                                    <structuredData>
-&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
-    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
-&lt;/structure&gt;
-</structuredData>
-                                    <aliases>
-                                        <item name="isEmpty">
-                                            <queryFormatString>.//isEmpty</queryFormatString>
-                                        </item>
-                                    </aliases>
-                                </behavior>
-                            </emulation>
-                        </item>
-                        <item guid="b52cca35-8769-4574-aef6-c29b86b3fdae" action="eval">
-                            <command>
-                                <body>set jsonPortList [concat $jsonPortList $portJSON]</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">addJsonNode</action>
+                                <pathValue inherit="false" sub="true">{&quot;ports/\\[0\\]&quot;:\\[{&quot;container&quot;:&quot;group1&quot;,&quot;name&quot;:&quot;$port&quot;,&quot;status&quot;:&quot;$portStatus&quot;}\\]}</pathValue>
+                                <editResponseStructure inherit="false">true</editResponseStructure>
+                            </applicationProperties>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
-                </item>
-                <item guid="388d90a7-6072-4d1f-b89b-f2367ce2f23c" action="return">
-                    <command>
-                        <body>$jsonPortList</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
             </steps>
-        </item>
-        <item name="addPortToJSON" isVBlock="true">
-            <steps>
-                <item guid="56eef89d-cec8-4078-8f18-883190966864" action="eval">
-                    <command>
-                        <body>puts &quot;portName: $portName&quot;</body>
-                    </command>
-                    <postProcessing>
-                        <analysisRules>
-                            <item>
-                                <extractorInfo extractorType="query">
-                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>portName()</query>
-                                    </extractorProperties>
-                                </extractorInfo>
-                                <processorInfo ruleType="store">
-                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                        <storageLocation>portName</storageLocation>
-                                        <query>[return name]</query>
-                                    </ruleProperties>
-                                </processorInfo>
-                            </item>
-                        </analysisRules>
-                    </postProcessing>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
-                </item>
-                <item guid="20b5caf0-e9b0-4b08-b185-fe0c46b72568" action="eval">
-                    <command>
-                        <body>puts &quot;portStatus: $portStatus&quot;</body>
-                    </command>
-                    <postProcessing>
-                        <analysisRules>
-                            <item>
-                                <extractorInfo extractorType="query">
-                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>portStatus()</query>
-                                    </extractorProperties>
-                                </extractorInfo>
-                                <processorInfo ruleType="store">
-                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                        <storageLocation>portStatus</storageLocation>
-                                        <query>[return status]</query>
-                                    </ruleProperties>
-                                </processorInfo>
-                            </item>
-                        </analysisRules>
-                    </postProcessing>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
-                </item>
-                <item guid="8b642a77-a985-4b2e-9b88-e38bbb1d65d0" action="eval">
-                    <command>
-                        <body>puts &quot;portContainer: $portContainer&quot;</body>
-                    </command>
-                    <postProcessing>
-                        <analysisRules>
-                            <item>
-                                <extractorInfo extractorType="query">
-                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>portContainer()</query>
-                                    </extractorProperties>
-                                </extractorInfo>
-                                <processorInfo ruleType="store">
-                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                        <storageLocation>portContainer</storageLocation>
-                                        <query>[return container]</query>
-                                    </ruleProperties>
-                                </processorInfo>
-                            </item>
-                        </analysisRules>
-                    </postProcessing>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
-                </item>
-            </steps>
-            <arguments>
-                <item name="portContainer"/>
-                <item name="portStatus"/>
-                <item name="portName"/>
-            </arguments>
-            <response>{&quot;name&quot;:&quot;port0&quot;,&quot;status&quot;:&quot;online&quot;,&quot;container&quot;:&quot;group0&quot;}</response>
+            <response>{&quot;ports&quot;:[]}</response>
         </item>
         <item name="sendChangeMessageToAdmin">
             <steps>
-                <item guid="5cac4188-1895-4592-9dc8-320b1d2f16d1" action="comment">
+                <item guid="5cac4188-1895-4592-9dc8-320b1d2f16d1" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>token</body>
                     </command>
@@ -697,7 +584,15 @@
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                                 <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[param property_velocityURL]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[velocity url]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false">
+                                    <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                    <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                        <memberClasses>
+                                            <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                        </memberClasses>
+                                        <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="[velocity token]" value.inherit="false"/>
+                                    </httpHeader>
+                                </sessionProperties>
                                 <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                             </applicationProperties>
@@ -717,168 +612,41 @@
                                 </behavior>
                             </emulation>
                         </item>
-                        <item guid="12b61229-bfc9-47de-8915-60cd632b06ca" action="GET" session="s0">
-                            <command>
-                                <body>auth/v1/token</body>
-                            </command>
-                            <postProcessing>
-                                <analysisRules>
-                                    <item>
-                                        <extractorInfo extractorType="query">
-                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                <query>mapped/Json/xtoken</query>
-                                            </extractorProperties>
-                                        </extractorInfo>
-                                        <processorInfo ruleType="store">
-                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                                <storageLocation>token</storageLocation>
-                                            </ruleProperties>
-                                        </processorInfo>
-                                    </item>
-                                </analysisRules>
-                            </postProcessing>
-                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="auth/v1/token" action.inherit="false">
-                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="[param property_velocityAdminUser]" user.inherit="false" password.masked="true" password="Hu62+w4ez8VRjpeoxPozxOaxxmtFloyHzho5crmeLm5IHNAaGBit5A==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
-                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
-                                    <memberClasses>
-                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
-                                    </memberClasses>
-                                </httpHeader>
-                            </applicationProperties>
-                            <emulation>
-                                <behavior>
-                                    <response>{&quot;token&quot;:&quot;eyJzaWduYXR1cmUiOiAiNjE0MjJkZjg5N2ZkMTkzYmViY2JiOGUyZTM3MDZiYjRmZGJmOWViOTI0YjQ3NjhiZjBhNTRhYzdmZDc3YTNlMGM0Njc2N2Q0ZjQ1MDk3YTE3OGI0YTY3Mzc5MTI0MDE5NTM3ZjIzMTQ0YTgyN2QwOTEwNzVkOTRlZWUzZjFlN2E4M2Y5ZDZkODdlYmViZDVkNzNiMDljMjk1ZTM4YmE4MzU3MGZlZWM5MTVhOGIzNTIxZmNiNDNiMTEwNDFiZDY2OGQwZWZmOTc1Y2E5Zjg1MDhmMWUwNjM0MDEwZTBlMzY2MDAwMmY2ZGFkMDAyOGQ5YzgyMWNkYmNjYjFjYzBmYSIsICJwYWNrZXQiOiAie1wiaWRcIjogXCJzcGlyZW50XCIsIFwiZXhwaXJhdGlvblwiOiAxNDU3NzIzMDU2LCBcInN0YXJ0X3RpbWVcIjogMTQ1NzYzNjM1NiwgXCJ1c2VyX25hbWVcIjogXCJzcGlyZW50XCIsIFwiZG9tYWluXCI6IFwibGRhcFwifSJ9&quot;}</response>
-                                    <responseType>text</responseType>
-                                    <structuredData>
-&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
-    &lt;statusCode value=&quot;200&quot;/&gt;
-    &lt;requestHTTPHeaders map:nodetype=&quot;token&quot;/&gt;
-    &lt;requestRawText map:nodetype=&quot;token&quot;/&gt;
-    &lt;responseHTTPHeaders map:nodetype=&quot;token&quot;&gt;
-        &lt;Transfer_Encoding map:nodetype=&quot;token&quot;&gt;chunked&lt;/Transfer_Encoding&gt;
-        &lt;Server map:nodetype=&quot;token&quot;&gt;nginx/1.4.6 (Ubuntu)&lt;/Server&gt;
-        &lt;Cache_Control map:nodetype=&quot;token&quot;&gt;no-cache, no-store, must-revalidate&lt;/Cache_Control&gt;
-        &lt;Cache_Control map:nodetype=&quot;token&quot;&gt;no-cache&lt;/Cache_Control&gt;
-        &lt;Connection map:nodetype=&quot;token&quot;&gt;keep-alive&lt;/Connection&gt;
-        &lt;Expires map:nodetype=&quot;token&quot;&gt;0&lt;/Expires&gt;
-        &lt;Pragma map:nodetype=&quot;token&quot;&gt;no-cache&lt;/Pragma&gt;
-        &lt;Date map:nodetype=&quot;token&quot;&gt;Thu, 10 Mar 2016 19:05:36 GMT&lt;/Date&gt;
-        &lt;Content_Type map:nodetype=&quot;token&quot;&gt;application/json&lt;/Content_Type&gt;
-        &lt;X_Powered_By map:nodetype=&quot;token&quot;&gt;Undertow 1&lt;/X_Powered_By&gt;
-    &lt;/responseHTTPHeaders&gt;
-    &lt;responseRawText map:nodetype=&quot;token&quot;&gt;{&amp;quot;token&amp;quot;:&amp;quot;eyJzaWduYXR1cmUiOiAiNjE0MjJkZjg5N2ZkMTkzYmViY2JiOGUyZTM3MDZiYjRmZGJmOWViOTI0YjQ3NjhiZjBhNTRhYzdmZDc3YTNlMGM0Njc2N2Q0ZjQ1MDk3YTE3OGI0YTY3Mzc5MTI0MDE5NTM3ZjIzMTQ0YTgyN2QwOTEwNzVkOTRlZWUzZjFlN2E4M2Y5ZDZkODdlYmViZDVkNzNiMDljMjk1ZTM4YmE4MzU3MGZlZWM5MTVhOGIzNTIxZmNiNDNiMTEwNDFiZDY2OGQwZWZmOTc1Y2E5Zjg1MDhmMWUwNjM0MDEwZTBlMzY2MDAwMmY2ZGFkMDAyOGQ5YzgyMWNkYmNjYjFjYzBmYSIsICJwYWNrZXQiOiAie1wiaWRcIjogXCJzcGlyZW50XCIsIFwiZXhwaXJhdGlvblwiOiAxNDU3NzIzMDU2LCBcInN0YXJ0X3RpbWVcIjogMTQ1NzYzNjM1NiwgXCJ1c2VyX25hbWVcIjogXCJzcGlyZW50XCIsIFwiZG9tYWluXCI6IFwibGRhcFwifSJ9&amp;quot;}&lt;/responseRawText&gt;
-&lt;/structure&gt;
-</structuredData>
-                                    <aliases>
-                                        <item name="isEmpty">
-                                            <queryFormatString>.//isEmpty</queryFormatString>
-                                        </item>
-                                    </aliases>
-                                    <duration>0.3</duration>
-                                </behavior>
-                            </emulation>
-                        </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="6f638b9c-ff9c-4c6a-978d-2536467325c6" action="comment">
+                <item guid="6f638b9c-ff9c-4c6a-978d-2536467325c6" action="comment" useFieldsInCommand="false">
                     <command>
                         <body>open rest session, get userId of notify user, send message</body>
                     </command>
                     <nestedSteps>
-                        <item guid="e25a2c62-694a-40f1-a1cf-bc7bc8758102" action="GET" session="s0">
-                            <command>
-                                <body>user/v3/profiles?filter=name::[param property_velocityAdminUser]</body>
-                            </command>
-                            <postProcessing>
-                                <analysisRules>
-                                    <item>
-                                        <extractorInfo extractorType="query">
-                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                <query>mapped/Json/profiles/item/id</query>
-                                            </extractorProperties>
-                                        </extractorInfo>
-                                        <processorInfo ruleType="store">
-                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                                <storageLocation>notifyUserId</storageLocation>
-                                            </ruleProperties>
-                                        </processorInfo>
-                                    </item>
-                                </analysisRules>
-                            </postProcessing>
-                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v3/profiles?filter=name::[param property_velocityAdminUser]" action.inherit="false">
-                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
-                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
-                                    <memberClasses>
-                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
-                                    </memberClasses>
-                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
-                                </httpHeader>
-                            </applicationProperties>
-                            <emulation>
-                                <behavior>
-                                    <response>{&quot;total&quot;:1,&quot;offset&quot;:0,&quot;count&quot;:1,&quot;profiles&quot;:[{&quot;id&quot;:&quot;f64994c3-d788-4027-a804-e2b6fc38dd3b&quot;,&quot;name&quot;:&quot;spirent&quot;,&quot;description&quot;:&quot;&quot;,&quot;autosetTimeZone&quot;:true,&quot;timeZoneId&quot;:&quot;America/Dawson&quot;,&quot;timeZoneOffset&quot;:-28800000,&quot;role&quot;:&quot;SUPER_ADMIN&quot;,&quot;email&quot;:null,&quot;receivesEmailNotifications&quot;:false,&quot;prefersExternalApplicationToHandleConsoleUrls&quot;:false,&quot;receivesDailyReports&quot;:false,&quot;receivesOwnReservationInvitations&quot;:true,&quot;isDisabled&quot;:false,&quot;userStatus&quot;:&quot;ACTIVE&quot;,&quot;created&quot;:1450127630680,&quot;lastModifierId&quot;:null,&quot;lastModified&quot;:1457634614728}]}</response>
-                                    <responseType>text</responseType>
-                                    <structuredData>
-&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
-    &lt;statusCode value=&quot;200&quot;/&gt;
-    &lt;requestHTTPHeaders map:nodetype=&quot;token&quot;&gt;
-        &lt;X_Auth_Token map:nodetype=&quot;token&quot;&gt;eyJzaWduYXR1cmUiOiAiNjE0MjJkZjg5N2ZkMTkzYmViY2JiOGUyZTM3MDZiYjRmZGJmOWViOTI0YjQ3NjhiZjBhNTRhYzdmZDc3YTNlMGM0Njc2N2Q0ZjQ1MDk3YTE3OGI0YTY3Mzc5MTI0MDE5NTM3ZjIzMTQ0YTgyN2QwOTEwNzVkOTRlZWUzZjFlN2E4M2Y5ZDZkODdlYmViZDVkNzNiMDljMjk1ZTM4YmE4MzU3MGZlZWM5MTVhOGIzNTIxZmNiNDNiMTEwNDFiZDY2OGQwZWZmOTc1Y2E5Zjg1MDhmMWUwNjM0MDEwZTBlMzY2MDAwMmY2ZGFkMDAyOGQ5YzgyMWNkYmNjYjFjYzBmYSIsICJwYWNrZXQiOiAie1wiaWRcIjogXCJzcGlyZW50XCIsIFwiZXhwaXJhdGlvblwiOiAxNDU3NzIzMDU2LCBcInN0YXJ0X3RpbWVcIjogMTQ1NzYzNjM1NiwgXCJ1c2VyX25hbWVcIjogXCJzcGlyZW50XCIsIFwiZG9tYWluXCI6IFwibGRhcFwifSJ9&lt;/X_Auth_Token&gt;
-    &lt;/requestHTTPHeaders&gt;
-    &lt;requestRawText map:nodetype=&quot;token&quot;/&gt;
-    &lt;responseHTTPHeaders map:nodetype=&quot;token&quot;&gt;
-        &lt;Transfer_Encoding map:nodetype=&quot;token&quot;&gt;chunked&lt;/Transfer_Encoding&gt;
-        &lt;Server map:nodetype=&quot;token&quot;&gt;nginx/1.4.6 (Ubuntu)&lt;/Server&gt;
-        &lt;Cache_Control map:nodetype=&quot;token&quot;&gt;no-cache, no-store, must-revalidate&lt;/Cache_Control&gt;
-        &lt;Cache_Control map:nodetype=&quot;token&quot;&gt;no-cache&lt;/Cache_Control&gt;
-        &lt;Connection map:nodetype=&quot;token&quot;&gt;keep-alive&lt;/Connection&gt;
-        &lt;Expires map:nodetype=&quot;token&quot;&gt;0&lt;/Expires&gt;
-        &lt;Pragma map:nodetype=&quot;token&quot;&gt;no-cache&lt;/Pragma&gt;
-        &lt;Date map:nodetype=&quot;token&quot;&gt;Thu, 10 Mar 2016 19:05:36 GMT&lt;/Date&gt;
-        &lt;Content_Type map:nodetype=&quot;token&quot;&gt;application/json&lt;/Content_Type&gt;
-        &lt;X_Powered_By map:nodetype=&quot;token&quot;&gt;Undertow 1&lt;/X_Powered_By&gt;
-    &lt;/responseHTTPHeaders&gt;
-    &lt;responseRawText map:nodetype=&quot;token&quot;&gt;{&amp;quot;total&amp;quot;:1,&amp;quot;offset&amp;quot;:0,&amp;quot;count&amp;quot;:1,&amp;quot;profiles&amp;quot;:[{&amp;quot;id&amp;quot;:&amp;quot;f64994c3-d788-4027-a804-e2b6fc38dd3b&amp;quot;,&amp;quot;name&amp;quot;:&amp;quot;spirent&amp;quot;,&amp;quot;description&amp;quot;:&amp;quot;&amp;quot;,&amp;quot;autosetTimeZone&amp;quot;:true,&amp;quot;timeZoneId&amp;quot;:&amp;quot;America/Dawson&amp;quot;,&amp;quot;timeZoneOffset&amp;quot;:-28800000,&amp;quot;role&amp;quot;:&amp;quot;SUPER_ADMIN&amp;quot;,&amp;quot;email&amp;quot;:null,&amp;quot;receivesEmailNotifications&amp;quot;:false,&amp;quot;prefersExternalApplicationToHandleConsoleUrls&amp;quot;:false,&amp;quot;receivesDailyReports&amp;quot;:false,&amp;quot;receivesOwnReservationInvitations&amp;quot;:true,&amp;quot;isDisabled&amp;quot;:false,&amp;quot;userStatus&amp;quot;:&amp;quot;ACTIVE&amp;quot;,&amp;quot;created&amp;quot;:1450127630680,&amp;quot;lastModifierId&amp;quot;:null,&amp;quot;lastModified&amp;quot;:1457634614728}]}&lt;/responseRawText&gt;
-&lt;/structure&gt;
-</structuredData>
-                                    <aliases>
-                                        <item name="isEmpty">
-                                            <queryFormatString>.//isEmpty</queryFormatString>
-                                        </item>
-                                    </aliases>
-                                    <duration>0.3</duration>
-                                </behavior>
-                            </emulation>
-                        </item>
-                        <item guid="4125c401-612f-4de2-90f5-46812dfb0740" action="switch">
+                        <item guid="4125c401-612f-4de2-90f5-46812dfb0740" action="switch" useFieldsInCommand="false">
                             <command>
                                 <body>$whatChanged</body>
                             </command>
                             <nestedSteps>
-                                <item guid="667c9064-820f-4c32-b3f6-af1a956125e5" action="case">
+                                <item guid="667c9064-820f-4c32-b3f6-af1a956125e5" action="case" useFieldsInCommand="false">
                                     <command>
                                         <body>&quot;curlVersion&quot;</body>
                                     </command>
                                     <nestedSteps>
                                         <item guid="174274ee-f12e-4a7b-b414-d8d2f7bda415" action="POST" session="s0">
                                             <command>
-                                                <body>message/v3/message</body>
+                                                <body>api/message/v7/message</body>
                                             </command>
-                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="message/v3/message" action.inherit="false">
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="api/message/v7/message" action.inherit="false">
                                                 <message inherit="false">{
   &quot;subject&quot;: &quot;Velocity driver detected a curl software version change&quot;,
   &quot;message&quot;: &quot;$message&quot;,
   &quot;origin&quot;: &quot;Velocity Driver&quot;,
-  &quot;userId&quot;: &quot;$notifyUserId&quot;,
-  &quot;selfCopy&quot;: &quot;false&quot;
+  &quot;forAdmins&quot;: true 
 }</message>
                                                 <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
                                                 <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
                                                     <memberClasses>
                                                         <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
                                                     </memberClasses>
-                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="$token" value.inherit="false"/>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="[velocity token]" value.inherit="false"/>
                                                     <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
                                                 </httpHeader>
                                             </applicationProperties>
@@ -924,15 +692,12 @@
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
-                        <item guid="2ff09b93-ea7a-45a4-9d82-e444f2f8460b" action="close" session="s0">
+                        <item guid="2ff09b93-ea7a-45a4-9d82-e444f2f8460b" action="close" session="s0" useFieldsInCommand="false">
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                             <emulation>
                                 <behavior>
                                     <structuredData>
@@ -950,7 +715,6 @@
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>
@@ -962,40 +726,36 @@
                     <isMandatory>true</isMandatory>
                 </item>
             </arguments>
+            <response>{}</response>
         </item>
         <item name="setConfig">
             <steps>
-                <item guid="4816c1dd-0974-4b3a-a852-dd61ab17639b" action="eval">
+                <item guid="4816c1dd-0974-4b3a-a852-dd61ab17639b" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set tftpUrl [lindex ${arg[1]} 1]</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="8c4fc311-a3d7-40be-8924-77ce735338b2" action="eval">
+                <item guid="8c4fc311-a3d7-40be-8924-77ce735338b2" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set fileName [lindex [split $tftpUrl /] end]</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="6207ac5d-08fd-417a-a835-77dd8589c7d4" action="eval">
+                <item guid="6207ac5d-08fd-417a-a835-77dd8589c7d4" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set tftpHost [lindex [split [lindex [split $tftpUrl /] 2] :] 0]</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="cb7f00d9-cb24-4e8d-8e03-f9198d9c5a4f" action="eval">
+                <item guid="cb7f00d9-cb24-4e8d-8e03-f9198d9c5a4f" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set uuid [math.round [expr 1000000 * [math.rand]]]</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="6ddeedea-6529-48ee-83dd-14dbc859370a" action="comment">
+                <item guid="6ddeedea-6529-48ee-83dd-14dbc859370a" action="comment" useFieldsInCommand="false">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="f41af50b-1f60-40b8-bc09-679adf90dc01" action="command" session="p1" timeout="120">
                     <command>
@@ -1011,11 +771,11 @@
                 </item>
                 <item guid="94ab28dd-7f9e-4e96-ab1a-fa777f5bc9d9" action="command" session="p1">
                     <command>
-                        <body>run /bin/bash -c &quot;echo [param property_ipAddress] ansible_user=[param property_SSH_Username] ansible_ssh_pass=[param property_SSH_Password] &gt;&gt; /tmp/[get uuid].hosts&quot;</body>
+                        <body>run /bin/bash -c &quot;echo [param property_ipAddress] ansible_user=[param property_username] ansible_ssh_pass=[param property_password] &gt;&gt; /tmp/[get uuid].hosts&quot;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="fbc9cf8f-7acb-45b2-9c19-efffa95d3f00" action="command" session="p1" useResponseMapLibraryApplicability="false" timeout="120" useProcTimeout="false">
+                <item guid="fbc9cf8f-7acb-45b2-9c19-efffa95d3f00" action="command" session="p1" responseMap="response_maps/ansible-playbook.ffrm" useResponseMapLibraryApplicability="false" timeout="120" useProcTimeout="false">
                     <command>
                         <body>run ansible-playbook /tmp/[get uuid].yml -i /tmp/[get uuid].hosts --ssh-common-args=&apos;-o ControlPath=/tmp/ansible-ssh-%h-%p-%r -o StrictHostKeyChecking=no&apos;</body>
                     </command>
@@ -1088,7 +848,6 @@
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <responseMap>response_maps/ansible-playbook.ffrm</responseMap>
                     <useResponseMapLibraryFromSession>false</useResponseMapLibraryFromSession>
                 </item>
             </steps>

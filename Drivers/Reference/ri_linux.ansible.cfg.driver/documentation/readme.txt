@@ -16,7 +16,7 @@ The driver discovers:
   
 Polling:
   When Velocity invokes this driver to poll the Linux host, roughly every 5 minutes,
-  the installed curl version is compared with the curl version set as a property and can message the admin of this change
+  the installed curl version is compared with the curl version set as a property and can message the admins of this change
   
 Configuration via Ansible:
   When a configuration is specified to be used upon reservation startup, a user can specify which Ansible playbook should be used
@@ -32,15 +32,9 @@ Requirements:
   The SSH username must be able to sudo with no password required (NOPASSWD setting)    
   
 HOWTO:
-  Import the Linux Ansible template under the velocity.template directory. 
-    As admin, go to Inventory, Import, Import from ZIP
-    Point to the ansible.driver.template.zip file and upload
-    Check Velocity messages to verify that one template has been successfully imported
-  
-  Change the template's parent
-    Navigate to the newly imported template and "Change Parent" to Server
-    This will add properties like ipAddress and Hostname
-    
+  Choose a template to be used by this driver, like the Server template. 
+    Add the following properties: Kernel_Release and Curl_Version
+      
   Upload the Ansible driver iTar
     Export the project to an iTar
     Upload the iTar as a Driver in Velocity
@@ -50,16 +44,14 @@ HOWTO:
     Verify that the template is set to "Configurable" interface type
 
   Create a Linux host resource
-    Create a new resource using the Linux template
-    Assign the ipAddress, SSH username, and SSH password
-    Optionally, assign the Velocity URL, Velocity admin, and Velocity password (to receive detected curl version changes when polling)
+    Create a new resource using the chosen template
+    Assign the ipAddress, username, and password property values
     Click "Discover" and verify that the system's interfaces and Hostname, Curl Version, and Kernel Version properties are detected
     
   Reserve the resource with an Ansible playbook configuration
     SSH into the Linux host
     Create a new reservation on the Linux host with an Ansible playbook   
-    Look at the SSH console and verify that a broadcast message appears showing that curl software version has changed 
-    
+    Run curl --version to see the current version of curl
   
    
 	

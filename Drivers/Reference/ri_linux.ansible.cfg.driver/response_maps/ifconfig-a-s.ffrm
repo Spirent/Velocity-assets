@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ResponseMap version="5.2.0.95bb698">
+<ResponseMap version="8.5.0.202103021747">
     <sampleDictionary>
         <item name="sample1">
             <action actionType="command">
@@ -39,12 +39,24 @@ lo        65536 0   1211930      0      0 0       1211930      0      0      0 L
             </aliases>
             <duration>0.4</duration>
         </item>
+        <item name="sample2">
+            <responseBody>Iface   MTU Met   RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+docker0    1500 0         0      0      0 0             0      0      0      0 BMU
+ens160     1500 0  69708881      0      0 0       2283418      0      0      0 BMRU
+lo        65536 0    711277      0      0 0        711277      0      0      0 LRU</responseBody>
+        </item>
+        <item name="sample3">
+            <responseBody>Iface      MTU    RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+ens160    1500  4106906      0     77 0       5333731      0      0      0 BMRU
+ens192    1500        0      0      0 0             0      0      0      0 BM
+lo       65536   247354      0      0 0        247354      0      0      0 LRU</responseBody>
+        </item>
     </sampleDictionary>
     <mapperProperties>
         <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
             <tabularMaps>
                 <item name="table1">
-                    <banner>Iface\\s+MTU Met\\s+RX-OK RX-ERR RX-DRP RX-OVR\\s+TX-OK TX-ERR TX-DRP TX-OVR Flg\\s*</banner>
+                    <banner>Iface\\s*</banner>
                     <bannerStructure>Regex</bannerStructure>
                     <minOccurences>0</minOccurences>
                     <columns>
@@ -115,5 +127,5 @@ lo        65536 0   1211930      0      0 0       1211930      0      0      0 L
             </tabularMaps>
         </item>
     </mapperProperties>
-    <applicabilityProperties actionType="command" command="ifconfig -s*"/>
+    <applicabilityProperties actionType="command" command="ifconfig -a -s*"/>
 </ResponseMap>
