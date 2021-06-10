@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>     
+    <version>2.0.0</version>
+    <vendor>Spirent</vendor>     
+    <language>itest</language>     
+    <interface>Configurable Layer 2 Switch</interface> 
+    <entryPoint>vmware-l2switch-driver.fftc</entryPoint>
+    <resourceProperties>
+        <property optional="false">
+            <name>username</name>
+        </property>
+        <property optional="false">
+            <name>password</name>
+        </property>
+        <property optional="false">
+            <name>vSphereHost</name>
+        </property>
+        <property optional="false">
+            <name>vSwitchNamePrefix</name>
+        </property>
+        <property optional="false">
+            <name>vSwitchIsDVS</name>
+        </property>
+        <property optional="false">
+            <name>vSwitchDatacenter</name>
+        </property>
+        <property optional="false">
+            <name>vSwitchHost</name>
+        </property>
+    </resourceProperties>
+</resourceDriver>

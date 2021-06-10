@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tbml xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.teslaalliance.org/trs/tbml/1.0/tbml-core.xsd" xmlns="http://www.teslaalliance.org/trs/tbml/1.0">
+  <header>
+    <name>Custom Orchestrated</name>
+    <description></description>
+    <property name="dateModified">2020-09-30T14:16:49.266-07:00</property>
+    <property name="creationTool" vendor="com.fnfr">com.fnfr.itest.topology.tbml.diagram</property>
+    <property name="creationToolVersion" vendor="com.fnfr">8.3.0.202009041627</property>
+  </header>
+  <body>
+    <resources>
+      <resource guid="29a55a39-8ab4-4481-98fe-0314316b0b87" id="i5523302b-866f-4def-8fd0-8bed371dc09e" shared="true" type="device">
+        <boundary height="100" width="100" x="204" y="192"/>
+        <property isimportant="false" name="name">Velocity-Virtual2Ports</property>
+        <property isimportant="false" name="description"/>
+        <property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=29a55a39-8ab4-4481-98fe-0314316b0b87</property>
+        <property editable="false" isimportant="false" name="reservationTime">IMMEDIATE</property>
+        <property isimportant="false" name="ilo_iconId"/>
+        <property isimportant="false" name="hostResource_topologyResourceId"/>
+        <property isimportant="false" name="hostResource_parentType"/>
+        <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        <property isimportant="false" name="templateId">04a2f6b3-4b31-4d49-8257-47d051de5278</property>
+        <property isimportant="false" name="ilo_shape">RECTANGLE</property>
+        <resource guid="ca09a363-0df8-4c01-8410-a3aa02372bd7" id="ia6c26d86-a5f3-48f3-8b71-352d74f288b8" type="port">
+          <property isimportant="false" name="name">Port1</property>
+          <property isimportant="false" name="description">Port1</property>
+          <property isimportant="false" name="connectivity">any</property>
+          <property isimportant="false" name="keepOnRemoveConnection">true</property>
+          <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        </resource>
+        <resource guid="da09a363-0df8-4c01-8410-a3aa02372bd7" id="ja6c26d86-a5f3-48f3-8b71-352d74f288b8" type="port">
+          <property isimportant="false" name="name">Port2</property>
+          <property isimportant="false" name="description">Port2</property>
+          <property isimportant="false" name="connectivity">any</property>
+          <property isimportant="false" name="keepOnRemoveConnection">true</property>
+          <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        </resource>
+      </resource>
+    </resources>
+    <connectivity/>
+  </body>
+  <illustration>
+    <layer/>
+  </illustration>
+</tbml>

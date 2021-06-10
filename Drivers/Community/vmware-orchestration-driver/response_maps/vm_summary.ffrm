@@ -1,0 +1,975 @@
+<?xml version="1.0"?>
+<ResponseMap version="8.3.0.202008130718">
+    <responseStructure>text/python</responseStructure>
+    <sampleDictionary>
+        <item name="ubuntu_sample">
+            <action>
+                <command>
+                    <body>vm.summary</body>
+                </command>
+            </action>
+            <responseBody>(vim.vm.Summary) {
+   dynamicType = &lt;unset&gt;,
+   dynamicProperty = (vmodl.DynamicProperty) [],
+   vm = &apos;vim.VirtualMachine:vm-270790&apos;,
+   runtime = (vim.vm.RuntimeInfo) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      device = (vim.vm.DeviceRuntimeInfo) [
+         (vim.vm.DeviceRuntimeInfo) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            runtimeState = (vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState) {
+               dynamicType = &lt;unset&gt;,
+               dynamicProperty = (vmodl.DynamicProperty) [],
+               vmDirectPathGen2Active = false,
+               vmDirectPathGen2InactiveReasonVm = (str) [],
+               vmDirectPathGen2InactiveReasonOther = (str) [
+                  &apos;vmNptIncompatibleNetwork&apos;
+               ],
+               vmDirectPathGen2InactiveReasonExtended = &lt;unset&gt;,
+               reservationStatus = &lt;unset&gt;,
+               attachmentStatus = &apos;&apos;,
+               featureRequirement = (vim.vm.FeatureRequirement) []
+            },
+            key = 4000
+         }
+      ],
+      host = &apos;vim.HostSystem:host-107342&apos;,
+      connectionState = &apos;connected&apos;,
+      powerState = &apos;poweredOn&apos;,
+      faultToleranceState = &apos;notConfigured&apos;,
+      dasVmProtection = &lt;unset&gt;,
+      toolsInstallerMounted = false,
+      suspendTime = &lt;unset&gt;,
+      bootTime = 2020-08-18T18:55:52.595579Z,
+      suspendInterval = 0L,
+      question = &lt;unset&gt;,
+      memoryOverhead = &lt;unset&gt;,
+      maxCpuUsage = 5600,
+      maxMemoryUsage = 8192,
+      numMksConnections = 0,
+      recordReplayState = &apos;inactive&apos;,
+      cleanPowerOff = &lt;unset&gt;,
+      needSecondaryReason = &lt;unset&gt;,
+      onlineStandby = false,
+      minRequiredEVCModeKey = &apos;intel-ivybridge&apos;,
+      consolidationNeeded = false,
+      offlineFeatureRequirement = (vim.vm.FeatureRequirement) [
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.lm&apos;,
+            featureName = &apos;cpuid.lm&apos;,
+            value = &apos;Bool:Min:1&apos;
+         }
+      ],
+      featureRequirement = (vim.vm.FeatureRequirement) [
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSE3&apos;,
+            featureName = &apos;cpuid.SSE3&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.PCLMULQDQ&apos;,
+            featureName = &apos;cpuid.PCLMULQDQ&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSSE3&apos;,
+            featureName = &apos;cpuid.SSSE3&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.CMPXCHG16B&apos;,
+            featureName = &apos;cpuid.CMPXCHG16B&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.PCID&apos;,
+            featureName = &apos;cpuid.PCID&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSE41&apos;,
+            featureName = &apos;cpuid.SSE41&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSE42&apos;,
+            featureName = &apos;cpuid.SSE42&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.POPCNT&apos;,
+            featureName = &apos;cpuid.POPCNT&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.AES&apos;,
+            featureName = &apos;cpuid.AES&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.XSAVE&apos;,
+            featureName = &apos;cpuid.XSAVE&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.AVX&apos;,
+            featureName = &apos;cpuid.AVX&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.F16C&apos;,
+            featureName = &apos;cpuid.F16C&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.RDRAND&apos;,
+            featureName = &apos;cpuid.RDRAND&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SS&apos;,
+            featureName = &apos;cpuid.SS&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.FSGSBASE&apos;,
+            featureName = &apos;cpuid.FSGSBASE&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SMEP&apos;,
+            featureName = &apos;cpuid.SMEP&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.ENFSTRG&apos;,
+            featureName = &apos;cpuid.ENFSTRG&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.MDCLEAR&apos;,
+            featureName = &apos;cpuid.MDCLEAR&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.STIBP&apos;,
+            featureName = &apos;cpuid.STIBP&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.FCMD&apos;,
+            featureName = &apos;cpuid.FCMD&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSBD&apos;,
+            featureName = &apos;cpuid.SSBD&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.XCR0_MASTER_SSE&apos;,
+            featureName = &apos;cpuid.XCR0_MASTER_SSE&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.XCR0_MASTER_YMM_H&apos;,
+            featureName = &apos;cpuid.XCR0_MASTER_YMM_H&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.LAHF64&apos;,
+            featureName = &apos;cpuid.LAHF64&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.NX&apos;,
+            featureName = &apos;cpuid.NX&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.RDTSCP&apos;,
+            featureName = &apos;cpuid.RDTSCP&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.LM&apos;,
+            featureName = &apos;cpuid.LM&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.Intel&apos;,
+            featureName = &apos;cpuid.Intel&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.IBRS&apos;,
+            featureName = &apos;cpuid.IBRS&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.IBPB&apos;,
+            featureName = &apos;cpuid.IBPB&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;misc.cpuidFaulting&apos;,
+            featureName = &apos;misc.cpuidFaulting&apos;,
+            value = &apos;Bool:Min:1&apos;
+         }
+      ],
+      featureMask = (vim.host.FeatureMask) [],
+      vFlashCacheAllocation = 0L,
+      paused = false,
+      snapshotInBackground = false,
+      quiescedForkParent = &lt;unset&gt;,
+      instantCloneFrozen = false,
+      cryptoState = &lt;unset&gt;
+   },
+   guest = (vim.vm.Summary.GuestSummary) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      guestId = &apos;ubuntu64Guest&apos;,
+      guestFullName = &apos;Ubuntu Linux (64-bit)&apos;,
+      toolsStatus = &apos;toolsOk&apos;,
+      toolsVersionStatus = &apos;guestToolsUnmanaged&apos;,
+      toolsVersionStatus2 = &apos;guestToolsUnmanaged&apos;,
+      toolsRunningStatus = &apos;guestToolsRunning&apos;,
+      hostName = &apos;sdc-cr-ubuntu&apos;,
+      ipAddress = &apos;10.142.0.249&apos;,
+      hwVersion = &lt;unset&gt;
+   },
+   config = (vim.vm.Summary.ConfigSummary) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      name = &apos;Virtual1-0c64c15a95dc26832&apos;,
+      template = false,
+      vmPathName = &apos;[esx-apt-dut3-raid50] Virtual1-0c64c15a95dc26832/Virtual1-0c64c15a95dc26832.vmx&apos;,
+      memorySizeMB = 8192,
+      cpuReservation = 0,
+      memoryReservation = 0,
+      numCpu = 2,
+      numEthernetCards = 1,
+      numVirtualDisks = 1,
+      uuid = &apos;420bbe58-bdd6-15bf-409b-09ff10316859&apos;,
+      instanceUuid = &apos;500bf861-9a5d-4690-21e8-9805d436e302&apos;,
+      guestId = &apos;ubuntu64Guest&apos;,
+      guestFullName = &apos;Ubuntu Linux (64-bit)&apos;,
+      annotation = &apos;&apos;,
+      product = &lt;unset&gt;,
+      installBootRequired = false,
+      ftInfo = &lt;unset&gt;,
+      managedBy = &lt;unset&gt;,
+      tpmPresent = false,
+      numVmiopBackings = 0,
+      hwVersion = &lt;unset&gt;
+   },
+   storage = (vim.vm.Summary.StorageSummary) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      committed = 51625599468L,
+      uncommitted = 520L,
+      unshared = 42949672960L,
+      timestamp = 2020-08-18T18:55:52.702862Z
+   },
+   quickStats = (vim.vm.Summary.QuickStats) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      overallCpuUsage = 0,
+      overallCpuDemand = 5600,
+      overallCpuReadiness = &lt;unset&gt;,
+      guestMemoryUsage = 6144,
+      hostMemoryUsage = 1090,
+      guestHeartbeatStatus = &apos;yellow&apos;,
+      distributedCpuEntitlement = 0,
+      distributedMemoryEntitlement = 0,
+      staticCpuEntitlement = 0,
+      staticMemoryEntitlement = 0,
+      grantedMemory = &lt;unset&gt;,
+      privateMemory = 8192,
+      sharedMemory = 0,
+      swappedMemory = 0,
+      balloonedMemory = 0,
+      consumedOverheadMemory = 0,
+      ftLogBandwidth = -1,
+      ftSecondaryLatency = -1,
+      ftLatencyStatus = &apos;gray&apos;,
+      compressedMemory = 0L,
+      uptimeSeconds = 27,
+      ssdSwappedMemory = 0L
+   },
+   overallStatus = &apos;green&apos;,
+   customValue = (vim.CustomFieldsManager.Value) []
+}
+</responseBody>
+        </item>
+        <item name="windows_sample">
+            <action>
+                <command>
+                    <body>vm.summary</body>
+                </command>
+            </action>
+            <responseBody>(vim.vm.Summary) {
+   dynamicType = &lt;unset&gt;,
+   dynamicProperty = (vmodl.DynamicProperty) [],
+   vm = &apos;vim.VirtualMachine:vm-271424&apos;,
+   runtime = (vim.vm.RuntimeInfo) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      device = (vim.vm.DeviceRuntimeInfo) [
+         (vim.vm.DeviceRuntimeInfo) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            runtimeState = (vim.vm.DeviceRuntimeInfo.VirtualEthernetCardRuntimeState) {
+               dynamicType = &lt;unset&gt;,
+               dynamicProperty = (vmodl.DynamicProperty) [],
+               vmDirectPathGen2Active = false,
+               vmDirectPathGen2InactiveReasonVm = (str) [],
+               vmDirectPathGen2InactiveReasonOther = (str) [
+                  &apos;vmNptIncompatibleNetwork&apos;
+               ],
+               vmDirectPathGen2InactiveReasonExtended = &lt;unset&gt;,
+               reservationStatus = &lt;unset&gt;,
+               attachmentStatus = &apos;&apos;,
+               featureRequirement = (vim.vm.FeatureRequirement) []
+            },
+            key = 4000
+         }
+      ],
+      host = &apos;vim.HostSystem:host-107342&apos;,
+      connectionState = &apos;connected&apos;,
+      powerState = &apos;poweredOn&apos;,
+      faultToleranceState = &apos;notConfigured&apos;,
+      dasVmProtection = &lt;unset&gt;,
+      toolsInstallerMounted = false,
+      suspendTime = &lt;unset&gt;,
+      bootTime = 2020-08-20T18:04:07.880934Z,
+      suspendInterval = 0L,
+      question = &lt;unset&gt;,
+      memoryOverhead = &lt;unset&gt;,
+      maxCpuUsage = 11200,
+      maxMemoryUsage = 32768,
+      numMksConnections = 0,
+      recordReplayState = &apos;inactive&apos;,
+      cleanPowerOff = &lt;unset&gt;,
+      needSecondaryReason = &lt;unset&gt;,
+      onlineStandby = false,
+      minRequiredEVCModeKey = &apos;intel-ivybridge&apos;,
+      consolidationNeeded = false,
+      offlineFeatureRequirement = (vim.vm.FeatureRequirement) [
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.lm&apos;,
+            featureName = &apos;cpuid.lm&apos;,
+            value = &apos;Bool:Min:1&apos;
+         }
+      ],
+      featureRequirement = (vim.vm.FeatureRequirement) [
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSE3&apos;,
+            featureName = &apos;cpuid.SSE3&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.PCLMULQDQ&apos;,
+            featureName = &apos;cpuid.PCLMULQDQ&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSSE3&apos;,
+            featureName = &apos;cpuid.SSSE3&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.CMPXCHG16B&apos;,
+            featureName = &apos;cpuid.CMPXCHG16B&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.PCID&apos;,
+            featureName = &apos;cpuid.PCID&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSE41&apos;,
+            featureName = &apos;cpuid.SSE41&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSE42&apos;,
+            featureName = &apos;cpuid.SSE42&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.POPCNT&apos;,
+            featureName = &apos;cpuid.POPCNT&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.AES&apos;,
+            featureName = &apos;cpuid.AES&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.XSAVE&apos;,
+            featureName = &apos;cpuid.XSAVE&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.AVX&apos;,
+            featureName = &apos;cpuid.AVX&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.F16C&apos;,
+            featureName = &apos;cpuid.F16C&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.RDRAND&apos;,
+            featureName = &apos;cpuid.RDRAND&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SS&apos;,
+            featureName = &apos;cpuid.SS&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.FSGSBASE&apos;,
+            featureName = &apos;cpuid.FSGSBASE&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SMEP&apos;,
+            featureName = &apos;cpuid.SMEP&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.ENFSTRG&apos;,
+            featureName = &apos;cpuid.ENFSTRG&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.MDCLEAR&apos;,
+            featureName = &apos;cpuid.MDCLEAR&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.STIBP&apos;,
+            featureName = &apos;cpuid.STIBP&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.FCMD&apos;,
+            featureName = &apos;cpuid.FCMD&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.SSBD&apos;,
+            featureName = &apos;cpuid.SSBD&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.XCR0_MASTER_SSE&apos;,
+            featureName = &apos;cpuid.XCR0_MASTER_SSE&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.XCR0_MASTER_YMM_H&apos;,
+            featureName = &apos;cpuid.XCR0_MASTER_YMM_H&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.LAHF64&apos;,
+            featureName = &apos;cpuid.LAHF64&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.NX&apos;,
+            featureName = &apos;cpuid.NX&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.RDTSCP&apos;,
+            featureName = &apos;cpuid.RDTSCP&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.LM&apos;,
+            featureName = &apos;cpuid.LM&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.Intel&apos;,
+            featureName = &apos;cpuid.Intel&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.IBRS&apos;,
+            featureName = &apos;cpuid.IBRS&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;cpuid.IBPB&apos;,
+            featureName = &apos;cpuid.IBPB&apos;,
+            value = &apos;Bool:Min:1&apos;
+         },
+         (vim.vm.FeatureRequirement) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            key = &apos;misc.cpuidFaulting&apos;,
+            featureName = &apos;misc.cpuidFaulting&apos;,
+            value = &apos;Bool:Min:1&apos;
+         }
+      ],
+      featureMask = (vim.host.FeatureMask) [],
+      vFlashCacheAllocation = 0L,
+      paused = false,
+      snapshotInBackground = false,
+      quiescedForkParent = &lt;unset&gt;,
+      instantCloneFrozen = false,
+      cryptoState = &lt;unset&gt;
+   },
+   guest = (vim.vm.Summary.GuestSummary) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      guestId = &apos;windows9_64Guest&apos;,
+      guestFullName = &apos;Microsoft Windows 10 (64-bit)&apos;,
+      toolsStatus = &apos;toolsOk&apos;,
+      toolsVersionStatus = &apos;guestToolsCurrent&apos;,
+      toolsVersionStatus2 = &apos;guestToolsSupportedNew&apos;,
+      toolsRunningStatus = &apos;guestToolsRunning&apos;,
+      hostName = &apos;sdc-cr-win10&apos;,
+      ipAddress = &apos;fd53:5043:5000:8e00:250:56ff:fe8b:c80e&apos;,
+      hwVersion = &lt;unset&gt;
+   },
+   config = (vim.vm.Summary.ConfigSummary) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      name = &apos;Virtual1-29f02b0a1fb6d27eb&apos;,
+      template = false,
+      vmPathName = &apos;[esx-apt-dut3-raid50] Virtual1-29f02b0a1fb6d27eb/Virtual1-29f02b0a1fb6d27eb.vmx&apos;,
+      memorySizeMB = 32768,
+      cpuReservation = 0,
+      memoryReservation = 0,
+      numCpu = 4,
+      numEthernetCards = 1,
+      numVirtualDisks = 1,
+      uuid = &apos;420b5a03-2e52-2119-d1c0-94b84d4d1c63&apos;,
+      instanceUuid = &apos;500b40b2-ee1a-c965-ad6a-c10272814610&apos;,
+      guestId = &apos;windows9_64Guest&apos;,
+      guestFullName = &apos;Microsoft Windows 10 (64-bit)&apos;,
+      annotation = &apos;&apos;,
+      product = &lt;unset&gt;,
+      installBootRequired = false,
+      ftInfo = &lt;unset&gt;,
+      managedBy = &lt;unset&gt;,
+      tpmPresent = false,
+      numVmiopBackings = 0,
+      hwVersion = &lt;unset&gt;
+   },
+   storage = (vim.vm.Summary.StorageSummary) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      committed = 77399859704L,
+      uncommitted = 520L,
+      unshared = 42949672960L,
+      timestamp = 2020-08-20T18:04:30.734092Z
+   },
+   quickStats = (vim.vm.Summary.QuickStats) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      overallCpuUsage = 5208,
+      overallCpuDemand = 6552,
+      overallCpuReadiness = &lt;unset&gt;,
+      guestMemoryUsage = 30474,
+      hostMemoryUsage = 32896,
+      guestHeartbeatStatus = &apos;green&apos;,
+      distributedCpuEntitlement = 0,
+      distributedMemoryEntitlement = 0,
+      staticCpuEntitlement = 0,
+      staticMemoryEntitlement = 0,
+      grantedMemory = &lt;unset&gt;,
+      privateMemory = 32768,
+      sharedMemory = 0,
+      swappedMemory = 0,
+      balloonedMemory = 0,
+      consumedOverheadMemory = 128,
+      ftLogBandwidth = -1,
+      ftSecondaryLatency = -1,
+      ftLatencyStatus = &apos;gray&apos;,
+      compressedMemory = 0L,
+      uptimeSeconds = 252,
+      ssdSwappedMemory = 0L
+   },
+   overallStatus = &apos;green&apos;,
+   customValue = (vim.CustomFieldsManager.Value) []
+}
+</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="vmid_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>vm = &apos;vim\\.VirtualMachine:</regex>
+                            <start>0</start>
+                            <end>25</end>
+                        </item>
+                        <item name="vmid">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>25</start>
+                            <end>34</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{9}">exactly 9 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>&apos;,</regex>
+                            <start>34</start>
+                            <end>36</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>vm = &apos;vim.VirtualMachine:vm-269608&apos;,</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="hostname_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\s+hostName = &apos;</regex>
+                            <start>0</start>
+                            <end>18</end>
+                        </item>
+                        <item name="hostName">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>18</start>
+                            <end>30</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{12}">exactly 12 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>&apos;,</regex>
+                            <start>30</start>
+                            <end>32</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>      hostName = &apos;sdc-cr-win10&apos;,</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="ipaddress_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\s+ipAddress = &apos;</regex>
+                            <start>0</start>
+                            <end>19</end>
+                        </item>
+                        <item name="ipAddress">
+                            <regex>\\d+.\\d+.\\d+.\\d+</regex>
+                            <named>true</named>
+                            <start>19</start>
+                            <end>31</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="((\d+\.)+\d+)">one or more of digit and dots</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>&apos;,</regex>
+                            <start>31</start>
+                            <end>33</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>      ipAddress = &apos;10.142.0.180&apos;,</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="numCpu_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>numCpu =\\s+</regex>
+                            <start>0</start>
+                            <end>9</end>
+                        </item>
+                        <item name="numCpu">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>9</start>
+                            <end>10</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>,</regex>
+                            <start>10</start>
+                            <end>11</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>numCpu = 1,</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="memorySizeMB_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>memorySizeMB =\\s+</regex>
+                            <start>0</start>
+                            <end>15</end>
+                        </item>
+                        <item name="memorySizeMB">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>15</start>
+                            <end>18</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>,</regex>
+                            <start>18</start>
+                            <end>19</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>memorySizeMB = 512,</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="config_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>\\s+uuid = &apos;</regex>
+                            <start>0</start>
+                            <end>14</end>
+                        </item>
+                        <item name="uuid">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>14</start>
+                            <end>50</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{36}">exactly 36 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>&apos;,\\s+instanceUuid = &apos;</regex>
+                            <start>50</start>
+                            <end>75</end>
+                        </item>
+                        <item name="instanceUuid">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>75</start>
+                            <end>111</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{36}">exactly 36 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor2">
+                            <regex>&apos;,\\s+guestId = &apos;</regex>
+                            <start>111</start>
+                            <end>131</end>
+                        </item>
+                        <item name="guestOsId">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>131</start>
+                            <end>147</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor3">
+                            <regex>&apos;,\\s+guestFullName = &apos;</regex>
+                            <start>147</start>
+                            <end>173</end>
+                        </item>
+                        <item name="guestOsFullName">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>173</start>
+                            <end>202</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name=".{29}">exactly 29 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor4">
+                            <regex>&apos;,\\s+</regex>
+                            <start>202</start>
+                            <end>205</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>      uuid = &apos;420b5a03-2e52-2119-d1c0-94b84d4d1c63&apos;,
+      instanceUuid = &apos;500b40b2-ee1a-c965-ad6a-c10272814610&apos;,
+      guestId = &apos;windows9_64Guest&apos;,
+      guestFullName = &apos;Microsoft Windows 10 (64-bit)&apos;,
+</sampleMatch>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="vm.summary"/>
+</ResponseMap>

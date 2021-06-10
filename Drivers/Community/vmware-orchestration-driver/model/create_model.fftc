@@ -1,0 +1,883 @@
+<?xml version="1.0"?>
+<testCase version="8.3.0.202008271533">
+    <general>
+        <documentation>Create VMware Instance Driver Model</documentation>
+        <notes>Creates the necessary template(s) required for the VMware Instance Driver</notes>
+    </general>
+    <execution>
+        <parameters version="8.3.0.202008271533">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <velocity_ip pt:description="Hostname or IP address of Velocity">ps-production-velocity.spirenteng.com</velocity_ip>
+                    <velocity_user pt:description="User with admin privileges"/>
+                    <velocity_password pt:datatype="SECRET" pt:description="User password" pt:mask="true"/>
+                    <vmware_root_template pt:description="Root template to create under Orchestrated Resource template">VMware vSphere</vmware_root_template>
+                    <vmware_instance_template pt:description="Instance template to create under VMware Root template">vSphere Instance Template</vmware_instance_template>
+                    <vmware_port_template pt:description="Port template to crreate under Network Port template.">vSphere Network Adapter</vmware_port_template>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="5fb36a25-b859-439e-8d8e-5ad73062ea5e" action="open" session="velocity">
+                    <command>
+                        <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://[param velocity_ip]/velocity/api/" url.inherit="false">
+                            <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="815cced8-74ff-4387-8f8a-cab10488b48f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="16847b02-fdb1-4ed0-b9ce-30bfc029c025" action="GET" session="velocity">
+                            <command>
+                                <body>auth/v2/token</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/xtoken</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>token</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>error</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 0</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>{auto_message_true}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Unable to login</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="auth/v2/token" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="[param velocity_user]" user.inherit="false" password.masked="true" password="BCJm/oZUS6zbrrI58ZdXcerYANzZETwjSBzQGhgYreQ=" password.inherit="false" keyStoreFile.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3284034d-ec89-4076-9673-32537380acd0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get the ID of the &quot;Orchestrated Resource&quot; &amp; &quot;Network Port&quot; template</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7926dc88-7908-476a-95d3-86bae9796dd4" action="GET" session="velocity">
+                            <command>
+                                <body>inventory/v13/templates</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/templates/item[name=&apos;Orchestrated Resource&apos;]/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>orchResourceTemplateId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/templates/item[name=&apos;Network Port&apos;]/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>networkPortTemplateId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="inventory/v13/templates" action.inherit="false">
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c51eeb14-db86-49a0-8afc-136551e946d3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create the &quot;vSphere Network Adapter&quot; template under &quot;Network Port&apos;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d1deac99-9c8f-49f6-96fb-36f9002009e6" action="POST" session="velocity">
+                            <command>
+                                <body>inventory/v13/template</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>errorId</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 0</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>{auto_message_true}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>{auto_message_false}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>vSphereNetworkAdapterTemplateId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="inventory/v13/template" action.inherit="false">
+                                <message inherit="false">{
+  &quot;name&quot;: &quot;[param vmware_port_template]&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;type&quot;: &quot;PORT&quot;,
+  &quot;parentId&quot;: &quot;$networkPortTemplateId&quot;,
+  &quot;lastAction&quot;: &quot;MODIFIED&quot;,
+  &quot;tags&quot;: \\[
+    
+  ],
+  &quot;propertyGroups&quot;: \\[
+    {
+      &quot;name&quot;: &quot;VMware Information&quot;,
+      &quot;isHidden&quot;: false,
+      &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;NIC_Name&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;NIC_MAC&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;NIC_Adapter_Type&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        }
+      ]
+    }
+  ],
+  &quot;portGroups&quot;: \\[
+
+  ],
+  &quot;inheritConfig&quot;: false,
+  &quot;inheritFirmware&quot;: false,
+  &quot;reservationTime&quot;: &quot;IMMEDIATE&quot;,
+  &quot;l2SwitchId&quot;: null,
+  &quot;isShared&quot;: true,
+  &quot;interface&quot;: &quot;NONE&quot;,
+  &quot;isRemoved&quot;: false,
+  &quot;isUpdating&quot;: false,
+  &quot;agentRequirements&quot;: \\[
+
+  ]
+}</message>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f7b8c133-fd04-499a-9d30-319b07f7ee82" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create the &quot;VMware vSphere&quot; template under Orchestrated Resource</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0ae3c374-85eb-49ef-b5c4-146f40108dd5" action="POST" session="velocity">
+                            <command>
+                                <body>inventory/v13/template</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>errorId</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 0</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>{auto_message_true}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>{auto_message_false}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>id()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>rootTemplateId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="inventory/v13/template" action.inherit="false">
+                                <message inherit="false">{
+  &quot;name&quot;: &quot;[param vmware_root_template]&quot;,
+  &quot;type&quot;: &quot;DEVICE&quot;,
+  &quot;parentId&quot;: &quot;$orchResourceTemplateId&quot;,
+  &quot;lastAction&quot;: &quot;MODIFIED&quot;,
+  &quot;tags&quot;: \\[
+    
+  ],
+  &quot;propertyGroups&quot;: \\[
+    {
+      &quot;name&quot;: &quot;Credentials&quot;,
+      &quot;isHidden&quot;: true,
+      &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;Host&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Username&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Password&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;PASSWORD&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        }
+      ]
+    }
+  ],
+  &quot;portGroups&quot;: \\[
+
+  ],
+  &quot;inheritConfig&quot;: false,
+  &quot;inheritFirmware&quot;: false,
+  &quot;reservationTime&quot;: &quot;IMMEDIATE&quot;,
+  &quot;l2SwitchId&quot;: null,
+  &quot;isShared&quot;: true,
+  &quot;interface&quot;: &quot;NONE&quot;,
+  &quot;isRemoved&quot;: false,
+  &quot;isUpdating&quot;: false,
+  &quot;agentRequirements&quot;: \\[
+
+  ]
+}</message>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="58627bdc-b0d3-4fe3-b042-3bbc2d2e2515" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create the &quot;vSphere Instance&quot; template under VMware vSphere</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a3d96600-495d-42a7-9475-a00c84e2d100" action="GET" session="velocity" skip="true">
+                            <command>
+                                <body>inventory/v13/template/c3f763ca-f56e-4714-95c0-33eab3699681</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message.inherit="false" action="inventory/v13/template/c3f763ca-f56e-4714-95c0-33eab3699681" action.inherit="false">
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="04417379-b0d2-4622-a6e5-38f5366b8377" action="POST" session="velocity">
+                            <command>
+                                <body>inventory/v13/template</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>errorId</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 0</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>{auto_message_true}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>{auto_message_false}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>id()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>instanceTemplateId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="inventory/v13/template" action.inherit="false">
+                                <message inherit="false">{
+  &quot;name&quot;: &quot;[param vmware_instance_template]&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;type&quot;: &quot;DEVICE&quot;,
+  &quot;parentId&quot;: &quot;$rootTemplateId&quot;,
+  &quot;lastAction&quot;: &quot;MODIFIED&quot;,
+  &quot;tags&quot;: \\[
+
+  ],
+  &quot;propertyGroups&quot;: \\[
+    {
+      &quot;name&quot;: &quot;Instance Identification&quot;,
+      &quot;isHidden&quot;: false,
+      &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;VMID&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;UUID&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Instance_UUID&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Instance_Name&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Instance_IP_Address&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Instance_Hostname&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        }
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;Instance Placement&quot;,
+      &quot;isHidden&quot;: false,
+      &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;Template&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Datacenter&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Cluster&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Datastore&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Resource_Pool&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Wait_For_IP&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;true&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;BOOLEAN&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Clone_From_Snapshot&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;false&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;BOOLEAN&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Folder&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        }
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;Instance General Information&quot;,
+      &quot;isHidden&quot;: false,
+      &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;CPU_Count&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Memory&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Disk_Size&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;OS_Family&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        }
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;Consoles&quot;,
+      &quot;isHidden&quot;: false,
+      &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;Supports_HTTP_Console&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;false&quot;,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;BOOLEAN&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Supports_HTTPS_Console&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;false&quot;,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;BOOLEAN&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Supports_RDP_Console&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;false&quot;,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;BOOLEAN&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Supports_SSH_Console&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;false&quot;,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;BOOLEAN&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;Supports_Telnet_Console&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;false&quot;,
+          &quot;isRequired&quot;: false,
+          &quot;type&quot;: &quot;BOOLEAN&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        }
+      ]
+    }
+  ],
+  &quot;portGroups&quot;: \\[
+
+  ],
+  &quot;configAssetId&quot;: null,
+  &quot;firmwareAssetId&quot;: null,
+  &quot;configURI&quot;: null,
+  &quot;firmwareURI&quot;: null,
+  &quot;inheritConfig&quot;: false,
+  &quot;inheritFirmware&quot;: false,
+  &quot;reservationTime&quot;: &quot;IMMEDIATE&quot;,
+  &quot;isShared&quot;: true,
+  &quot;interface&quot;: &quot;ORCHESTRATION&quot;,
+  &quot;isRemoved&quot;: false,
+  &quot;isUpdating&quot;: false,
+  &quot;agentRequirements&quot;: \\[
+
+  ]
+}</message>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="36c1ba29-bf91-42a2-97fe-135ae3c5f6a8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create a Port derived from &quot;vSphere Network Adapter&quot;</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="443b813f-9283-416b-8333-2e4f98e37402" action="GET" session="velocity" skip="true">
+                            <command>
+                                <body>inventory/v13/template/c3f763ca-f56e-4714-95c0-33eab3699681/ports</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message.inherit="false" action="inventory/v13/template/c3f763ca-f56e-4714-95c0-33eab3699681/ports" action.inherit="false">
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="3e0dd051-e868-4651-9640-37ceee6f7985" action="POST" session="velocity">
+                            <command>
+                                <body>inventory/v13/template/$instanceTemplateId/ports</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>errorId</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 0</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>{auto_message_true}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>{auto_message_false}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="inventory/v13/template/$instanceTemplateId/ports" action.inherit="false">
+                                <message inherit="false">{
+  &quot;ports&quot;: \\[
+    {
+      &quot;name&quot;: &quot;nic1&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;templateId&quot;: &quot;$vSphereNetworkAdapterTemplateId&quot;
+    },
+    {
+      &quot;name&quot;: &quot;nic2&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;templateId&quot;: &quot;$vSphereNetworkAdapterTemplateId&quot;
+    }
+  ]
+}</message>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9b630787-9efd-479e-bcba-47359c77cbc5" action="close" session="velocity">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2aaaf8c0-1bfa-4293-8431-614d119c595d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>If we reach here, force test case to pass</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>1 == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

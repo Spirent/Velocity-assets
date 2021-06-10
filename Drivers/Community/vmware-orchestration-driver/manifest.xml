@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>  
+    <version>1.0.0</version>  
+    <vendor>Spirent</vendor>
+    <supportCustomArguments>true</supportCustomArguments>
+    <language>itest</language>  
+    <interface>Orchestration</interface>
+    <entryPoint>vmware-orchestration-driver.fftc</entryPoint>
+    <timeout>3600</timeout>
+    <resourceProperties>
+      <property optional="false">
+        <name>UUID</name>        
+      </property>
+      <property optional="false">
+        <name>Instance_IP_Address</name>        
+      </property>
+      <property optional="false">
+        <name>Host</name>              
+      </property>      
+      <property optional="false">
+        <name>Username</name>        
+      </property>   
+      <property optional="false">
+        <name>Password</name>        
+      </property>   
+      <property optional="false">
+        <name>Template</name>        
+      </property>
+      <property optional="false">
+        <name>Datacenter</name>        
+      </property>
+      <property optional="false">
+        <name>Folder</name>        
+      </property>
+      <property optional="false">
+        <name>Datastore</name>        
+      </property>     
+      <property optional="false">
+        <name>Cluster</name>        
+      </property>
+      <property optional="false">
+        <name>Resource_Pool</name>        
+      </property>         
+      <property optional="false">
+        <name>Wait_For_IP</name>        
+      </property>                                    
+      <property optional="false">
+        <name>Clone_From_Snapshot</name>        
+      </property>                                    
+    </resourceProperties>   
+</resourceDriver>

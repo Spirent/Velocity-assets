@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ParameterTree version="8.5.0.202104211757">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <call_count pt:datatype="INTEGER">1</call_count>
+            <call_0>destroyVlan 777</call_0>
+        </parameters>
+    </parameters>
+    <includeParameters>
+        <item>_required.ffpt</item>
+    </includeParameters>
+</ParameterTree>

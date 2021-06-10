@@ -1,0 +1,19 @@
+language: python
+python:
+    - "2.7"
+    - "3.6"
+    - "pypy"
+
+before_install:
+    - pip install pep8
+    - pep8 $TRAVIS_BUILD_DIR/samples/*.py
+    - pep8 $TRAVIS_BUILD_DIR/samples/tools/*.py
+
+install:
+    - python setup.py bdist_egg
+    - pip install -e file://$TRAVIS_BUILD_DIR
+
+script:
+    nosetests
+
+
