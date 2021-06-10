@@ -29,7 +29,7 @@ VMware object documentation: https://vdc-repo.vmware.com/vmwb-repository/dcr-pub
                             <nestedSteps>
                                 <item guid="98358ee0-1825-4e52-aead-f1bfb2cbe413" action="eval" useFieldsInCommand="false">
                                     <command>
-                                        <body>print(file_uriToPath(&apos;project://vmware-orchestration-driver&apos;))</body>
+                                        <body>print(file_uriToPath(&apos;project://ri_vmware-orchestration-driver&apos;))</body>
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>

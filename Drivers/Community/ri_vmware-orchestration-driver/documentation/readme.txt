@@ -14,7 +14,7 @@ The agent running this driver needs the pyvmomi python library installed and usa
 
 ### Installation:
   
-Upload the "vSphere vSwitch" driver iTar to Velocity via "Libary / Drivers / Add" and name it something like "VMware L2 Switch Driver 2.0.0"
+Upload the "vSphere vSwitch" driver zip to Velocity via "Libary / Drivers / Add" and name it something like "VMware L2 Switch Driver 2.0.0"
 ![Template](documentation/l2.driver.upload.png)
 
 Create the "vSphere vSwitch" template by running vmware-l2switch-driver/model/create_model.fftc, making sure that the parameters are set appropriately. When running the script, iTest will prompt for the password.
