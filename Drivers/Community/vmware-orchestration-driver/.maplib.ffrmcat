@@ -1,11 +1,2 @@
 <?xml version="1.0"?>
-<ResponseMapCatalog version="8.5.0.202103021747">
-    <mapCatalog>
-        <item name="response_maps/add_nic.ffrm">
-            <applicability actionType="command" command="add_nic*"/>
-        </item>
-        <item name="response_maps/vm_summary.ffrm">
-            <applicability actionType="command" command="vm.summary"/>
-        </item>
-    </mapCatalog>
-</ResponseMapCatalog>
+<ResponseMapCatalog version="8.5.0.202103021747"/>
