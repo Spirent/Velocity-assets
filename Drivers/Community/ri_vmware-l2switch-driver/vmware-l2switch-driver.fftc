@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="8.5.0.202104211757">
+<testCase version="8.5.0.202103021747">
     <general>
         <documentation>VMware vSphere L2 Switch Driver</documentation>
         <notes>An L2 driver that manages vSwitches, networks and port groups in vSphere. Tested with Python 3.6.5.
@@ -24,7 +24,7 @@ VMware object documentation: https://vdc-repo.vmware.com/vmwb-repository/dcr-pub
                     <nestedSteps>
                         <item guid="98358ee0-1825-4e52-aead-f1bfb2cbe413" action="eval" useFieldsInCommand="false">
                             <command>
-                                <body>print(file_uriToPath(&apos;project://vmware-l2switch-driver&apos;))</body>
+                                <body>print(file_uriToPath(&apos;project://ri_vmware-l2switch-driver&apos;))</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
