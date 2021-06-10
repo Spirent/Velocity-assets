@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ParameterTree version="8.5.0.202104211757">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <call_count pt:datatype="INTEGER">1</call_count>
+            <call_0>addToVlan 777 420b2ba9-ce16-deb5-1431-c0fb175eeb4d.00:50:56:8b:a3:99 mytag</call_0>
+        </parameters>
+    </parameters>
+    <includeParameters>
+        <item>_required.ffpt</item>
+    </includeParameters>
+</ParameterTree>

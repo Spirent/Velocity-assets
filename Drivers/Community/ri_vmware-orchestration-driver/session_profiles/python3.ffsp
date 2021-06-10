@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.5.0.202103021747">
+    <baseApplication>com.fnfr.svt.applications.python</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.python.PythonSessionProperties">
+        <pythonProperties>
+            <additionalModulePath inherit="false">
+                <item inherit="false">pyvmomi-community-samples/samples</item>
+                <item inherit="false">.</item>
+            </additionalModulePath>
+            <initializationScript inherit="false">from pyVmomi import vim
+from pyVmomi import vmodl
+from tools import tasks
+from pyVim.connect import SmartConnect, SmartConnectNoSSL, Disconnect
+import atexit
+import argparse
+import getpass
+</initializationScript>
+        </pythonProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_vmware-orchestration-driver</responseLibrary>
+    <formMapLibrary inherit="false">project://ri_vmware-orchestration-driver</formMapLibrary>
+    <language>Python</language>
+</SessionTemplate>

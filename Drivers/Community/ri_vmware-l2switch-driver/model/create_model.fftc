@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<testCase version="8.5.0.202104211757">
+    <general>
+        <documentation>Create VMware L2 Switch Driver Model</documentation>
+        <notes>Creates the necessary template(s) required for the VMware L2 Switch Driver</notes>
+    </general>
+    <execution>
+        <parameters version="8.5.0.202104211757">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <velocity_ip pt:description="Hostname or IP address of Velocity">ps-production-velocity.spirenteng.com</velocity_ip>
+                    <velocity_user pt:description="User with admin privileges"/>
+                    <velocity_password pt:datatype="SECRET" pt:description="User password" pt:mask="true"/>
+                    <vmware_l2switch_template pt:description="Name of the template to create under Layer 2 Switch">vSphere vSwitch</vmware_l2switch_template>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="5fb36a25-b859-439e-8d8e-5ad73062ea5e" action="open" session="velocity">
+                    <command>
+                        <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://[param velocity_ip]/velocity/api/" url.inherit="false">
+                            <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="815cced8-74ff-4387-8f8a-cab10488b48f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Login</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="16847b02-fdb1-4ed0-b9ce-30bfc029c025" action="GET" session="velocity">
+                            <command>
+                                <body>auth/v2/token</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/xtoken</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>token</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>error</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 0</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>{auto_message_true}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Unable to login</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="auth/v2/token" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="[param velocity_user]" user.inherit="false" password.masked="true" password="BCJm/oZUS6zbrrI58ZdXcerYANzZETwjSBzQGhgYreQ=" password.inherit="false" keyStoreFile.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3284034d-ec89-4076-9673-32537380acd0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get the IDs of the &quot;Layer 2 Switch&quot; templates</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7926dc88-7908-476a-95d3-86bae9796dd4" action="GET" session="velocity">
+                            <command>
+                                <body>inventory/v13/templates</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/templates/item[name=&apos;Layer 2 Switch&apos;]/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>l2SwitchTemplateId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="inventory/v13/templates" action.inherit="false">
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1fdc3f2b-784e-4708-afeb-72fed5bb3593" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create the &quot;vSphere vSwitch&quot; template under Layer 2 Switch</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="987668de-bf7e-4cb1-80bf-4c3af3c8c05b" action="POST" session="velocity">
+                            <command>
+                                <body>inventory/v13/template</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>errorId</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>$value == 0</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>{auto_message_true}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>{auto_message_false}</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="inventory/v13/template" action.inherit="false">
+                                <message inherit="false">{
+  &quot;name&quot;: &quot;[param vmware_l2switch_template]&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;type&quot;: &quot;DEVICE&quot;,
+  &quot;parentId&quot;: &quot;$l2SwitchTemplateId&quot;,
+  &quot;lastAction&quot;: &quot;MODIFIED&quot;,
+  &quot;tags&quot;: \\[
+    
+  ],
+  &quot;propertyGroups&quot;: \\[
+    {
+      &quot;name&quot;: &quot;vSphere Information&quot;,
+      &quot;isHidden&quot;: false,
+      &quot;properties&quot;: \\[
+        {
+          &quot;name&quot;: &quot;vSphereHost&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: null,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;vSwitchNamePrefix&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;vel&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;vSwitchIsDVS&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;false&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;BOOLEAN&quot;,
+          &quot;isInherited&quot;: true,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;vSwitchDatacenter&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        },
+        {
+          &quot;name&quot;: &quot;vSwitchHost&quot;,
+          &quot;description&quot;: &quot;&quot;,
+          &quot;defaultValue&quot;: &quot;&quot;,
+          &quot;isRequired&quot;: true,
+          &quot;type&quot;: &quot;TEXT&quot;,
+          &quot;isInherited&quot;: false,
+          &quot;availableValues&quot;: null
+        }
+      ]
+    }
+  ],
+  &quot;portGroups&quot;: \\[
+
+  ],
+  &quot;inheritConfig&quot;: false,
+  &quot;inheritFirmware&quot;: false,
+  &quot;reservationTime&quot;: &quot;IMMEDIATE&quot;,
+  &quot;l2SwitchId&quot;: null,
+  &quot;isShared&quot;: true,
+  &quot;interface&quot;: &quot;CONFIGURABLE_LAYER2_SWITCH&quot;,
+  &quot;isRemoved&quot;: false,
+  &quot;isUpdating&quot;: false,
+  &quot;agentRequirements&quot;: \\[
+
+  ]
+}</message>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" header.sub="false" value="$token" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9b630787-9efd-479e-bcba-47359c77cbc5" action="close" session="velocity">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2aaaf8c0-1bfa-4293-8431-614d119c595d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>If we reach here, force test case to pass</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>1 == 1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

@@ -1,0 +1,2353 @@
+<?xml version="1.0"?>
+<testCase version="8.5.0.202104211757">
+    <general>
+        <documentation>VMware vSphere L2 Switch Driver</documentation>
+        <notes>An L2 driver that manages vSwitches, networks and port groups in vSphere. Tested with Python 3.6.5.
+
+To prepare the driver agents to run this, follow instructions in http://vmware.github.io/pyvmomi-community-samples/
+
+Windows: http://vthinkbeyondvm.com/getting-started-with-pyvmomi-on-windows-supports-vsphere-6-7/
+
+VMware object documentation: https://vdc-repo.vmware.com/vmwb-repository/dcr-public/6b586ed2-655c-49d9-9029-bc416323cb22/fa0b429a-a695-4c11-b7d2-2cbc284049dc/doc/left-pane.html
+
+</notes>
+        <owner>Spirent Communications</owner>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="18843a0b-9918-4ea9-b299-07cd07a734d2" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>The file_uriToPath function explodes the contents of the entire project into a tmp directory on the agent. This is necessary in order for the Python automation to gain access to modules. If you rename this project, make sure to rename the line below.</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="98358ee0-1825-4e52-aead-f1bfb2cbe413" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(file_uriToPath(&apos;project://vmware-l2switch-driver&apos;))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c98f4eee-a694-4abe-821e-f7fdc9415f9c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Run each procedure call listed as a parameter</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="8f563bc1-6436-4855-968d-251aaa0a3c3e" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>i in range(0, int(param(&apos;call_count&apos;))):</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="917a93ec-d82e-4853-86ac-6a60b5e38a12" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>call = &apos;call_{0}&apos;.format(i)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="4e4d635d-fcdb-40a4-98b4-9783a1dc70a8" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>procCall = param(call).replace(&quot;&apos;&quot;, &apos;&quot;&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="1cd7c34a-b317-4f02-989c-cb141d9e57e7" action="message" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Information:Calling [procCall]</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="9471e12f-3649-4aea-ae67-c9fa1cab6789" action="call">
+                                            <command>
+                                                <body>[procCall]</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                        <message inherit="false">Calling [procCall]</message>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7a378be1-9f35-4de3-879c-06b340044ccc" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Return JSON response to Velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="628186d2-01b2-4367-8b1f-3b905974020b" action="return">
+                            <command>
+                                <body>[response]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getPorts">
+            <steps>
+                <item guid="1226013e-9713-4936-af45-aaae8057e5b4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>TODO: Add ping logic in here to determine online/offline status of the VM. Optionally add port online/offline status as well</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b7ea44ce-c724-442c-9064-b9db82fcf2b7" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;ports&apos;, fromFile=&apos;false&apos;, jsonString=&apos;{&quot;ports&quot;:[]}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false">{&quot;ports&quot;:[]}</jsonString>
+                                <documentName inherit="false">ports</documentName>
+                            </applicationProperties>
+                        </item>
+                        <item guid="67182455-e5de-4498-a149-7a5720432272" action="return">
+                            <command>
+                                <body>[ports]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="getProperties">
+            <steps>
+                <item guid="cad7a510-68a5-4448-8fdf-ba8dacd0a1e7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>TODO: Add auto-discover logic in here</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2e026e89-935b-4d87-bb1a-2eea535662d1" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=&apos;false&apos;, jsonString=&apos;{&quot;ports&quot;:[],&quot;properties&quot;:[]}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false">{&quot;ports&quot;:[],&quot;properties&quot;:[]}</jsonString>
+                                <documentName inherit="false">response</documentName>
+                            </applicationProperties>
+                        </item>
+                        <item guid="88510b5c-a0c9-44e2-992a-d6f5188746f8" action="return">
+                            <command>
+                                <body>[response]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="includePorts">
+                    <defaultValue>false</defaultValue>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="termOrchestratedResource_old">
+            <steps>
+                <item guid="c01a43ff-b29a-42e0-90b1-3d1a9cf06831" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create password secret from property</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5701a86a-9159-47bb-a309-4c14a079690c" action="eval" useFieldsInCommand="false" skippReporting="false">
+                            <command>
+                                <body>print(param(&apos;property_password&apos;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>password</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">true</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e6946c71-0e30-4c52-a96c-06b615750ef0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Destroy vm based on uuid</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="079f8b8c-1848-4676-a76e-786deaabb403" action="open" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>session_profiles/python2.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.applications.python.PythonSessionProperties"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="76e8a427-65bc-4965-96a4-7485f1afb703" action="command" session="t1" normalOffset="15.924" estimatedStepExecutionTime="1.6">
+                            <command>
+                                <body>si=SmartConnectNoSSL(host=&apos;[param(&apos;property_vSphereHost&apos;)]&apos;, user=&apos;[param(&apos;property_username&apos;)]&apos;, pwd=&apos;[param(&apos;property_password&apos;)]&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b1c845bb-a05e-497f-8c5b-5250cb301a69" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>si</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>item()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &quot;vim.ServiceInstance:ServiceInstance&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message> ServiceInstance object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message> Unable to create ServiceInstance object - check your credentials.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="50f8f906-54bd-4187-958e-407e55043167" action="command" session="t1" normalOffset="13.707" estimatedStepExecutionTime="0.004" useFieldsInCommand="false">
+                            <command>
+                                <body>atexit.register(Disconnect, si)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="82051f42-0ff1-48ba-91be-84a9b5f3ea7a" action="comment" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>Original term code</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="3a67485c-973c-4824-8e19-259fd2efe4c5" action="command" session="t1" skip="true" estimatedStepExecutionTime="0.015" useFieldsInCommand="false">
+                                    <command>
+                                        <body>from delete_vm import *</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="72a95ced-a78a-41cd-a9c2-998637f857da" action="command" session="t1" skip="true" normalOffset="15.924" estimatedStepExecutionTime="1.6">
+                                    <command>
+                                        <body>si=SmartConnectNoSSL(host=&apos;[param(&apos;property_vSphereHost&apos;)]&apos;, user=&apos;[param(&apos;property_username&apos;)]&apos;, pwd=&apos;[param(&apos;property_password&apos;)]&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="7de1be1b-255e-4819-ba25-60154f15802a" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>si</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>item()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>value == &quot;vim.ServiceInstance:ServiceInstance&quot;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                    <message> ServiceInstance object created successfully.</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message> Unable to create ServiceInstance object - check your credentials.</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="AbortExecution">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="4f9405ff-7590-4b53-8c19-94a2181b559a" action="command" session="t1" skip="true" normalOffset="13.707" estimatedStepExecutionTime="0.004" useFieldsInCommand="false">
+                                    <command>
+                                        <body>atexit.register(Disconnect, si)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="fad55db7-df39-4d0c-9d22-702856cb737c" action="command" session="t1" skip="true">
+                                    <command>
+                                        <body>destroy_vm(si, &apos;[param(&apos;property_UUID&apos;)]&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="00f5dcfe-2a5d-4ce1-b273-5975e831eda1" action="comment" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>add and remove vswitch and portgroup</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="d3e715e8-e902-4193-b7e2-3942ebf13b40" action="command" session="t1" skip="true" normalOffset="0.166" estimatedStepExecutionTime="0.002" useFieldsInCommand="false">
+                                    <command>
+                                        <body>from add_vswitch_to_host import *</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="5c37a821-6e25-4e0d-b973-3f8829824e53" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>from del_vswitch_from_host import *</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="43d4e371-0074-41cc-b773-8fbc13b33146" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>from add_portgroup_to_vswitch import *</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="9a7402ff-69d5-4d4d-af32-4a581aa8decd" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>from del_portgroup_from_vswitch import *</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="15dd8843-a1cc-4a22-b7aa-40075ab5cb9a" action="command" session="t1" skip="true" normalOffset="15.924" estimatedStepExecutionTime="1.6">
+                                    <command>
+                                        <body>si=SmartConnectNoSSL(host=&apos;[param(&apos;property_vSphereHost&apos;)]&apos;, user=&apos;[param(&apos;property_username&apos;)]&apos;, pwd=&apos;[param(&apos;property_password&apos;)]&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c1979140-7280-48b8-bd53-75c5a3970a11" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>si</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>item()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>value == &quot;vim.ServiceInstance:ServiceInstance&quot;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                    <message> ServiceInstance object created successfully.</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message> Unable to create ServiceInstance object - check your credentials.</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="AbortExecution">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="c5599a5b-4673-47bc-90e9-16f6d2ccf528" action="command" session="t1" skip="true" normalOffset="13.707" estimatedStepExecutionTime="0.004" useFieldsInCommand="false">
+                                    <command>
+                                        <body>atexit.register(Disconnect, si)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="3bbfd534-ae79-4531-9fae-64586a8fbdda" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>content = si.RetrieveContent()</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="3004dd5a-5fae-4300-a572-f7df6fd58270" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>content</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="e4db8155-2d6e-4814-bcf7-d24418fe18e4" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>hosts = GetVMHosts(content)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="9fb46c2c-7f0e-4eac-96b1-0642b5222074" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>hosts</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="350d9d74-db88-4669-a30f-5164dcf77af9" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>AddHostsSwitch(hosts,&apos;rtx-vswitch1&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="9d09087c-b4b0-4e41-9273-0a37bd272e82" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>AddHostsPortgroup(hosts, &apos;rtx-vswitch1&apos;, &apos;rtx-portgroup1&apos;, 900)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="5fb91ea6-ea0c-47bf-9f64-d5cc85bafd54" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>AddHostsPortgroup(hosts, &apos;rtx-vswitch1&apos;, &apos;rtx-portgroup2&apos;, 900)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="af2bada4-3aea-4697-9498-692be04abb78" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>DelHostsPortgroup(hosts, &apos;rtx-portgroup1&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="cd7060c4-ec70-4820-a7a4-c8b047e73f20" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>DelHostsPortgroup(hosts, &apos;rtx-portgroup2&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ddede5cd-ab90-4de5-a5b8-8af93fcfaed4" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>DelHostsSwitch(hosts, &apos;rtx-vswitch1&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="af8d001c-16c1-4fb6-b9c4-ffe956aa9676" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>change vm network</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="8b41a68b-d7eb-4c05-95be-79e483595dff" action="command" session="t1" useFieldsInCommand="false">
+                                    <command>
+                                        <body>from change_vm_vif import *</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="08583a97-5587-4a88-a4ec-3a998ee48d92" action="command" session="t1" useFieldsInCommand="false">
+                                    <command>
+                                        <body>change_vm_network(si, &apos;420bc87a-d9a5-1064-3079-cad3b461e2b5&apos;, &apos;Network adapter 2&apos;, &apos;rtx-portgroup1&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="01f2c9d1-b7b7-46c0-9a5e-89d0cd575deb" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get_VDS_network(content, &apos;rtx-portgroup1&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="8869b9fd-449e-4283-9713-6e4021de115e" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get_VSS_network(content, &apos;rtx-portgroup1&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f43e45f7-8f74-4ad0-8dad-0517c0105b50" action="close" session="t1" normalOffset="177.752" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="createVlan">
+            <steps>
+                <item guid="0e0abc25-fec5-45f4-bf72-5cbfc72334f4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Extract arguments</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="afa3eb42-a633-4e83-b3f1-985e7feada33" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>vlanId = arg</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b4910a5e-e788-475c-b6a3-356559043f85" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create password secret from property</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="1bc0a407-9a1e-41b5-ab9e-544771d036d9" action="eval" useFieldsInCommand="false" skippReporting="false">
+                            <command>
+                                <body>print(param(&apos;property_password&apos;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>password</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">true</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b5db21ae-85d9-406b-90f9-06a73721f581" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open session and do all the necessary imports</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9f8c4b9f-7900-4975-8c8e-b81d36dda842" action="open" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>session_profiles/python2.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.applications.python.PythonSessionProperties"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="f437d4ca-6028-4ff3-a135-749cf0c6891f" action="command" session="t1" normalOffset="0.166" estimatedStepExecutionTime="0.002" useFieldsInCommand="false">
+                            <command>
+                                <body>from add_vswitch_to_host import *</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ae2febf3-318f-492d-873f-7e3b6d96a450" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>from add_portgroup_to_vswitch import *</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="84041135-3843-4731-8405-21c7b8eb9afa" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>from create_dvs_and_dvport_group import *</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="dc05c11d-b48c-4aa3-a780-04999c2b19ff" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create Service Instance and Content object</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c25d900e-9405-4518-a02e-0d6ab36a829c" action="command" session="t1" normalOffset="15.924" estimatedStepExecutionTime="1.6">
+                            <command>
+                                <body>si=SmartConnectNoSSL(host=&apos;[param(&apos;property_vSphereHost&apos;)]&apos;, user=&apos;[param(&apos;property_username&apos;)]&apos;, pwd=&apos;[password]&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9bdfdb9f-810e-4dba-8b41-7ab03e8ac48f" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>si</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>item()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &quot;vim.ServiceInstance:ServiceInstance&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message> ServiceInstance object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message> Unable to create ServiceInstance object - check your credentials.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f92a288f-4353-4eb2-8ba0-b6533a01a881" action="command" session="t1" normalOffset="13.707" estimatedStepExecutionTime="0.004" useFieldsInCommand="false">
+                            <command>
+                                <body>atexit.register(Disconnect, si)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="58aa6c74-b829-4a44-8ed6-d72c42bd234e" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>content = si.RetrieveContent()</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="4b97e096-bea7-4523-8bd1-baa64e95e314" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>content</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>(vim.ServiceInstanceContent)</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>Content object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Unable to create Content object.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1d3e34ab-79f5-4301-8489-33fa321c4a90" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create unique vSwitch and portgroup</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="190b58f9-e2e9-4210-afa1-e355c5121dd9" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>getVSwitchName(vlanId)</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>vSwitchName</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="28ce79b6-ed58-44d9-a81f-9b77cda4872b" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>getNetworkName(vlanId)</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>networkName</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a2a20654-c419-4c24-b8a9-fd2513e2ec9d" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>hosts = GetVMHosts(content)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="6902dbf4-9061-4604-b85a-a28802e0a49c" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>hosts</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="7275baa2-81a5-4198-b73d-bc0dc39cd932" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Add vswitch depending on whether we need a DVS or a vSwitch</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="632db0e5-174c-4ac8-bc2e-30a99246fbc8" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>param(&apos;property_vSwitchIsDVS&apos;) == &apos;true&apos;:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="ad6dcea2-ea7a-44ef-9ea1-5b8ef41f29c2" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>We need to add a DVS to a specific host</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="5630d8bd-b87a-4021-a7c3-5c882d5738f9" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>vSwitchHost = param(&apos;property_vSwitchHost&apos;) </body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="c7c0b566-47a3-4175-80a5-29c81878b2f3" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>vSwitchDatacenter = param(&apos;property_vSwitchDatacenter&apos;) </body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="2f9855fc-5670-4363-85f6-35aef2874c84" action="command" session="t1">
+                                                    <command>
+                                                        <body>CreateDVSAndPortGroup(si, content, hosts, &apos;[vSwitchHost]&apos;, &apos;[vSwitchDatacenter]&apos;, &apos;[vSwitchName]&apos;, &apos;[vlanId]&apos;, &apos;[networkName]&apos;)</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="contains">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                                        <searchString>Traceback</searchString>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="assert">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                        <expression>value == 0</expression>
+                                                                        <actionsWhenTrue>
+                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                    <message>Successfully created DVS and Portgroup.</message>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                            <item actionId="Eval">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                                    <statement>error = &quot;no&quot;</statement>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenTrue>
+                                                                        <actionsWhenFalse>
+                                                                            <item actionId="FailTest">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                                    <message>Unable to create DVS and/or Portgroup.</message>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                            <item actionId="Eval">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                                    <statement>error = &quot;yes&quot;</statement>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenFalse>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="8fa8396a-d4de-47ac-9492-e303d68d2ef9" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>error == &quot;yes&quot;:</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="2077739f-a4e4-4cef-bb6d-aed058975233" action="comment" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>Clean up on any error</body>
+                                                            </command>
+                                                            <nestedSteps>
+                                                                <item guid="5520933c-233b-4590-b98d-5f0f09b456f7" action="command" session="t1">
+                                                                    <command>
+                                                                        <body>DeleteDVS(si, content, &apos;[vSwitchName]&apos;)</body>
+                                                                    </command>
+                                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                </item>
+                                                            </nestedSteps>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="6cbb2211-149e-4525-9bfc-8fa9c6094026" action="else" useFieldsInCommand="false">
+                                    <nestedSteps>
+                                        <item guid="f9cb280a-e1f9-4d26-8a4b-527703412e42" action="comment" skip="true" useFieldsInCommand="false">
+                                            <command>
+                                                <body>We need to add a vSwitch to all hosts</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="bcd2e199-ecd2-44ce-b2ea-bfa679ab79d4" action="command" session="t1">
+                                                    <command>
+                                                        <body>AddHostsSwitch(hosts, &apos;[vSwitchName]&apos;)</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="contains">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                                        <searchString>Traceback</searchString>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="assert">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                        <expression>value == 0</expression>
+                                                                        <actionsWhenTrue>
+                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                    <message>{auto_message_true}</message>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenTrue>
+                                                                        <actionsWhenFalse>
+                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                                    <message>Unable to add switch.</message>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                            <item actionId="FailTest">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                            <item actionId="AbortExecution">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                        </actionsWhenFalse>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="77fb2d5f-21e4-41ac-bf70-72747bce701b" action="command" session="t1">
+                                                    <command>
+                                                        <body>AddHostsPortgroup(hosts,  &apos;[vSwitchName]&apos;, &apos;[networkName]&apos;, &apos;[vlanId]&apos;)</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="contains">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                                        <searchString>Traceback</searchString>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="assert">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                        <expression>value == 0</expression>
+                                                                        <actionsWhenTrue>
+                                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                                    <message>{auto_message_true}</message>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenTrue>
+                                                                        <actionsWhenFalse>
+                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                                    <message>Unable to add portgroup.</message>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                            <item actionId="FailTest">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                            <item actionId="AbortExecution">
+                                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                            </item>
+                                                                        </actionsWhenFalse>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="92054fa7-7cf8-4eae-9513-d851bca0cf4b" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Add to a specific host only</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="c31d3ac9-6a1a-4fcb-bb94-92dcedac32c7" action="command" session="t1">
+                                                    <command>
+                                                        <body>cluster = GetHost(hosts, &apos;[param(&apos;property_vSwitchHost&apos;)]&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="b9d30a23-02fb-4b69-9d1e-c3f4244672e1" action="command" session="t1" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>cluster</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="c2e97374-277f-434a-bbb3-bb20f3ffe470" action="command" session="t1">
+                                                    <command>
+                                                        <body>AddHostSwitch(cluster, &apos;[vSwitchName]&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="b4e83303-79d6-477c-ba45-91961177762c" action="command" session="t1">
+                                                    <command>
+                                                        <body>AddHostPortgroup(cluster,  &apos;[vSwitchName]&apos;, &apos;[networkName]&apos;, &apos;[vlanId]&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4623a00b-4356-40a3-9301-3c280c204622" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Close session</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="8fef197d-2487-4293-925e-3eebce38e1e8" action="close" session="t1" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="85a1fecb-d896-438c-88cc-7b90f7921b5e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Form JSON and return</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="008d8fad-5bdd-4136-9fb9-2167b4957f6d" action="return">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="destroyVlan">
+            <steps>
+                <item guid="07b79fc1-7aa4-44b4-b388-8141963b7380" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Extract arguments</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c2bc3d1b-8344-465a-a2d7-5de2bc0cbd4b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>vlanId = arg</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="66a5d75c-b9f9-4876-b2c0-27c887ac28f5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create password secret from property</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5f303361-abe8-44b3-bc75-d8d9409c2f23" action="eval" useFieldsInCommand="false" skippReporting="false">
+                            <command>
+                                <body>print(param(&apos;property_password&apos;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>password</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">true</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="266d1f42-e210-460f-bb96-542361290c5d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open session and do all the necessary imports</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6dc33fc8-3414-482a-b784-50db183f8e09" action="open" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>session_profiles/python2.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.applications.python.PythonSessionProperties"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="03c1c386-77e0-4127-9098-26197fc7cbbb" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>from del_vswitch_from_host import *</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3c73dd5d-2c97-405f-ac58-8727b9dc7656" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>from del_portgroup_from_vswitch import *</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3ec0d593-3106-49fc-8db4-e808218aa993" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>from create_dvs_and_dvport_group import *</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="904d674c-dc88-46ca-aa72-b594643313a6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create Service Instance and Content object</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7712e2a8-47bc-459d-8839-b79491968acd" action="command" session="t1" normalOffset="15.924" estimatedStepExecutionTime="1.6">
+                            <command>
+                                <body>si=SmartConnectNoSSL(host=&apos;[param(&apos;property_vSphereHost&apos;)]&apos;, user=&apos;[param(&apos;property_username&apos;)]&apos;, pwd=&apos;[password]&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1a48d259-d831-448f-9ba4-861b4fe4919a" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>si</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>item()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &quot;vim.ServiceInstance:ServiceInstance&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message> ServiceInstance object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message> Unable to create ServiceInstance object - check your credentials.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c647716a-095f-48c6-9a28-9b5661858351" action="command" session="t1" normalOffset="13.707" estimatedStepExecutionTime="0.004" useFieldsInCommand="false">
+                            <command>
+                                <body>atexit.register(Disconnect, si)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="50a00107-df78-4689-b507-24fb72d2955b" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>content = si.RetrieveContent()</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="73c0870c-5862-4b41-854e-32f5c34bbe85" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>content</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>(vim.ServiceInstanceContent)</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>Content object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Unable to create Content object.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="834d046c-e0d8-42a1-967d-07a8794f6918" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Delete portgroup &amp; vSwitch</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ab2ae979-2a67-4207-a873-0d67fc62af99" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>getVSwitchName(vlanId)</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>vSwitchName</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1a355bcd-67ae-4fc3-8159-e6ddd349dd92" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>getNetworkName(vlanId)</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>networkName</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="261f9d7d-7f62-4391-9729-3ba421fc1ca9" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>param(&apos;property_vSwitchIsDVS&apos;) == &apos;true&apos;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="1d197286-4fde-4ae2-ab17-8c3f4ad46bb8" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Delete a DVS</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="6f99ffef-18a5-40d4-8623-9fae8447dbf1" action="command" session="t1">
+                                            <command>
+                                                <body>DeleteDVS(si, content, &apos;[vSwitchName]&apos;)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2733eb4f-972d-491d-b761-fc8afa494dc6" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="80b9e60f-14ad-4fda-bc30-1a9bd20f56b9" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Delete a regular vSwitch</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="945fe51b-e3e1-4522-b108-b876581344b5" action="command" session="t1" useFieldsInCommand="false">
+                                            <command>
+                                                <body>hosts = GetVMHosts(content)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="288fffbf-e24a-48c6-86da-dd7e053107a0" action="command" session="t1" useFieldsInCommand="false">
+                                            <command>
+                                                <body>hosts</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="fa70b1e9-0aa0-40af-b0ec-ba75e99e3552" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Delete from a specific host only</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="78f11896-ac0d-4b11-b4f2-57fd993bc8dd" action="command" session="t1">
+                                                    <command>
+                                                        <body>cluster = GetHost(hosts, &apos;[param(&apos;property_vSwitchHost&apos;)]&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="d3c3f646-d8f4-41e1-8eb2-78736e1ac301" action="command" session="t1" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>cluster</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="d097af27-5d25-4d7e-b771-c7bc67f43826" action="command" session="t1">
+                                                    <command>
+                                                        <body>DelHostPortgroup(cluster, &apos;[networkName]&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="5f376121-51a1-44f4-85e3-9c34ccb2c1de" action="command" session="t1">
+                                                    <command>
+                                                        <body>DelHostSwitch(cluster, &apos;[vSwitchName]&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="4aec63f1-95be-4958-b986-0db5f8bcdbdf" action="comment" skip="true" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Delete from all hosts</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="488ecbb4-24aa-414b-88ff-0ee670f36bda" action="command" session="t1">
+                                                    <command>
+                                                        <body>DelHostsPortgroup(hosts, &apos;[networkName]&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="8333d4f1-d3b7-4833-bee1-e994073e90d5" action="command" session="t1">
+                                                    <command>
+                                                        <body>DelHostsSwitch(hosts, &apos;[vSwitchName]&apos;)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6cccdbed-020a-4967-9dd9-b9cb62429ab6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Close session</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="aec4dd78-a98e-4fdd-8963-28db264576d9" action="close" session="t1" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4eaf1f82-66b0-4825-b4b0-fd95aaea33e6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Form JSON and return</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="bf83a3b1-e727-407a-94c4-6f4d153b3b76" action="return">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="addToVlan">
+            <steps>
+                <item guid="71361e49-a628-44ba-a1c7-70c9711598c5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Extract arguments</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fdd52352-a864-4b52-a411-c836b0ea4fba" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>vlanId = arg[0]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2beddfe7-adc0-4b56-875b-35495f3e8fae" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port = arg[1]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e249a1f3-d64d-44f6-b2ca-0719c26dbe86" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>tag = arg[2]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9a9fa67c-da62-44ba-8110-04ffaf27c989" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Extract VM UUID and Network Adapter MAC from port</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="4b6a6cf5-bd32-4d1e-b1d5-3183f9d85aac" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>x = port.split(&apos;.&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ac384386-be12-4de8-b829-540e102b92af" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>uuid = x[0]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ef8b8297-ba59-4512-b0ed-8fa0e6426cbe" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mac = x[1]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6c7cb197-3b91-4e5a-8028-eb151403c458" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create password secret from property</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="991726b7-9933-4c75-9796-3833260e1f26" action="eval" useFieldsInCommand="false" skippReporting="false">
+                            <command>
+                                <body>print(param(&apos;property_password&apos;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>password</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">true</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="385df4f9-8093-4dc3-8fb9-096d1c5ed788" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open session and do all the necessary imports</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f797011f-eaff-4d22-a1ae-ced192a77dfd" action="open" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>session_profiles/python2.ffsp</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Traceback</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value != 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>No errors opening session.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Errors opening session.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.applications.python.PythonSessionProperties"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="79e3303d-e888-49a6-8ff3-27b1cc488d44" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>from change_vm_vif import *</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Traceback</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value != 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>No errors during import.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Errors importing.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e02dcc98-faf7-4d0c-a664-4c290024dd63" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create Service Instance and Content object</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="594f4917-6331-46ac-b203-f0a51c2da256" action="command" session="t1" normalOffset="15.924" estimatedStepExecutionTime="1.6">
+                            <command>
+                                <body>si=SmartConnectNoSSL(host=&apos;[param(&apos;property_vSphereHost&apos;)]&apos;, user=&apos;[param(&apos;property_username&apos;)]&apos;, pwd=&apos;[password]&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1fc036bc-12dc-418d-8af6-597a055043b0" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>si</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>item()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &quot;vim.ServiceInstance:ServiceInstance&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message> ServiceInstance object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message> Unable to create ServiceInstance object - check your credentials.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="724e2c74-8637-4bc9-b33c-7fa4ec29d6b9" action="command" session="t1" normalOffset="13.707" estimatedStepExecutionTime="0.004" useFieldsInCommand="false">
+                            <command>
+                                <body>atexit.register(Disconnect, si)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c4d26fa4-1408-4aed-8d69-7e0191189fa0" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>content = si.RetrieveContent()</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="edd15b6f-eaf1-4eaa-a04e-d728a23176b5" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>content</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>(vim.ServiceInstanceContent)</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>Content object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Unable to create Content object.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d14e5c9e-44ff-47b3-a33c-44cf90b229be" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Change the network adapter on the VM</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="12601ecd-fd94-4365-b358-49857492dd2d" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>get_VDS_network(content, &apos;rtx-portgroup1&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="8bf29b25-7c8f-42ff-a3e4-e59c4b364a29" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>get_VSS_network(content, &apos;rtx-portgroup1&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d458d544-fd22-4e79-b909-e807875ac85c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>is_DVS = param(&apos;property_vSwitchIsDVS&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="17088961-44e5-4cc8-9544-3fa66cbe6dc8" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>getNetworkName(vlanId)</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>networkName</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="644b84c1-6993-4256-ab5f-90c9b34efa3a" action="command" session="t1">
+                            <command>
+                                <body>change_vm_network(si, &apos;[uuid]&apos;, &apos;[mac]&apos;, &apos;[networkName]&apos;, &apos;[is_DVS]&apos;)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Traceback</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value != 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>No errors while changing network.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Error while changing network.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="11feb2fd-ab52-4574-a3a6-9c6e45fa3084" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Close session</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="869a884f-d382-4cd8-a71b-30f67cd34aa2" action="close" session="t1" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3ca439ae-d3d2-401d-beff-20ec2abbeffa" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Form JSON and return</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="3106a85a-fb40-4eeb-aa32-145ed3bad1f5" action="return">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="removeFromVlan">
+            <steps>
+                <item guid="8f581b9a-9585-4cc9-bc29-0db0ed14a626" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Extract arguments</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c1b94bfa-b20f-431c-b21d-f8bd6cfd7f53" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>vlanId = arg[0]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e2c975be-9310-45e6-9b3c-2e1c201700d4" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port = arg[1]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="43541d8f-38da-4cd7-bacc-167d09b7a924" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>tag = arg[2]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="30c81d5e-2d34-4009-92c5-4dbb0dd4a1f2" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Extract VM UUID and Network Adapter MAC from port</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="31d734df-abd6-4340-b04f-eb6b8b8d1b4e" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>x = port.split(&apos;.&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="4a5d14f0-1109-4e09-a074-ecccfb1cee98" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>uuid = x[0]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="d4e56002-c0e2-42c4-a4bb-b8f2f64e6095" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>mac = x[1]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8fafeed8-f9f0-4ecb-913d-da70fdd0d979" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create password secret from property</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ceb2b8de-2c6c-44ac-ac05-1d7fe86bd720" action="eval" useFieldsInCommand="false" skippReporting="false">
+                            <command>
+                                <body>print(param(&apos;property_password&apos;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseLine()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>password</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">true</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5fe42d07-bbab-488d-aa35-cbc1c4a1a44e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open session and do all the necessary imports</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fbc24918-d988-4e97-80ce-f42f0ca03ea3" action="open" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>session_profiles/python2.ffsp</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Traceback</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value != 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>No errors opening session.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Errors opening session.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.applications.python.PythonSessionProperties"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="2a02fab2-4b51-42d7-856e-edb611230619" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>from change_vm_vif import *</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Traceback</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value != 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>No errors during import.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Errors importing.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8b2a7899-9251-451a-a9a2-a3015aeeddd3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create Service Instance and Content object</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b6384c67-fe7c-40a2-bac9-77732e3719f8" action="command" session="t1" normalOffset="15.924" estimatedStepExecutionTime="1.6">
+                            <command>
+                                <body>si=SmartConnectNoSSL(host=&apos;[param(&apos;property_vSphereHost&apos;)]&apos;, user=&apos;[param(&apos;property_username&apos;)]&apos;, pwd=&apos;[password]&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c4083447-afc6-438c-822a-67e91962383a" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>si</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>item()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == &quot;vim.ServiceInstance:ServiceInstance&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message> ServiceInstance object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message> Unable to create ServiceInstance object - check your credentials.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="186d0796-ac7e-4601-90bb-e8e9bfeb1233" action="command" session="t1" normalOffset="13.707" estimatedStepExecutionTime="0.004" useFieldsInCommand="false">
+                            <command>
+                                <body>atexit.register(Disconnect, si)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ec64ccb3-b8ee-4d15-8b67-3649e594dbb8" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>content = si.RetrieveContent()</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3d7139b9-8108-40ea-af06-f47c3758a50e" action="command" session="t1" useFieldsInCommand="false">
+                            <command>
+                                <body>content</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>(vim.ServiceInstanceContent)</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value == 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>Content object created successfully.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Unable to create Content object.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1e78d9d4-3c06-4b17-8e1e-413377cec4f6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Remove the network attached to the adapter on the VM</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="da6c4ba3-1450-4f86-a03b-04de92c8b69a" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>get_VDS_network(content, &apos;rtx-portgroup1&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="bd9c3ee2-8aa6-4759-a01f-5caafa4058c5" action="command" session="t1" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>get_VSS_network(content, &apos;rtx-portgroup1&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="fbed875c-5377-4967-9140-55f2099e0457" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>is_DVS = param(&apos;property_vSwitchIsDVS&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="324617c8-4a8c-40cb-9a45-fa1989635209" action="command" session="t1">
+                            <command>
+                                <body>change_vm_network(si, &apos;[uuid]&apos;, &apos;[mac]&apos;, &apos;&apos;, &apos;[is_DVS]&apos;)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="contains">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.ExtractorContainsPropertyGroup">
+                                                <searchString>Traceback</searchString>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>value != 1</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>No errors while changing network.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>Error while changing network.</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="961cc2d8-6ed8-4edd-aca3-f79cc784c57d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Close session</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="64a1c221-93c5-47d1-a9ec-d508f99bf30a" action="close" session="t1" useFieldsInCommand="false">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="847ff566-8c9c-4cdb-9856-7db4924efd5a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Form JSON and return</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a35e7ea0-7616-4f67-a523-f48e7fe6ec68" action="return">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="getUniqueKeyFromReservationId">
+            <steps>
+                <item guid="168e1bc5-4c7b-4f4e-8116-690c7114ff08" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Return the last 12 characters of the Reservation Id to use as the unique key</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="873c387c-dfca-4e06-ba8f-b60e0e7e4600" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resId = velocity(&apos;reservationId&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b74423c5-c1ed-4497-9006-5bc29adbf1fe" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>resId == &quot;&quot;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="4770f936-8e15-4d95-9b51-c69fc9ccd220" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>If we don&apos;t have a reservation Id, we must be in debug mode</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="a1bc50c4-9299-4679-922e-cb92cb164512" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>resId = &apos;d313bada-bace-4f67-a164-f5e9a8e77cff&apos;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ca98455e-1e56-4072-9e86-30ec86c7a6ed" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>unique = resId[-12:]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d9b0d10e-c08d-4330-bad5-1a73853ce62a" action="return">
+                            <command>
+                                <body>[unique]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getVSwitchName">
+            <steps>
+                <item guid="18b38d47-33f7-4ec8-a8b5-743bcda7adc1" action="call" useFieldsInCommand="false">
+                    <command>
+                        <body>getUniqueKeyFromReservationId()</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>unique</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="04007633-5f7a-47ec-8c4f-940acafb048b" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>prefix = param(&apos;property_vSwitchNamePrefix&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="58d2921c-08f1-4671-9dfc-9e78816e662b" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>switchType = &apos;vswitch&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e0040457-1ce4-4f49-ba62-ea5d1dd717c6" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>param(&apos;property_vSwitchIsDVS&apos;) == &apos;true&apos;:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="8ca0a998-bccb-4677-973d-3a68ca2a4c1c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>switchType = &apos;dvs&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c94f57f8-c8d4-46f5-8034-6c407d3964a1" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>ret = prefix + &apos;-&apos; + switchType + &apos;-&apos; + vlanId + &apos;-&apos; + unique</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="248d91b9-54bd-48c2-a7ba-be83ab095a21" action="comment" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>Uncomment me to delete a specific vSwitch</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4ce78fea-9330-4a96-b646-8e01800d6cb8" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ret =&apos;rtx-vSwitch-900-2a9ca49d52c0&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="57278d4a-3ec5-41eb-8fde-cb2a5d8d9839" action="return">
+                    <command>
+                        <body>[ret]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="vlanId">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="getNetworkName">
+            <steps>
+                <item guid="45d2e020-cd4d-45f7-baf5-455eb4c61d69" action="call" useFieldsInCommand="false">
+                    <command>
+                        <body>getUniqueKeyFromReservationId()</body>
+                    </command>
+                    <postProcessing>
+                        <storeResponseAt>unique</storeResponseAt>
+                        <storeResponseText>true</storeResponseText>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9cca4689-82d4-4712-9415-fe1bfcf6fa31" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>prefix = param(&apos;property_vSwitchNamePrefix&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9be1c332-b0b8-4c76-b6c9-fa48e976b205" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>switchType = &apos;vswitch&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e6a363c6-7c14-4a3d-a0e6-f106e344dd5f" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>param(&apos;property_vSwitchIsDVS&apos;) == &apos;true&apos;:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="8b7dda67-7c34-49d9-b13f-d1bd89f800bb" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>switchType = &apos;dvs&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a8eae626-65f8-4abc-bf14-ea137ce4b754" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>ret = prefix + &apos;-&apos; + switchType + &apos;-&apos; + vlanId + &apos;-net-&apos; + unique</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="64a3433b-35f7-4218-96a5-723ed56a7b8e" action="comment" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>Uncomment me to delete a specific network / portgroup</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9df7daa4-1de9-4388-abd8-e73581b03db0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ret =&apos;rtx-vSwitch-900-net-2a9ca49d52c0&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0598511f-7058-487a-bd20-79e1154ce1be" action="return">
+                    <command>
+                        <body>[ret]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="vlanId">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<ResponseMap version="8.3.1.0">
+    <responseStructure>text/python</responseStructure>
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>add_nic(si, &apos;420beed7-5cd9-6df1-5bd9-afce6710026b&apos;)</body>
+                </command>
+            </action>
+            <responseBody>(vim.vm.device.VirtualDeviceSpec) {
+   dynamicType = &lt;unset&gt;,
+   dynamicProperty = (vmodl.DynamicProperty) [],
+   operation = &lt;unset&gt;,
+   fileOperation = &lt;unset&gt;,
+   device = (vim.vm.device.VirtualE1000) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      key = 4001,
+      deviceInfo = (vim.Description) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         label = &apos;Network adapter 2&apos;,
+         summary = &apos;&apos;
+      },
+      backing = (vim.vm.device.VirtualEthernetCard.LegacyNetworkBackingInfo) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         deviceName = &apos;&apos;,
+         useAutoDetect = false
+      },
+      connectable = (vim.vm.device.VirtualDevice.ConnectInfo) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         migrateConnect = &apos;unset&apos;,
+         startConnected = true,
+         allowGuestControl = true,
+         connected = false,
+         status = &apos;unrecoverableError&apos;
+      },
+      slotInfo = (vim.vm.device.VirtualDevice.PciBusSlotInfo) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         pciSlotNumber = 35
+      },
+      controllerKey = 100,
+      unitNumber = 8,
+      addressType = &apos;assigned&apos;,
+      macAddress = &apos;00:50:56:8b:ab:20&apos;,
+      wakeOnLanEnabled = true,
+      resourceAllocation = (vim.vm.device.VirtualEthernetCard.ResourceAllocation) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         reservation = 0,
+         share = (vim.SharesInfo) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            shares = 50,
+            level = &apos;normal&apos;
+         },
+         limit = -1
+      },
+      externalId = &lt;unset&gt;,
+      uptCompatibilityEnabled = false
+   },
+   profile = (vim.vm.ProfileSpec) [],
+   backing = &lt;unset&gt;
+}
+NIC CARD ADDED
+</responseBody>
+            <contentType>text/python</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;responseLine&gt;(vim.vm.device.VirtualDeviceSpec) {&lt;/responseLine&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="responseLine">
+                    <queryFormatString>.//responseLine</queryFormatString>
+                </item>
+            </aliases>
+            <duration>3.6</duration>
+        </item>
+        <item name="sample2">
+            <action>
+                <command>
+                    <body>add_nic(si, &apos;420b926d-e0a0-8ccf-c87e-6bc09ae61b60&apos;)</body>
+                </command>
+            </action>
+            <responseBody>(vim.vm.device.VirtualDeviceSpec) {
+   dynamicType = &lt;unset&gt;,
+   dynamicProperty = (vmodl.DynamicProperty) [],
+   operation = &lt;unset&gt;,
+   fileOperation = &lt;unset&gt;,
+   device = (vim.vm.device.VirtualVmxnet3) {
+      dynamicType = &lt;unset&gt;,
+      dynamicProperty = (vmodl.DynamicProperty) [],
+      key = 4002,
+      deviceInfo = (vim.Description) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         label = &apos;Network adapter 3&apos;,
+         summary = &apos;&apos;
+      },
+      backing = (vim.vm.device.VirtualEthernetCard.LegacyNetworkBackingInfo) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         deviceName = &apos;&apos;,
+         useAutoDetect = false
+      },
+      connectable = (vim.vm.device.VirtualDevice.ConnectInfo) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         migrateConnect = &apos;unset&apos;,
+         startConnected = true,
+         allowGuestControl = true,
+         connected = false,
+         status = &apos;unrecoverableError&apos;
+      },
+      slotInfo = (vim.vm.device.VirtualDevice.PciBusSlotInfo) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         pciSlotNumber = 35
+      },
+      controllerKey = 100,
+      unitNumber = 9,
+      addressType = &apos;assigned&apos;,
+      macAddress = &apos;00:50:56:8b:c0:8e&apos;,
+      wakeOnLanEnabled = true,
+      resourceAllocation = (vim.vm.device.VirtualEthernetCard.ResourceAllocation) {
+         dynamicType = &lt;unset&gt;,
+         dynamicProperty = (vmodl.DynamicProperty) [],
+         reservation = 0L,
+         share = (vim.SharesInfo) {
+            dynamicType = &lt;unset&gt;,
+            dynamicProperty = (vmodl.DynamicProperty) [],
+            shares = 50,
+            level = &apos;normal&apos;
+         },
+         limit = -1L
+      },
+      externalId = &lt;unset&gt;,
+      uptCompatibilityEnabled = false
+   },
+   profile = (vim.vm.ProfileSpec) [],
+   backing = &lt;unset&gt;
+}
+NIC CARD ADDED
+</responseBody>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="label_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>label = &apos;</regex>
+                            <start>0</start>
+                            <end>9</end>
+                        </item>
+                        <item name="nicLabel">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>9</start>
+                            <end>26</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name=".{17}">exactly 17 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>&apos;,</regex>
+                            <start>26</start>
+                            <end>28</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>label = &apos;Network adapter 2&apos;,</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="macAddress_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>macAddress = &apos;</regex>
+                            <start>0</start>
+                            <end>14</end>
+                        </item>
+                        <item name="macAddress">
+                            <regex>\\S+</regex>
+                            <named>true</named>
+                            <start>14</start>
+                            <end>31</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name=".{17}">exactly 17 of any character</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>&apos;,</regex>
+                            <start>31</start>
+                            <end>33</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>macAddress = &apos;00:50:56:8b:ab:20&apos;,</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+                <item name="adapterType_pattern">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>device = \\(vim\\.vm\\.device\\.</regex>
+                            <start>0</start>
+                            <end>24</end>
+                        </item>
+                        <item name="adapterType">
+                            <regex>\\w+</regex>
+                            <named>true</named>
+                            <start>24</start>
+                            <end>38</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                        <item name="anchor1">
+                            <regex>\\) \\{</regex>
+                            <start>38</start>
+                            <end>41</end>
+                        </item>
+                    </groups>
+                    <sampleMatch>device = (vim.vm.device.VirtualVmxnet3) {</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                    <optional>true</optional>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="add_nic*"/>
+</ResponseMap>

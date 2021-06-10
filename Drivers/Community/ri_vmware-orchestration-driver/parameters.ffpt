@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ParameterTree version="8.5.0.202103021747">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <call_count>1</call_count>
+            <call_0 pt:description="termOrchestratedResource">initOrchestratedResource</call_0>
+            <topologyResourceId>i5523302b-866f-4def-8fd0-8bed371dc09e</topologyResourceId>
+            <property_UUID>420bc394-9395-3d44-966f-7dc3ae4637ca</property_UUID>
+            <property_Instance_IP_Address>127.0.0.1</property_Instance_IP_Address>
+            <property_Host>10.1.1.1</property_Host>
+            <property_Username>abarve@foo.com</property_Username>
+            <property_Password pt:datatype="SECRET" pt:mask="true"/>
+            <property_Datacenter>FOO-Datacenter</property_Datacenter>
+            <property_Datastore>FOO-Datastore</property_Datastore>
+            <property_Cluster>FOO-Cluster</property_Cluster>
+            <property_Resource_Pool>pool1</property_Resource_Pool>
+            <property_Folder>Provisioned Resources</property_Folder>
+            <property_Wait_For_IP>true</property_Wait_For_IP>
+            <property_Clone_From_Snapshot>true</property_Clone_From_Snapshot>
+            <property_Template>FOO-Template</property_Template>
+        </parameters>
+    </parameters>
+</ParameterTree>

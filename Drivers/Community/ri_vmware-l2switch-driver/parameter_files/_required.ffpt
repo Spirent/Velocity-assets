@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ParameterTree version="8.5.0.202104211757">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <property_username>spirent@vsphere.local</property_username>
+            <property_password pt:datatype="SECRET" pt:mask="true"/>
+            <property_vSphereHost>vcenter-apt-dut.spirenteng.com</property_vSphereHost>
+            <property_vSwitchNamePrefix>vel</property_vSwitchNamePrefix>
+            <property_vSwitchIsDVS>true</property_vSwitchIsDVS>
+            <property_vSwitchDatacenter>Datacenter-dut3</property_vSwitchDatacenter>
+            <property_vSwitchHost>esx-apt-dut3.spirenteng.com</property_vSwitchHost>
+        </parameters>
+    </parameters>
+</ParameterTree>
