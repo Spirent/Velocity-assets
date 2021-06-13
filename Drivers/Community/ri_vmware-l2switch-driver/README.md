@@ -18,8 +18,8 @@ The agent running this driver needs the pyvmomi python library installed and usa
 Upload the "vSphere vSwitch" driver zip to Velocity via "Libary / Drivers / Add" and name it something like "VMware L2 Switch Driver 2.0.0"  
 ![Template](documentation/l2.driver.upload.png)  
   
-Create the "vSphere vSwitch" template by running vmware-l2switch-driver/model/create_model.fftc, making sure that the parameters are set appropriately. When running the script, iTest will prompt for the password.  
-![Template](documentation/password1.png)  
+Create the "vSphere vSwitch" template by running main/ri_vmware-l2switch-driver/model/create_model.fftc, making sure that the parameters are set appropriately. When running the script, make certain the username and password are set correctly.  
+![Template](documentation/vel.password1.png)  
   
 This will add the template right into Velocity under "Network Element / Layer 2 Switch"  
 ![Template](documentation/l2.template.added.png)  
@@ -37,8 +37,8 @@ Set the property values of all required properties plus username, password, and 
 Upload the "VMware Orchestration" driver iTar to Velocity via "Libary / Drivers / Add" and name it something like "VMware Orchestration 1.0.0"  
 ![Template](documentation/instance.driver.upload.png)  
   
-Create the "vSphere Instance Template" template by running vmware-orchestration-driver/model/create_model.fftc, making sure that the parameters are set appropriately. When running the script, iTest will prompt for the password.  
-![Template](documentation/run.model.png)  
+Create the "vSphere Instance Template" template by running main/ri_vmware-orchestration-driver/model/create_model.fftc, making sure that the parameters are set appropriately. When running the script, make certain the username and password are set correctly.  
+![Template](documentation/vel.password2.png)  
   
 This will add the template right into Velocity under "Orchestrated Resource / VMware vSphere"  
 ![Template](documentation/instance.template.added.png)  
