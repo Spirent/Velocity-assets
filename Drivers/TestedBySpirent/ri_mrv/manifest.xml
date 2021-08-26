@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resourceDriver>
     <manifestVersion>1.4</manifestVersion>     
-    <version>5.3.0</version>
+    <version>8.6.0</version>
     <vendor>Spirent</vendor>     
     <language>itest</language>     
     <interface>Layer 1 Switch</interface> 
-    <entryPoint>mrv-5.3.0.fftc</entryPoint>
+    <entryPoint>mrv-8.6.0.fftc</entryPoint>
     <resourceProperties>     
         <property optional="true">
             <name>ipAddress</name>
