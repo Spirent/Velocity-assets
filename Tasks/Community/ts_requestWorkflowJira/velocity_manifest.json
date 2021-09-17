@@ -1,0 +1,40 @@
+{
+    "defaultData": {
+        "description": "%file% Jira integration for reservation requests",
+        "executionMessages": {
+            "error": "^.*(ERROR|CRITICAL).*",
+            "info": "^.*(DEBUG|INFO).*",
+            "ok": "^.*(verified).*",
+            "warning": "^.*(WARNING).*"
+        },
+        "headline": "%file% Jira integration",
+        "hidden": false,
+        "language": "python",
+        "namespace": "Jira",
+        "owner": "spirent",
+        "timeout": 10,
+        "verdictMethod": "EXIT_CODE"
+    },
+    "fileSets": [
+        {
+            "fileNameMatch": "requestAcceptJira\\.py",
+            "commandSequence": [
+                "%file% --jiraUser %param_jiraUser%"
+            ],
+            "parameters": [
+                {
+                    "description": "Jira API user as creator of Task issue",
+                    "name": "jiraUser",
+                    "type": "TEXT",
+                    "value": "APT_Demo1"
+                },
+                {
+                    "description": "Jira API password as creator of Task issue",
+                    "name": "jiraPwd",
+                    "type": "TEXT",
+                    "masked": true
+                }
+            ]
+        }
+    ]
+}
