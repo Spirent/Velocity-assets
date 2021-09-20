@@ -78,6 +78,7 @@ rlResponse = requests.post('https://jira.spirenteng.com/rest/api/2/issue', data=
 assert rlResponse.status_code == 201
 jiraJson = json.loads(rlResponse.text)
 jiraId = jiraJson['key']
+print("jiraId: " + jiraId)
 
 headers={}
 headers['X-Auth-Token']=token
@@ -87,6 +88,7 @@ message={}
 message['html'] = True
 message['forAdmins'] = True
 message['subject'] = 'Jira Task Created'
-message['message'] = 'https://jira.spirenteng.com/browse/' + jiraId
+message['message'] = '<a href="https://jira.spirenteng.com/browse/' + jiraId + '" target="_blank">Click here to see Jira Ticket ' + jiraId + '</a>'
 rlResponse = requests.post(baseUrl + '/velocity/api/message/v7/message', data=json.dumps(message), headers=headers)
 assert rlResponse.status_code == 200
+
