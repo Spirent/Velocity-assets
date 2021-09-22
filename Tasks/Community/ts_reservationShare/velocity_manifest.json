@@ -1,0 +1,34 @@
+{
+    "defaultData": {
+        "description": "%file% auto-share reservation with user group admins",
+        "executionMessages": {
+            "error": "^.*(ERROR|CRITICAL).*",
+            "info": "^.*(DEBUG|INFO).*",
+            "ok": "^.*(verified).*",
+            "warning": "^.*(WARNING).*"
+        },
+        "headline": "%file% auto-share reservation",
+        "hidden": false,
+        "language": "python",
+        "namespace": "developer-community",
+        "owner": "spirent",
+        "timeout": 10,
+        "verdictMethod": "EXIT_CODE"
+    },
+    "fileSets": [
+        {
+            "fileNameMatch": "reservationShare\\.py",
+            "commandSequence": [
+                "%file% --dryrun %param_dryrun%"
+            ],
+            "parameters": [
+                {
+                    "description": "Perform a dry run first showing the user group admins to be added to the reservation",
+                    "name": "dryrun",
+                    "type": "BOOLEAN",
+                    "value": "true"
+                }
+            ]
+        }
+    ]
+}
