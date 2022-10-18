@@ -1,0 +1,227 @@
+<?xml version="1.0"?>
+<testCase version="9.2.0.202210121033">
+    <general>
+        <language>Python</language>
+        <xPathVersion>XPATH31</xPathVersion>
+    </general>
+    <execution>
+        <parameters version="9.2.0.202210121033">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <resourceIds pt:description="(Automatically passed from Velocity) resource IDs of resources involved in the operation"/>
+                    <gitlab_url pt:description="URL to  gitlab host (not a specific repository)"/>
+                    <gitlab_project_id pt:description="numeric project ID of the target repository"/>
+                    <gitlab_branch pt:description="name of branch to use"/>
+                    <gitlab_token pt:description="gitlab access token (Personal, Project, etc.)" pt:mask="true">CaK+mWSFs84=</gitlab_token>
+                    <velocity_url pt:description="URL of velocity instance"/>
+                    <velocity_username pt:description="Velocity username" pt:mask="true">CaK+mWSFs84=</velocity_username>
+                    <velocity_password pt:description="Velocity password" pt:mask="true">CaK+mWSFs84=</velocity_password>
+                    <commit_email pt:description="email address of user committing changes"/>
+                    <commit_name pt:description="name of user committing changes"/>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="27609843-34e1-4dd2-a63b-e2f256c235e3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Process the input parameters (Device IDs)</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="eedd3eb5-b235-428c-a3c2-01dae69d15e2" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ids = param(&apos;resourceIds&apos;).split(&apos; &apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f9b73043-f850-46c3-a2b7-8d4c55a3ef54" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>import base64</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2e6f1237-b69a-45fb-a0bd-04dd8a02afef" action="open" session="gitlab" useFieldsInCommand="false">
+                    <command>
+                        <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[param(&apos;gitlab_url&apos;)]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false" version="2" version.inherit="false">
+                            <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                <memberClasses>
+                                    <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                </memberClasses>
+                                <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="PRIVATE-TOKEN" header.inherit="false" value="[param(&apos;gitlab_token&apos;)]" value.inherit="false"/>
+                            </httpHeader>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="2a567e86-521c-4879-81c6-77e72bc1dc32" action="open" session="velocity">
+                    <command>
+                        <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[param(&apos;velocity_url&apos;)]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false" version="2" version.inherit="false">
+                            <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="bf0421bb-8357-4ef2-9114-31141f08d8f6" action="GET" session="velocity" estimatedStepExecutionTime="1.059">
+                    <command>
+                        <body>api/auth/v2/token</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/xtoken</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>token</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="api/auth/v2/token" action.inherit="false">
+                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="[param(&apos;velocity_username&apos;)]" user.inherit="false" password.masked="true" password="4RvNHVItEyvmscZrRZaMhyjgohcsVlbv10+L6oMniZ0=" password.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="8ce41fa8-51e3-4b6e-aef8-ee0fd61a063c" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>id in ids:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="609a74a1-40a6-4950-aeb0-7cdbc4015c81" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Retrieve JSON info of the deleted resource(s)</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="2cdd8e96-8f2f-4086-8bb1-775a29bfb643" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>print(id)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ab17a7ce-6f75-415e-947b-df29e09b6eab" action="GET" session="velocity">
+                                    <command>
+                                        <body>api/inventory/v17/device/[id]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>resourceJson</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="api/inventory/v17/device/[id]" action.inherit="false">
+                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                            <memberClasses>
+                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                            </memberClasses>
+                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="[token]" value.inherit="false"/>
+                                        </httpHeader>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="0a079b5b-1fcd-4721-9873-8455b5078ed1" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>resourceB64=base64.b64encode(resourceJson.encode(&quot;ascii&quot;))</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="d3b1705d-8d1e-4b59-bf49-1db57f177987" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>print(resourceB64)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a1c05cad-1e97-45d5-bd69-5dace36a6649" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Commit to git repository</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="3051bee4-93cc-4b4f-8ea9-5e7a9afcdbde" action="DELETE" session="gitlab">
+                                    <command>
+                                        <body>api/v4/projects/[param(&apos;gitlab_project_id&apos;)]/repository/files/[id].json</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>statusCode/@value</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>value == &quot;204&quot;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                    <message>resource [id] committed</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="DeclareExecutionIssue">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                    <message>Error [value] occured</message>
+                                                                </actionProperties>
+                                                            </item>
+                                                            <item actionId="FailTest">
+                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" bodyType.inherit="false" action="api/v4/projects/[param(&apos;gitlab_project_id&apos;)]/repository/files/[id].json" action.inherit="false">
+                                        <message inherit="false">{&quot;branch&quot;: &quot;[param(&apos;gitlab_branch&apos;)]&quot;, &quot;author_email&quot;: &quot;[param(&apos;commit_email&apos;)]&quot;, &quot;author_name&quot;: &quot;[param(&apos;commit_name&apos;)]&quot;, &quot;encoding&quot; : &quot;base64&quot;,
+               &quot;content&quot;: &quot;[resourceB64]&quot;, &quot;commit_message&quot;: &quot;deleted resource: [id]&quot;}</message>
+                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                            <memberClasses>
+                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                            </memberClasses>
+                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="PRIVATE-TOKEN" header.inherit="false" value="[param(&apos;gitlab_token&apos;)]" value.inherit="false"/>
+                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                        </httpHeader>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="86fbd9f3-9de9-4cd8-8f11-e5200004d071" action="close" session="gitlab">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="185005a4-bb8b-4ec1-bc59-d32d621a9086" action="close" session="velocity">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>
