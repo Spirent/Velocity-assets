@@ -1,4 +1,3 @@
-### Project Information:
 Project: Velocity Resource Create,(no) Read, Update, Delete (CRUD) scripts  
 Description: Scripts for use with Velocity resource triggers provided since release 9.2  
 Category: task  
