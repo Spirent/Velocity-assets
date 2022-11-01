@@ -8,7 +8,6 @@
         <parameters version="9.2.0.202210121033">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
-                    <resourceIds pt:description="(Automatically passed from Velocity) resource IDs of resources involved in the operation"/>
                     <gitlab_url pt:description="URL to  gitlab host (not a specific repository)"/>
                     <gitlab_project_id pt:description="numeric project ID of the target repository"/>
                     <gitlab_branch pt:description="name of branch to use"/>
@@ -32,7 +31,7 @@
                     <nestedSteps>
                         <item guid="eedd3eb5-b235-428c-a3c2-01dae69d15e2" action="eval" useFieldsInCommand="false">
                             <command>
-                                <body>ids = param(&apos;resourceIds&apos;).split(&apos; &apos;)</body>
+                                <body>ids = param(&apos;resourcesIds&apos;).split(&apos; &apos;)</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
