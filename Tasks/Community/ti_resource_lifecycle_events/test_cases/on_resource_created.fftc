@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <testCase version="9.2.0.202210121033">
     <general>
+        <documentation>Create New Velocity Resource in a Gitlab Repository</documentation>
+        <notes>This script fetches Velocity resource JSON data and creates a file in a gitlab repository.  In the event that the file already exists, an &quot;update&quot; action is performed instead of a &quot;create&quot; action.</notes>
+        <owner>andy.michaels@spirent.com</owner>
         <language>Python</language>
         <xPathVersion>XPATH31</xPathVersion>
     </general>
@@ -284,13 +287,13 @@
                                                         </actionsWhenTrue>
                                                         <actionsWhenFalse>
                                                             <item actionId="DeclareExecutionIssue">
-                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                                    <message>Error [value] occured</message>
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                    <message>the file already exists in the repository, committing and update instead of a create</message>
                                                                 </actionProperties>
                                                             </item>
                                                             <item actionId="Eval">
                                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
-                                                                    <statement>fileExists = False</statement>
+                                                                    <statement>fileExists = True</statement>
                                                                 </actionProperties>
                                                             </item>
                                                         </actionsWhenFalse>

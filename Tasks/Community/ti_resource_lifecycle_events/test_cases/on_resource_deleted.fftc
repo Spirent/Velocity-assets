@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <testCase version="9.2.0.202210121033">
     <general>
+        <documentation>Delete a Velocity Resource from a Gitlab Repository</documentation>
+        <notes>This script deletes the JSON data associated with a Velocity resource from a gitlab repository.  In the event that the file does not exist, a 400 error is received.</notes>
+        <owner>andy.michaels@spirent.com</owner>
         <language>Python</language>
         <xPathVersion>XPATH31</xPathVersion>
     </general>

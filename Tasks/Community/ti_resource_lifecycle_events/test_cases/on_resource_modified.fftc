@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <testCase version="9.2.0.202210121033">
     <general>
+        <documentation>Update a modified Velocity Resource in a Gitlab Repository</documentation>
+        <notes>This script fetches Velocity resource JSON data and updates the associated file in a gitlab repository.  In the event that the file doesn&apos;t exist, a &quot;create&quot; action is performed instead of an &quot;update&quot; action.</notes>
+        <owner>andy.michaels@spirent.com</owner>
         <language>Python</language>
         <xPathVersion>XPATH31</xPathVersion>
     </general>
@@ -284,8 +287,8 @@
                                                         </actionsWhenTrue>
                                                         <actionsWhenFalse>
                                                             <item actionId="DeclareExecutionIssue">
-                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                                    <message>Error [value] occured</message>
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                    <message>File didn&apos;t exist, committed a create instead of an update</message>
                                                                 </actionProperties>
                                                             </item>
                                                             <item actionId="Eval">
