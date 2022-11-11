@@ -251,6 +251,12 @@
                                     </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
+                                <item guid="2ae0c47d-5dbd-4b5f-b5c3-497b4baff8da" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>fileExists = True</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
                                 <item guid="619a3c42-3ef6-4f77-adb9-109476710dac" action="POST" session="gitlab">
                                     <command>
                                         <body>api/v4/projects/[param(&apos;gitlab_project_id&apos;)]/repository/commits</body>
@@ -282,8 +288,10 @@
                                                                     <message>Error [value] occured</message>
                                                                 </actionProperties>
                                                             </item>
-                                                            <item actionId="FailTest">
-                                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                            <item actionId="Eval">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                    <statement>fileExists = False</statement>
+                                                                </actionProperties>
                                                             </item>
                                                         </actionsWhenFalse>
                                                     </ruleProperties>
@@ -312,6 +320,82 @@
                                             <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
                                         </httpHeader>
                                     </applicationProperties>
+                                </item>
+                                <item guid="c168e077-f63a-4dec-8ffc-82b2dee82d43" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>fileExists == False:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="293001eb-1564-493e-98ea-d2fcc06bf8aa" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>The file didn&apos;t exist, so we need to add it</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="4e688d3c-a39d-474b-a982-06a85a91d8e3" action="POST" session="gitlab">
+                                            <command>
+                                                <body>api/v4/projects/[param(&apos;gitlab_project_id&apos;)]/repository/commits</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>statusCode/@value</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="assert">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                <expression>value == &quot;201&quot;</expression>
+                                                                <actionsWhenTrue>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                            <message>resource [resourceName] committed</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                </actionsWhenTrue>
+                                                                <actionsWhenFalse>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                            <message>Error [value] occured</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="FailTest">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                </actionsWhenFalse>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" bodyType.inherit="false" action="api/v4/projects/[param(&apos;gitlab_project_id&apos;)]/repository/commits" action.inherit="false">
+                                                <message inherit="false">{
+\t&quot;branch&quot;: &quot;[param(&apos;gitlab_branch&apos;)]&quot;,
+\t&quot;author_email&quot;: &quot;[param(&apos;commit_email&apos;)]&quot;,
+\t&quot;author_name&quot;: &quot;[param(&apos;commit_name&apos;)]&quot;,
+\t&quot;actions&quot;: \\[{
+\t\t&quot;action&quot;: &quot;create&quot;,
+\t\t&quot;encoding&quot;: &quot;base64&quot;,
+\t\t&quot;file_path&quot;: &quot;[resourceName].json&quot;,
+\t\t&quot;content&quot;: &quot;[resourceB64]&quot;
+\t}],
+\t&quot;commit_message&quot;: &quot;User: [username] added resource: [resourceName] with ID: [id]&quot;
+}</message>
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="PRIVATE-TOKEN" header.inherit="false" value="[param(&apos;gitlab_token&apos;)]" value.inherit="false"/>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
