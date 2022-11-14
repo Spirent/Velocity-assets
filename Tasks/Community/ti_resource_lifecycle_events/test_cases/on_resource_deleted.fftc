@@ -15,11 +15,8 @@
                     <gitlab_project_id pt:description="numeric project ID of the target repository"/>
                     <gitlab_branch pt:description="name of branch to use"/>
                     <gitlab_token pt:description="gitlab access token (Personal, Project, etc.)" pt:mask="true">CaK+mWSFs84=</gitlab_token>
-                    <velocity_url pt:description="URL of velocity instance"/>
-                    <velocity_username pt:description="Velocity username" pt:mask="true">CaK+mWSFs84=</velocity_username>
-                    <velocity_password pt:description="Velocity password" pt:mask="true">CaK+mWSFs84=</velocity_password>
-                    <commit_email pt:description="email address of user committing changes"/>
-                    <commit_name pt:description="name of user committing changes"/>
+                    <commit_email pt:description="email address of GitLab user committing changes"/>
+                    <commit_name pt:description="name of GitLab user committing changes"/>
                 </parameters>
             </parameters>
         </parameters>
@@ -84,39 +81,18 @@
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                         <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[param(&apos;velocity_url&apos;)]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false" version="2" version.inherit="false">
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[velocity(&apos;url&apos;)]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false" version="2" version.inherit="false">
                             <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
                         </sessionProperties>
                         <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                     </applicationProperties>
                 </item>
-                <item guid="bf0421bb-8357-4ef2-9114-31141f08d8f6" action="GET" session="velocity" estimatedStepExecutionTime="1.059">
+                <item guid="81103b8b-21b3-4255-9f7e-e753aa7140af" action="eval" useFieldsInCommand="false">
                     <command>
-                        <body>api/auth/v2/token</body>
+                        <body>token = velocity(&apos;token&apos;)</body>
                     </command>
-                    <postProcessing>
-                        <analysisRules>
-                            <item>
-                                <extractorInfo extractorType="query">
-                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                        <query>mapped/Json/xtoken</query>
-                                    </extractorProperties>
-                                </extractorInfo>
-                                <processorInfo ruleType="store">
-                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                        <storageLocation>token</storageLocation>
-                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
-                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
-                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
-                                    </ruleProperties>
-                                </processorInfo>
-                            </item>
-                        </analysisRules>
-                    </postProcessing>
-                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="api/auth/v2/token" action.inherit="false">
-                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="[param(&apos;velocity_username&apos;)]" user.inherit="false" password.masked="true" password="4RvNHVItEyvmscZrRZaMhyjgohcsVlbv10+L6oMniZ0=" password.inherit="false"/>
-                    </applicationProperties>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
                 <item guid="8ce41fa8-51e3-4b6e-aef8-ee0fd61a063c" action="for" useFieldsInCommand="false">
                     <command>
@@ -207,7 +183,6 @@
                                         </analysisRules>
                                     </postProcessing>
                                     <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="api/user/v10/profile/[userId]" action.inherit="false">
-                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="[param(&apos;velocity_username&apos;)]" user.inherit="false" password.masked="true" password="4RvNHVItEyvmscZrRZaMhyjgohcsVlbv10+L6oMniZ0=" password.inherit="false"/>
                                         <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
                                             <memberClasses>
                                                 <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
