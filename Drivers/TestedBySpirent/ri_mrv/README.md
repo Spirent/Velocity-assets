@@ -17,7 +17,7 @@ properties:
 
  ----
 1 test case in project
-## Test Case File: mrv.fftc
+## Test Case File: mrv-8.6.0.fftc
 ### convertPortToCSPP
 ### getConnections
 ### validatePortState
