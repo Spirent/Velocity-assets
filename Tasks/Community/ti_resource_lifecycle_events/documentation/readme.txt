@@ -3,8 +3,7 @@ Description: Triggered automation scripts invoked on resource changes introduced
 Category: task  
 Class: Community  
 
-These scripts are an example implementation for the resource lifecycle event triggers introduced in Velocity 9.2.  Each script will fetch resource information via the Velocity API (but excludes ports in this release) for the resource IDs provided by Velocity in the parameter "resourcesIds".  They then connect to a GitLab instance and project and commit new resources, modifications or deletions.  The user needs to provide the appropriate connection information for a gitlab instance and project.
-
+These scripts are an example implementation for the resource lifecycle event triggers introduced in Velocity 9.2.  Each script will fetch resource information via the Velocity API (but excludes ports in this release) for the resource IDs provided by Velocity in the parameter "resourcesIds".  They then connect to a GitLab instance and project and commit new resources, modifications or deletions.  The user needs to provide the appropriate connection information for a gitlab instance and project. Using the embedded diff in GitLab, it's easy to see how resources change over time. ![Example](documentation/git.commit.diff.png)
 
 In the event that these scripts are used on an existing inventory, as opposed to a new Velocity instance, the scripts handle the cases where files may or may not exist as expected.
 
@@ -19,4 +18,4 @@ Handling Sensitive Information:
 
   For executing the scripts in iTest, the user can export the "parameters" page from any of the included .fftc files and fill in the sensitive information there.  Please do not save any of this info in the .fftc files.
   
-  For executin the scripts as triggers in Velocity, the parameter values can be entered in the configuration dialog for the associated triggered task.
+  For executing the scripts as triggers in Velocity, the parameter values can be entered in the configuration dialog for the associated triggered task.
