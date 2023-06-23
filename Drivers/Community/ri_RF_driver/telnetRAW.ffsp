@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.6.0.202108170724">
+    <baseApplication>com.fnfr.svt.applications.telnet</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+        <ipAddress inherit="false">[param(&apos;property_ipAddress&apos;)]</ipAddress>
+        <port inherit="false">3001</port>
+        <TerminalProperties>
+            <stepDefaults>
+                <completionProperties>
+                    <promptExtraction inherit="false">LAST_NONEMPTY_LINE</promptExtraction>
+                </completionProperties>
+            </stepDefaults>
+            <captureProperties>
+                <commandBreakChars inherit="false">
+                    <item>[char Ctrl-C]</item>
+                </commandBreakChars>
+            </captureProperties>
+            <prompts merge="true">
+                <item name="prompt1" TypeOfPrompt="PASSWORD">
+                    <Content>No MOTD has been set</Content>
+                </item>
+                <item name="prompt2" MatchMethod="REGULAR_EXPRESSION">
+                    <Content>.*&lt;-&gt;.*</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://RF%20driver/</responseLibrary>
+    <formMapLibrary inherit="false">project://RF%20driver/</formMapLibrary>
+    <language>Python</language>
+</SessionTemplate>
