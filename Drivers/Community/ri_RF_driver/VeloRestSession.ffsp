@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<SessionTemplate version="9.2.0.202211170131">
+    <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://[param(&apos;property_velocityIP&apos;)]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false" version="2" version.inherit="false">
+        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="Aramirez" user.inherit="false" password.masked="true" password="AiRWju4XCF68/xt4CGWUjg==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://RF%20driver/</responseLibrary>
+    <formMapLibrary inherit="false">project://RF%20driver/</formMapLibrary>
+    <language>Python</language>
+</SessionTemplate>

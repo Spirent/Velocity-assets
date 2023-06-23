@@ -1,0 +1,1324 @@
+<?xml version="1.0"?>
+<testCase version="9.2.0.202211170131">
+    <general>
+        <language>Python</language>
+    </general>
+    <execution defaultStepTimeout="300">
+        <parameters version="9.2.0.202211170131">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <reservationId>8e2b7b41-5259-4be2-b297-66fbca182757</reservationId>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <testbed>project://RF_automation/RF%20driver%20Test.tbml</testbed>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="07bda1d4-84ee-41c8-9c38-2c420379edc8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get cable-mac switch IP</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="056a45ea-f243-42bd-95d4-2eaf20121870" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>getSwitchIP()</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>RF_switch_ips</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0b31b797-7a0e-43d2-ab45-002a725711e7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>check reservation status</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b52fcab4-0f61-4b15-b05f-edf9bdf2dccb" action="open" session="s3">
+                    <command>
+                        <body>project://RF%20driver/VeloRestSession.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" version="2" version.inherit="false"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="8aaaddbe-c48f-4494-951f-3809ab82e57c" action="GET" session="s3" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>/velocity/api/reservation/v18/reservation/[velocity(&apos;reservationId&apos;)]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/velocity/api/reservation/v18/reservation/[velocity(&apos;reservationId&apos;)]" action.inherit="false"/>
+                </item>
+                <item guid="07459892-898c-4921-94fd-27e8181318e7" action="GET" session="s3" useFieldsInCommand="false">
+                    <command>
+                        <body>/velocity/api/reservation/v18/reservation/[param(&apos;reservationId&apos;)]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/velocity/api/reservation/v18/reservation/[param(&apos;reservationId&apos;)]" action.inherit="false"/>
+                </item>
+                <item guid="2583c2de-daf1-4dec-9ae7-80c34a1944a5" action="close" session="s3">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d2437839-0046-460c-9136-18832d2dddc3" action="exit" useFieldsInCommand="false">
+                    <command>
+                        <body>0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="07d6ec4e-6011-49df-b683-e0606b3a6891" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>calls = [&quot;&quot;]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="52018867-9ed0-4ee2-8728-9d3bbe2763bc" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>param(&apos;call_count&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bed95fc3-2f68-409a-98d3-104670a8dcb5" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>x in range(0,int(param(&apos;call_count&apos;))):</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="459d9ee3-99e0-49d6-91ab-337fa451081d" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Insert steps here to be executed on each loop</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c8a28a31-85da-4aa6-a056-3b04056c32f0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>xx = param(&apos;call_&apos;+str(x))</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9eec2e97-6676-41f1-bf24-1df39dcc0d4c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>xx</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="8c6075ad-c82b-4243-bdcf-da3d3a48e0e7" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>&quot;create&quot; not in xx and &quot;remove&quot; not in xx:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="16418d01-3cc9-4adb-93ff-e62dedca479f" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>only one call will map all the ports in the switch</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="eee8bddf-7626-4865-bb81-526b17e984b9" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>calls[0]=xx.split(&apos; &apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d660c0c3-0776-402f-9f31-57e4176ba912" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>&quot;remove&quot; in xx:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="409141b6-0b78-425a-9e17-9658ea4ce254" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>calls.append(xx.split(&apos; &apos;))</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f6b12e4e-dd2c-4399-bcd6-db5c8f558e6b" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>len(calls) == 0:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0b89e483-4a9e-42a4-bcd2-11631ef79f94" action="return">
+                            <command>
+                                <body>{}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="801da66f-001b-4ee4-b60e-6f25d23dfdce" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>calls</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d8b7ee45-1914-40d8-9218-b8dedf5d24f8" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>&quot;addToVlan&quot; in calls[0]:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e36693f0-93ba-47c3-b794-7bc626455b70" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Get links and map endpoints</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1253aebb-e9b7-4fbd-9f6b-443e99cb7ecd" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>get_links()</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>endpoints</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="01acb5e6-fa92-428d-8e2b-a6085b248b91" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>endpoints</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="123d0939-1e33-4a7f-b625-ce662101c9c7" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>addToVlan(endpoints=endpoints, RF_switch_ips=RF_switch_ips)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f72438d9-3788-4efa-8b17-bde98b3e861f" action="if" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>&quot;destroyVlan&quot; in calls[0]:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="3c65598f-4853-4866-ad05-88f437faceb0" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Get links and map endpoints</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="94eb5fe1-4ba9-41e6-9505-1a3139d6d5f3" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>get_links()</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>endpoints</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ceb430b9-b907-4c2e-8221-e648a45202b5" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>endpoints</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c6959e29-562f-4f42-867d-ee9efe724453" action="call" useFieldsInCommand="false">
+                            <command>
+                                <body>destroyVlan(endpoints=endpoints, RF_switch_ips=RF_switch_ips)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="308a35dd-ed48-4de0-949a-858619449671" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>len(calls)&gt;1:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="a4591fa1-1c9c-4cd4-80b5-6c04fbe1aadf" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>x in calls:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="3b103567-9c0e-4cc4-a7f7-47ccdc35781f" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>x</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="756d2948-b5d6-419e-afe2-72c38de400b0" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>x != &quot;&quot;:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="ed10e421-483c-4311-91fb-cc24fc448012" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Insert steps here for when expression is true</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="4d86103c-bb2c-4db7-bf69-22410eb3ff3a" action="call" useFieldsInCommand="false">
+                                            <command>
+                                                <body>removeFromVlan(port=x[2], RF_switch_ips=RF_switch_ips)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="32d37c53-0061-4d54-9e75-d70f55d407aa" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>restore missing links</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="453f7f2e-99ca-4b61-af04-a7ba89b90d0d" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>get_links()</body>
+                                    </command>
+                                    <postProcessing>
+                                        <storeResponseAt>endpoints</storeResponseAt>
+                                        <storeResponseText>true</storeResponseText>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="bb3f71e3-a1bf-49d9-8bf8-3aa958f33caf" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>endpoints</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="e2cb0380-4e47-49b3-9081-a8971ba82c2b" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>addToVlan(endpoints=endpoints, RF_switch_ips=RF_switch_ips)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="209d7d3c-3eef-44a2-82a8-62d5707f0d9a" action="message" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>Warning: debug </body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="none">
+                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>True</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>{auto_message_true}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                    <message>{auto_message_false}</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                        <severity inherit="false">Warning</severity>
+                        <message inherit="false"> debug </message>
+                    </applicationProperties>
+                </item>
+                <item guid="1108b0c6-6efa-4f63-81cb-36c521b1f9ae" action="return">
+                    <command>
+                        <body>{}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="getSwitchIP" isPublic="true">
+            <steps>
+                <item guid="10a6f58d-70c1-4b62-a5a7-fc1612ed2c6e" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>x=tbml(&apos;deviceList&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c769de2d-d08f-4384-976c-631f3426ff68" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>dnames={}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="44e79294-1560-46b9-aaef-9e3b6c8daa98" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>devices names</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cbc61b7f-75d2-46f1-84c8-4e68e6e5623f" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>i in x:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ac72405f-7116-49a2-8687-7e593a0c8723" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>&quot;cable&quot; in tbml(&apos;property&apos;, &apos;-id&apos;, i, &apos;name&apos;) :</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="2b671364-c997-4709-b1b7-8774a8c6ef43" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>dnames[tbml(&apos;property&apos;, &apos;-id&apos;, i, &apos;name&apos;)]= tbml(&apos;property&apos;, &apos;-id&apos;, i, &apos;{General Info} ipAddress&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a4d8224a-db46-4e19-b05c-60f30513b587" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>ipNames = dnames</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6e6ddc9c-05cc-410f-8242-f8a7e0c23e14" action="return">
+                    <command>
+                        <body>[ipNames]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="get_links" isPublic="true">
+            <steps>
+                <item guid="04936365-1a1e-4a9f-9f4e-c539a58b45ba" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>x=tbml(&apos;deviceList&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5933c617-61c1-4c4c-8283-f6ec5f5608dc" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>dnames={}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cc77e332-cd74-42f9-8096-43388a3a7e86" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>devices names</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="09ca028b-b8c3-415b-a5a5-f5e116e7a16b" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>i in x:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4a6fd467-3277-4878-94a6-9858f47d9374" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>&quot;cable&quot; in tbml(&apos;property&apos;, &apos;-id&apos;, i, &apos;name&apos;) :</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="460f59aa-4e60-4aa5-93b0-5e06641ddcc5" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>dnames[tbml(&apos;property&apos;, &apos;-id&apos;, i, &apos;name&apos;)]=[i]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e9213975-7d3b-4adc-9540-64a681560a2e" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>print(dnames)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="5a5d97d0-7fdb-45e5-9e4b-75cf5aa5d539" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>cmacs identification</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="80a839ee-54fd-42b9-a9a2-5be075044063" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>n,v in dnames.items():</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="421003ef-4f7b-4144-91b8-96c9732984e1" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Insert steps here to be executed on each loop</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="c2734705-6d38-420c-b045-52ac5744bbf6" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>n,v</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1f1cbf84-7166-44c3-a11e-2cbffa00dce6" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>type(tbml(&apos;deviceList&apos;, &apos;-id&apos;, v[0])) is str:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="0879e7e1-4b78-4d2c-b67e-272fea70f73f" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert steps here for when expression is true</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="2a36d4c6-92b6-4d21-9a82-44048efa79d0" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>ex=tbml(&apos;deviceList&apos;, &apos;-id&apos;, v[0])</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="867f099e-9634-4d9e-bf9f-86dfae5691b2" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>ex</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="72a85e7d-7d6f-49bf-abb3-afa6578dd8f5" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>ex == &quot;&quot;:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="82da695c-e840-4696-ba9e-53a7ca9e5173" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Insert steps here for when expression is true</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="70ffccb5-a19d-46b8-af3c-077c6614e704" action="continue" useFieldsInCommand="false">
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="4821d070-2009-4e2a-8b30-8d9936e81ff1" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>&quot;input&quot; in tbml(&apos;property&apos;, &apos;-id&apos;, ex, &apos;name&apos;) :</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="3f6c0ea0-0401-4208-b334-2deeb8996ddd" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Insert steps here for when expression is true</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="a0c0885f-db7c-4a4a-9cb5-72bc1d75c0dc" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>v.append([tbml(&apos;property&apos;, &apos;-id&apos;, ex, &apos;name&apos;),tbml(&apos;property&apos;, &apos;-id&apos;, dnames[n][0], &apos;{General Info} RF_port_id&apos;)]) </body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="8042e982-ea32-49b1-993f-867bb66561e4" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="4e2351f5-183c-41be-9ae0-156cb930eb30" action="for" useFieldsInCommand="false">
+                                    <command>
+                                        <body>ex in tbml(&apos;deviceList&apos;, &apos;-id&apos;, v[0]):</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="ab594937-de3f-4fe3-8dd8-3500554f7347" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Insert steps here to be executed on each loop</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="bb29c217-40c2-4a2e-8832-bcdced684996" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>ex</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="cbb48386-9a2d-445d-867c-0f5277bb1dd4" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>&quot;input&quot; in tbml(&apos;property&apos;, &apos;-id&apos;, ex, &apos;name&apos;) :</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="9b38425c-5c7c-4f2e-800a-c043ae2afc2e" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>Insert steps here for when expression is true</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="fd41743e-70d2-4c72-b762-b949e790aa02" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>v.append([tbml(&apos;property&apos;, &apos;-id&apos;, ex, &apos;name&apos;),tbml(&apos;property&apos;, &apos;-id&apos;, dnames[n][0], &apos;{General Info} RF_port_id&apos;)]) </body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ce10cd5e-656b-4fd0-ac18-f0c64c464150" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>dnames2 = dnames.copy()</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="46b3c546-9fc9-42c7-8050-046d323548d6" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>k,v in dnames2.items():</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fb2687fc-43bb-4af0-ab92-7abdc901115d" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>If there are no links, skip sending the cable mac </body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0bd7c640-4407-4489-bffb-907739b78758" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>len(v) == 1:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="b9aafcba-0fce-4e3a-96ed-9acd6b505d63" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>del dnames[k]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="80bf6254-edef-49a4-860e-ff25274f137a" action="return">
+                    <command>
+                        <body>[dnames]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="addToVlan" isPublic="true">
+            <steps>
+                <item guid="99171a4f-a288-4250-8946-2c75695de5ed" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>endpoints</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6ce6d7c7-6d10-4eac-b264-22a767d9c446" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>RF_switch_ips</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ae09db40-aa42-4fd1-bfd1-c65094ee573f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>attach IPs from global</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4875c8d2-3693-4270-a6e6-9b84dcb1bfa0" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>k,v in endpoints.items():</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="c0388a0c-c580-4ecb-8383-524e82de9814" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>endpoints[k][0] = RF_switch_ips[k]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="86fcc541-611d-4648-9dee-07d198785496" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>endpoints</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="c24dda51-b925-498a-b0cc-95dbaa60abda" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>si_dir={}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3b51b656-746f-48da-b05e-6ecb78ee9a27" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>set key on command dict</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e4ff6c0b-1d6d-4e44-9dee-250e83f73d83" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>k,v in endpoints.items():</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="afeaaf40-e8d6-4ccd-b2bb-293518e371f4" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>v[1][0]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="37d2c244-0889-48f9-a122-2e36e9709313" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>connectPorts(i=re.sub(&quot;RF_input_&quot;,&quot;&quot;,v[1][0]), o=re.sub(&quot;RF_output_&quot;,&quot;&quot;,v[1][1]),ip=endpoints[k][0])</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="8a372112-b03f-4f1b-9b90-08282e6b11b3" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>verifyMap(ip=endpoints[k][0])</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="endpoints">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="RF_switch_ips">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="connectPorts" isPublic="true">
+            <steps>
+                <item guid="cb8b8a3d-5f8a-4884-9e5f-b85591bf7abc" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>i,&quot;input to &quot;,o,&quot; output with &quot;,ip</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2a67c9a0-7d2f-4439-8886-1d25d4d57db1" action="message" useFieldsInCommand="false">
+                    <command>
+                        <body>Information: map input [i] &lt;-&gt; output [o]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                        <message inherit="false"> map input [i] &lt;-&gt; output [o]</message>
+                    </applicationProperties>
+                </item>
+                <item guid="a6934456-31a3-48cd-8b5a-f88891b4e56f" action="open" session="s1">
+                    <command>
+                        <body>project://RF%20driver/telnetRAW.ffsp</body>
+                    </command>
+                    <eventHandlers>
+                        <item name="OnPromptNotFoundTimeout"/>
+                    </eventHandlers>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                            <completionProperties promptLearnUserResponseTime="5" promptLearnUserResponseTime.inherit="false">
+                                <maxIdleTimeAddition inherit="false">2.0</maxIdleTimeAddition>
+                            </completionProperties>
+                        </stepProperties>
+                        <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                            <ipAddress inherit="false">[ip]</ipAddress>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="43ad2fd9-87c9-4853-8f6e-3e3fe75e7cad" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>len(o)&gt;1:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="be94c65a-ac99-45b7-bae3-4087fe24c1e1" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>aux=&quot;&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="71e85700-df6d-4194-b7c0-0716dc99d7e3" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>e in o:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="f7a845ca-2db0-42d2-b1b1-66dc698fca25" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>aux=aux+i+&quot; &quot;+e+&quot; &quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d9ca2dc8-92f8-45f3-a158-546f2ce0a0ea" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(aux)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="8f23eb04-70ae-4827-be05-56f08e9f7c2a" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>send commands</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="3c6f861a-bf2b-4e25-8cb9-c13320974763" action="command" session="s1">
+                                    <command>
+                                        <body>SI -R [aux]</body>
+                                    </command>
+                                    <eventHandlers>
+                                        <item name="OnPromptNotFoundTimeout"/>
+                                    </eventHandlers>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <completionProperties promptLearnUserResponseTime="5" promptLearnUserResponseTime.inherit="false">
+                                            <maxIdleTimeAddition inherit="false">2.0</maxIdleTimeAddition>
+                                        </completionProperties>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="0441a337-d707-4c1e-8fd8-2244b56f2e04" action="close" session="s1" useFieldsInCommand="false">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="07647a92-5287-4939-a6de-155882554173" action="else" useFieldsInCommand="false">
+                    <nestedSteps>
+                        <item guid="a57237fd-faa1-439a-bb5c-874c0daa8135" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>send commands</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ef094243-6128-4546-b5aa-c69425f3b716" action="command" session="s1">
+                                    <command>
+                                        <body>SI -R [i] [o[0]]</body>
+                                    </command>
+                                    <eventHandlers>
+                                        <item name="OnPromptNotFoundTimeout"/>
+                                    </eventHandlers>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <completionProperties promptLearnUserResponseTime="5" promptLearnUserResponseTime.inherit="false">
+                                            <maxIdleTimeAddition inherit="false">2.0</maxIdleTimeAddition>
+                                        </completionProperties>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="efcf66ca-2d92-480e-b9f8-8cc8c524853c" action="close" session="s1" useFieldsInCommand="false">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="i">
+                    <description>input</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="o">
+                    <description>output</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="ip">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="disconnectPorts" isPublic="true">
+            <steps>
+                <item guid="3e1d6277-a42d-4343-b7e0-a72b70c7c5db" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>i,&quot;input to &quot;,o,&quot; output with &quot;,ip</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="775e5f3d-c699-4850-bc78-7ca1c97f8b30" action="message" useFieldsInCommand="false">
+                    <command>
+                        <body>Information: unmap input [i] &lt;-&gt; output 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                        <message inherit="false"> unmap input [i] &lt;-&gt; output 0</message>
+                    </applicationProperties>
+                </item>
+                <item guid="6a640796-fbe0-4ab0-9e8b-711799f98e24" action="open" session="s1">
+                    <command>
+                        <body>project://RF%20driver/telnetRAW.ffsp</body>
+                    </command>
+                    <eventHandlers>
+                        <item name="OnPromptNotFoundTimeout"/>
+                    </eventHandlers>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                            <completionProperties promptLearnUserResponseTime="5" promptLearnUserResponseTime.inherit="false">
+                                <maxIdleTimeAddition inherit="false">2.0</maxIdleTimeAddition>
+                            </completionProperties>
+                        </stepProperties>
+                        <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                            <ipAddress inherit="false">[ip]</ipAddress>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="502aaf2b-c352-4a94-a061-e2ba857afcda" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>len(o)&gt;1:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4155ee04-d464-4b1f-9f34-6c40eef3af6f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>aux=&quot;&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e540eac2-e08f-423e-93d3-abae1697aaa8" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>e in o:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="8d66094e-7037-4180-b66e-85730b7e7dcb" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>aux=aux+i+&quot; &quot;+&quot;0&quot;+&quot; &quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="58e36189-19ff-4074-80c3-65046c656716" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(aux)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3239649d-fbbe-4e43-93ba-b00775dd28c0" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>send commands</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="c86ecfeb-886d-499a-ac33-d0a27c2eab12" action="command" session="s1">
+                                    <command>
+                                        <body>SI -R [aux]</body>
+                                    </command>
+                                    <eventHandlers>
+                                        <item name="OnPromptNotFoundTimeout"/>
+                                    </eventHandlers>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <completionProperties promptLearnUserResponseTime="5" promptLearnUserResponseTime.inherit="false">
+                                            <maxIdleTimeAddition inherit="false">2.0</maxIdleTimeAddition>
+                                        </completionProperties>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="8d9ac187-36ec-43b1-b966-bfe72ddbbbb4" action="close" session="s1" useFieldsInCommand="false">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bdb6b3f3-b959-45d2-ae65-540e86245fa8" action="else" useFieldsInCommand="false">
+                    <nestedSteps>
+                        <item guid="d8a8587d-6997-42b1-af2f-f08397891931" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>send commands</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="c551ea22-ba2d-4aa7-a6f7-86aee3185060" action="command" session="s1">
+                                    <command>
+                                        <body>SI -R [i] 0</body>
+                                    </command>
+                                    <eventHandlers>
+                                        <item name="OnPromptNotFoundTimeout"/>
+                                    </eventHandlers>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                        <completionProperties promptLearnUserResponseTime="5" promptLearnUserResponseTime.inherit="false">
+                                            <maxIdleTimeAddition inherit="false">2.0</maxIdleTimeAddition>
+                                        </completionProperties>
+                                    </applicationProperties>
+                                </item>
+                                <item guid="a3d162c0-b6ac-4140-a6b7-322848ee79c4" action="close" session="s1" useFieldsInCommand="false">
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="i">
+                    <description>input</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="o">
+                    <description>output</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="ip">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="verifyMap" isPublic="true">
+            <steps>
+                <item guid="1e62bbed-f7d5-499e-af24-2a1a967f2d4c" action="open" session="s1">
+                    <command>
+                        <body>project://RF%20driver/telnetRAW.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                            <completionProperties promptLearnUserResponseTime="5" promptLearnUserResponseTime.inherit="false">
+                                <maxIdleTimeAddition inherit="false">2.0</maxIdleTimeAddition>
+                            </completionProperties>
+                        </stepProperties>
+                        <sessionProperties type="com.fnfr.svt.applications.telnet.documents.TelnetSessionProperties">
+                            <ipAddress inherit="false">[ip]</ipAddress>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="86301415-a5c7-4e83-9ef4-232f85750fab" action="command" session="s1">
+                    <command>
+                        <body>RMP</body>
+                    </command>
+                    <eventHandlers>
+                        <item name="OnPromptNotFoundTimeout"/>
+                    </eventHandlers>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="300c91b5-c879-403c-84f4-9c5843439259" action="close" session="s1" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="ip">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="destroyVlan" isPublic="true">
+            <steps>
+                <item guid="98b58633-83f0-4a65-ba42-e874ec2231c5" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>endpoints</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f7c32a23-eb23-47bb-85b1-3ee282db2214" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>RF_switch_ips</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="49c158c7-d8c9-4d27-a3a4-67fa2a1cb306" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>attach IPs from global</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="68b8574c-db58-4682-874a-3eb805bf3a57" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>k,v in endpoints.items():</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ae8d2f12-2b81-420f-ac14-4d88fb8c7a0b" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>endpoints[k][0] = RF_switch_ips[k]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4ba3957a-c201-4afd-abaf-0a7a52ae9210" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>endpoints</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a39c788d-708b-4e0d-a99b-de8c354694b9" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>si_dir={}</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2b79f960-c46b-46b9-afad-18e551826538" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>set key on command dict</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="732342ae-24ac-4504-9f60-78e81c9a2f6c" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>k,v in endpoints.items():</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="5e4c55dd-ee89-43b7-8926-d9c6608b3cf1" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>v[1][0]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="f588e300-a413-4736-9dbc-a50b20c97d17" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>disconnectPorts(i=re.sub(&quot;RF_input_&quot;,&quot;&quot;,v[1][0]), o=re.sub(&quot;RF_output_&quot;,&quot;&quot;,v[1][1]),ip=endpoints[k][0])</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="12d7532c-4df8-44a8-b737-99a0cd597f1b" action="call" useFieldsInCommand="false">
+                                    <command>
+                                        <body>verifyMap(ip=endpoints[k][0])</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="endpoints">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="RF_switch_ips">
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="removeFromVlan" isPublic="true">
+            <steps>
+                <item guid="a4ce03b0-de7a-4d81-91df-049b8d8c793a" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>port</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="20e89a48-1aae-4d55-9ad9-c32b80dd582f" action="open" session="s2">
+                    <command>
+                        <body>project://RF%20driver/VeloRestSession.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" version="2" version.inherit="false"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="9ab288a3-5481-4fa9-8106-5ef9a35d6dc2" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get port name to send to 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0d43b9dd-859d-4ad0-b51c-b433cce9c347" action="GET" session="s2">
+                    <command>
+                        <body>/velocity/api/inventory/v15/devices/ports?filter=name::[port]&amp;filter=parentName::RF_VirtualSwitch</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/ports/item/connectedPortName</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>&quot;input&quot; in str(value)</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>newPort = str(value)</statement>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>ret = False</statement>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="Eval">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                    <statement>ret = True</statement>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="SkipRemainingRules">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>mapped/Json/ports/item/connectedPortParentName</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>parentName</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/velocity/api/inventory/v15/devices/ports?filter=name::[port]&amp;filter=parentName::RF_VirtualSwitch" action.inherit="false"/>
+                </item>
+                <item guid="18894b74-8177-4df9-bdb5-1318bd93f044" action="close" session="s2">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0b29e20e-36e6-46dc-90d4-84e0ce1db8b5" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>ret == True:</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d144c98e-2b35-46b4-9778-9c0e71c92e27" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Insert steps here for when expression is true</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d3ca843c-9aae-42f0-9e04-1b3ac95b853d" action="return">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7cc897c3-bee3-4f63-adda-4ce841c2cca7" action="comment" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>Get port parent name to get IP from the actual switch</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7cf320e4-89cd-4766-a60f-8a5b936c0643" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>parentName = re.sub(&quot; &quot;,&quot;%20&quot;,parentName)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="acaf4009-61f1-479b-87b5-53f2fe625211" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>parentName</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e85e10e4-2b0d-44b6-92b1-c8f5c65cb345" action="GET" session="s2">
+                            <command>
+                                <body>/velocity/api/inventory/v15/devices?filter=name::[parentName]&amp;includeProperties=true</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/devices/item/properties/item[1]/value</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>ip</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/velocity/api/inventory/v15/devices?filter=name::[parentName]&amp;includeProperties=true" action.inherit="false"/>
+                        </item>
+                        <item guid="910964f1-ee5a-47ab-b202-1101c0a032bd" action="close" session="s2">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6f6d36b3-0329-43f2-b3e2-e9f7220c5c48" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>ip = RF_switch_ips[parentName]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cacebfa6-8587-4bf9-b255-c68be7e373a2" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>newPort,ip</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ed4ab5d3-b771-492e-82fb-fee3f56525e6" action="call" useFieldsInCommand="false">
+                    <command>
+                        <body>disconnectPorts(i=re.sub(&quot;RF_input_&quot;,&quot;&quot;,newPort),o=[0],ip=ip)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="port">
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="RF_switch_ips"/>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>
