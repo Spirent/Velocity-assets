@@ -64,7 +64,7 @@
                             </item>
                         </arguments>
                     </item>
-                    <item name="getUserGroupId" isPublic="true">
+                    <item name="getUserGroupId" isPublic="true" blockResponseType="JSON">
                         <description>Get the ID of the specified user group by name</description>
                         <arguments>
                             <item name="groupName">
@@ -72,6 +72,9 @@
                                 <isMandatory>true</isMandatory>
                             </item>
                         </arguments>
+                        <response>{
+  &quot;userGroupId&quot;: &quot;value&quot;
+}</response>
                     </item>
                 </procedures>
             </tcDescriptor>

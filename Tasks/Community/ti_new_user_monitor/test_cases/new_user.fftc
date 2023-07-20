@@ -35,6 +35,31 @@
                         <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                     </applicationProperties>
                 </item>
+                <item guid="34dd7e88-806e-4737-a0bb-acf6bed10aaa" action="getUserGroupId" session="vel_rest" useFieldsInCommand="false">
+                    <command>
+                        <body>-groupName [param usergroup]</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>userGroupId()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>userGroupId</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
                 <item guid="ce956b23-a929-4fdc-bb1a-fdf61ff9cb8a" action="getUngroupedUsers" session="vel_rest" useFieldsInCommand="false">
                     <command>
                         <body>-ignoredUsers [param IGNORE_LIST]</body>
@@ -109,7 +134,7 @@
                     <nestedSteps>
                         <item guid="f8c3b5c7-aed8-4191-9ec3-d37061385ed2" action="addUserToGroup" session="vel_rest" useFieldsInCommand="false">
                             <command>
-                                <body>-userId $id</body>
+                                <body>-userId $id -groupId $userGroupId</body>
                             </command>
                             <postProcessing>
                                 <analysisRules>

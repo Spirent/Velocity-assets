@@ -326,14 +326,36 @@
                 </item>
             </arguments>
         </item>
-        <item name="getUserGroupId" isPublic="true">
+        <item name="getUserGroupId" isPublic="true" blockResponseType="JSON">
             <description>Get the ID of the specified user group by name</description>
             <steps>
                 <item guid="131591fb-f994-4c02-839d-1c5bafe882e2" action="GET" session="$session" normalOffset="19.509" estimatedStepExecutionTime="0.094">
                     <command>
                         <body>user/v11/groups</body>
                     </command>
-                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v11/groups" action.inherit="false"/>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query sub="true">mapped/Json/userGroups/item\\[name=&apos;$groupName&apos;]/id</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>userGroup</storageLocation>
+                                        <query>userGroupId</query>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v11/groups" action.inherit="false">
+                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" user="administrator" user.inherit="false" password.masked="true" password="SrqvrrOjrgE=" password.inherit="false"/>
+                    </applicationProperties>
                 </item>
             </steps>
             <arguments>
@@ -342,6 +364,9 @@
                     <isMandatory>true</isMandatory>
                 </item>
             </arguments>
+            <response>{
+  &quot;userGroupId&quot;: &quot;value&quot;
+}</response>
         </item>
     </procedures>
 </testCase>
