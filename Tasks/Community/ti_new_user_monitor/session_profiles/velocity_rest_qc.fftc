@@ -4,16 +4,7 @@
         <sessionClass includeTestCase="true" sessionType="velocity_rest.ffsp"/>
     </general>
     <procedures>
-        <item name="main">
-            <steps>
-                <item guid="aa87b2b8-bf93-4c9d-9fe5-0d93a35b425e" action="call" useFieldsInCommand="false">
-                    <command>
-                        <body>project://ti_new_user_monitor/test_cases/unit_test.fftc#basicFunctionality</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-        </item>
+        <item name="main"/>
         <item name="getUngroupedUsers" isPublic="true">
             <steps>
                 <item guid="3807fe77-f273-441f-87c5-0bdacc7dc04d" action="GET" session="$session" normalOffset="19.509" estimatedStepExecutionTime="0.094">
@@ -54,9 +45,7 @@
                             </item>
                         </analysisRules>
                     </postProcessing>
-                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/group/NONE/users" action.inherit="false">
-                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
-                    </applicationProperties>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/group/NONE/users" action.inherit="false"/>
                 </item>
                 <item guid="afd5a499-b66a-40e7-8868-a57f1f3c462b" action="eval" useFieldsInCommand="false">
                     <command>
@@ -172,9 +161,7 @@
                             </item>
                         </analysisRules>
                     </postProcessing>
-                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/group/$groupId/user/$userId" action.inherit="false">
-                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
-                    </applicationProperties>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/group/$groupId/user/$userId" action.inherit="false"/>
                 </item>
                 <item guid="d8f755c3-ad3c-4136-aee7-42764ea160b3" action="return">
                     <command>
@@ -210,9 +197,7 @@
                         <storeResponseAt>userJson</storeResponseAt>
                         <storeResponseText>true</storeResponseText>
                     </postProcessing>
-                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/profile/$userId" action.inherit="false">
-                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
-                    </applicationProperties>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/profile/$userId" action.inherit="false"/>
                 </item>
                 <item guid="15115b1c-8104-4663-ae5f-3d4ccb11cb5d" action="eval" useFieldsInCommand="false">
                     <command>
@@ -282,9 +267,7 @@
                         <storeResponseAt>userJson</storeResponseAt>
                         <storeResponseText>true</storeResponseText>
                     </postProcessing>
-                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/profile/$userId" action.inherit="false">
-                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
-                    </applicationProperties>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v1/profile/$userId" action.inherit="false"/>
                 </item>
                 <item guid="9c914c1e-0a5e-4289-ad9f-a0512504fb46" action="eval" useFieldsInCommand="false">
                     <command>
@@ -339,6 +322,23 @@
                 </item>
                 <item name="username">
                     <description>email handle.  The LDAP username is sufficient.</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="getUserGroupId" isPublic="true">
+            <description>Get the ID of the specified user group by name</description>
+            <steps>
+                <item guid="131591fb-f994-4c02-839d-1c5bafe882e2" action="GET" session="$session" normalOffset="19.509" estimatedStepExecutionTime="0.094">
+                    <command>
+                        <body>user/v11/groups</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="user/v11/groups" action.inherit="false"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="groupName">
+                    <description>Name of user group to get ID of</description>
                     <isMandatory>true</isMandatory>
                 </item>
             </arguments>

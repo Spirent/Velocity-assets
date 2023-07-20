@@ -4,10 +4,8 @@
         <parameters version="9.3.3.202306071734">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
-                    <IGNORE_LIST pt:description="space-separated list of usernames to ignore">_pdsvcacct</IGNORE_LIST>
-                    <call_count>2</call_count>
-                    <call_0>getPorts</call_0>
-                    <call_1>getProperties</call_1>
+                    <IGNORE_LIST pt:description="space-separated list of usernames to ignore"/>
+                    <usergroup pt:description="Name of user group to add new users to">Users</usergroup>
                 </parameters>
             </parameters>
         </parameters>

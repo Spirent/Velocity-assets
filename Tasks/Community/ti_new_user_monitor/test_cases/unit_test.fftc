@@ -13,17 +13,8 @@
         </parameters>
     </execution>
     <procedures>
-        <item name="main">
-            <steps>
-                <item guid="e1f2c6f1-75f7-46be-a98f-d19b9164eaba" action="comment" useFieldsInCommand="false">
-                    <command>
-                        <body>This test case unit tests the new user monitor driver</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-            </steps>
-        </item>
-        <item name="basicFunctionality" isPublic="true">
+        <item name="main" isPublic="true">
+            <description>The entry point to the test case</description>
             <steps>
                 <item guid="973a69ce-b23d-4797-8920-89985115eed1" action="open" session="s1">
                     <command>
@@ -31,10 +22,24 @@
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                         <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://10.108.33.55/velocity/api" url.inherit="false">
+                            <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="administrator" user.inherit="false" password.masked="false" password="spirent" password.inherit="false"/>
+                        </sessionProperties>
                         <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                     </applicationProperties>
+                </item>
+                <item guid="f61e6cba-4e3c-4e20-8d34-6122d2681fc6" action="GET" session="s1">
+                    <command>
+                        <body>auth/v2/token</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="auth/v2/token" action.inherit="false"/>
+                </item>
+                <item guid="e193de9a-7ceb-4483-b66c-915d01305034" action="getUserGroupId" session="s1" useFieldsInCommand="false">
+                    <command>
+                        <body>-groupName Users</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
                 <item guid="8a903cf6-2d58-488b-9a44-b9cdb296948a" action="getUngroupedUsers" session="s1" skip="true" useFieldsInCommand="false">
                     <command>

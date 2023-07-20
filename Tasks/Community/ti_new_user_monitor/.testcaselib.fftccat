@@ -64,6 +64,15 @@
                             </item>
                         </arguments>
                     </item>
+                    <item name="getUserGroupId" isPublic="true">
+                        <description>Get the ID of the specified user group by name</description>
+                        <arguments>
+                            <item name="groupName">
+                                <description>Name of user group to get ID of</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
                 </procedures>
             </tcDescriptor>
         </item>
@@ -73,7 +82,9 @@
                     <isProcedureLibrary>true</isProcedureLibrary>
                 </general>
                 <procedures>
-                    <item name="basicFunctionality" isPublic="true"/>
+                    <item name="main" isPublic="true">
+                        <description>The entry point to the test case</description>
+                    </item>
                 </procedures>
             </tcDescriptor>
         </item>
