@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.0.1.0">
+<TestCaseCatalog version="9.3.3.202306071734">
     <testCaseCatalog>
         <item name="session_profiles/velocity_db_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="9.3.3.202306071734">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="velocity_db.ffsp"/>
                 </general>
@@ -18,7 +18,7 @@
             </tcDescriptor>
         </item>
         <item name="session_profiles/velocity_rest_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="9.3.3.202306071734">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="velocity_rest.ffsp"/>
                 </general>
@@ -68,7 +68,7 @@
             </tcDescriptor>
         </item>
         <item name="test_cases/unit_test.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="9.3.3.202306071734">
                 <general>
                     <isProcedureLibrary>true</isProcedureLibrary>
                 </general>

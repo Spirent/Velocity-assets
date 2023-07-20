@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
-<testCase version="5.1.0.77511">
+<testCase version="9.3.3.202306071734">
     <general>
         <sessionClass includeTestCase="true" sessionType="velocity_rest.ffsp"/>
     </general>
     <procedures>
         <item name="main">
             <steps>
-                <item guid="aa87b2b8-bf93-4c9d-9fe5-0d93a35b425e" action="call">
+                <item guid="aa87b2b8-bf93-4c9d-9fe5-0d93a35b425e" action="call" useFieldsInCommand="false">
                     <command>
                         <body>project://ti_new_user_monitor/test_cases/unit_test.fftc#basicFunctionality</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
         </item>
@@ -32,6 +31,9 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>userIds</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -44,6 +46,9 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>usernames</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
@@ -53,57 +58,51 @@
                         <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
                     </applicationProperties>
                 </item>
-                <item guid="afd5a499-b66a-40e7-8868-a57f1f3c462b" action="eval">
+                <item guid="afd5a499-b66a-40e7-8868-a57f1f3c462b" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set scrubbedList &quot;&quot;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="7945e4e4-0892-4797-8b2b-c2e534c8423d" action="foreach">
+                <item guid="7945e4e4-0892-4797-8b2b-c2e534c8423d" action="foreach" useFieldsInCommand="false">
                     <command>
                         <body>id $userIds name $usernames</body>
                     </command>
                     <nestedSteps>
-                        <item guid="7181142e-c9ef-412d-be3b-17b0eba175f1" action="eval">
+                        <item guid="7181142e-c9ef-412d-be3b-17b0eba175f1" action="eval" useFieldsInCommand="false">
                             <command>
                                 <body>lsearch -exact $ignoredUsers $name</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
-                        <item guid="71429d87-d52d-45af-b495-306580956267" action="if">
+                        <item guid="71429d87-d52d-45af-b495-306580956267" action="if" useFieldsInCommand="false">
                             <command>
                                 <body>[lsearch -exact $ignoredUsers $name] == -1</body>
                             </command>
                             <nestedSteps>
-                                <item guid="271f3851-e6bf-4b3c-a74a-456cad1dff51" action="then">
+                                <item guid="271f3851-e6bf-4b3c-a74a-456cad1dff51" action="then" useFieldsInCommand="false">
                                     <nestedSteps>
-                                        <item guid="e29579e7-0d82-4edd-889c-82ea06be7e54" action="eval">
+                                        <item guid="e29579e7-0d82-4edd-889c-82ea06be7e54" action="eval" useFieldsInCommand="false">
                                             <command>
                                                 <body>lappend scrubbedList &quot;userId = $id username = $name\\n&quot;</body>
                                             </command>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                            <useFieldsInCommand>false</useFieldsInCommand>
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                    <useFieldsInCommand>false</useFieldsInCommand>
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="ef38a396-4b4e-4739-9662-d959c223de26" action="if">
+                <item guid="ef38a396-4b4e-4739-9662-d959c223de26" action="if" useFieldsInCommand="false">
                     <command>
                         <body>[llength $scrubbedList] == 0</body>
                     </command>
                     <nestedSteps>
-                        <item guid="0adce538-0eae-4410-848c-085bd72ea5f0" action="then">
+                        <item guid="0adce538-0eae-4410-848c-085bd72ea5f0" action="then" useFieldsInCommand="false">
                             <nestedSteps>
                                 <item guid="8a270bbe-dbd0-4ddb-aa5e-72ebe7c5fa6e" action="return">
                                     <command>
@@ -113,9 +112,8 @@
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
-                        <item guid="ad727f8d-0f9f-48b8-bc51-99ea3f4d09ea" action="else">
+                        <item guid="ad727f8d-0f9f-48b8-bc51-99ea3f4d09ea" action="else" useFieldsInCommand="false">
                             <nestedSteps>
                                 <item guid="0f4fd0f6-e988-4d4e-97ae-173ecd5ba397" action="return">
                                     <command>
@@ -125,11 +123,9 @@
                                 </item>
                             </nestedSteps>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
             </steps>
             <arguments>
@@ -143,12 +139,11 @@
         </item>
         <item name="addUserToGroup" isPublic="true">
             <steps>
-                <item guid="f6b671d8-250f-4a12-86cd-6f7a2e5f292f" action="eval">
+                <item guid="f6b671d8-250f-4a12-86cd-6f7a2e5f292f" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set retVal &quot;OK&quot;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="0f11c404-0868-40e5-b0c3-32ca3dcc2e32" action="POST" session="$session" estimatedStepExecutionTime="0.078">
                     <command>
@@ -201,12 +196,11 @@
         </item>
         <item name="enableSystemMessageEmail" isPublic="true">
             <steps>
-                <item guid="fcfb5bdf-38c6-4b43-adc1-124c9056280b" action="eval">
+                <item guid="fcfb5bdf-38c6-4b43-adc1-124c9056280b" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set retVal &quot;OK&quot;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="ce4d29bd-75fd-4efa-93d8-c8f28154229a" action="GET" session="$session" estimatedStepExecutionTime="0.063">
                     <command>
@@ -220,7 +214,7 @@
                         <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
                     </applicationProperties>
                 </item>
-                <item guid="15115b1c-8104-4663-ae5f-3d4ccb11cb5d" action="eval">
+                <item guid="15115b1c-8104-4663-ae5f-3d4ccb11cb5d" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>regsub &quot;receivesEmailNotifications\\&quot;:false&quot;  $userJson &quot;receivesEmailNotifications\\&quot;:true&quot;</body>
                     </command>
@@ -229,7 +223,6 @@
                         <storeResponseText>true</storeResponseText>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="d8cf3f26-6216-4bdc-9d28-66a951c049ae" action="PUT" session="$session">
                     <command>
@@ -275,12 +268,11 @@
         </item>
         <item name="setEmailAddress" isPublic="true">
             <steps>
-                <item guid="7a654b27-2dcc-49a6-86ec-2fccd1567ede" action="eval">
+                <item guid="7a654b27-2dcc-49a6-86ec-2fccd1567ede" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set retVal &quot;OK&quot;</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="44cf82e5-79f9-4716-85e3-11615f26d1ad" action="GET" session="$session" estimatedStepExecutionTime="0.063">
                     <command>
@@ -294,16 +286,15 @@
                         <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Secure" authenticationType.inherit="false" user="_pdsvcacct" user.inherit="false" password.masked="true" password="h4yrKJWqMkVhRWzLXOKVNQ==" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
                     </applicationProperties>
                 </item>
-                <item guid="9c914c1e-0a5e-4289-ad9f-a0512504fb46" action="eval">
+                <item guid="9c914c1e-0a5e-4289-ad9f-a0512504fb46" action="eval" useFieldsInCommand="false">
                     <command>
-                        <body>regsub &quot;email\\&quot;:null,&quot;  $userJson &quot;email\\&quot;:\\&quot;$username@f5.com\\&quot;,&quot;</body>
+                        <body>regsub &quot;email\\&quot;:null,&quot;  $userJson &quot;email\\&quot;:\\&quot;$username@foo.com\\&quot;,&quot;</body>
                     </command>
                     <postProcessing>
                         <storeResponseAt>updatedJson</storeResponseAt>
                         <storeResponseText>true</storeResponseText>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="664add76-a03e-404c-a7da-1ce1a53940d9" action="PUT" session="$session">
                     <command>

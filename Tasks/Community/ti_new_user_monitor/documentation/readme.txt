@@ -1,8 +1,7 @@
 Project: New User Accounts Driver
 Description: New User Accounts Driver
-Category: driver
+Category: task
 Class: Community
 
-Monitor New User Accounts Driver
-
-<b>Tags:</b> Management
+Monitor New User Accounts Task
+	Can be used to auomatically assign users to a user group, set email addresses, and configure other options.
