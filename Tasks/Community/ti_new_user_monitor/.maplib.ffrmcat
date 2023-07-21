@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ResponseMapCatalog version="8.0.1.0">
+<ResponseMapCatalog version="9.3.3.202306071734">
     <mapCatalog>
         <item name="response_maps/getUngroupedUsers.ffrm">
             <applicability actionType="getUngroupedUsers"/>

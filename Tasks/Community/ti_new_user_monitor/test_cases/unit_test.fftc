@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<testCase version="5.1.0.77511">
+<testCase version="9.3.3.202306071734">
     <general>
         <isProcedureLibrary>true</isProcedureLibrary>
     </general>
     <execution>
-        <parameters version="5.1.0.77511">
+        <parameters version="9.3.3.202306071734">
             <parameters escape="true">
                 <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
                     <IGNORE_LIST pt:description="space-separated list of usernames to ignore">_pdsvcacct</IGNORE_LIST>
@@ -13,18 +13,8 @@
         </parameters>
     </execution>
     <procedures>
-        <item name="main">
-            <steps>
-                <item guid="e1f2c6f1-75f7-46be-a98f-d19b9164eaba" action="comment">
-                    <command>
-                        <body>This test case unit tests the new user monitor driver</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
-                </item>
-            </steps>
-        </item>
-        <item name="basicFunctionality" isPublic="true">
+        <item name="main" isPublic="true">
+            <description>The entry point to the test case</description>
             <steps>
                 <item guid="973a69ce-b23d-4797-8920-89985115eed1" action="open" session="s1">
                     <command>
@@ -32,11 +22,64 @@
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
                         <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://10.108.33.55/velocity/api" url.inherit="false">
+                            <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="administrator" user.inherit="false" password.masked="false" password="spirent" password.inherit="false"/>
+                        </sessionProperties>
                         <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                     </applicationProperties>
                 </item>
-                <item guid="8a903cf6-2d58-488b-9a44-b9cdb296948a" action="getUngroupedUsers" session="s1" skip="true">
+                <item guid="f61e6cba-4e3c-4e20-8d34-6122d2681fc6" action="GET" session="s1">
+                    <command>
+                        <body>auth/v2/token</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>xtoken()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>token</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="auth/v2/token" action.inherit="false"/>
+                </item>
+                <item guid="e193de9a-7ceb-4483-b66c-915d01305034" action="getUserGroupId" session="s1" useFieldsInCommand="false">
+                    <command>
+                        <body>-groupName Users</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>userGroupId()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>var1</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8a903cf6-2d58-488b-9a44-b9cdb296948a" action="getUngroupedUsers" session="s1" skip="true" useFieldsInCommand="false">
                     <command>
                         <body>-ignoredUsers [param IGNORE_LIST]</body>
                     </command>
@@ -51,29 +94,29 @@
                                 <processorInfo ruleType="store">
                                     <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
                                         <storageLocation>userIds</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
                                     </ruleProperties>
                                 </processorInfo>
                             </item>
                         </analysisRules>
                     </postProcessing>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
-                <item guid="4fd219fe-e7bc-4f36-ac2f-3805e3658d05" action="foreach" skip="true">
+                <item guid="4fd219fe-e7bc-4f36-ac2f-3805e3658d05" action="foreach" skip="true" useFieldsInCommand="false">
                     <command>
                         <body>id $userIds</body>
                     </command>
                     <nestedSteps>
-                        <item guid="e09cdba8-13f5-4d3f-8379-f602c89c5f34" action="addUserToGroup" session="s1" skip="true">
+                        <item guid="e09cdba8-13f5-4d3f-8379-f602c89c5f34" action="addUserToGroup" session="s1" skip="true" useFieldsInCommand="false">
                             <command>
                                 <body>-userId $id</body>
                             </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                            <useFieldsInCommand>false</useFieldsInCommand>
                         </item>
                     </nestedSteps>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                    <useFieldsInCommand>false</useFieldsInCommand>
                 </item>
                 <item guid="0e08435b-ec8b-4a09-ae40-1d505d8966ff" action="close" session="s1">
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>

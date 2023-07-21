@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.0.1.0">
+<TestCaseCatalog version="9.3.3.202306071734">
     <testCaseCatalog>
         <item name="session_profiles/velocity_db_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="9.3.3.202306071734">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="velocity_db.ffsp"/>
                 </general>
@@ -18,7 +18,7 @@
             </tcDescriptor>
         </item>
         <item name="session_profiles/velocity_rest_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="9.3.3.202306071734">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="velocity_rest.ffsp"/>
                 </general>
@@ -64,16 +64,30 @@
                             </item>
                         </arguments>
                     </item>
+                    <item name="getUserGroupId" isPublic="true" blockResponseType="JSON">
+                        <description>Get the ID of the specified user group by name</description>
+                        <arguments>
+                            <item name="groupName">
+                                <description>Name of user group to get ID of</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{
+  &quot;userGroupId&quot;: &quot;value&quot;
+}</response>
+                    </item>
                 </procedures>
             </tcDescriptor>
         </item>
         <item name="test_cases/unit_test.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="9.3.3.202306071734">
                 <general>
                     <isProcedureLibrary>true</isProcedureLibrary>
                 </general>
                 <procedures>
-                    <item name="basicFunctionality" isPublic="true"/>
+                    <item name="main" isPublic="true">
+                        <description>The entry point to the test case</description>
+                    </item>
                 </procedures>
             </tcDescriptor>
         </item>
