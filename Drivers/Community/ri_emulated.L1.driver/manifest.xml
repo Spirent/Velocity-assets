@@ -12,5 +12,9 @@
             <name>ipAddress</name>
             <description>IP address of the remote device</description>
         </property>
+        <property optional="false">
+            <name>Hostname</name>
+            <description>Normally generic hostname string, but this driver can use it to set number of blades to model in the switch</description>
+        </property>
     </resourceProperties>
 </resourceDriver>
