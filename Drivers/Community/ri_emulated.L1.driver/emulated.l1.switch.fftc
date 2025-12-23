@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<testCase version="7.2.0.201812200559">
+<testCase version="25.4.0.202512050652">
     <general>
         <documentation>emulated L1</documentation>
         <notes>Model a device called &quot;Emulated L1 Switch 1” using the MRV template, associate it with this driver, and assign it an IP address of 127.0.0.1 (no other properties are required)
@@ -9,7 +9,17 @@ Create a topology connecting these two devices together with an Ethernet connect
 Reserve the topology, and the connection light should go green.</notes>
         <owner>cwhitty</owner>
     </general>
-    <execution defaultStepTimeout="300"/>
+    <execution defaultStepTimeout="300">
+        <parameters version="25.4.0.202512050652">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <call_count>1</call_count>
+                    <call_0>getProperties -includePorts true</call_0>
+                    <property_foobar pt:datatype="INTEGER">2</property_foobar>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
     <procedures>
         <item name="main">
             <steps>
@@ -47,6 +57,7 @@ Reserve the topology, and the connection light should go green.</notes>
                                         <processorInfo ruleType="message">
                                             <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
                                                 <message>Calling [param call_$i]</message>
+                                                <tag sub="false" defaultValue=""/>
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
@@ -341,6 +352,68 @@ Reserve the topology, and the connection light should go green.</notes>
         </item>
         <item name="getUnwrappedPorts">
             <steps>
+                <item guid="34e8ea63-e7f6-4308-9875-5be7ad85c361" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>[info exists param property_Hostname]</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="75fd4876-0243-43db-8c70-11e8d1ea5e0b" action="then" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="3be0d0e2-5aef-4ff6-a5e5-5cf5beebc958" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>[string is integer -strict [param property_Hostname]]</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="4f7aca3a-955e-4532-8ebe-f3f3c32d9617" action="then" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="a46d81e5-3872-4a88-a759-c30c9679458f" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>set bladeCount [param property_Hostname]</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="88f6234b-fef6-401e-8d0c-342803c8d065" action="else" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="2ac9c49c-ced2-4050-ac75-4b5a31dbb82c" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>set bladeCount 1</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="56a21105-f8e7-40b2-b42a-055835036746" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="0e64d83c-f941-49eb-8afc-e538c5587e87" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>set bladeCount 1</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4ff1569d-28e4-498d-8dc6-b7b9b5777185" action="message" useFieldsInCommand="false">
+                    <command>
+                        <body>Information:Modeling switch with $bladeCount number of blades</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                        <message inherit="false">Modeling switch with $bladeCount number of blades</message>
+                    </applicationProperties>
+                </item>
                 <item guid="b37566d9-67e2-415e-8c58-36ad4a8d2301" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set ret &quot;\\&quot;ports\\&quot;:\\[&quot;</body>
@@ -353,100 +426,108 @@ Reserve the topology, and the connection light should go green.</notes>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="03697d9e-b1ba-4a87-95ab-8c2f83e6efa7" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>set blades 1</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
-                <item guid="12bb52ce-a7e1-4d9b-8718-ebe5f5162836" action="eval" useFieldsInCommand="false">
-                    <command>
-                        <body>set ports {port1 port2}</body>
-                    </command>
-                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                </item>
                 <item guid="06b117d0-c7d9-4781-bdc1-92f3a53d2433" action="eval" useFieldsInCommand="false">
                     <command>
                         <body>set statuses {online online}</body>
                     </command>
                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                 </item>
-                <item guid="bd379520-058c-4956-a467-5770916278dd" action="for" useFieldsInCommand="false">
+                <item guid="1e60ffae-2b31-4f67-ab42-ac58628d6a7d" action="eval" useFieldsInCommand="false">
                     <command>
-                        <body>{set i 0} {$i &lt; 48} {incr i}</body>
+                        <body>set portNumber 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2aca108f-c1d6-472a-a476-92b019b6e053" action="for" useFieldsInCommand="false">
+                    <command>
+                        <body>{set b 1} {$b &lt;= $bladeCount} {incr b}</body>
                     </command>
                     <nestedSteps>
-                        <item guid="408fa51e-bb42-4281-ab5e-d75295e9ba33" action="eval" useFieldsInCommand="false">
+                        <item guid="bd379520-058c-4956-a467-5770916278dd" action="for" useFieldsInCommand="false">
                             <command>
-                                <body>set name port$i</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="dd9e8cfe-7c67-4a8b-8088-67f49a6d00aa" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>set status online</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="2e73e217-8c6d-4f3c-ac32-925a4cd4c9e7" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>set group &quot;Chassis [lindex $chassis 0]/Blade [lindex $chassis 0].[lindex $blades 0]&quot;</body>
-                            </command>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="782f754d-f151-46fe-9fee-9e27d69529f7" action="if" useFieldsInCommand="false">
-                            <command>
-                                <body>[expr $i % 2]</body>
+                                <body>{set i 0} {$i &lt; 48} {incr i}</body>
                             </command>
                             <nestedSteps>
-                                <item guid="88a88639-dad4-425e-84de-cf866f5a7294" action="then" useFieldsInCommand="false">
+                                <item guid="408fa51e-bb42-4281-ab5e-d75295e9ba33" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>set name port$portNumber</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="dd9e8cfe-7c67-4a8b-8088-67f49a6d00aa" action="eval" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>set status online</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="2e73e217-8c6d-4f3c-ac32-925a4cd4c9e7" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>set group &quot;Chassis [lindex $chassis 0]/Blade [lindex $chassis 0].$b&quot;</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="782f754d-f151-46fe-9fee-9e27d69529f7" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>[expr $i % 2]</body>
+                                    </command>
                                     <nestedSteps>
-                                        <item guid="a4365221-0e7a-4d95-acee-c221e4f53020" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>set status &quot;online&quot;</body>
-                                            </command>
+                                        <item guid="88a88639-dad4-425e-84de-cf866f5a7294" action="then" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="a4365221-0e7a-4d95-acee-c221e4f53020" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>set status &quot;online&quot;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="afa34e92-9849-4380-99a3-8390bbf3a9b9" action="else" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="2d3a29fe-ecab-4a5a-be09-74ecbd7bd5e2" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>set status &quot;offline&quot;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
                                     </nestedSteps>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
-                                <item guid="afa34e92-9849-4380-99a3-8390bbf3a9b9" action="else" useFieldsInCommand="false">
+                                <item guid="3ada4b6f-8376-4eac-80e2-34a659c13d9d" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>$portNumber != 0</body>
+                                    </command>
                                     <nestedSteps>
-                                        <item guid="2d3a29fe-ecab-4a5a-be09-74ecbd7bd5e2" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>set status &quot;offline&quot;</body>
-                                            </command>
+                                        <item guid="f03fa698-488a-43cc-9e1b-79494f304290" action="then" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="77802b74-bcef-4d6f-adff-26a45848bca2" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>set ret &quot;$ret,&quot;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
                                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                         </item>
                                     </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="427e3f6f-b401-4303-9b08-f57420ed7dd7" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>incr portNumber</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="10a9d707-0dad-48b2-83f1-cbae64bf7e40" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>set ret &quot;$ret{\\&quot;name\\&quot;:\\&quot;$name\\&quot;,\\&quot;status\\&quot;:\\&quot;$status\\&quot;,\\&quot;container\\&quot;:\\&quot;$group\\&quot;}&quot;</body>
+                                    </command>
                                     <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                                 </item>
                             </nestedSteps>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="3ada4b6f-8376-4eac-80e2-34a659c13d9d" action="if" useFieldsInCommand="false">
-                            <command>
-                                <body>$i != 0</body>
-                            </command>
-                            <nestedSteps>
-                                <item guid="f03fa698-488a-43cc-9e1b-79494f304290" action="then" useFieldsInCommand="false">
-                                    <nestedSteps>
-                                        <item guid="77802b74-bcef-4d6f-adff-26a45848bca2" action="eval" useFieldsInCommand="false">
-                                            <command>
-                                                <body>set ret &quot;$ret,&quot;</body>
-                                            </command>
-                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                        </item>
-                                    </nestedSteps>
-                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                                </item>
-                            </nestedSteps>
-                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
-                        </item>
-                        <item guid="10a9d707-0dad-48b2-83f1-cbae64bf7e40" action="eval" useFieldsInCommand="false">
-                            <command>
-                                <body>set ret &quot;$ret{\\&quot;name\\&quot;:\\&quot;$name\\&quot;,\\&quot;status\\&quot;:\\&quot;$status\\&quot;,\\&quot;container\\&quot;:\\&quot;$group\\&quot;}&quot;</body>
-                            </command>
                             <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
                         </item>
                     </nestedSteps>
