@@ -2,8 +2,9 @@
 <testCase version="25.4.0.202512050652">
     <general>
         <documentation>emulated L1</documentation>
-        <notes>Model a device called &quot;Emulated L1 Switch 1” using the MRV template, associate it with this driver, and assign it an IP address of 127.0.0.1 (no other properties are required)
-Click “Discover” for the driver to auto-populate the port groups and ports
+        <notes>Model a device called &quot;Emulated L1 Switch&quot; using the &quot;Layer 1 Switch&quot; template, associate it with this driver, and assign it an IP address of 127.0.0.1 (no other properties are required)
+Click &quot;Discover&quot; for the driver to auto-populate the port groups and ports
+Hidden feature is if you specify an integer value in &quot;Hostname&quot; property, this driver will model that number of blades.
 Connect at least two inventory devices to this emulated L1 switch
 Create a topology connecting these two devices together with an Ethernet connection
 Reserve the topology, and the connection light should go green.</notes>
