@@ -16,8 +16,9 @@ Reserve the topology, and the connection light should go green.
 1 test case in project
 ## Test Case File: emulated.l1.switch.fftc
 ### emulated L1
-Model a device called "Emulated L1 Switch 1” using the MRV template, associate it with this driver, and assign it an IP address of 127.0.0.1 (no other properties are required)
-Click “Discover” for the driver to auto-populate the port groups and ports
+Model a device called "Emulated L1 Switch" using the "Layer 1 Switch" template, associate it with this driver, and assign it an IP address of 127.0.0.1 (no other properties are required)
+Click "Discover" for the driver to auto-populate the port groups and ports
+Hidden feature is if you specify an integer value in "Hostname" property, this driver will model that number of blades.
 Connect at least two inventory devices to this emulated L1 switch
 Create a topology connecting these two devices together with an Ethernet connection
 Reserve the topology, and the connection light should go green.
