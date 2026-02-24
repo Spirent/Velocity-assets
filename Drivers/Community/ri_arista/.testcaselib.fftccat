@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.0.1.0">
+<TestCaseCatalog version="25.4.0.202512130118">
     <testCaseCatalog>
         <item name="session_profiles/arista_base_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="arista_base.ffsp"/>
                 </general>
                 <procedures>
-                    <item name="getInterfaces" isPublic="true" isVBlock="true">
+                    <item name="getInterfaces" isPublic="true" blockResponseType="JSON">
                         <response>{&quot;ports&quot;:null}</response>
                     </item>
-                    <item name="addPortToVlan" isPublic="true" isVBlock="true">
+                    <item name="addPortToVlan" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="vlanId">
                                 <description>can be a single number, a range delimited by &quot;-&quot; or a set of numbers delimited by &quot;,&quot;
@@ -26,7 +26,7 @@ e.g.
                         </arguments>
                         <response>{&quot;vlanAddStatus&quot;:null}</response>
                     </item>
-                    <item name="removePortFromVlan" isPublic="true" isVBlock="true">
+                    <item name="removePortFromVlan" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="vlanId">
                                 <description>can be a single number, a range delimited by &quot;-&quot; or a set of numbers delimited by &quot;,&quot;

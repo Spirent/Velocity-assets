@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>  
+    <version>2.0.2</version>  
+    <vendor>Spirent</vendor>
+    <supportCustomArguments>true</supportCustomArguments>
+    <language>itest</language>  
+    <interface>Orchestration</interface>
+    <entryPoint>eve-ng-driver-2.0.2.fftc</entryPoint>
+    <timeout>3600</timeout>
+    <resourceProperties>
+      <property optional="false">
+        <name>template</name>        
+      </property>
+      <property optional="false">
+        <name>type</name>        
+      </property>
+      <property optional="true">
+        <name>image</name>              
+      </property>      
+      <property optional="false">
+        <name>icon</name>        
+      </property>   
+      <property optional="true">
+        <name>idlepc</name>        
+      </property>   
+      <property optional="true">
+        <name>nvram</name>        
+      </property>
+      <property optional="true">
+        <name>ram</name>        
+      </property>
+      <property optional="true">
+        <name>slot1</name>        
+      </property>
+      <property optional="true">
+        <name>slot2</name> 
+      </property>
+      <property optional="true">
+        <name>slot3</name>
+        </property>
+      <property optional="true">
+        <name>slot4</name>    
+        </property>
+      <property optional="true">
+        <name>slot5</name>   
+        </property>
+      <property optional="true">
+        <name>slot6</name>
+      </property>     
+      <property optional="false">
+        <name>config</name>        
+      </property>
+      <property optional="false">
+        <name>delay</name>        
+      </property>         
+      <property optional="false">
+        <name>left</name>        
+      </property>                                    
+      <property optional="false">
+        <name>top</name>        
+      </property>   
+      <property optional="false">
+        <name>postfix</name>        
+      </property>              
+      <property optional="false">
+        <name>ClusterIP</name>        
+      </property>
+      <property optional="false">
+        <name>ClusterUsername</name>        
+      </property>
+      <property optional="false">
+        <name>ClusterPassword</name>        
+      </property>                   
+    </resourceProperties>   
+</resourceDriver>

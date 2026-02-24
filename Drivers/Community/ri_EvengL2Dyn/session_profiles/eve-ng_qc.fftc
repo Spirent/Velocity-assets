@@ -1,0 +1,1551 @@
+<?xml version="1.0"?>
+<testCase version="25.3.0.202507301940">
+    <general>
+        <notes>Quickcall library for EVE-NG</notes>
+        <sessionClass includeTestCase="true" sessionType="project://ri_EvengL2Dyn/session_profiles/eve-ng.ffsp"/>
+        <language>Python</language>
+        <xPathVersion>XPATH31</xPathVersion>
+    </general>
+    <execution>
+        <parameters version="25.3.0.202507301940">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <eve-ng>
+                        <ip_addr>10.75.238.105</ip_addr>
+                        <username>admin</username>
+                        <password>eve</password>
+                    </eve-ng>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="2b0b8988-9260-4aa6-a926-5512f49c9e5c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Quickcall library for EVE-NG</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="evengLogin" isPublic="true">
+            <steps>
+                <item guid="8de58d34-ec7d-491e-843f-057f866fc381" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="14467e00-65d3-4b67-aada-3608242d1553" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bbd5d23b-0291-454c-96bc-da289fbde2b5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>login and get session cookie</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9abc93ff-3b1c-43fb-b944-0bc5bb6ea588" action="POST" session="[session]">
+                            <command>
+                                <body>/api/auth/login</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>responseHTTPHeaders/Set_Cookie</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>cookie</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>status()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;success&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;True&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="{&quot;username&quot;: &quot;[username]&quot;, &quot;password&quot;: &quot;[password]&quot;, &quot;html5&quot;: &quot;-1&quot;}" message.inherit="false" action="/api/auth/login" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Accept" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="de04a1d9-c039-4ee6-be92-5734d7f7799c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="44734fa3-1ee1-44fd-88a3-4701863b4445" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;, &quot;cookie&quot;: &quot;[cookie]&quot;, &quot;message&quot;: &quot;[message]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="username">
+                    <description>eve-ng username</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="password">
+                    <description>eve-ng password</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="evengCreateLab" isPublic="true">
+            <steps>
+                <item guid="4979cbe9-7f63-43bc-8b2f-88fce5ab56d6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="aa55ea1e-acf7-4345-915f-53758c109e34" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(cookie)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e4c98d22-b756-4e11-a599-94fa7e520528" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(lab_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0ef8b278-667d-4ca2-ba01-ab8734746207" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(version)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="740a17fc-7eba-44db-aed9-de89026a3539" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(path)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e1a431c0-27d5-4050-81ba-0649450c9ec8" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(author)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="bd0841e3-0026-4358-93fe-457ecee407c0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(description)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="33bb5249-7329-41c1-bfaf-4d800103bba0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(body)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f692596d-9355-47ca-a372-86f7917c9fef" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="927d0b75-e433-4dc9-a36e-c967995b43ae" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="6e75299e-ade7-4695-86cf-57bafb710b47" action="POST" session="[session]">
+                            <command>
+                                <body>/api/labs</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>status()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;success&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;True&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="{&quot;path&quot;:&quot;[path]&quot;,&quot;name&quot;:&quot;[lab_name]&quot;,&quot;version&quot;:&quot;[version]&quot;,&quot;author&quot;:&quot;[author]&quot;,&quot;description&quot;:&quot;[description]&quot;,&quot;body&quot;:&quot;[body]&quot;}" message.inherit="false" action="/api/labs" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4ed1f10f-a91a-4032-9a14-98cc9de7dfab" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7aba5ab7-60b9-444e-8e70-24507bbd2b02" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;, &quot;message&quot;:&quot;[message]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng session cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (required)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="version">
+                    <description>eve-ng lab version (required)</description>
+                    <defaultValue>1</defaultValue>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="path">
+                    <description>eve-ng lab path</description>
+                </item>
+                <item name="author">
+                    <description>eve-ng lab author</description>
+                </item>
+                <item name="description">
+                    <description>even-ng new lab description</description>
+                </item>
+                <item name="body">
+                    <description>eve-ng new lab body</description>
+                </item>
+            </arguments>
+        </item>
+        <item name="evengDeleteLab" isPublic="true">
+            <steps>
+                <item guid="5413fa02-0594-4c6f-9193-75d3c251460b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="38c6ad31-dbb0-4782-95d4-a01f949c65b8" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(cookie)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="6da8ca0c-344b-48dc-980a-11649cddab16" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(lab_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b208a77a-3d0b-4274-b7e0-64b8eb59e7f3" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a306d80a-ee32-457a-abe2-a522379a89d6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="057952ce-26c6-47a7-a3e5-cd1be360ca79" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="75a767b5-01c7-4b28-a222-40979148dad5" action="DELETE" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>status()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;success&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode = &quot;True&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/api/labs/[lab]" action.inherit="false"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2e3deccc-c2f3-43cf-ac62-1ef9fe54abfc" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="633d7613-7409-4206-9057-f1c8fbefb643" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;, &quot;message&quot;:&quot;[message]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng session cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (required)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="evengCreateNode" isPublic="true">
+            <steps>
+                <item guid="d4816f7b-a029-47c1-b647-65b6d4669f7d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="955a6f78-74bc-42d2-9079-e2f876014a55" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(node_dict)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="053244f5-e07b-439e-88a3-faee4e0081a9" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="27f1264e-4023-451d-8137-0e0bc907f1b8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5aebcf10-bb0c-45e5-831b-bf85fdd93ab5" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="32f29015-d9c8-4211-80e5-f6b4e7ab90f6" action="POST" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/nodes</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>status()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;success&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode  = &quot;True&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/data/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>node_id</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="[node_dict]" message.inherit="false" action="/api/labs/[lab]/nodes" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a1a7d1ae-6e5a-414f-91cc-4c68c3eef95a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fc570933-1df3-430f-92dd-091eec8da30b" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;, &quot;message&quot;:&quot;[message]&quot;, &quot;node_id&quot;:&quot;[node_id]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="node_dict">
+                    <description>eve-ng node template (includes all required properties)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="evengStartNode" isPublic="true">
+            <steps>
+                <item guid="cf5a02ba-7b8c-4257-bd4d-fdead789dfc0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="cad04da1-aae3-4c52-b368-3b9cec696430" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="241e0d4b-5a4f-4cf8-a0d4-55469c83cdbf" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ff037228-e49d-457f-af52-66a047c5f086" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ec0c9f04-0158-4440-84c8-34c50e6322c7" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/nodes</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">//id\\[../name=&apos;[node]&apos;]</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>idL</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/api/labs/[lab]/nodes" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="cbb0e072-acb8-4277-a3d4-0a898526681f" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>id in idL:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="ec48c564-6831-4cbf-9487-174aa706f9e5" action="GET" session="[session]">
+                                    <command>
+                                        <body>/api/labs/[lab]/nodes/[id]/start</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>status()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>str(value) == &quot;success&quot;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="Eval">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                    <statement>retCode  = &quot;True&quot;</statement>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>message()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>message</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/api/labs/[lab]/nodes/[id]/start" action.inherit="false">
+                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                            <memberClasses>
+                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                            </memberClasses>
+                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Cookie" header.inherit="false" value="[cookie]" value.inherit="false"/>
+                                        </httpHeader>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="58a06578-46fb-44c8-913d-8b641f9e20fd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d3dfb649-5fad-47a3-af53-972271180c30" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;, &quot;message&quot;:&quot;[message]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="node">
+                    <description>node name to be started</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="evengGetNode" isPublic="true">
+            <steps>
+                <item guid="fb816ed0-c464-4010-a54e-3876992a1071" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="974b1089-70bc-4c94-9eda-7f97047ae3ef" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(node_id)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1ae90e38-55d9-409f-80ec-b692610c75fb" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4a7de143-5348-4a1e-89e7-e0702c753ba7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="26e2edda-9d4a-4d78-9eb6-80f867cc4cf0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b3cc5274-9332-4d13-a069-cc0b6adda960" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/nodes/[node_id]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>status()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;success&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode  = &quot;True&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/data/url</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>url</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/data/left</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>left</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/data/top</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>top</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message.inherit="false" action="/api/labs/[lab]/nodes/[node_id]" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d0b47e1a-0e2e-4b6b-8641-c95f0ea82b8f" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="29ee3591-0160-405a-a3e2-1f16e0256fea" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;, &quot;message&quot;:&quot;[message]&quot;, &quot;url&quot;:&quot;[url]&quot;, &quot;left&quot;:&quot;[left]&quot;, &quot;top&quot;:&quot;[top]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="ip_addr">
+                    <description>eve-ng ip address</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="node_id">
+                    <description>eve-ng node id after creation</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+        </item>
+        <item name="evengGetNodeID" isPublic="true" blockResponseType="JSON">
+            <steps>
+                <item guid="243c6ffc-61a6-4178-885e-36186d7e0bfc" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b8ed5e19-88e2-48ab-bbff-770a29d7115b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(node_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f8e5a492-4c8a-46a9-b1a3-4651b7b55f95" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e07b1952-23e0-49b3-89e3-d3135979a8c2" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="fe7b506d-ac0a-4b3b-b127-2beb73706903" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/nodes</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">//*\\[name=&quot;[node_name]&quot;]/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <query>id</query>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/api/labs/[lab]/nodes" action.inherit="false"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="node_name">
+                    <description>eve-ng node id after creation</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+            </arguments>
+            <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+        </item>
+        <item name="evengGetNodeInterfaceID" isPublic="true" blockResponseType="JSON">
+            <steps>
+                <item guid="62886561-02d0-4dc9-9b3a-f0cdb3c86bed" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="65c8d748-4d6e-4d6e-9d9b-3ab97109d22b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(node_id)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="acfcfc46-2582-4d05-83af-e3a11da5a800" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="71f55af9-ffd7-4406-b862-512ea34e491b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="30a3422a-631c-4fa9-9e09-a1d4e154e4e3" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/nodes/[node_id]/interfaces</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">count(//item\\[name=&apos;[interface_name]&apos;]/preceding-sibling::item)</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <query>id</query>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/api/labs/[lab]/nodes/[node_id]/interfaces" action.inherit="false"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="node_id">
+                    <description>eve-ng node id after creation</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="interface_name"/>
+            </arguments>
+            <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+        </item>
+        <item name="evengConnectToNet" isPublic="true" blockResponseType="JSON">
+            <steps>
+                <item guid="de426e61-f8d1-4bce-b621-b8cadb20971a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e3440481-baed-4bce-8247-568b5b7372aa" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="06360cfb-377e-4cbc-a61b-1a7e0e3ca4b6" action="PUT" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/nodes/[node_id]/interfaces</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>status()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;success&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode  = &quot;True&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="{&quot;[interface_id]&quot;:&quot;[network_id]&quot;}" message.inherit="false" action="/api/labs/[lab]/nodes/[node_id]/interfaces" action.inherit="false"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="node_id">
+                    <description>eve-ng node id after creation</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="interface_id"/>
+                <item name="network_id"/>
+            </arguments>
+            <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+        </item>
+        <item name="evengCreateNodeConnections" isPublic="true">
+            <steps>
+                <item guid="49ddb163-bf75-41fc-a136-3dc330bb5d83" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2b122c31-bed0-4db0-96c1-16dba1c1fee3" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(node_id)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9705dcc6-8b22-4ea8-bf38-e5a71c551062" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(network_info)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="519dcf06-b2e5-4d9f-b54a-8e1cb6fb535f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(cookie)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="52f805d9-eff3-428d-8cd9-372fb341adc1" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4c9083be-fa9a-4df7-9c36-20c5dba3d639" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f670648f-037f-4b6b-a4d2-9ae37778fd07" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2530c8fd-b3fb-4e50-b420-f4c87988f03b" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/topology</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message.inherit="false" action="/api/labs/[lab]/topology" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="f79161b5-7d27-4e25-88c8-7ea54809e3a5" action="PUT" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/nodes/[node_id]/interfaces</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>status()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;success&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="Eval">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                            <statement>retCode  = &quot;True&quot;</statement>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="[network_info]" message.inherit="false" action="/api/labs/[lab]/nodes/[node_id]/interfaces" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="36b56a1a-638b-486d-97da-05cb04909a50" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/topology</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message.inherit="false" action="/api/labs/[lab]/topology" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7f1312ed-322b-4b85-b0db-68a02563c4f0" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b02c29a6-8a57-4c51-a928-5c16e932494b" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="node_id">
+                    <description>eve-ng node id</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="network_id">
+                    <description>eve-ng network info
+e.g. {&quot;32&quot;:&quot;1&quot;,&quot;21&quot;:&quot;2&quot;} where 32 - is port id and 1 - in network id</description>
+                </item>
+                <item name="portName"/>
+            </arguments>
+        </item>
+        <item name="evengCreateNetwork" isPublic="true" blockResponseType="JSON">
+            <steps>
+                <item guid="a3cab5f0-f94f-422c-8e16-cb71a6a0a185" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2e8d5a99-23f4-4b71-88fe-6381d8766b7a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="cc938e75-fb96-45b1-ae9e-93ce4b9c05a5" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/networks</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                <query sub="true">mapped/Json/data/*\\[name=&quot;[network]&quot;]/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <query>id</query>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                <query sub="true">count(mapped/Json/data/*\\[name=&quot;[network]&quot;]/id)</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>countId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/api/labs/[lab]/networks" action.inherit="false">
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="3d5468ad-7a3c-454d-9d3e-5269e3c4e0ae" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>countId == &apos;0&apos;:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="75a4e220-8777-45bf-8d6c-f87881bd5110" action="POST" session="[session]">
+                                    <command>
+                                        <body>/api/labs/[lab]/networks</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/data/id</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <query>id</query>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="{&quot;count&quot;:1,&quot;name&quot;:&quot;[network]&quot;,&quot;type&quot;:&quot;[type]&quot;,&quot;left&quot;:0,&quot;top&quot;:0,&quot;visibility&quot;:1,&quot;postfix&quot;:0}" message.inherit="false" action="/api/labs/[lab]/networks" action.inherit="false">
+                                        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                            <memberClasses>
+                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                            </memberClasses>
+                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                        </httpHeader>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="network"/>
+                <item name="type"/>
+            </arguments>
+            <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+        </item>
+        <item name="evengGetNetworkID" isPublic="true" blockResponseType="JSON">
+            <steps>
+                <item guid="5a985788-b2d5-4fc1-b814-aaf72a64d49d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bfac1914-38ef-447c-adee-ba5d4a2e6185" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="3daf7df4-7610-45d7-9a2c-e5740ef35c22" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3940f4a3-2e7e-4f55-9b0c-acab9fb5ac93" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/networks</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">mapped/Json/data/*\\[name=&quot;[network]&quot;]/id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <query>id</query>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message.inherit="false" action="/api/labs/[lab]/networks" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="network"/>
+            </arguments>
+            <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+        </item>
+        <item name="evengSetNetworksVisibility" isPublic="true">
+            <steps>
+                <item guid="9ad56aae-9db0-4d2a-ac39-7ad5e918b58b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="df84295a-51e5-4f3a-970a-039430131082" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(cookie)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="395e855d-0c85-4040-be70-f0083d73e710" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>retCode = &quot;False&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2848b0c4-0867-481e-b5bf-bc8d14264392" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>send commands</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f045dd80-efb4-46bc-af3f-8b06b819d484" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>lab = str(lab_name) + &quot;.unl&quot;; print(lab)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="88a3867f-0d0b-4eb2-b1fe-d0897988a2af" action="GET" session="[session]">
+                            <command>
+                                <body>/api/labs/[lab]/topology</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message.inherit="false" action="/api/labs/[lab]/topology" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                    <memberClasses>
+                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                    </memberClasses>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Cookie" header.inherit="false" value="[cookie]" value.inherit="false"/>
+                                </httpHeader>
+                            </applicationProperties>
+                        </item>
+                        <item guid="0fcd12aa-e14b-4a85-b48a-b12cd76e4552" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>id in networks_list:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="807fa8fa-ccd2-40aa-a9c3-c49ba45ea401" action="PUT" session="[session]">
+                                    <command>
+                                        <body>http://[ip_addr]/api/labs/[lab]/networks/[id]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>status()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>str(value) == &quot;success&quot;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="Eval">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                    <statement>retCode  = &quot;True&quot;</statement>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" message="{&quot;visibility&quot;:[visibility]}" message.inherit="false" action="http://[ip_addr]/api/labs/[lab]/networks/[id]" action.inherit="false">
+                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                            <memberClasses>
+                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                            </memberClasses>
+                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                        </httpHeader>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e6557ec2-a838-43ee-94aa-22a008a64a0b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return result</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b0aa9dc5-4c58-4e8f-ab3d-adef2c2ae745" action="return">
+                            <command>
+                                <body>{&quot;retCode&quot;: &quot;[retCode]&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="cookie">
+                    <description>eve-ng cookie</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="lab_name">
+                    <description>eve-ng lab name (without .unl)</description>
+                    <isMandatory>true</isMandatory>
+                </item>
+                <item name="networks_list">
+                    <description>eve-ng networks list
+e.g. [1, 2]</description>
+                </item>
+                <item name="visibility">
+                    <description>eve-ng network id visibility value
+e.g. {0, 1}</description>
+                </item>
+            </arguments>
+        </item>
+    </procedures>
+</testCase>

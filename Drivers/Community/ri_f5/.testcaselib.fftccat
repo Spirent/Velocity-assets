@@ -1,31 +1,31 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.0.1.0">
+<TestCaseCatalog version="25.4.0.202512130118">
     <testCaseCatalog>
         <item name="session_profiles/big_ip_base_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="big_ip_base.ffsp"/>
                 </general>
                 <procedures>
-                    <item name="getActiveVersion" isPublic="true" isVBlock="true">
+                    <item name="getActiveVersion" isPublic="true" blockResponseType="JSON">
                         <description>getActiveVersion</description>
                         <version>1.0</version>
                         <multilineDescription>This quickcall returns a JSON value corresponding to the version of the active image on the BigIP.</multilineDescription>
                         <response>{&quot;activeVersion&quot;:null}</response>
                     </item>
-                    <item name="getInterfaces" isPublic="true" isVBlock="true">
+                    <item name="getInterfaces" isPublic="true" blockResponseType="JSON">
                         <description>getInterfaces</description>
                         <version>1.0</version>
                         <multilineDescription>This quickcall returns a JSON list of interface names and statuses</multilineDescription>
                         <response>{&quot;ports&quot;:&quot;&quot;}</response>
                     </item>
-                    <item name="getRunningState" isPublic="true" isVBlock="true">
+                    <item name="getRunningState" isPublic="true" blockResponseType="JSON">
                         <description>getRunningState</description>
                         <version>1.0</version>
                         <multilineDescription>getRunningState returns the status displayed in the prompt</multilineDescription>
                         <response>{&quot;runningState&quot;:null}</response>
                     </item>
-                    <item name="setVlan" isPublic="true" isVBlock="true">
+                    <item name="setVlan" isPublic="true" blockResponseType="JSON">
                         <description>setVlan</description>
                         <version>1.0</version>
                         <multilineDescription>setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values</multilineDescription>
@@ -75,7 +75,7 @@
                         </arguments>
                         <response>{&quot;statusCode&quot;:null}</response>
                     </item>
-                    <item name="clearVlan" isPublic="true" isVBlock="true">
+                    <item name="clearVlan" isPublic="true" blockResponseType="JSON">
                         <description>clearVlan</description>
                         <version>1.0</version>
                         <multilineDescription>clearVlan removes the specified VLAN.</multilineDescription>
@@ -88,7 +88,7 @@
                         </arguments>
                         <response>{&quot;statusCode&quot;:null}</response>
                     </item>
-                    <item name="getFirstActivePort" isPublic="true" isVBlock="true">
+                    <item name="getFirstActivePort" isPublic="true" blockResponseType="JSON">
                         <description>getFirstActivePort</description>
                         <version>1.0</version>
                         <multilineDescription>getFirstActivePort returns the name of the first port with the status of &quot;up&quot;</multilineDescription>
@@ -98,12 +98,12 @@
             </tcDescriptor>
         </item>
         <item name="session_profiles/big_ip_chassis_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="big_ip_chassis.ffsp"/>
                 </general>
                 <procedures>
-                    <item name="setVlan" isPublic="true" isVBlock="true">
+                    <item name="setVlan" isPublic="true" blockResponseType="JSON">
                         <description>setVlan</description>
                         <version>1.0</version>
                         <multilineDescription>setVlan adds an interface to the specified vlanID.  vlan name and ip addresses have valid default values</multilineDescription>

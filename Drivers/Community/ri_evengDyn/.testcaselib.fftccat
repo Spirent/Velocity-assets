@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="25.4.0.202512130118">
+    <testCaseCatalog>
+        <item name="libraries/libraryVelocityActions.fftc">
+            <tcDescriptor version="25.4.0.202512130118">
+                <general>
+                    <documentation>Procedures library for Velocity actions</documentation>
+                    <owner>Spirent Comunications</owner>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                    <language>Python</language>
+                    <xPathVersion>XPATH31</xPathVersion>
+                </general>
+                <procedures>
+                    <item name="getResourceCredentialsByName" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="name"/>
+                        </arguments>
+                        <response>{&quot;ipAddress&quot;:&quot;value&quot;,&quot;username&quot;:&quot;value&quot;,&quot;password&quot;:&quot;value&quot;}</response>
+                    </item>
+                    <item name="getOrchestratedResourceIdInfo" isPublic="true"/>
+                    <item name="getTopologyResourcesCoordInfo" isPublic="true"/>
+                    <item name="getOrchestratedResourceIdPorts" isPublic="true"/>
+                    <item name="getReservationConnectionsDetails" isPublic="true"/>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="session_profiles/velocity_qc.fftc">
+            <tcDescriptor version="25.4.0.202512130118">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="velocity.ffsp"/>
+                    <language>Python</language>
+                    <xPathVersion>XPATH31</xPathVersion>
+                </general>
+                <procedures>
+                    <item name="getResourceCredentialsByName" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="name"/>
+                        </arguments>
+                        <response>{&quot;ipAddress&quot;:&quot;value&quot;,&quot;username&quot;:&quot;value&quot;,&quot;password&quot;:&quot;value&quot;}</response>
+                    </item>
+                    <item name="getOrchestratedResourceIdInfo" isPublic="true">
+                        <arguments>
+                            <item name="resource_id"/>
+                            <item name="reservationId"/>
+                        </arguments>
+                    </item>
+                    <item name="getTopologyResourcesCoordInfo" isPublic="true">
+                        <arguments>
+                            <item name="reservationId"/>
+                        </arguments>
+                    </item>
+                    <item name="getOrchestratedResourceIdPorts" isPublic="true">
+                        <arguments>
+                            <item name="resource_id"/>
+                            <item name="reservationId"/>
+                        </arguments>
+                    </item>
+                    <item name="getReservationConnectionsDetails" isPublic="true"/>
+                </procedures>
+            </tcDescriptor>
+        </item>
+        <item name="session_profiles/eve-ng_qc.fftc">
+            <tcDescriptor version="25.4.0.202512130118">
+                <general>
+                    <notes>Quickcall library for EVE-NG</notes>
+                    <sessionClass includeTestCase="true" sessionType="project://ri_evengDyn/session_profiles/eve-ng.ffsp"/>
+                    <language>Python</language>
+                    <xPathVersion>XPATH31</xPathVersion>
+                </general>
+                <procedures>
+                    <item name="evengLogin" isPublic="true">
+                        <arguments>
+                            <item name="username">
+                                <description>eve-ng username</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="password">
+                                <description>eve-ng password</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="evengCreateLab" isPublic="true">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng session cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (required)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="version">
+                                <description>eve-ng lab version (required)</description>
+                                <defaultValue>1</defaultValue>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="path">
+                                <description>eve-ng lab path</description>
+                            </item>
+                            <item name="author">
+                                <description>eve-ng lab author</description>
+                            </item>
+                            <item name="description">
+                                <description>even-ng new lab description</description>
+                            </item>
+                            <item name="body">
+                                <description>eve-ng new lab body</description>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="evengDeleteLab" isPublic="true">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng session cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (required)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="evengCreateNode" isPublic="true">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="node_dict">
+                                <description>eve-ng node template (includes all required properties)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="evengStartNode" isPublic="true">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="node">
+                                <description>node name to be started</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="evengStoptNodesAll" isPublic="true">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="evengGetNode" isPublic="true">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="node_id">
+                                <description>eve-ng node id after creation</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                    </item>
+                    <item name="evengGetNodeID" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="node_name">
+                                <description>eve-ng node id after creation</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                        </arguments>
+                        <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+                    </item>
+                    <item name="evengGetNodeInterfaceID" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="node_id">
+                                <description>eve-ng node id after creation</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="interface_name"/>
+                        </arguments>
+                        <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+                    </item>
+                    <item name="evengConnectToNet" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="node_id">
+                                <description>eve-ng node id after creation</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="interface_id"/>
+                            <item name="network_id"/>
+                        </arguments>
+                        <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+                    </item>
+                    <item name="evengCreateNodeConnections" isPublic="true">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="node_id">
+                                <description>eve-ng node id</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="network_id">
+                                <description>eve-ng network info
+e.g. {&quot;32&quot;:&quot;1&quot;,&quot;21&quot;:&quot;2&quot;} where 32 - is port id and 1 - in network id</description>
+                            </item>
+                            <item name="portName"/>
+                        </arguments>
+                    </item>
+                    <item name="evengCreateNetwork" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="network"/>
+                        </arguments>
+                        <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+                    </item>
+                    <item name="evengGetNetworkID" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="network"/>
+                        </arguments>
+                        <response>{&quot;id&quot;:&quot;-1&quot;}</response>
+                    </item>
+                    <item name="evengSetNetworksVisibility" isPublic="true">
+                        <arguments>
+                            <item name="cookie">
+                                <description>eve-ng cookie</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="lab_name">
+                                <description>eve-ng lab name (without .unl)</description>
+                                <isMandatory>true</isMandatory>
+                            </item>
+                            <item name="networks_list">
+                                <description>eve-ng networks list
+e.g. [1, 2]</description>
+                            </item>
+                            <item name="visibility">
+                                <description>eve-ng network id visibility value
+e.g. {0, 1}</description>
+                            </item>
+                        </arguments>
+                    </item>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.0.1.0">
+<TestCaseCatalog version="25.4.0.202512130118">
     <testCaseCatalog>
         <item name="session_profiles/big_switch_ssh_base.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="project://ri_bigswitch_big_monitoring_fabric/session_profiles/big_switch_ssh_base.ffsp"/>
                 </general>
                 <procedures>
-                    <item name="connect" isPublic="true" isVBlock="true">
+                    <item name="connect" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="port1">
                                 <isMandatory>true</isMandatory>
@@ -21,7 +21,7 @@
                         </arguments>
                         <response>{&quot;status&quot;:&quot;OK&quot;}</response>
                     </item>
-                    <item name="disconnect" isPublic="true" isVBlock="true">
+                    <item name="disconnect" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="port1">
                                 <isMandatory>true</isMandatory>
@@ -35,29 +35,29 @@
                         </arguments>
                         <response>{&quot;status&quot;:&quot;OK&quot;}</response>
                     </item>
-                    <item name="getPorts" isPublic="true" isVBlock="true">
+                    <item name="getPorts" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="switch_id"/>
                         </arguments>
                         <response>{&quot;ports&quot;:&quot;value&quot;}</response>
                     </item>
-                    <item name="getPortState" isPublic="true" isVBlock="true">
+                    <item name="getPortState" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="switch_id"/>
                             <item name="interface"/>
                         </arguments>
                         <response>{&quot;state&quot;:&quot;value&quot;}</response>
                     </item>
-                    <item name="getPortsAndStates" isPublic="true" isVBlock="true">
+                    <item name="getPortsAndStates" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="switch_id"/>
                         </arguments>
                         <response>{&quot;interfaces&quot;:&quot;value&quot;,&quot;states&quot;:&quot;value&quot;}</response>
                     </item>
-                    <item name="getProperties" isPublic="true" isVBlock="true">
+                    <item name="getProperties" isPublic="true" blockResponseType="JSON">
                         <response>{&quot;model&quot;:&quot;value&quot;,&quot;version&quot;:&quot;value&quot;}</response>
                     </item>
-                    <item name="createChainName" isPublic="true" isVBlock="true">
+                    <item name="createChainName" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="port1">
                                 <isMandatory>true</isMandatory>
@@ -75,7 +75,7 @@
             </tcDescriptor>
         </item>
         <item name="test_cases/driver.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <documentation>BigSwitch L1 Switch Driver</documentation>
                     <notes>How it works.

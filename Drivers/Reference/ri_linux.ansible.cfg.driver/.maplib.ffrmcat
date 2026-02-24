@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ResponseMapCatalog version="8.5.0.202103021747">
+<ResponseMapCatalog version="25.4.0.202512130118">
     <mapCatalog>
         <item name="response_maps/ansible-playbook.ffrm">
             <applicability actionType="command" command="run ansible-playbook *"/>

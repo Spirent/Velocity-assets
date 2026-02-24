@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.0.1.0">
+<TestCaseCatalog version="25.4.0.202512130118">
     <testCaseCatalog>
         <item name="drivers/library.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <documentation>Library Procedures</documentation>
                     <notes>THis is the supporting APCON procedure library</notes>
@@ -36,7 +36,7 @@
                         </arguments>
                     </item>
                     <item name="getPortItemList" isPublic="true"/>
-                    <item name="getPortItem" isPublic="true" isVBlock="true">
+                    <item name="getPortItem" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="portName">
                                 <isMandatory>true</isMandatory>
@@ -52,7 +52,7 @@
             </tcDescriptor>
         </item>
         <item name="session_profiles/process_ref_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="process_ref.ffsp"/>
                 </general>
@@ -71,7 +71,7 @@
             </tcDescriptor>
         </item>
         <item name="session_profiles/ssh_ref_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="ssh_ref.ffsp"/>
                 </general>

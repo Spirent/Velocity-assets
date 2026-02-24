@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<TestCaseCatalog version="8.0.1.0">
+<TestCaseCatalog version="25.4.0.202512130118">
     <testCaseCatalog>
         <item name="session_profiles/hp_5900_ssh_qc.fftc">
-            <tcDescriptor version="8.0.1.0">
+            <tcDescriptor version="25.4.0.202512130118">
                 <general>
                     <sessionClass includeTestCase="true" sessionType="hp_5900_ssh.ffsp"/>
                 </general>
                 <procedures>
-                    <item name="addPortToVlan" isPublic="true" isVBlock="true">
+                    <item name="addPortToVlan" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="portName">
                                 <isMandatory>true</isMandatory>
@@ -18,7 +18,7 @@
                         </arguments>
                         <response>{&quot;addToVlanStatus&quot;:null}</response>
                     </item>
-                    <item name="removePortFromVlan" isPublic="true" isVBlock="true">
+                    <item name="removePortFromVlan" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="portName">
                                 <isMandatory>true</isMandatory>
@@ -29,14 +29,14 @@
                         </arguments>
                         <response>{&quot;removeFromVlanStatus&quot;:null}</response>
                     </item>
-                    <item name="getFirmwareVersion" isPublic="true" isVBlock="true">
+                    <item name="getFirmwareVersion" isPublic="true" blockResponseType="JSON">
                         <response>{&quot;firmwareVersion&quot;:null}</response>
                     </item>
-                    <item name="getAllPortsStatus" isPublic="true" isVBlock="true">
+                    <item name="getAllPortsStatus" isPublic="true" blockResponseType="JSON">
                         <response>{&quot;ports&quot;:null}</response>
                     </item>
-                    <item name="getBridgeAggregateInterfaces" isPublic="true" isVBlock="true"/>
-                    <item name="addPortToBridgeAggregate" isPublic="true" isVBlock="true">
+                    <item name="getBridgeAggregateInterfaces" isPublic="true" blockResponseType="JSON"/>
+                    <item name="addPortToBridgeAggregate" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="portName">
                                 <description>e.g. &quot;FortyGigE1/0/6:1&quot;</description>
@@ -52,7 +52,7 @@
                         </arguments>
                         <response>{&quot;addPortToBridgeAggStatus&quot;:null}</response>
                     </item>
-                    <item name="removePortFromBridgeAggregate" isPublic="true" isVBlock="true">
+                    <item name="removePortFromBridgeAggregate" isPublic="true" blockResponseType="JSON">
                         <arguments>
                             <item name="portName">
                                 <description>e.g. &quot;FortyGigE1/0/6:1&quot;</description>

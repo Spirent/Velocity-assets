@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tbml xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.teslaalliance.org/trs/tbml/1.0/tbml-core.xsd" xmlns="http://www.teslaalliance.org/trs/tbml/1.0" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema">
+  <header>
+    <name>EVE_Velocity_test</name>
+    <description></description>
+    <property name="emulation" vendor="com.fnfr">enabled</property>
+    <property name="rmGuid">6ae826d8-4cd0-4c2c-bc61-faa1488ce18d</property>
+  </header>
+  <body>
+    <resources>
+      <resource guid="c38ef349-c6e8-4908-a3b8-ca16116df5af" id="i05b63de2-e4b5-4aaa-97ba-fc09d0441cad" shared="true" type="device">
+        <boundary height="72" width="200" x="-505.34472656250006" y="-453.5"/>
+        <property isimportant="false" name="name">Cisco1710_A</property>
+        <property isimportant="false" name="description"/>
+        <property isimportant="false" name="utilizationType">EXCLUSIVE</property>
+        <property isimportant="false" name="ilo_iconId"/>
+        <property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=c38ef349-c6e8-4908-a3b8-ca16116df5af</property>
+        <property isimportant="false" name="isIconVisible">false</property>
+        <property isimportant="false" name="reservationTime">IMMEDIATE</property>
+        <property isimportant="false" name="hostResource_topologyResourceId"/>
+        <property isimportant="false" name="hostResource_parentType"/>
+        <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        <property isimportant="false" name="templateId">4d97e2a8-e431-4fdd-9a84-1814f9b1e536</property>
+        <property isimportant="false" name="ilo_shape">RECTANGLE</property>
+        <property isimportant="false" name="color">WHITE</property>
+        <property isimportant="false" name="borderColor">SILVER</property>
+        <resource guid="3f78d34a-6251-4398-8238-3dcc97de26f6" id="ic80b803b-4964-4b19-b926-390486ae81d4" type="port">
+          <property isimportant="false" name="name">Port1</property>
+          <property isimportant="false" name="description"/>
+          <property isimportant="false" name="connectivity">connected</property>
+          <property isimportant="false" name="utilizationType">EXCLUSIVE</property>
+          <property isimportant="false" name="keepOnRemoveConnection">true</property>
+          <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        </resource>
+        <resource guid="b6e888a8-4e88-4107-b4d6-d5889a9a5f9b" id="i6214c56f-ea26-47be-ac0a-58a0cc9449a8" type="port">
+          <property isimportant="false" name="name">Port2</property>
+          <property isimportant="false" name="description"/>
+          <property isimportant="false" name="connectivity">any</property>
+          <property isimportant="false" name="utilizationType">EXCLUSIVE</property>
+          <property isimportant="false" name="keepOnRemoveConnection">true</property>
+          <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        </resource>
+      </resource>
+      <resource guid="c38ef349-c6e8-4908-a3b8-ca16116df5af" id="ic156ed63-bc87-4ef9-80b0-f05c3f809b84" shared="true" type="device">
+        <boundary height="72" width="200" x="-140.3333740234375" y="-453.5"/>
+        <property isimportant="false" name="name">Cisco1710_B</property>
+        <property isimportant="false" name="description"/>
+        <property isimportant="false" name="utilizationType">EXCLUSIVE</property>
+        <property isimportant="false" name="ilo_iconId"/>
+        <property isimportant="false" name="iconURI">ilo://api/0/resource/icon?id=c38ef349-c6e8-4908-a3b8-ca16116df5af</property>
+        <property isimportant="false" name="isIconVisible">false</property>
+        <property isimportant="false" name="reservationTime">IMMEDIATE</property>
+        <property isimportant="false" name="hostResource_topologyResourceId"/>
+        <property isimportant="false" name="hostResource_parentType"/>
+        <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        <property isimportant="false" name="templateId">4d97e2a8-e431-4fdd-9a84-1814f9b1e536</property>
+        <property isimportant="false" name="ilo_shape">RECTANGLE</property>
+        <property isimportant="false" name="color">WHITE</property>
+        <property isimportant="false" name="borderColor">SILVER</property>
+        <resource guid="3f78d34a-6251-4398-8238-3dcc97de26f6" id="i2c134c6d-2073-41c6-ad8c-c2b9d6016223" type="port">
+          <property isimportant="false" name="name">Port1</property>
+          <property isimportant="false" name="description"/>
+          <property isimportant="false" name="connectivity">connected</property>
+          <property isimportant="false" name="utilizationType">EXCLUSIVE</property>
+          <property isimportant="false" name="keepOnRemoveConnection">true</property>
+          <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        </resource>
+        <resource guid="b6e888a8-4e88-4107-b4d6-d5889a9a5f9b" id="ie939a598-a3a8-4ef1-b041-808352dc781f" type="port">
+          <property isimportant="false" name="name">Port2</property>
+          <property isimportant="false" name="description"/>
+          <property isimportant="false" name="connectivity">any</property>
+          <property isimportant="false" name="utilizationType">EXCLUSIVE</property>
+          <property isimportant="false" name="keepOnRemoveConnection">true</property>
+          <property isimportant="false" name="orchestratedResourceRole">S2_ORCHESTRATED</property>
+        </resource>
+      </resource>
+    </resources>
+    <connectivity>
+      <link id="i7a94050b-a60a-4ad8-b609-307db8ae9aba">
+        <property isimportant="false" name="name">Link</property>
+        <property isimportant="false" name="type">VLAN</property>
+        <property isimportant="false" name="lineStyle">LINEAL</property>
+        <property isimportant="false" name="abstractResourceId"/>
+        <property isimportant="false" name="abstractResourceName"/>
+        <propertyCollection name="connectionType" order="0">
+                    <property isimportant="false" name="id">dd347d3a-d255-a200-7535-d5389a8e0294</property>
+                    <property isimportant="false" name="description"/>
+                    <property isimportant="false" name="kind">L2</property>
+                    <property isimportant="false" name="shortcut">VLAN</property>
+                </propertyCollection>
+        <propertyCollection name="view" order="0">
+                    <property isimportant="false" name="color">GRAY</property>
+                    <property isimportant="false" name="width">2</property>
+                </propertyCollection>
+        <endpoint direction="bidirectional" id="ic80b803b-4964-4b19-b926-390486ae81d4"/>
+        <endpoint direction="bidirectional" id="i2c134c6d-2073-41c6-ad8c-c2b9d6016223"/>
+        <extensions type="com.fnfr.rm.condition" XMLSchema:namespace="com.fnfr.rm.condition"/>
+      </link>
+    </connectivity>
+  </body>
+  <illustration>
+    <layer/>
+  </illustration>
+</tbml>
