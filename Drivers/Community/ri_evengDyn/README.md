@@ -58,4 +58,4 @@ When connecting nodes, regular VLAN links or cloud can be used (Links and blue n
 When connected nodes into external network (purple network), a network with a custom argument named EVE_Network must be used. This argument will contain the port name in EveNG cluster to use to connect to.
 
 ![Template](documentation/network.jpeg)
-<img width="451" height="685" alt="image" src="https://github.com/user-attachments/assets/09f614e3-7549-47ca-9bf4-90927c28f77d" />
+
