@@ -1,0 +1,1322 @@
+<?xml version="1.0"?>
+<testCase version="25.3.0.202507301940">
+    <general>
+        <documentation>EVE-NG Orchestration Driver</documentation>
+        <owner>Spirent Communications</owner>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="412c36f3-48da-4512-bd37-92f3f9e1ebf8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Information:Call procedure</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c98f4eee-a694-4abe-821e-f7fdc9415f9c" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Run each procedure call listed as a parameter</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="448537f1-0d83-4ffa-b9a1-596697870627" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i = 0</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ade7d79f-3ea4-4af0-ae3b-4c629b0ee8cd" action="while" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i &lt; int(param(&apos;call_count&apos;)):</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="365a0927-cb3f-44a0-88db-2e46d4031dcf" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>proc_name = &apos;call_{0}&apos;.format(i)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="0cf98087-c351-452e-8719-57ec73070c65" action="message" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Information:Calling [param(proc_name)]</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="2d901ac2-2823-48d6-9728-b3997bac3129" action="call">
+                                                    <command>
+                                                        <body>[param(proc_name)]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <storeResponseAt>response</storeResponseAt>
+                                                        <storeResponseText>true</storeResponseText>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                <message inherit="false">Calling [param(proc_name)]</message>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="d9939d41-5d6c-4c9e-bb88-f57ce909670a" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>i = i + 1</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="7a378be1-9f35-4de3-879c-06b340044ccc" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Return JSON response to Velocity</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="628186d2-01b2-4367-8b1f-3b905974020b" action="return">
+                                    <command>
+                                        <body>[response]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getPorts" isPublic="true">
+            <steps>
+                <item guid="1226013e-9713-4936-af45-aaae8057e5b4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>TODO: Add ping logic in here to determine online/offline status of the node</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b7ea44ce-c724-442c-9064-b9db82fcf2b7" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;ports&apos;, fromFile=&apos;false&apos;, jsonString=&apos;{&quot;ports&quot;:[]}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false">{&quot;ports&quot;:[]}</jsonString>
+                                <documentName inherit="false">ports</documentName>
+                            </applicationProperties>
+                        </item>
+                        <item guid="67182455-e5de-4498-a149-7a5720432272" action="return">
+                            <command>
+                                <body>[ports]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="getProperties" isPublic="true">
+            <steps>
+                <item guid="cad7a510-68a5-4448-8fdf-ba8dacd0a1e7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>TODO: Add auto-discover logic in here</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2e026e89-935b-4d87-bb1a-2eea535662d1" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=false, jsonString=&apos;{&quot;ports&quot;:[],&quot;properties&quot;:[]}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false">{&quot;ports&quot;:[],&quot;properties&quot;:[]}</jsonString>
+                                <documentName inherit="false">response</documentName>
+                            </applicationProperties>
+                        </item>
+                        <item guid="88510b5c-a0c9-44e2-992a-d6f5188746f8" action="return">
+                            <command>
+                                <body>[response]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="includePorts">
+                    <defaultValue>false</defaultValue>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="initOrchestratedResource" isPublic="true">
+            <steps>
+                <item guid="4d28a3c7-ff84-4128-8ce8-ca42407ce80e" action="open" session="velocity">
+                    <command>
+                        <body>project://ri_evengDyn/session_profiles/velocity.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" version="2" version.inherit="false"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="d5d25ccc-ff7d-4987-b21d-b92b1c46434a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get orchestrated resource id properties</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="27e4b1ba-2938-4ac2-8b28-7cf5ffbe6d1c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resource_id=param(&apos;topologyResourceId&apos;); print(resource_id)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="7273f5d8-6ff6-46ce-aace-37a5fb68d589" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>reservationId = velocity(&quot;reservationId&quot;); print(reservationId)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="cf20da95-c1c6-4a22-b889-bee7e8b5223b" action="getOrchestratedResourceIdInfo" session="velocity" useFieldsInCommand="false">
+                            <command>
+                                <body>(resource_id=param(&apos;topologyResourceId&apos;), reservationId=velocity(&quot;reservationId&quot;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>node_name()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>node_name</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>node_template_id()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>node_template_id</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="71b790af-a495-425d-8471-664415acc3b5" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_name = node_name.replace(&apos; &apos;,&apos;_&apos;).replace(&apos;(&apos;,&apos;_&apos;).replace(&apos;)&apos;,&apos;_&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="127a1e26-d4b8-453d-b665-cec995a49e96" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get EVE_NG ip, user and pass from velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ab908714-4b5e-463d-90fc-78c8b549d8bd" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>EVEipAddress = param(&apos;property_ClusterIP&apos;); print(EVEipAddress )</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="dd0be6e8-20b6-4482-97ff-662f4a3c3d53" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>EVEusername = param(&apos;property_ClusterUsername&apos;); print(EVEusername )</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b70772a7-efc1-467c-b4ef-64a4e7f64253" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>EVEpassword = param(&apos;property_ClusterPassword&apos;); print(EVEpassword )</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e50a9799-1c60-48e7-b085-70fc26897030" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open eve-ng session and create or edit topology lab</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="249dcc40-1a56-404b-8f36-ed88cb912bc8" action="getTopologyResourcesCoordInfo" session="velocity" useFieldsInCommand="false">
+                            <command>
+                                <body>(reservationId=velocity(&quot;reservationId&quot;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">mapped/yaml/document/resources/*\\[id=&apos;[resource_id]&apos;]/x</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>node_coord_x</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">mapped/yaml/document/resources/*\\[id=&apos;[resource_id]&apos;]/y</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>node_coord_y</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>topology()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>topology_name</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0af2b516-6d87-42d4-ad00-943593365230" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>topology_name = topology_name + &apos;_&apos; + velocity(&quot;reservationId&quot;).replace(&apos;-&apos;,&apos;_&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="de90b194-a7c0-4ade-934c-426cb4ea1f2d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(topology_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0aefe99d-4823-4d5c-b467-ef895237fbc7" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(EVEipAddress)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="47077a55-59a8-48e3-afe9-68d93a17d569" action="open" session="eve">
+                            <command>
+                                <body>project://ri_evengDyn/session_profiles/eve-ng.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://[EVEipAddress]" url.inherit="false" version="2" version.inherit="false">
+                                    <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="11ee5d3d-9255-423f-af07-f321cc310d83" action="evengLogin" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>(username=EVEusername, password=EVEpassword)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>cookie()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>cookie</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;True&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- eve-ng login is successful: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- eve-ng login is not successful: [message]; abort execution</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="46cb80a7-fab7-4b6c-9309-4b092536d839" action="evengCreateLab" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>(cookie=str(cookie), lab_name=str(topology_name), version=&apos;1&apos;, path=&apos;&apos;, author=&apos;velocity&apos;, description=&apos;&apos;, body=&apos;&apos;)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;True&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- eve-ng new lab is successfully created: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Warning">
+                                                            <message>--- eve-ng new lab not created: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ce540b85-fabc-440c-a711-fe96f52d6d2c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Build eve-ng node template json </body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="9974c7a4-47aa-48e6-9014-dd199e649e82" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict = {&quot;template&quot;:param(&apos;property_template&apos;),&quot;type&quot;:param(&apos;property_type&apos;),&quot;count&quot;:&quot;1&quot;,&quot;name&quot;:&quot;&quot;,&quot;icon&quot;:param(&apos;property_icon&apos;),&quot;idlepc&quot;:param(&apos;property_idlepc&apos;), &quot;nvram&quot;:param(&apos;property_nvram&apos;), &quot;ram&quot;:param(&apos;property_ram&apos;), &quot;slot1&quot;:param(&apos;property_slot1&apos;), &quot;slot2&quot;:param(&apos;property_slot2&apos;), &quot;config&quot;:param(&apos;property_config&apos;),&quot;delay&quot;:param(&apos;property_delay&apos;),&quot;left&quot;:param(&apos;property_left&apos;),&quot;top&quot;:param(&apos;property_top&apos;),&quot;postfix&quot;:param(&apos;property_postfix&apos;)}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="6785c1ed-5862-4b5f-af0d-e0cda254577c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;name&apos;] = str(node_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ed25fa0c-edc0-43db-8ab0-ae6da1433d53" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;left&apos;] = str(node_coord_x)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="9686ea64-bb55-40b8-b9a0-a4d824bac1e9" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;top&apos;] = str(node_coord_y)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e8b25c41-7111-4127-bca9-0f7249230df8" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict_str = str(node_dict); print(node_dict_str)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0efd0169-b679-487b-a788-b90c65b7460f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict_subs = node_dict_str.replace(&quot;&apos;&quot;,&quot;\\&quot;&quot;); print(node_dict_subs) </body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="633e8e49-bbdc-490a-a1ee-58905a2c2507" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create node in eve-ng</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="095a83ed-b815-46af-867e-ac831a7b42c5" action="evengLogin" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>(username=EVEusername, password=EVEpassword)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>cookie()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>cookie</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;True&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- eve-ng login is successful: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- eve-ng login is not successful: [message]; abort execution</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="e56cd237-8cce-4bdd-afff-f89d4112af7c" action="evengCreateNode" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>(cookie=str(cookie), lab_name=str(topology_name), node_dict=str(node_dict_subs))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>node_id()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>node_id</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;True&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- eve-ng new node id: [node_id] was successfully created: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- eve-ng new node was not created: [message]; abort execution</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8c7fa07d-7373-4706-8422-d8793fbe7de6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Start node</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e56cd237-8cce-4bdd-afff-f89d4112af7c" action="evengStartNode" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>(cookie=cookie, lab_name=topology_name, node=node_name)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;True&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- eve-ng node [node_name] was successfully started: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- eve-ng node [node_name] was not successfully started: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="48f9b115-3966-4b8d-9780-b343da8c0fa3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create list of ports defined on the node</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7ca443c7-3c5f-47d8-aeee-066da416fcb1" action="getOrchestratedResourceIdPorts" session="velocity" useFieldsInCommand="false">
+                            <command>
+                                <body>(resource_id=param(&apos;topologyResourceId&apos;), reservationId=velocity(&quot;reservationId&quot;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/item</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>portList</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d5793468-2a7e-41fd-9186-1757daf8ce9b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Build Velocity JSON response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f3f03860-fa5b-4625-9f77-ef722b43631e" action="evengGetNode" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>(cookie=cookie, lab_name=topology_name, node_id=node_id)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>url()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>url</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;True&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- eve-ng new node id: [node_id] was successfully created: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- eve-ng new node was not created: [message]; abort execution</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ffffded3-d2e7-4514-a827-be008cf4c841" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>port = url.split(&apos;:&apos;)[2]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="255d99ed-f9b3-4526-9582-524041b44299" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;Port&apos;] = port</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="52d90497-4548-4f43-b223-9b8b2f3ca718" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;ipAddress&apos;] = EVEipAddress</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="454a6fd1-a5f4-46e9-946a-161e60b75bf0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict_str = str(node_dict); print(node_dict_str)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="50d12212-97b4-4aea-b3e2-789c012916f9" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict_subs = node_dict_str.replace(&quot;&apos;&quot;,&quot;\\&quot;&quot;); print(node_dict_subs) </body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="cb18a3d8-a4b4-43b8-918e-76b71fb857ca" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=false, jsonString=&apos;{&quot;properties&quot;:[node_dict_subs],&quot;ports&quot;:\\\\[], &quot;switchPorts&quot;:\\\\[], &quot;connections&quot;:\\\\[]}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false" sub="true">{&quot;properties&quot;:[node_dict_subs],&quot;ports&quot;:\\[], &quot;switchPorts&quot;:\\[], &quot;connections&quot;:\\[]}</jsonString>
+                                <documentName inherit="false">response</documentName>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f8aff180-c0b5-4890-894f-1b617547ed41" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Add all ports, switchPorts, and connections into response JSON</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="db2540d7-a307-4bbe-ac7c-19fd0dcd32ad" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>len(portList) &gt; 0:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="6b37a115-28e1-4a8a-9f2b-34572bc900dc" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Information:Create empty nodes</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="f5507235-f373-4f4a-a901-460815ee9f3c" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;createJson&apos;, documentName=&apos;ports&apos;, fromFile=false, jsonString=&apos;{&quot;ports&quot;:[]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">createJson</action>
+                                                <jsonString inherit="false">{&quot;ports&quot;:[]}</jsonString>
+                                                <documentName inherit="false">ports</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="b86e5ae0-1a69-420c-aebc-2f12b4c87745" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;createJson&apos;, documentName=&apos;switch_ports&apos;, fromFile=false, jsonString=&apos;{&quot;switchPorts&quot;:[]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">createJson</action>
+                                                <jsonString inherit="false">{&quot;switchPorts&quot;:[]}</jsonString>
+                                                <documentName inherit="false">switch_ports</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="033c6145-81c1-4fa3-9f57-3dcbc87f9cbc" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;createJson&apos;, documentName=&apos;connections&apos;, fromFile=false, jsonString=&apos;{&quot;connections&quot;:[]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">createJson</action>
+                                                <jsonString inherit="false">{&quot;connections&quot;:[]}</jsonString>
+                                                <documentName inherit="false">connections</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="6270d970-fc28-4169-9b1e-2a085eab04b3" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Iterate through port list</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="683f3ff2-4d24-4ae8-a2db-82d86c321ca6" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>i in range(len(portList)):</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="8123fe39-1cbc-437c-a471-66a2bb3baac7" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>naming</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="f9a03384-b3fc-4234-bc6d-276618e8c6ae" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>resourcePortName = portList[i]; print(resourcePortName)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="3c45f09a-db4b-419c-88b4-894df10cea45" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>switchPortName = f&quot;{node_name}@{resourcePortName}@{i}&quot;; print(switchPortName)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="f0ae97e4-1a3e-4114-bf6f-b54c1997b5d6" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>switchPortNumber =  f&quot;{node_name}@{resourcePortName}@{i}&quot;; print(switchPortNumber)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="7d4bcf67-c1fa-497f-a7e3-c5086bc9986c" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>resource port JSON</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="d52b6205-0c54-413e-ae9b-13fbbe16dc28" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;createJson&apos;, documentName=&apos;port_property&apos;, fromFile=false, jsonString=&apos;{&quot;name&quot;: &quot;[resourcePortName]&quot;}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                                <action inherit="false">createJson</action>
+                                                                <jsonString inherit="false" sub="true">{&quot;name&quot;: &quot;[resourcePortName]&quot;}</jsonString>
+                                                                <documentName inherit="false">port_property</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                        <item guid="a52f59a0-89f6-4d20-92f2-977cb5913cf1" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;ports&apos;, pathValue=&apos;{&quot;ports/\\\\[[i]]&quot;:\\\\[[port_property]]}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;ports/\\[[i]]&quot;:\\[[port_property]]}" pathValue.inherit="false" pathValue.sub="true">
+                                                                <action inherit="false">addJsonNode</action>
+                                                                <documentName inherit="false">ports</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="8604dc27-e03d-433e-b7e1-3e7aece0ebc1" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>switch port JSON</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="99fe749f-d335-4a47-ae0e-b964eb6dcabd" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;createJson&apos;, documentName=&apos;switch_property&apos;, fromFile=false, jsonString=&apos;{&quot;name&quot;:&quot;[switchPortName]&quot;,&quot;portNumber&quot;:&quot;[switchPortNumber]&quot;}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                                <action inherit="false">createJson</action>
+                                                                <jsonString inherit="false" sub="true">{&quot;name&quot;:&quot;[switchPortName]&quot;,&quot;portNumber&quot;:&quot;[switchPortNumber]&quot;}</jsonString>
+                                                                <documentName inherit="false">switch_property</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                        <item guid="b3618011-b8fe-4410-ab97-77e3c4f51a5e" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;switch_ports&apos;, pathValue=&apos;{&quot;switchPorts/\\\\[0]&quot;:\\\\[[switch_property]]}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;switchPorts/\\[0]&quot;:\\[[switch_property]]}" pathValue.inherit="false" pathValue.sub="true">
+                                                                <action inherit="false">addJsonNode</action>
+                                                                <documentName inherit="false">switch_ports</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="af8d0f44-dadf-4eca-afd5-f93385f073a0" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>connections JSON</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="4d6290c8-ec08-4f23-a449-3a985960ccc1" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;createJson&apos;, documentName=&apos;connection_property&apos;, fromFile=false, jsonString=&apos;{&quot;port1&quot;:&quot;[switchPortName]&quot;, &quot;port2&quot;:&quot;[resourcePortName]&quot;}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                                <action inherit="false">createJson</action>
+                                                                <jsonString inherit="false" sub="true">{&quot;port1&quot;:&quot;[switchPortName]&quot;, &quot;port2&quot;:&quot;[resourcePortName]&quot;}</jsonString>
+                                                                <documentName inherit="false">connection_property</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                        <item guid="d5e684b7-b5a6-44fc-99f8-bee985476c8e" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;connections&apos;, pathValue=&apos;{&quot;connections/\\\\[0]&quot;:\\\\[[connection_property]]}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;connections/\\[0]&quot;:\\[[connection_property]]}" pathValue.inherit="false" pathValue.sub="true">
+                                                                <action inherit="false">addJsonNode</action>
+                                                                <documentName inherit="false">connections</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="e7baa870-bcc0-479f-bfda-6b46ef8924e2" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert into response JSON</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="42314d4f-1ab3-4ab5-be98-ebbfb24aeca3" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;response&apos;, pathValue=&apos;{&quot;/&quot;:[ports]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;/&quot;:[ports]}" pathValue.inherit="false" pathValue.sub="true">
+                                                <action inherit="false">addJsonNode</action>
+                                                <documentName inherit="false">response</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="f1c3e67c-dab5-47d0-a899-1985bdc17593" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;response&apos;, pathValue=&apos;{&quot;/&quot;:[switch_ports]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;/&quot;:[switch_ports]}" pathValue.inherit="false" pathValue.sub="true">
+                                                <action inherit="false">addJsonNode</action>
+                                                <documentName inherit="false">response</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="081e1d96-b5c9-4b5c-955a-ec19b844660c" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;response&apos;, pathValue=&apos;{&quot;/&quot;:[connections]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;/&quot;:[connections]}" pathValue.inherit="false" pathValue.sub="true">
+                                                <action inherit="false">addJsonNode</action>
+                                                <documentName inherit="false">response</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="87d29504-1c55-4a61-a6f7-8be3550efc21" action="close" session="velocity">
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b2f0615c-2f37-4994-93d9-2c9941b6eb23" action="return">
+                    <command>
+                        <body>[response]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="termOrchestratedResource">
+            <steps>
+                <item guid="210c43ca-2225-45ee-a03a-2c2fef79be3e" action="open" session="velocity">
+                    <command>
+                        <body>project://ri_evengDyn/session_profiles/velocity.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" version="2" version.inherit="false"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="55beba3d-58e7-4add-a6b1-c6ee87a1cb04" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get EVE_NG ip, user and pass from velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="f2839cee-7aba-4738-a6f5-083336f601e1" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>EVEipAddress = param(&apos;property_ClusterIP&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a7f2ee0f-f1a5-475e-8e58-24e3cebfd2f8" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>EVEusername = param(&apos;property_ClusterUsername&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f5c661f0-3399-4634-ac5a-e9096e839307" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>EVEpassword = param(&apos;property_ClusterPassword&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ec2342eb-b1bc-4ab5-9902-758778030804" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get topology name</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c7b3f885-7e1f-4a8b-974d-b2f57e10644f" action="getTopologyResourcesCoordInfo" session="velocity" useFieldsInCommand="false">
+                            <command>
+                                <body>(reservationId=velocity(&quot;reservationId&quot;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>topology()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>topology_name</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="4ea5fde9-7ac4-4ac1-b584-f574ecba864c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>topology_name = topology_name + &apos;_&apos; + velocity(&quot;reservationId&quot;).replace(&apos;-&apos;,&apos;_&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="44975315-c03d-45e0-b245-f6a5bdc75638" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(topology_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6fa03509-29ac-43bf-a7b6-0328e273d556" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open eve-ng session and delete lab</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="67688c29-4036-48ba-b260-b155c52dd2ce" action="open" session="eve">
+                            <command>
+                                <body>project://ri_evengDyn/session_profiles/eve-ng.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://[EVEipAddress]/api/auth/login" url.inherit="false" version="2" version.inherit="false">
+                                    <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                    <httpHeaderTemplate inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                        <memberClasses>
+                                            <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                        </memberClasses>
+                                        <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                    </httpHeaderTemplate>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="11ee5d3d-9255-423f-af07-f321cc310d83" action="evengLogin" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>(username=EVEusername, password=EVEpassword)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>cookie()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>cookie</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>message()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>message</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>retCode()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="assert">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                <expression>str(value) == &quot;True&quot;</expression>
+                                                <actionsWhenTrue>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                            <message>--- eve-ng login is successful: [message]</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenTrue>
+                                                <actionsWhenFalse>
+                                                    <item actionId="DeclareExecutionIssue">
+                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                            <message>--- eve-ng login is not successful: [message]; abort execution</message>
+                                                        </actionProperties>
+                                                    </item>
+                                                    <item actionId="FailTest">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                    <item actionId="AbortExecution">
+                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                    </item>
+                                                </actionsWhenFalse>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="b4e021de-aab4-4041-8a9f-ecbb4c7a97ef" action="evengStoptNodesAll" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>( cookie=cookie, lab_name=topology_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="46cb80a7-fab7-4b6c-9309-4b092536d839" action="evengDeleteLab" session="eve" useFieldsInCommand="false">
+                            <command>
+                                <body>( cookie=cookie, lab_name=topology_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="uuid">
+                    <description>If this argument is set, use this rather than from property</description>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+    </procedures>
+</testCase>

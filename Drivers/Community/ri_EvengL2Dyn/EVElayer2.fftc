@@ -1,0 +1,563 @@
+<?xml version="1.0"?>
+<testCase version="25.3.0.202507301940">
+    <general>
+        <documentation>Layer 2 Driver Template</documentation>
+        <notes>Read the full guide on driver development here:
+https://support.spirent.com/SpirentCSC/SC_KnowledgeView?id=DOC10679</notes>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="7129b454-3986-4bce-b7ee-82a560a6ee4d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Information:Call procedure</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c98f4eee-a694-4abe-821e-f7fdc9415f9c" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Run each procedure call listed as a parameter</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="448537f1-0d83-4ffa-b9a1-596697870627" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i = 0</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ade7d79f-3ea4-4af0-ae3b-4c629b0ee8cd" action="while" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i &lt; int(param(&apos;call_count&apos;)):</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="365a0927-cb3f-44a0-88db-2e46d4031dcf" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>proc_name = &apos;call_{0}&apos;.format(i)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="0cf98087-c351-452e-8719-57ec73070c65" action="message" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Information:Calling [param(proc_name)]</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="2d901ac2-2823-48d6-9728-b3997bac3129" action="call">
+                                                    <command>
+                                                        <body>[param(proc_name)]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <storeResponseAt>response</storeResponseAt>
+                                                        <storeResponseText>true</storeResponseText>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                <message inherit="false">Calling [param(proc_name)]</message>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="d9939d41-5d6c-4c9e-bb88-f57ce909670a" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>i = i + 1</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="7a378be1-9f35-4de3-879c-06b340044ccc" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Return JSON response to Velocity</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="628186d2-01b2-4367-8b1f-3b905974020b" action="return">
+                                    <command>
+                                        <body>[response]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="createVlan">
+            <steps>
+                <item guid="f1adb52b-f266-45ab-b12b-e2c2461395d9" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology requiring layer 2 connections is reserved. Its accepts one argument called &apos;vlanId&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getProperties" blockResponseType="JSON">
+            <steps>
+                <item guid="7ce884e3-4851-42c1-b12a-00aece57f1d9" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called by Velocity when a driver is run as the result of the user clicking the discover button on a resource</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="76546bb5-c2b6-47f0-9f40-fee45bf5a371" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>It is set to return a list of properties in JSON format. The base of this JSON string is configured in the response area of the procedure properties </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="45ff0bf5-f045-4695-906e-810004db2eb3" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Example showing how to add a node to the JSON return string. Edit this step to use the actual make of your device.</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="dd136f58-ed81-4daf-b264-2adc58d2964a" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=true, pathValue=&apos;{&quot;properties/&quot;:{&quot;Make&quot;:&quot;Manufacturer&quot;}}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;properties/&quot;:{&quot;Make&quot;:&quot;Manufacturer&quot;}}" pathValue.inherit="false">
+                                <action inherit="false">addJsonNode</action>
+                                <editResponseStructure inherit="false">true</editResponseStructure>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1b35da89-c2c5-4fa4-acd6-912bfc52eb52" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get list of ports if the includePorts argument is set</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="dda70519-6d17-465e-a859-8c7037acf3d6" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>info(&apos;exists&apos;, &apos;local&apos;, &apos;includePorts&apos;):</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="21a199d5-cfbc-4da9-a3bd-b1d57ffec640" action="if" useFieldsInCommand="false">
+                                    <command>
+                                        <body>includePorts == &apos;true&apos;:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="5e6e6ad3-e322-4746-8742-5e1ef2388931" action="call" useFieldsInCommand="false">
+                                            <command>
+                                                <body>getPorts()</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="regex">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                                                <regex>^\\{&quot;ports&quot;:\\[(\\S+)\\]}$</regex>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>portString</storageLocation>
+                                                                <query>properties/ports</query>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="85efac29-4d29-4208-a098-eca99a7de5cb" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=true, pathValue=&apos;{&quot;properties/&quot;:{&quot;ports&quot;:\\\\[[portString]]}}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;properties/&quot;:{&quot;ports&quot;:\\[[portString]]}}" pathValue.inherit="false" pathValue.sub="true">
+                                                <action inherit="false">addJsonNode</action>
+                                                <editResponseStructure inherit="false">true</editResponseStructure>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="6d609145-02de-4145-a71c-aea12aea3a89" action="comment" useFieldsInCommand="false">
+                                            <command>
+                                                <body>When doing variable substitution in a JSON step, you must escape any opening square brackets to be printed literally with a backslash.</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{&quot;properties&quot;:{}}</response>
+        </item>
+        <item name="addToVlan">
+            <steps>
+                <item guid="429a5a20-3b57-48df-b7c9-e9dc058caabc" action="open" session="velocity">
+                    <command>
+                        <body>project://ri_EvengL2Dyn/session_profiles/velocity.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" version="2" version.inherit="false"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="535fb72c-a4fb-4785-81e3-7d298a362d80" action="getTopologyResourcesCoordInfo" session="velocity" useFieldsInCommand="false">
+                    <command>
+                        <body>(reservationId=velocity(&quot;reservationId&quot;))</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>topology()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>topology_name</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="abf97a6f-837e-4bd9-9ecd-18b47fb3c0ec" action="getTopologyResourcesCoordInfo" session="velocity" skip="true" useFieldsInCommand="false">
+                    <command>
+                        <body>(reservationId=param(&apos;reservationId&apos;))</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>topology()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>topology_name</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2b058f50-4f21-4e39-9be8-7a911e4c6401" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>ports = portNumber.split(&quot;@&quot;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f681da3b-6177-4c6e-9eae-524c903b33bf" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>deviceName=ports[0]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="139737fe-e824-4bd3-ad07-ac622e683c22" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>devicePort = ports[1]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="74a4c487-954e-4fab-b598-b17d4622dc62" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>switchPort = ports[2]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="bbee7812-fa0c-4162-84fe-342fb0460cc6" action="eval" useFieldsInCommand="false">
+                    <command>
+                        <body>topology_name = topology_name + &apos;_&apos; + velocity(&quot;reservationId&quot;).replace(&apos;-&apos;,&apos;_&apos;)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2b5e91a4-8aa4-43e7-a7b9-d669bb966a9d" action="if" useFieldsInCommand="false">
+                    <command>
+                        <body>&apos;EVE_Network&apos; in locals():</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="eb87fdc1-3026-495b-8909-d3c2d9be3c4c" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>type = EVE_Network</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f353f5fa-5e18-44ce-825f-32494bd7c5f0" action="else" useFieldsInCommand="false">
+                    <nestedSteps>
+                        <item guid="0f58d598-ab3a-4ee9-b474-23ae998ae7f1" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>type = &apos;bridge&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="26afe609-80f9-450e-9fcd-dc1b3b03b170" action="open" session="eve">
+                    <command>
+                        <body>project://ri_EvengL2Dyn/session_profiles/eve-ng.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://[param(&apos;property_ipAddress&apos;)]" url.inherit="false" version="2" version.inherit="false">
+                            <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="cf050dc5-177f-44f8-b468-fff3afa0f332" action="evengLogin" session="eve" useFieldsInCommand="false">
+                    <command>
+                        <body>(username=param(&apos;property_username&apos;), password=param(&apos;property_password&apos;))</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>cookie()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>cookie</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>message()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>message</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>retCode()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>str(value) == &quot;True&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>--- eve-ng login is successful: [message]</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>--- eve-ng login is not successful: [message]; abort execution</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="AbortExecution">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="38f731dc-937a-474c-a535-96bc7d8f2a8b" action="evengCreateNetwork" session="eve" useFieldsInCommand="false">
+                    <command>
+                        <body>(cookie=cookie, lab_name=topology_name, network=&apos;Net_Velocity_&apos; + str(vlanId), type=type)</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>id()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>netID</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="619fcb95-bb7c-429e-a2b4-3d58de395540" action="evengGetNodeID" session="eve" useFieldsInCommand="false">
+                    <command>
+                        <body>(cookie=cookie, lab_name=topology_name, node_name=deviceName)</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>id()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>devID</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9df6e76d-8d85-44a0-af73-6f6a13171d07" action="evengGetNodeInterfaceID" session="eve" useFieldsInCommand="false">
+                    <command>
+                        <body>(cookie=cookie, lab_name=topology_name, node_id=devID, interface_name=devicePort)</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>id()</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>interfaceID</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7bd0823e-9244-4df5-bef3-d9699f92fcbe" action="evengConnectToNet" session="eve" useFieldsInCommand="false">
+                    <command>
+                        <body>(cookie=cookie, lab_name=topology_name, node_id=devID, interface_id=interfaceID, network_id=netID)</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9e18ec7c-a9c8-46ce-83be-772535aedf97" action="close" session="eve" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="fe678901-9637-4b25-906b-c2a0bf9e37b8" action="close" session="velocity">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="removeFromVlan">
+            <steps>
+                <item guid="400132f7-d20c-4ffb-9c6f-867cb3c7bdc4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology reservation requiring layer 2 connections ends. Its accepts one three arguments, &apos;vlanId&apos;, &apos;portNumber&apos;, and &apos;tagging&apos; </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="921c38d1-be3a-4982-ac07-3c97c2803ebc" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to remove the specified port from the specified vlan</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="destroyVlan">
+            <steps>
+                <item guid="d1d64885-22b1-4941-940d-c71dda8db7cd" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>This procedure is called when a topology reservation requiring layer 2 connections ends. Its accepts one argument called &apos;vlanId&apos;</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d2745522-36e4-4754-96b5-febf5fa967a5" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Issue commands to remove the VLAN from the layer 2 switch</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getPorts" defaultSessionProfile="application:com.fnfr.svt.applications.ssh" blockResponseType="JSON">
+            <description>Device Status and Port Status/Info</description>
+            <steps>
+                <item guid="9071ef3a-837d-4700-8c02-0214f781ae14" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Do nothing</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <author>Malcom Terry</author>
+            <multilineDescription>Get information about device ports and their properties.
+
+This method is also used to determine whether the device is online. If this call ends up with an error, the device is considered offline. Otherwise, the device is considered online.
+
+Returns: JSON
+
+Example:
+{
+  &quot;ports&quot;: [
+    {
+      &quot;name&quot;: &quot;Fa0/1&quot;,
+      &quot;status&quot;: &quot;offline&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Fa0/2&quot;,
+      &quot;status&quot;: &quot;offline&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Gi0/1&quot;,
+      &quot;status&quot;: &quot;online&quot;
+    }
+  ]
+}</multilineDescription>
+            <response>{&quot;ports&quot;:[]}</response>
+        </item>
+    </procedures>
+</testCase>

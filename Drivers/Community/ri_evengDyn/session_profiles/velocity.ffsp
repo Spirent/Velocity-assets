@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<SessionTemplate version="25.3.0.202507301940">
+    <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[velocity(&apos;url&apos;)]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false" version="2" version.inherit="false">
+        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+            <memberClasses>
+                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+            </memberClasses>
+            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="[velocity(&apos;token&apos;)]" value.inherit="false"/>
+        </httpHeader>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_evengDyn/</responseLibrary>
+    <formMapLibrary inherit="false">project://ri_evengDyn/</formMapLibrary>
+    <sessionClassTestCase inherit="false">velocity_qc.fftc</sessionClassTestCase>
+    <language>Python</language>
+</SessionTemplate>

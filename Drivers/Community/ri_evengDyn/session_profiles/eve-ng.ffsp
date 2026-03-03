@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<SessionTemplate version="25.3.0.202507301940">
+    <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://[profile(&apos;.&apos;,&apos;eve-ng/ip_addr&apos;)]" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false" version="2" version.inherit="false">
+        <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+    </sessionProperties>
+    <parameters version="25.3.0.202507301940">
+        <parameters escape="true">
+            <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                <eve-ng>
+                    <ip_addr>10.75.238.105</ip_addr>
+                    <username>velocity</username>
+                    <password>velocity</password>
+                </eve-ng>
+            </parameters>
+        </parameters>
+    </parameters>
+    <responseLibrary inherit="false">project://ri_evengDyn</responseLibrary>
+    <formMapLibrary inherit="false">project://ri_evengDyn</formMapLibrary>
+    <sessionClassTestCase inherit="false">project://ri_evengDyn/session_profiles/eve-ng_qc.fftc</sessionClassTestCase>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>
