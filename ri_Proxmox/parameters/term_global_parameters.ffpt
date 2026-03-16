@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ParameterTree version="25.3.0.202507301940">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <velocity>
+                <ip_addr>10.75.236.3</ip_addr>
+                <username>tsimal</username>
+                <password>tsimal</password>
+            </velocity>
+            <eve-ng>
+                <ip_addr>10.75.238.105</ip_addr>
+                <username>admin</username>
+                <password>eve</password>
+            </eve-ng>
+            <call_count>1</call_count>
+            <call_0>initOrchestratedResource true</call_0>
+            <topologyResourceId>a4498a78-53e4-4439-8afc-addc4029a864</topologyResourceId>
+            <reservationId>a274385b-baed-43ba-abc2-2ef931e5084c</reservationId>
+            <property_ipAddress>10.75.238.105</property_ipAddress>
+            <property_username>admin</property_username>
+            <property_password>eve</property_password>
+        </parameters>
+    </parameters>
+</ParameterTree>

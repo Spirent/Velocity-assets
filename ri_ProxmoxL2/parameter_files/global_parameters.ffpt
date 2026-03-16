@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ParameterTree version="25.3.0.202507301940">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <property_ipAddress>10.75.238.105</property_ipAddress>
+            <property_username>velocity</property_username>
+            <property_password>eve</property_password>
+            <call_count>1</call_count>
+            <call_0>addToVlan -vlanId 200 -portNumber Cisco1710_A@fa0@0 -tagged untagged </call_0>
+            <topologyResourceId>a4498a78-53e4-4439-8afc-addc4029a864</topologyResourceId>
+            <reservationId>e2d97d45-544b-4deb-9634-4b1fa8c5616d</reservationId>
+        </parameters>
+    </parameters>
+</ParameterTree>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<ResponseMap version="25.3.0.202507301940">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>qm list</body>
+                </command>
+            </action>
+            <responseBody>      VMID NAME                 STATUS     MEM(MB)    BOOTDISK(GB) PID       
+       100 testubuntu           running    4096             150.00 2840663   
+       101 baseUbuntu2204       stopped    32000            250.00 0         
+       103 VelocityTest         stopped    2048              32.00 0         
+       107 dck8sFollower7       stopped    32000            200.00 0         
+       129 contutemp            running    8192             152.00 3967535   
+       130 AionWorkerIp225.130  running    32000            150.00 558222    
+       143 prometheusIP255.143  running    16000            300.00 319964    
+       144 contu                running    32000            300.00 3631935   
+       146 stcv146              running    1024               3.00 57081     
+       147 stcv147              running    1024               3.00 60000     
+       148 labserver5.55IP225.148 running    32768             15.00 82132     
+       149 stcv149              running    4096               3.00 259667    
+       151 grafanaIP225.151     running    16384            200.00 6128      
+       154 vTS2ProxIP225.154    stopped    4096              20.00 0         
+       155 vTS1ProxIP225.155    stopped    4096              20.00 0         
+       157 LandslideTasIP225.157 stopped    24000             20.00 0         
+       165 dck8sfollower4       stopped    32000            250.00 0         
+       166 dck8sfollower5       stopped    32000            250.00 0         
+       249 demo                 stopped    2048              32.00 0         
+       250 stc5.43              running    2048               3.00 2137056   
+       252 licsrv               stopped    2048              32.00 0         
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;responseLine&gt;      VMID NAME                 STATUS     MEM(MB)    BOOTDISK(GB) PID       &lt;/responseLine&gt;
+    &lt;promptName&gt;prompt2&lt;/promptName&gt;
+    &lt;echo&gt;qm list&lt;/echo&gt;
+    &lt;prompt&gt;root@pve:~# &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="responseLine">
+                    <queryFormatString>.//responseLine</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>1.5</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.table.TabularMapperProperties">
+            <tabularMaps>
+                <item name="table1">
+                    <banner>*VMID NAME                 STATUS     MEM(MB)    BOOTDISK(GB) PID*</banner>
+                    <bannerStructure>Wildcard</bannerStructure>
+                    <columns>
+                        <item name="VMID">
+                            <lastFullCell></lastFullCell>
+                            <uid>b0669243-fb90-4ebb-a288-5473779fa09d</uid>
+                        </item>
+                        <item name="NAME">
+                            <isKey>true</isKey>
+                            <lastFullCell></lastFullCell>
+                            <uid>fd0c733f-e7f8-4f27-ac4e-b5e993fe6d24</uid>
+                        </item>
+                        <item name="STATUS">
+                            <lastFullCell></lastFullCell>
+                            <uid>d8e2fe02-a8f6-40bb-985d-fc60b5644930</uid>
+                        </item>
+                        <item name="MEM_MB_">
+                            <lastFullCell></lastFullCell>
+                            <uid>6654342d-7fd7-4a19-b0d8-843bd08895ea</uid>
+                        </item>
+                        <item name="BOOTDISK_GB_">
+                            <lastFullCell></lastFullCell>
+                            <uid>39525613-45b8-4ae6-9c7b-1aa388114a77</uid>
+                        </item>
+                        <item name="PID">
+                            <lastFullCell></lastFullCell>
+                            <uid>90e37bfb-5c0b-4d59-a2a4-0c5c5172abe3</uid>
+                        </item>
+                    </columns>
+                </item>
+            </tabularMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="qm list"/>
+    <aliases>
+        <item name="maxID">
+            <queryFormatString>max(//VMID)</queryFormatString>
+        </item>
+        <item name="freeID">
+            <queryFormatString>max(//VMID)+1</queryFormatString>
+        </item>
+    </aliases>
+    <xPathVersion>XPATH31</xPathVersion>
+</ResponseMap>

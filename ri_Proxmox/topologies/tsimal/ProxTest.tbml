@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tbml xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.teslaalliance.org/trs/tbml/1.0/tbml-core.xsd" xmlns="http://www.teslaalliance.org/trs/tbml/1.0">
+  <header>
+    <name>ProxTest</name>
+    <description></description>
+    <property name="emulation" vendor="com.fnfr">enabled</property>
+    <property name="rmGuid">19db3624-32bc-4134-911c-788ba827ce6c</property>
+  </header>
+  <body>
+    <resources>
+      <resource guid="f483828a-be00-4d8f-baf8-210416b0f809" id="i7d41a875-1560-4aa1-ac29-84e34937a3f6" shared="true" type="device">
+        <boundary height="72" width="200" x="752.2083129882812" y="245"/>
+        <property isimportant="false" name="name">VelProx</property>
+        <property isimportant="false" name="inventoryName">225.33-APT_Linux</property>
+        <property isimportant="false" name="description">Jenkins:
+      http://10.75.225.33:8080/ 
+login/password : spirent/spirent
+
+Used for:
+-	iTest demos, as  a regular Linux server
+-	Contains Velocity agents (the ones called spirent_X)
+-	Jenkins server
+-      GitLab runner (managed by GitLab 10.75.225.141)
+-	Managed by Tomas Simal
+</property>
+        <property isimportant="false" name="utilizationType">EXCLUSIVE</property>
+        <property isimportant="false" name="ilo_iconId">b080717b-9f82-4739-a9ba-f8b67c7ffc9f</property>
+        <property isimportant="false" name="iconURI">ilo://api/repository/v2/asset/b080717b-9f82-4739-a9ba-f8b67c7ffc9f?rasterizedIconSize=64</property>
+        <property isimportant="false" name="isIconVisible">true</property>
+        <property isimportant="false" name="reservationTime">IMMEDIATE</property>
+        <property isimportant="false" name="ilo_shape">RECTANGLE</property>
+        <property isimportant="false" name="color">WHITE</property>
+        <property isimportant="false" name="borderColor">SILVER</property>
+        <propertyCollection name="System Identification">
+                    <property id="0827e713-220a-4e00-bd3a-497380d887d3" valuelabel="" name="ipAddress" type="text">10.75.225.33</property>
+                    <property id="40c4f7c6-80ea-d601-da48-7510e19162d6" valuelabel="" name="Hostname" type="text"/>
+                    <property id="5f539885-beb3-0a69-c9a9-d2cf9f0af33e" valuelabel="" name="Make" type="text"/>
+                    <property id="ec5e166b-6fcb-9059-e3c2-2c8cff1b2f8d" valuelabel="" name="Model" type="text"/>
+                    <property id="3beea23f-5cd3-44a1-6527-223e0beed6ec" valuelabel="" name="Serial Number" type="text"/>
+                    <property id="c779a62e-b29d-c678-1c71-6fe75ad7b887" valuelabel="" name="Console server" type="text"/>
+                    <property id="fd27c5e8-0bac-ea68-ccd2-831b98aeb35c" valuelabel="" name="OS" type="dropdown"/>
+                </propertyCollection>
+        <propertyCollection name="Power"/>
+        <propertyCollection name="Credentials">
+                    <property id="a6432078-0c55-4c75-8da7-bc1853635af4" valuelabel="" name="password" type="password">spirent</property>
+                    <property id="931730ee-c8f7-ccb9-fcef-a30148e1327c" valuelabel="" name="SSH username" type="text"/>
+                    <property id="30f50fa2-1fcf-d7ae-862b-b190224b18ae" valuelabel="" name="SSH password" type="password"/>
+                    <property id="21c9ef5f-58b9-4efe-8792-f0fd8fa5d382" valuelabel="" name="username" type="text">spirent</property>
+                </propertyCollection>
+        <propertyCollection name="Location Information">
+                    <property id="244ebeed-a4e0-38b4-dbea-79d6055a075f" valuelabel="" name="Floor Position" type="text"/>
+                    <property id="2992ba06-00d1-09a7-1498-8bee066372b6" valuelabel="" name="Facility" type="text"/>
+                    <property id="daf8b835-5c38-725f-4a02-39afd2aaf8f5" valuelabel="" name="Room" type="text"/>
+                </propertyCollection>
+      </resource>
+    </resources>
+    <connectivity/>
+  </body>
+  <illustration>
+    <layer/>
+  </illustration>
+</tbml>

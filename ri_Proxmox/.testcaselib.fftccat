@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="25.4.0.202512130118">
+    <testCaseCatalog>
+        <item name="session_profiles/velocity_qc.fftc">
+            <tcDescriptor version="25.4.0.202512130118">
+                <general>
+                    <sessionClass includeTestCase="true" sessionType="velocity.ffsp"/>
+                    <language>Python</language>
+                    <xPathVersion>XPATH31</xPathVersion>
+                </general>
+                <procedures>
+                    <item name="getResourceCredentialsByName" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="name"/>
+                        </arguments>
+                        <response>{&quot;ipAddress&quot;:&quot;value&quot;,&quot;username&quot;:&quot;value&quot;,&quot;password&quot;:&quot;value&quot;}</response>
+                    </item>
+                    <item name="getOrchestratedResourceIdInfo" isPublic="true">
+                        <arguments>
+                            <item name="resource_id"/>
+                            <item name="reservationId"/>
+                        </arguments>
+                    </item>
+                    <item name="getTopologyResourcesCoordInfo" isPublic="true">
+                        <arguments>
+                            <item name="reservationId"/>
+                        </arguments>
+                    </item>
+                    <item name="getOrchestratedResourceIdPorts" isPublic="true">
+                        <arguments>
+                            <item name="resource_id"/>
+                            <item name="reservationId"/>
+                        </arguments>
+                    </item>
+                    <item name="getReservationConnectionsDetails" isPublic="true"/>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>
