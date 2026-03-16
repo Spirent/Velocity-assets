@@ -59,7 +59,7 @@ Group "Credentials"
 - password: (Password)
 
 
-Create a template inherited from the instance one inherited (EVENG_Dyn) for each of the nodes available in EveNG. Those fields must be fulfilled:
+Create a template inherited from the instance one inherited for each of the nodes available in EveNG. Those fields must be fulfilled:
 
 Group Cluster:
 - ClusterIP: EevNG cluster IP
@@ -81,6 +81,13 @@ Group Template Body
 - left: Left coordinate to place he node in EveNG topology canvas (e.g. 0). nodes can overlap in EveNG visualization with no consequences.
 - top: Top coordinate to place he node in EveNG topology canvas (e.g. 0). nodes can overlap in EveNG visualization with no consequences.
 - postfix: Additional command to be send to QEMU when node is tarted.
+
+Create a template inherited from the L2 one inherited for the associated L2 switches. Those fields must be fulfilled:
+
+- ipAddressP: EevNG cluster IP
+- username: Cluster login credentials (username).
+- password: Cluster login credentials (password).
+
 
 EveNG only allow one session from a single user/pass. That means that the credential used for Velocity must not be used in any other context, as if someone login while velocity is configuring an environment, it will kick our Velocity and so topology instantiation will fail.
 Added to that, Velocity can work in parallel with multiple agents, to deploy several nodes in parallel and speedup the topology deployment. It will cause the same problem as single login session. To solve that, templates restrict agents to those with capabilities "unique: eveng". this must be set in only one agent as a restriction.
