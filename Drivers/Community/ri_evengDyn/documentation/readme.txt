@@ -16,7 +16,48 @@ Upload the EveNG instance driver zip to Velocity via "Library / Drivers / Add" a
 
 Upload the EveNG L2 driver zip to Velocity via "Library / Drivers / Add" and name it something like "EveNgL2Dyn"  
 
-Import the templates from the zip file located in the instance driver (EVENG_template.zip)
+Create two templates, one for the instances and one for the L2, with those properties and types.
+
+**instances**
+
+Inherited from "Orchestration" template.
+
+Group "Cluster":
+- ClusterIP: (Text)
+- ClusterUsername: (Text)
+- ClusterPassword: (Password)
+
+Group "EVE-NG Temporary"
+- eveng_id: (Text)
+- eveng_ipAddress: (Text)
+- eveng_telnetPort: (Text)
+- eveng_topoLeft: (Text)
+- eveng_topoTop: (Text)
+
+Group "Template Body"
+- template: (Text)
+- type: (Text)
+- image: (Text)
+- icon: (Text)
+- idlepc: (Text)
+- nvram: (Text)
+- ram: (Text)
+- slot1: (Text)
+- slot2: (Text)
+- config: (Text)
+- delay: (Text)
+- left: (Text)
+- top: (Text)
+- postfix:(Text)
+
+** L2 **
+
+Inherited from "Layer 2 Switch" template
+
+Group "Credentials"
+- username: (Text)
+- password: (Password)
+
 
 Create a template inherited from the instance one inherited (EVENG_Dyn) for each of the nodes available in EveNG. Those fields must be fulfilled:
 
@@ -36,7 +77,7 @@ Group Template Body
 - slot1: What is in slot 1 if applicable (e.g. Empty)
 - slot2: What is in slot 2 if applicable (e.g. Empty)
 - config: Config to be loaded (0=no custom config should be loaded, 1=load saved configuration, string=config to load)
-- delay: Delqy to start the node in seconds (e.g. 0)
+- delay: Delay to start the node in seconds (e.g. 0)
 - left: Left coordinate to place he node in EveNG topology canvas (e.g. 0). nodes can overlap in EveNG visualization with no consequences.
 - top: Top coordinate to place he node in EveNG topology canvas (e.g. 0). nodes can overlap in EveNG visualization with no consequences.
 - postfix: Additional command to be send to QEMU when node is tarted.
