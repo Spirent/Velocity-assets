@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>  
+    <version>1.0</version>  
+    <vendor>Spirent</vendor>
+    <supportCustomArguments>true</supportCustomArguments>
+    <language>itest</language>  
+    <interface>Orchestration</interface>
+    <entryPoint>proxmox-driver-1.0.fftc</entryPoint>
+    <timeout>3600</timeout>
+    <resourceProperties>
+      <property optional="false">
+        <name>Template</name>        
+      </property>
+      <property optional="false">
+        <name>Proxmox IP address</name>        
+      </property>
+      <property optional="false">
+        <name>Proxmox username</name>        
+      </property>
+      <property optional="false">
+        <name>Proxmox password</name>        
+      </property>
+      <property optional="false">
+        <name>Wait IP</name>        
+      </property>                      
+    </resourceProperties>   
+</resourceDriver>

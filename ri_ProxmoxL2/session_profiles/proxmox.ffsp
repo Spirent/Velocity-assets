@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<SessionTemplate version="25.4.0.202512130118">
+    <baseApplication>com.fnfr.svt.applications.ssh</baseApplication>
+    <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+        <TerminalProperties>
+            <prompts merge="true">
+                <item name="prompt1" MatchMethod="WILDCARD">
+                    <Content>*$</Content>
+                </item>
+                <item name="prompt2" MatchMethod="WILDCARD">
+                    <Content>*#</Content>
+                </item>
+            </prompts>
+        </TerminalProperties>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://ri_ProxmoxL2/</responseLibrary>
+    <formMapLibrary inherit="false">project://ri_ProxmoxL2/</formMapLibrary>
+    <isReferenceProfile>true</isReferenceProfile>
+    <language>Python</language>
+</SessionTemplate>

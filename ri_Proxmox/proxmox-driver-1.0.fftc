@@ -1,0 +1,1140 @@
+<?xml version="1.0"?>
+<testCase version="25.4.0.202512130118">
+    <general>
+        <documentation>EVE-NG Orchestration Driver</documentation>
+        <owner>Spirent Communications</owner>
+        <language>Python</language>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="412c36f3-48da-4512-bd37-92f3f9e1ebf8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Information:Call procedure</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="c98f4eee-a694-4abe-821e-f7fdc9415f9c" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Run each procedure call listed as a parameter</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="448537f1-0d83-4ffa-b9a1-596697870627" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i = 0</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="ade7d79f-3ea4-4af0-ae3b-4c629b0ee8cd" action="while" useFieldsInCommand="false">
+                                    <command>
+                                        <body>i &lt; int(param(&apos;call_count&apos;)):</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="365a0927-cb3f-44a0-88db-2e46d4031dcf" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>proc_name = &apos;call_{0}&apos;.format(i)</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="0cf98087-c351-452e-8719-57ec73070c65" action="message" useFieldsInCommand="false">
+                                            <command>
+                                                <body>Information:Calling [param(proc_name)]</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="2d901ac2-2823-48d6-9728-b3997bac3129" action="call">
+                                                    <command>
+                                                        <body>[param(proc_name)]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <storeResponseAt>response</storeResponseAt>
+                                                        <storeResponseText>true</storeResponseText>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.exec.MessagePropertyGroup">
+                                                <message inherit="false">Calling [param(proc_name)]</message>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="d9939d41-5d6c-4c9e-bb88-f57ce909670a" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>i = i + 1</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="7a378be1-9f35-4de3-879c-06b340044ccc" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Return JSON response to Velocity</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="628186d2-01b2-4367-8b1f-3b905974020b" action="return">
+                                    <command>
+                                        <body>[response]</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="getPorts" isPublic="true">
+            <steps>
+                <item guid="1226013e-9713-4936-af45-aaae8057e5b4" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>TODO: Add ping logic in here to determine online/offline status of the node</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="b7ea44ce-c724-442c-9064-b9db82fcf2b7" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;ports&apos;, fromFile=&apos;false&apos;, jsonString=&apos;{&quot;ports&quot;:[]}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false">{&quot;ports&quot;:[]}</jsonString>
+                                <documentName inherit="false">ports</documentName>
+                            </applicationProperties>
+                        </item>
+                        <item guid="67182455-e5de-4498-a149-7a5720432272" action="return">
+                            <command>
+                                <body>[ports]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <response>{}</response>
+        </item>
+        <item name="getProperties" isPublic="true">
+            <steps>
+                <item guid="cad7a510-68a5-4448-8fdf-ba8dacd0a1e7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>TODO: Add auto-discover logic in here</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2e026e89-935b-4d87-bb1a-2eea535662d1" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=false, jsonString=&apos;{&quot;ports&quot;:[],&quot;properties&quot;:[]}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false">{&quot;ports&quot;:[],&quot;properties&quot;:[]}</jsonString>
+                                <documentName inherit="false">response</documentName>
+                            </applicationProperties>
+                        </item>
+                        <item guid="88510b5c-a0c9-44e2-992a-d6f5188746f8" action="return">
+                            <command>
+                                <body>[response]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="includePorts">
+                    <defaultValue>false</defaultValue>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+        <item name="initOrchestratedResource" isPublic="true">
+            <steps>
+                <item guid="d61f4e9a-4cc4-4be1-8936-ccd7e315ab8c" action="open" session="velocity">
+                    <command>
+                        <body>project://ri_Proxmox/session_profiles/velocity.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" version="2" version.inherit="false"/>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="141e1fbc-96ba-4b10-b8ba-246411de5678" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Connect to proxmox</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fb4dc198-0861-4a56-91fe-4d0046741c6c" action="open" session="proxmox">
+                            <command>
+                                <body>project://ri_Proxmox/session_profiles/proxmox.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                                    <ipAddress inherit="false">[param(&apos;property_Proxmox_IP_address&apos;)]</ipAddress>
+                                    <user inherit="false">[param(&apos;property_Proxmox_username&apos;)]</user>
+                                    <password inherit="false" masked="false">[param(&apos;property_Proxmox_password&apos;)]</password>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="8beac983-5511-4dd3-a9cd-a14402e4e19b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get ReservationID as hash for VM</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5c9ca541-0d86-4342-9a8a-c87fac02f311" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>reservationID = velocity(&apos;reservationId&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="bb80658b-a756-4309-a012-92ad6e519327" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resourceName = tbml(&apos;property&apos;, &apos;-id&apos;, param(&apos;topologyResourceId&apos;), &apos;name&apos;).replace(&apos; &apos;, &apos;-&apos;).replace(&apos;_&apos;, &apos;-&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b003faca-305d-4d15-92e7-eab887b99ccf" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Look for VMID</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="51d3701f-416e-49e4-a336-1a8ba302d2c7" action="command" session="proxmox">
+                            <command>
+                                <body>qm list</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">VMID_by_NAME(&quot;[param(&apos;property_Template&apos;)]&quot;)</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>templateID</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>freeID()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>vmID</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f4712a47-bb93-40e2-b312-6963fa20e8e7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Clone VM</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="51d3701f-416e-49e4-a336-1a8ba302d2c7" action="command" session="proxmox">
+                            <command>
+                                <body>qm clone [templateID] [vmID] --name [resourceName]-[reservationID]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="8c87e282-d81c-42cb-936f-c2843a3d8d27" action="command" session="proxmox">
+                            <command>
+                                <body>qm start [vmID]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="4425bdb4-18eb-412f-9b00-03ac98c7fcab" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Wait for VM to start</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="77b723cd-5fe5-4504-a643-4814139ed1c4" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>started = False</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="3db54d82-47fd-4f6b-a3db-108e1b962703" action="while" useFieldsInCommand="false">
+                                    <command>
+                                        <body>not started:</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="946a8bf5-3620-4cf1-9984-5d203cca6b0d" action="sleep">
+                                            <command>
+                                                <body>3</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="e25b6e22-2b83-45b6-a84b-d57c6c203cd2" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>param(&apos;property_Wait_IP&apos;)==&apos;true&apos;:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="13001898-50ce-4c93-adcf-3e09ff705256" action="command" session="proxmox">
+                                                    <command>
+                                                        <body>qm status [vmID]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>status()</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="assert">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                        <expression>value == &apos;running&apos;</expression>
+                                                                        <actionsWhenTrue>
+                                                                            <item actionId="Eval">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                                    <statement>running = True</statement>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenTrue>
+                                                                        <actionsWhenFalse>
+                                                                            <item actionId="Eval">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                                    <statement>running = False</statement>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenFalse>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                </item>
+                                                <item guid="d598e858-66dd-4906-b7c1-3ba72f16bdcf" action="command" session="proxmox">
+                                                    <command>
+                                                        <body>qm agent [vmID] network-get-interfaces</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query>mapped/Json/item[hardware-address!=&quot;00:00:00:00:00:00&quot;]/ip-addresses/item[ip-address-type=&quot;ipv4&quot;]/ip-address</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>ip</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                </item>
+                                                <item guid="4bf8094c-74cd-415c-836b-5619ac69b3e9" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>running and len(ip)&gt;0:</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="4e052a5f-4ab0-4d37-bf80-67cbb588c860" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>started = True</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="03aa1557-e865-4578-a60d-a1ce88896097" action="else" useFieldsInCommand="false">
+                                                    <nestedSteps>
+                                                        <item guid="d9963270-3bef-4930-a1e1-a6efe5d7669c" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>started = False</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="844d63d1-e175-47fb-af13-502b8fe48267" action="else" useFieldsInCommand="false">
+                                            <nestedSteps>
+                                                <item guid="e79026e4-7a19-47e9-9209-66929e68c487" action="command" session="proxmox">
+                                                    <command>
+                                                        <body>qm status [vmID]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>status()</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="assert">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                        <expression>value == &apos;running&apos;</expression>
+                                                                        <actionsWhenTrue>
+                                                                            <item actionId="Eval">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                                    <statement>started = True</statement>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenTrue>
+                                                                        <actionsWhenFalse>
+                                                                            <item actionId="Eval">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                                    <statement>started = False</statement>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenFalse>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="684dbc11-2ab3-43a8-bac2-8a0831bf78e2" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Get VM properties</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="d7565d77-de75-4489-8415-6f265f0c5f3f" action="command" session="proxmox">
+                                    <command>
+                                        <body>qm status [vmID] --verbose true</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>maxmem()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>maxMem</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>cpus()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>cpus</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>maxdisk()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>maxDisk</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>name()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>name</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>running_qemu()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>qemuVersion</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>vmid()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>vmID</storageLocation>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="a80005f4-4b6b-4370-9d70-8562634da8e7" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Create list of ports defined on the node</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="7ca443c7-3c5f-47d8-aeee-066da416fcb1" action="getOrchestratedResourceIdPorts" session="velocity" skip="true" useFieldsInCommand="false">
+                                    <command>
+                                        <body>(resource_id=param(&apos;topologyResourceId&apos;), reservationId=velocity(&quot;reservationId&quot;))</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>mapped/Json/item</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="store">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                        <storageLocation>portList</storageLocation>
+                                                        <storeInAList>true</storeInAList>
+                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="d5793468-2a7e-41fd-9186-1757daf8ce9b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Build Velocity JSON response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="1dbc85d8-27ab-4fda-86a7-6aacbd04012e" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict = {&quot;template&quot;:param(&apos;property_Template&apos;),&quot;name&quot;:&quot;&quot;}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="475d01ce-86d0-4251-a220-3e31c259c9cf" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;name&apos;] = name</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="09fa170a-ee57-494f-b9c4-d02a7dcc0b3d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;VM name&apos;] = name</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="255d99ed-f9b3-4526-9582-524041b44299" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;Max memory&apos;] = maxMem</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="52d90497-4548-4f43-b223-9b8b2f3ca718" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;ipAddress&apos;] = ip</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="ede86e42-e50c-4859-86e8-e6966de9a503" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;CPUs&apos;] = cpus</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="fcb65220-ff8e-4a96-b841-90a16b7906e0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;Max disk memory&apos;] = maxDisk</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="013b4470-75cb-44a9-a4c0-2df45536ddf7" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;QEMU version&apos;] = qemuVersion</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0e57d6c7-ce8f-476e-a44e-df43ee2bcdf0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict[&apos;VM ID&apos;] = vmID</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="454a6fd1-a5f4-46e9-946a-161e60b75bf0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict_str = str(node_dict); print(node_dict_str)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="50d12212-97b4-4aea-b3e2-789c012916f9" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>node_dict_subs = node_dict_str.replace(&quot;&apos;&quot;,&quot;\\&quot;&quot;); print(node_dict_subs) </body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="0515d829-646c-4a14-ac8f-fe78b5e36fcd" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>dummy ports</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="cb18a3d8-a4b4-43b8-918e-76b71fb857ca" action="json" useFieldsInCommand="false">
+                            <command>
+                                <body>action=&apos;createJson&apos;, documentName=&apos;response&apos;, fromFile=false, jsonString=&apos;{&quot;properties&quot;:[node_dict_subs],&quot;ports&quot;:\\\\[{&quot;name&quot;: &quot;eth0&quot;}], &quot;switchPorts&quot;:\\\\[{&quot;name&quot;: &quot;eth0&quot;, &quot;portNumber&quot;: &quot;eth0&quot;}], &quot;connections&quot;:\\\\[{&quot;port1&quot;: &quot;eth0&quot;,&quot;port2&quot;: &quot;eth0&quot;}]}&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                <action inherit="false">createJson</action>
+                                <jsonString inherit="false" sub="true">{&quot;properties&quot;:[node_dict_subs],&quot;ports&quot;:\\[{&quot;name&quot;: &quot;eth0&quot;}], &quot;switchPorts&quot;:\\[{&quot;name&quot;: &quot;eth0&quot;, &quot;portNumber&quot;: &quot;eth0&quot;}], &quot;connections&quot;:\\[{&quot;port1&quot;: &quot;eth0&quot;,&quot;port2&quot;: &quot;eth0&quot;}]}</jsonString>
+                                <documentName inherit="false">response</documentName>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3022df6d-cb32-446b-b4d2-fb3e9b90085a" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Create list of ports defined on the node</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="7ca443c7-3c5f-47d8-aeee-066da416fcb1" action="getOrchestratedResourceIdPorts" session="velocity" useFieldsInCommand="false">
+                            <command>
+                                <body>(resource_id=param(&apos;topologyResourceId&apos;), reservationId=velocity(&quot;reservationId&quot;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/item</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>portList</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="38669c50-4bb3-437c-9970-2d488a55cb0d" action="getOrchestratedResourceIdPorts" session="velocity" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>(resource_id=param(&apos;topologyResourceId&apos;), reservationId=param(&apos;reservationID&apos;))</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/item</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>portList</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f8aff180-c0b5-4890-894f-1b617547ed41" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Add all ports, switchPorts, and connections into response JSON</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="db2540d7-a307-4bbe-ac7c-19fd0dcd32ad" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>len(portList) &gt; 0:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="6b37a115-28e1-4a8a-9f2b-34572bc900dc" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Information:Create empty nodes</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="f5507235-f373-4f4a-a901-460815ee9f3c" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;createJson&apos;, documentName=&apos;ports&apos;, fromFile=false, jsonString=&apos;{&quot;ports&quot;:[]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">createJson</action>
+                                                <jsonString inherit="false">{&quot;ports&quot;:[]}</jsonString>
+                                                <documentName inherit="false">ports</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="b86e5ae0-1a69-420c-aebc-2f12b4c87745" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;createJson&apos;, documentName=&apos;switch_ports&apos;, fromFile=false, jsonString=&apos;{&quot;switchPorts&quot;:[]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">createJson</action>
+                                                <jsonString inherit="false">{&quot;switchPorts&quot;:[]}</jsonString>
+                                                <documentName inherit="false">switch_ports</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="033c6145-81c1-4fa3-9f57-3dcbc87f9cbc" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;createJson&apos;, documentName=&apos;connections&apos;, fromFile=false, jsonString=&apos;{&quot;connections&quot;:[]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                <action inherit="false">createJson</action>
+                                                <jsonString inherit="false">{&quot;connections&quot;:[]}</jsonString>
+                                                <documentName inherit="false">connections</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="6270d970-fc28-4169-9b1e-2a085eab04b3" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Iterate through port list</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="683f3ff2-4d24-4ae8-a2db-82d86c321ca6" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>i in range(len(portList)):</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="8123fe39-1cbc-437c-a471-66a2bb3baac7" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>naming</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="f9a03384-b3fc-4234-bc6d-276618e8c6ae" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>resourcePortName = portList[i]; print(resourcePortName)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="3c45f09a-db4b-419c-88b4-894df10cea45" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>switchPortName = f&quot;{node_dict[&apos;name&apos;] }@{vmID}@{resourcePortName}@{i}&quot;; print(switchPortName)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                        <item guid="f0ae97e4-1a3e-4114-bf6f-b54c1997b5d6" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>switchPortNumber =  f&quot;{node_dict[&apos;name&apos;] }@{vmID}@{resourcePortName}@{i}&quot;; print(switchPortNumber)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="7d4bcf67-c1fa-497f-a7e3-c5086bc9986c" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>resource port JSON</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="d52b6205-0c54-413e-ae9b-13fbbe16dc28" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;createJson&apos;, documentName=&apos;port_property&apos;, fromFile=false, jsonString=&apos;{&quot;name&quot;: &quot;[resourcePortName]&quot;}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                                <action inherit="false">createJson</action>
+                                                                <jsonString inherit="false" sub="true">{&quot;name&quot;: &quot;[resourcePortName]&quot;}</jsonString>
+                                                                <documentName inherit="false">port_property</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                        <item guid="a52f59a0-89f6-4d20-92f2-977cb5913cf1" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;ports&apos;, pathValue=&apos;{&quot;ports/\\\\[[i]]&quot;:\\\\[[port_property]]}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;ports/\\[[i]]&quot;:\\[[port_property]]}" pathValue.inherit="false" pathValue.sub="true">
+                                                                <action inherit="false">addJsonNode</action>
+                                                                <documentName inherit="false">ports</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="8604dc27-e03d-433e-b7e1-3e7aece0ebc1" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>switch port JSON</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="99fe749f-d335-4a47-ae0e-b964eb6dcabd" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;createJson&apos;, documentName=&apos;switch_property&apos;, fromFile=false, jsonString=&apos;{&quot;name&quot;:&quot;[switchPortName]&quot;,&quot;portNumber&quot;:&quot;[switchPortNumber]&quot;}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                                <action inherit="false">createJson</action>
+                                                                <jsonString inherit="false" sub="true">{&quot;name&quot;:&quot;[switchPortName]&quot;,&quot;portNumber&quot;:&quot;[switchPortNumber]&quot;}</jsonString>
+                                                                <documentName inherit="false">switch_property</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                        <item guid="b3618011-b8fe-4410-ab97-77e3c4f51a5e" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;switch_ports&apos;, pathValue=&apos;{&quot;switchPorts/\\\\[0]&quot;:\\\\[[switch_property]]}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;switchPorts/\\[0]&quot;:\\[[switch_property]]}" pathValue.inherit="false" pathValue.sub="true">
+                                                                <action inherit="false">addJsonNode</action>
+                                                                <documentName inherit="false">switch_ports</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="af8d0f44-dadf-4eca-afd5-f93385f073a0" action="comment" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>connections JSON</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="4d6290c8-ec08-4f23-a449-3a985960ccc1" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;createJson&apos;, documentName=&apos;connection_property&apos;, fromFile=false, jsonString=&apos;{&quot;port1&quot;:&quot;[switchPortName]&quot;, &quot;port2&quot;:&quot;[resourcePortName]&quot;}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup">
+                                                                <action inherit="false">createJson</action>
+                                                                <jsonString inherit="false" sub="true">{&quot;port1&quot;:&quot;[switchPortName]&quot;, &quot;port2&quot;:&quot;[resourcePortName]&quot;}</jsonString>
+                                                                <documentName inherit="false">connection_property</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                        <item guid="d5e684b7-b5a6-44fc-99f8-bee985476c8e" action="json" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;connections&apos;, pathValue=&apos;{&quot;connections/\\\\[0]&quot;:\\\\[[connection_property]]}&apos;</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;connections/\\[0]&quot;:\\[[connection_property]]}" pathValue.inherit="false" pathValue.sub="true">
+                                                                <action inherit="false">addJsonNode</action>
+                                                                <documentName inherit="false">connections</documentName>
+                                                            </applicationProperties>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="e7baa870-bcc0-479f-bfda-6b46ef8924e2" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Insert into response JSON</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="42314d4f-1ab3-4ab5-be98-ebbfb24aeca3" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;response&apos;, pathValue=&apos;{&quot;/&quot;:[ports]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;/&quot;:[ports]}" pathValue.inherit="false" pathValue.sub="true">
+                                                <action inherit="false">addJsonNode</action>
+                                                <documentName inherit="false">response</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="f1c3e67c-dab5-47d0-a899-1985bdc17593" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;response&apos;, pathValue=&apos;{&quot;/&quot;:[switch_ports]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;/&quot;:[switch_ports]}" pathValue.inherit="false" pathValue.sub="true">
+                                                <action inherit="false">addJsonNode</action>
+                                                <documentName inherit="false">response</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="081e1d96-b5c9-4b5c-955a-ec19b844660c" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;response&apos;, pathValue=&apos;{&quot;/&quot;:[connections]}&apos;</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;/&quot;:[connections]}" pathValue.inherit="false" pathValue.sub="true">
+                                                <action inherit="false">addJsonNode</action>
+                                                <documentName inherit="false">response</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b2f0615c-2f37-4994-93d9-2c9941b6eb23" action="return">
+                    <command>
+                        <body>[response]</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+        <item name="termOrchestratedResource">
+            <steps>
+                <item guid="2397bbd6-2f2d-4d8f-87ee-6c91d9435e3d" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Connect to proxmox</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fb4dc198-0861-4a56-91fe-4d0046741c6c" action="open" session="proxmox">
+                            <command>
+                                <body>project://ri_Proxmox/session_profiles/proxmox.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                                    <ipAddress inherit="false">[param(&apos;property_Proxmox_IP_address&apos;)]</ipAddress>
+                                    <user inherit="false">[param(&apos;property_Proxmox_username&apos;)]</user>
+                                    <password inherit="false" masked="false">[param(&apos;property_Proxmox_password&apos;)]</password>
+                                </sessionProperties>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3dd1d5b9-3164-4eed-90a3-1f0ae157878c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Get ReservationID as hash for VM</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5c9ca541-0d86-4342-9a8a-c87fac02f311" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>reservationID = velocity(&apos;reservationId&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="bb80658b-a756-4309-a012-92ad6e519327" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resourceName = tbml(&apos;property&apos;, &apos;-id&apos;,param(&apos;topologyResourceId&apos;) , &apos;name&apos;).replace(&apos; &apos;,&apos;-&apos;).replace(&apos;_&apos;,&apos;-&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1b91de6e-415d-4e68-adec-a491f5009e1b" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>VMname = resourceName+&apos;-&apos;+reservationID</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="7e066002-5027-4918-b6d8-b68aa790bc20" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Look for VMID</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="51d3701f-416e-49e4-a336-1a8ba302d2c7" action="command" session="proxmox">
+                            <command>
+                                <body>qm list</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">VMID_by_NAME(&quot;[VMname]&quot;)</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>vmID</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="2ff38854-1a4f-4493-9b31-30b375565eda" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>shutdown VM</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="51d3701f-416e-49e4-a336-1a8ba302d2c7" action="command" session="proxmox">
+                            <command>
+                                <body>qm shutdown [vmID]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                                <completionProperties>
+                                    <maxIdleTimeAddition inherit="false">300.0</maxIdleTimeAddition>
+                                </completionProperties>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4425bdb4-18eb-412f-9b00-03ac98c7fcab" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Wait for VM to start</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="77b723cd-5fe5-4504-a643-4814139ed1c4" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>started = True</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3db54d82-47fd-4f6b-a3db-108e1b962703" action="while" useFieldsInCommand="false">
+                            <command>
+                                <body>started:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="946a8bf5-3620-4cf1-9984-5d203cca6b0d" action="sleep">
+                                    <command>
+                                        <body>3</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="90cb6566-4b7a-4780-9f80-0fd84c6d318f" action="command" session="proxmox">
+                                    <command>
+                                        <body>qm status [vmID]</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="query">
+                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                        <query>status()</query>
+                                                    </extractorProperties>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="assert">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                        <expression>value == &apos;running&apos;</expression>
+                                                        <actionsWhenTrue>
+                                                            <item actionId="Eval">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                    <statement>started = True</statement>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenTrue>
+                                                        <actionsWhenFalse>
+                                                            <item actionId="Eval">
+                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.EvalActionPropertyGroup">
+                                                                    <statement>started = False</statement>
+                                                                </actionProperties>
+                                                            </item>
+                                                        </actionsWhenFalse>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="921722b9-4d3a-4376-9b79-a4e9732ae58b" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>destroy VM VM</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="51d3701f-416e-49e4-a336-1a8ba302d2c7" action="command" session="proxmox">
+                            <command>
+                                <body>qm destroy [vmID]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="uuid">
+                    <description>If this argument is set, use this rather than from property</description>
+                </item>
+            </arguments>
+            <response>{}</response>
+        </item>
+    </procedures>
+</testCase>

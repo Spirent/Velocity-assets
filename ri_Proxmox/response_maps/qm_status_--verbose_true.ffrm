@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<ResponseMap version="25.3.0.202507301940">
+    <sampleDictionary>
+        <item name="sample1">
+            <action actionType="command">
+                <command>
+                    <body>qm status 253 --verbose true</body>
+                </command>
+            </action>
+            <responseBody>balloon: 2147483648
+ballooninfo:
+\tactual: 2147483648
+\tfree_mem: 1718697984
+\tlast_update: 1747134983
+\tmajor_page_faults: 1072
+\tmax_mem: 2147483648
+\tmem_swapped_in: 0
+\tmem_swapped_out: 0
+\tminor_page_faults: 184695
+\ttotal_mem: 2063695872
+blockstat:
+\tide2:
+\t\taccount_failed: 1
+\t\taccount_invalid: 1
+\t\tfailed_flush_operations: 0
+\t\tfailed_rd_operations: 0
+\t\tfailed_unmap_operations: 0
+\t\tfailed_wr_operations: 0
+\t\tfailed_zone_append_operations: 0
+\t\tflush_operations: 0
+\t\tflush_total_time_ns: 0
+\t\tidle_time_ns: 120675833285
+\t\tinvalid_flush_operations: 0
+\t\tinvalid_rd_operations: 0
+\t\tinvalid_unmap_operations: 0
+\t\tinvalid_wr_operations: 0
+\t\tinvalid_zone_append_operations: 0
+\t\trd_bytes: 46
+\t\trd_merged: 0
+\t\trd_operations: 2
+\t\trd_total_time_ns: 70204
+\t\ttimed_stats:
+\t\tunmap_bytes: 0
+\t\tunmap_merged: 0
+\t\tunmap_operations: 0
+\t\tunmap_total_time_ns: 0
+\t\twr_bytes: 0
+\t\twr_highest_offset: 0
+\t\twr_merged: 0
+\t\twr_operations: 0
+\t\twr_total_time_ns: 0
+\t\tzone_append_bytes: 0
+\t\tzone_append_merged: 0
+\t\tzone_append_operations: 0
+\t\tzone_append_total_time_ns: 0
+\tscsi0:
+\t\taccount_failed: 1
+\t\taccount_invalid: 1
+\t\tfailed_flush_operations: 0
+\t\tfailed_rd_operations: 0
+\t\tfailed_unmap_operations: 0
+\t\tfailed_wr_operations: 0
+\t\tfailed_zone_append_operations: 0
+\t\tflush_operations: 138
+\t\tflush_total_time_ns: 11999223998
+\t\tidle_time_ns: 14016985270
+\t\tinvalid_flush_operations: 0
+\t\tinvalid_rd_operations: 0
+\t\tinvalid_unmap_operations: 0
+\t\tinvalid_wr_operations: 0
+\t\tinvalid_zone_append_operations: 0
+\t\trd_bytes: 257152512
+\t\trd_merged: 0
+\t\trd_operations: 9628
+\t\trd_total_time_ns: 226315606045
+\t\ttimed_stats:
+\t\tunmap_bytes: 0
+\t\tunmap_merged: 0
+\t\tunmap_operations: 0
+\t\tunmap_total_time_ns: 0
+\t\twr_bytes: 21365760
+\t\twr_highest_offset: 15035666432
+\t\twr_merged: 0
+\t\twr_operations: 1245
+\t\twr_total_time_ns: 141833110137
+\t\tzone_append_bytes: 0
+\t\tzone_append_merged: 0
+\t\tzone_append_operations: 0
+\t\tzone_append_total_time_ns: 0
+cpus: 1
+disk: 0
+diskread: 257152558
+diskwrite: 21365760
+freemem: 1718697984
+maxdisk: 34359738368
+maxmem: 2147483648
+mem: 344997888
+name: VelProx-89131221-7077-47a1-af4f-37128aacfb51
+netin: 588666
+netout: 7102
+nics:
+\ttap253i0:
+\t\tnetin: 588666
+\t\tnetout: 7102
+pid: 53428
+proxmox-support:
+\tbackup-fleecing: 1
+\tbackup-max-workers: 1
+\tpbs-dirty-bitmap: 1
+\tpbs-dirty-bitmap-migration: 1
+\tpbs-dirty-bitmap-savevm: 1
+\tpbs-library-version: 1.4.1 (UNKNOWN)
+\tpbs-masterkey: 1
+\tquery-bitmap-info: 1
+qmpstatus: running
+running-machine: pc-i440fx-8.1+pve0
+running-qemu: 8.1.5
+status: running
+uptime: 154
+vmid: 253
+</responseBody>
+            <contentType>text</contentType>
+            <structuredData>
+&lt;structure xmlns:map=&quot;http://www.fnfr.com/svt/mapping&quot;&gt;
+    &lt;isEmpty&gt;false&lt;/isEmpty&gt;
+    &lt;responseLine&gt;balloon: 2147483648&lt;/responseLine&gt;
+    &lt;promptName&gt;prompt2&lt;/promptName&gt;
+    &lt;echo&gt;qm status 253 --verbose true&lt;/echo&gt;
+    &lt;prompt&gt;root@pve:~# &lt;/prompt&gt;
+&lt;/structure&gt;
+</structuredData>
+            <aliases>
+                <item name="isEmpty">
+                    <queryFormatString>.//isEmpty</queryFormatString>
+                </item>
+                <item name="responseLine">
+                    <queryFormatString>.//responseLine</queryFormatString>
+                </item>
+                <item name="promptName">
+                    <queryFormatString>.//promptName</queryFormatString>
+                </item>
+                <item name="echo">
+                    <queryFormatString>.//echo</queryFormatString>
+                </item>
+                <item name="prompt">
+                    <queryFormatString>.//prompt</queryFormatString>
+                </item>
+            </aliases>
+            <duration>1.7</duration>
+        </item>
+    </sampleDictionary>
+    <mapperProperties>
+        <item type="com.fnfr.svt.mapping.regex.RegexMapperProperties">
+            <regexMaps>
+                <item name="pattern1">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>maxmem:\\s+</regex>
+                            <start>0</start>
+                            <end>8</end>
+                        </item>
+                        <item name="maxmem">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>8</start>
+                            <end>18</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>maxmem: 2147483648</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+                <item name="pattern2">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>cpus:\\s+</regex>
+                            <start>0</start>
+                            <end>6</end>
+                        </item>
+                        <item name="cpus">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>6</start>
+                            <end>7</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>cpus: 1</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+                <item name="pattern3">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>maxdisk:\\s+</regex>
+                            <start>0</start>
+                            <end>9</end>
+                        </item>
+                        <item name="maxdisk">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>9</start>
+                            <end>20</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>maxdisk: 34359738368</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+                <item name="pattern4">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>name:\\s+</regex>
+                            <start>0</start>
+                            <end>6</end>
+                        </item>
+                        <item name="name">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>6</start>
+                            <end>10</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>name: name</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+                <item name="pattern5">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>running-qemu:\\s+</regex>
+                            <start>0</start>
+                            <end>14</end>
+                        </item>
+                        <item name="running_qemu">
+                            <regex>[^\\r\\n]+</regex>
+                            <named>true</named>
+                            <start>14</start>
+                            <end>17</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="[^0-9\r\n]+">one or more non-digit characters except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>running-qemu: ver</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+                <item name="pattern6">
+                    <groups>
+                        <item name="anchor0">
+                            <regex>vmid:\\s+</regex>
+                            <start>0</start>
+                            <end>6</end>
+                        </item>
+                        <item name="vmid">
+                            <regex>\\d+</regex>
+                            <named>true</named>
+                            <start>6</start>
+                            <end>9</end>
+                            <suggestions>
+                                <item name=".+">one or more of any character</item>
+                                <item name="[^\r\n]+">one or more of any character except line endings</item>
+                                <item name="\S+">one or more non-whitespace characters</item>
+                                <item name="\w+">one or more word characters</item>
+                                <item name="([-+]?\d+\.?\d*([eE][-+]?\d+)?)">one complex decimal number</item>
+                                <item name="\d+">one or more digits</item>
+                            </suggestions>
+                        </item>
+                    </groups>
+                    <sampleMatch>vmid: 253</sampleMatch>
+                    <regexMapMode>Line</regexMapMode>
+                </item>
+            </regexMaps>
+        </item>
+    </mapperProperties>
+    <applicabilityProperties actionType="command" command="qm status * --verbose true"/>
+    <xPathVersion>XPATH31</xPathVersion>
+</ResponseMap>

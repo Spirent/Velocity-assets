@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<TestCaseCatalog version="25.4.0.202512130118">
+    <testCaseCatalog>
+        <item name="libraries/libraryVelocityActions.fftc">
+            <tcDescriptor version="25.4.0.202512130118">
+                <general>
+                    <documentation>Procedures library for Velocity actions</documentation>
+                    <owner>Spirent Comunications</owner>
+                    <isProcedureLibrary>true</isProcedureLibrary>
+                    <language>Python</language>
+                    <xPathVersion>XPATH31</xPathVersion>
+                </general>
+                <procedures>
+                    <item name="getResourceCredentialsByName" isPublic="true" blockResponseType="JSON">
+                        <arguments>
+                            <item name="name"/>
+                        </arguments>
+                        <response>{&quot;ipAddress&quot;:&quot;value&quot;,&quot;username&quot;:&quot;value&quot;,&quot;password&quot;:&quot;value&quot;}</response>
+                    </item>
+                    <item name="getOrchestratedResourceIdInfo" isPublic="true"/>
+                    <item name="getTopologyResourcesCoordInfo" isPublic="true"/>
+                    <item name="getOrchestratedResourceIdPorts" isPublic="true"/>
+                    <item name="getReservationConnectionsDetails" isPublic="true"/>
+                </procedures>
+            </tcDescriptor>
+        </item>
+    </testCaseCatalog>
+</TestCaseCatalog>

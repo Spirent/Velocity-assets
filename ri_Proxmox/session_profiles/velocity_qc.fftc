@@ -1,0 +1,1026 @@
+<?xml version="1.0"?>
+<testCase version="25.3.0.202507301940">
+    <general>
+        <sessionClass includeTestCase="true" sessionType="velocity.ffsp"/>
+        <language>Python</language>
+        <xPathVersion>XPATH31</xPathVersion>
+    </general>
+    <procedures>
+        <item name="main"/>
+        <item name="getResourceCredentialsByName" isPublic="true" blockResponseType="JSON">
+            <steps>
+                <item guid="becbf438-7f3e-4abc-9f62-e099ef14169c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get resource id info for ephemeral resources</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e4b75062-6935-4d17-a04e-a12b63672d7a" action="GET" session="[session]" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/inventory/v19/devices?filter=name::[name]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>//id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>id</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v19/devices?filter=name::[name]" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="e090737d-8336-4686-ba4e-3811e4bb6d04" action="GET" session="[session]" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/inventory/v19/device/[id]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>//properties/item[name=&quot;ipAddress&quot;]/value</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <query>ipAddress</query>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>//properties/item[name=&quot;username&quot;]/value</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <query>username</query>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>//properties/item[name=&quot;password&quot;]/value</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <query>password</query>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">true</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">false</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                                <storeResponseAt>device</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v19/device/[id]" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="name"/>
+            </arguments>
+            <response>{&quot;ipAddress&quot;:&quot;value&quot;,&quot;username&quot;:&quot;value&quot;,&quot;password&quot;:&quot;value&quot;}</response>
+        </item>
+        <item name="getOrchestratedResourceIdInfo" isPublic="true">
+            <steps>
+                <item guid="91f61fb7-41f9-45ef-a751-8c2591040bb2" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0ba4b9ba-e26d-4e78-bde9-ce5edefd6651" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resource_id=param(&apos;topologyResourceId&apos;); print(resource_id)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="fe39f655-b2e9-4942-9292-598dbcda646d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>reservationId = velocity(&quot;reservationId&quot;); print(reservationId)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5669dabc-163b-4107-8723-bdefd381ddd6" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resource_dict = {}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="9ee2fba1-1ce1-477c-9795-c527a2c6fbc8" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get resource id info for velocity selected resources</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="d4ce598c-9259-4d89-8d95-9dcafc4eea13" action="GET" session="[session]" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/reservation/v19/reservation/[reservationId]/topology?limit=200</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">mapped/Xml/*\\[name()=&apos;tbml&apos;]/*\\[name()=&apos;body&apos;]/*\\[name()=&apos;resources&apos;]/*\\[name()=&apos;resource&apos;]\\[@id = &apos;[resource_id]&apos;]/*\\[name()=&apos;property&apos;]\\[5]</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>resource_id_selected</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">mapped/Xml/*\\[name()=&apos;tbml&apos;]/*\\[name()=&apos;body&apos;]/*\\[name()=&apos;resources&apos;]/*\\[name()=&apos;resource&apos;]\\[@id = &apos;[resource_id]&apos;]/*\\[name()=&apos;property&apos;]\\[@name=&apos;name&apos;]</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>node_name</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                                <storeResponseAt>topology_tbml</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/reservation/v19/reservation/[reservationId]/topology?limit=200" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="bdf3be46-369f-4216-b016-4ad8604ae403" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(resource_id_selected)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="1cb556b3-05b9-4481-bb0b-6a6dde008f8f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(node_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="488d1d2e-517b-4bd6-9f30-fcf3282c6ca2" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resource_id = resource_id_selected.split(&quot;id=&quot;)[1]; print(resource_id)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="63dfeb37-a42a-42ce-b63c-54b394f78234" action="GET" session="[session]" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/inventory/v17/orchestrated_resource/[resource_id]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>name()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>resource_inventory_name</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>templateId()</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>node_template_id</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/inventory/v17/orchestrated_resource/[resource_id]" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ac151319-8b93-471e-ac6f-60deeaed4ba6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return json</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="bb930290-c02b-4cb9-aaea-92f392948a74" action="return">
+                            <command>
+                                <body>{&quot;node_name&quot;: [node_name], &quot;node_template_id&quot;: [node_template_id], &quot;node_inventory_name&quot;: [resource_inventory_name]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="resource_id"/>
+                <item name="reservationId"/>
+            </arguments>
+        </item>
+        <item name="getTopologyResourcesCoordInfo" isPublic="true">
+            <steps>
+                <item guid="e2792664-3848-49f1-8cc4-2d69ebc472a7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="e0934c03-e071-440f-8a79-9d479d9fcfd7" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>topology_resources_dict = {}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="f9a27451-e73b-40ec-b3db-21ebd9f9fc37" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get topology name and replace illegal eve-ng characters</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0fc6f06c-9b67-47ae-8c82-2f830fe9eadd" action="GET" session="[session]" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/reservation/v18/reservation/[reservationId]?limit=200</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/topologyId</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>topologyId</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/reservation/v18/reservation/[reservationId]?limit=200" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="40af7af9-919d-4e14-b105-5c2665dbcec2" action="GET" session="[session]" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/topology/v16/topology/[topologyId]</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Json/name</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>topology_name</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/topology/v16/topology/[topologyId]" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="6a35952a-c0a2-46dc-b375-0bb46cebaee0" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>eveng_pattern = r&apos;[^A-Za-z0-9_\\-]&apos;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="6113fe5a-e3ab-44de-83cd-cb08c8f18f0d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>topology_name = re.sub(eveng_pattern, &apos;_&apos;, topology_name); print(topology_name)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cf34a1ef-6701-4931-9f0e-1c40473e9da7" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get resources coordinates</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="2b379e30-d65e-4b71-9ab6-87f9f0ae4b9a" action="GET" session="[session]" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/reservation/v19/reservation/[reservationId]/topology?limit=200</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Xml/*[name()=&apos;tbml&apos;]/*[name()=&apos;body&apos;]/*[name()=&apos;resources&apos;]/*[name()=&apos;resource&apos;][*]/*[name()=&apos;property&apos;][1]</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>resources_names</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Xml/*[name()=&apos;tbml&apos;]/*[name()=&apos;body&apos;]/*[name()=&apos;resources&apos;]/*[name()=&apos;resource&apos;][*]/*[name()=&apos;property&apos;][15]</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>resources_inventory_names</storageLocation>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                        <skip>true</skip>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Xml/*[name()=&apos;tbml&apos;]/*[name()=&apos;body&apos;]/*[name()=&apos;resources&apos;]/*[name()=&apos;resource&apos;][*]/*[name()=&apos;boundary&apos;]/@x</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>resources_boundary_x</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Xml/*[name()=&apos;tbml&apos;]/*[name()=&apos;body&apos;]/*[name()=&apos;resources&apos;]/*[name()=&apos;resource&apos;][*]/*[name()=&apos;boundary&apos;]/@y</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>resources_boundary_y</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query>mapped/Xml/*[name()=&apos;tbml&apos;]/*[name()=&apos;body&apos;]/*[name()=&apos;resources&apos;]/*[name()=&apos;resource&apos;][*]/@id</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>resources_ids</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                                <storeResponseAt>topology_tbml</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/reservation/v19/reservation/[reservationId]/topology?limit=200" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                        <item guid="990b30fd-dbfc-4e3d-9a73-7459cc552c11" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>res_id, res_name, x, y, res_name in zip(resources_ids, resources_names, resources_boundary_x, resources_boundary_y, resources_names):</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="c5f0e6b7-773c-41f9-b8a5-da8e1988ea09" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>x = str(int(float(x))-int(min([int(float(i)) for i in resources_boundary_x]))+100); print(x)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="0123b185-e2a7-4d5f-ab8b-9059a97f9983" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>y = str(int(float(y))-int(min([int(float(i)) for i in resources_boundary_y]))+100); print(y)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="15061aae-0f18-432e-b5a8-099f0217a042" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>topology_resources_dict[res_name] ={&quot;id&quot;: res_id, &quot;x&quot;: str(x), &quot;y&quot;: str(y)} </body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="3503c7d9-2ab5-4a22-888c-2f8eb36a691d" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>print(topology_resources_dict)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="a4f421a6-17c9-4e9f-8cac-ac902666a28e" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return json</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="ea3d8455-ab0f-4784-81ca-3974e374e09d" action="return">
+                            <command>
+                                <body>{&quot;topology&quot;: [topology_name], &quot;resources&quot;: [topology_resources_dict]}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="reservationId"/>
+            </arguments>
+        </item>
+        <item name="getOrchestratedResourceIdPorts" isPublic="true">
+            <steps>
+                <item guid="24a9bb42-1d38-40e1-8834-772b973b0af6" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="dfc802c6-3066-4021-bffb-f44e4f847740" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resource_dict = {}</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="de044d6e-e325-49e6-bcc4-a4be40601b25" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>get resource id ports</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="5ae6df96-57ca-461c-b374-369b467d6998" action="GET" session="[session]" estimatedStepExecutionTime="0.305">
+                            <command>
+                                <body>/velocity/api/reservation/v19/reservation/[reservationId]/topology?limit=200</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="query">
+                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                <query sub="true">mapped/Xml/*\\[name()=&apos;tbml&apos;]/*\\[name()=&apos;body&apos;]/*\\[name()=&apos;resources&apos;]/*\\[name()=&apos;resource&apos;]\\[@id=&apos;[resource_id]&apos;]/*\\[name()=&apos;resource&apos;]\\[*]/*\\[name()=&apos;property&apos;]\\[1]</query>
+                                            </extractorProperties>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="store">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                <storageLocation>ports</storageLocation>
+                                                <storeInAList>true</storeInAList>
+                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                                <storeResponseAt>topology_tbml</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="/velocity/api/reservation/v19/reservation/[reservationId]/topology?limit=200" action.inherit="false">
+                                <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="3cf3f3d4-a2ca-45b8-80b4-3461773ec653" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return response</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="280a1cdf-95bc-4cfc-aa6a-7d256ae05fe5" action="return">
+                            <command>
+                                <body>[ports]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+            <arguments>
+                <item name="resource_id"/>
+                <item name="reservationId"/>
+            </arguments>
+        </item>
+        <item name="getReservationConnectionsDetails" isPublic="true">
+            <steps>
+                <item guid="6f1a0433-5433-4d69-b5ea-379214edb4fb" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>init</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0139e20d-9a30-4d06-8d90-b5ecd19a5d3a" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>reservationId = velocity(&quot;reservationId&quot;); print(reservationId)</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="none">
+                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>Found reservationId: &quot;[reservationId]&quot;</message>
+                                                <tag sub="false" defaultValue=""/>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="21d031df-7be9-4310-af0b-0b7f65bb2f61" action="eval" skip="true" useFieldsInCommand="false">
+                            <command>
+                                <body>reservationId = &quot;a66a8716-c41b-44ea-bd36-86e8af267ca6&quot;</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="fdf2c8d6-3242-4a72-8df6-76b2aa7c7fe6" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>init dict</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="5384654d-af90-4f83-974d-cd328ab055ac" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>dict={}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="82540e22-63b4-41a7-b20b-934fd7983ddc" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>connections_dict={}</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="ed5d2272-9d4b-4cd3-b429-36ed018db1aa" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>open session to velocity and get reservation connections</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="0a058e00-1302-4493-8a0e-c33004a03def" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Open velocity session</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="0cdbff5c-e78e-4980-92c5-5b034255b872" action="open" session="[session]" useFieldsInCommand="false">
+                                    <command>
+                                        <body>application:com.fnfr.itest.applications.webservices.restful</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://10.75.236.3" url.inherit="false" version="2" version.inherit="false">
+                                            <authentication transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.AuthenticationProperties" authenticationType="Basic" authenticationType.inherit="false" user="spavel" user.inherit="false" password.masked="false" password="spavel" password.inherit="false" acceptAllCertificates="true" acceptAllCertificates.inherit="false"/>
+                                        </sessionProperties>
+                                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                    </applicationProperties>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="5d76586b-3bf0-4f51-be4d-a7665fedf9d5" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Get reservation connections</body>
+                            </command>
+                            <postProcessing>
+                                <analysisRules>
+                                    <item>
+                                        <extractorInfo extractorType="none">
+                                            <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                        </extractorInfo>
+                                        <processorInfo ruleType="message">
+                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                <message>Get reservation connections:</message>
+                                                <tag sub="false" defaultValue=""/>
+                                            </ruleProperties>
+                                        </processorInfo>
+                                    </item>
+                                </analysisRules>
+                            </postProcessing>
+                            <nestedSteps>
+                                <item guid="7fc92164-bb82-492f-b797-321c5e76ef8b" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Get connections information</body>
+                                    </command>
+                                    <postProcessing>
+                                        <analysisRules>
+                                            <item>
+                                                <extractorInfo extractorType="none">
+                                                    <extractorProperties type="com.fnfr.svt.documents.EmptyExtractorPropertyGroup"/>
+                                                </extractorInfo>
+                                                <processorInfo ruleType="message">
+                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.MessageProcessorPropertyGroup" severity="Information">
+                                                        <message>--- get reservation connections</message>
+                                                        <tag sub="false" defaultValue=""/>
+                                                    </ruleProperties>
+                                                </processorInfo>
+                                            </item>
+                                        </analysisRules>
+                                    </postProcessing>
+                                    <nestedSteps>
+                                        <item guid="6ba63a06-a4f0-497e-a745-105b21afb770" action="GET" session="[session]">
+                                            <command>
+                                                <body>/velocity/api/reservation/v18/reservation/[reservationId]/topology/links</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                <query>mapped/Json/items/*/id</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>link_ids</storageLocation>
+                                                                <storeInAList>true</storeInAList>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/velocity/api/reservation/v18/reservation/[reservationId]/topology/links" action.inherit="false"/>
+                                        </item>
+                                        <item guid="f0386ec6-a321-4014-960e-a572e5ea8cf1" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>id in link_ids:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="3bc308e8-28fb-4510-9ad9-f25ba2343a71" action="GET" session="[session]">
+                                                    <command>
+                                                        <body>/velocity/api/reservation/v18/reservation/[reservationId]/topology/links</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/Json/items/*\\[id=&quot;[id]&quot;]/parentResource1/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>node1_topologyId</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/Json/items/*\\[id=&quot;[id]&quot;]/parentResource2/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>node2_topologyId</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/items/*\\[id=&quot;[id]&quot;]/resource1/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port1_topologyId</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query sub="true">mapped/Json/items/*\\[id=&quot;[id]&quot;]/resource2/id</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port2_topologyId</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/velocity/api/reservation/v18/reservation/[reservationId]/topology/links" action.inherit="false"/>
+                                                </item>
+                                                <item guid="87c04e22-6c2d-468d-b5e9-dbc1e8f08304" action="GET" session="[session]">
+                                                    <command>
+                                                        <body>/velocity/api/reservation/v18/reservation/[reservationId]/topology</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/yaml/document/topology_template/node_templates/device_[node1_topologyId]/properties/property_groups/*\\[name=&quot;Reservation Information&quot;]/group/*\\[name=&quot;eveng_id&quot;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>node1_eveng_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/yaml/document/topology_template/node_templates/device_[node2_topologyId]/properties/property_groups/*\\[name=&quot;Reservation Information&quot;]/group/*\\[name=&quot;eveng_id&quot;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>node2_eveng_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/yaml/document/topology_template/node_templates/port_[port1_topologyId]/properties/inventory_name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port1_name</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/yaml/document/topology_template/node_templates/port_[port2_topologyId]/properties/inventory_name</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port2_name</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/yaml/document/topology_template/node_templates/port_[port1_topologyId]/properties/property_groups/item/group/*\\[name=&quot;Id&quot;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port1_eveng_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query sub="true">mapped/yaml/document/topology_template/node_templates/port_[port2_topologyId]/properties/property_groups/item/group/*\\[name=&quot;Id&quot;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>port2_eveng_id</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" action="/velocity/api/reservation/v18/reservation/[reservationId]/topology" action.inherit="false">
+                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                            <memberClasses>
+                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                            </memberClasses>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Accept" header.inherit="false" value="application/vnd.spirent-velocity.topology.tosca+yaml" value.inherit="false"/>
+                                                        </httpHeader>
+                                                    </applicationProperties>
+                                                </item>
+                                                <item guid="8475690f-5057-454b-be5e-3878d7cd3d9a" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>dict[node1_eveng_id]=str(port1_name)+&quot; : &quot;+str(port1_eveng_id)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="7fe3044b-ac2e-4f43-b42d-1d17d29f39f3" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>dict[node2_eveng_id]=str(port2_name)+&quot; : &quot;+str(port2_eveng_id)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="b0af18eb-40e7-4df5-9f23-0599f88595b4" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>connections_dict[str(link_ids.index(id)+1)]=dict</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                                <item guid="f74144e0-d0c3-4391-b9ef-8dde76332605" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>dict={}</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="dc0944f1-8c5e-42f2-8b59-fd54c9ac4ecf" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>print(connections_dict)</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>responseLine</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="assert">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                <expression>str(value) == &quot;{}&quot;</expression>
+                                                                <actionsWhenTrue>
+                                                                    <item actionId="FailTest">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                            <message>--- no connections in topology</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenTrue>
+                                                                <actionsWhenFalse>
+                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                            <message>--- successfully get connections information</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                </actionsWhenFalse>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="f73e6f8f-53c6-40cc-a385-75005d3f833a" action="comment" useFieldsInCommand="false">
+                            <command>
+                                <body>Close velocity session</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="db5e1fa0-abe2-4eee-bf01-b08a02ce9aa0" action="close" session="[session]">
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="6ed75b4f-8021-47bc-b16d-966e70757cf2" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>return connections dict</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="24dd9c63-36cd-40ce-b3fa-0cf3b1f0ba4d" action="return">
+                            <command>
+                                <body>[connections_dict]</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

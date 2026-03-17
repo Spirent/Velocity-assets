@@ -16,9 +16,50 @@ Upload the EveNG instance driver zip to Velocity via "Library / Drivers / Add" a
 
 Upload the EveNG L2 driver zip to Velocity via "Library / Drivers / Add" and name it something like "EveNgL2Dyn"  
 
-Import the templates from the zip file located in the instance driver (EVENG_template.zip)
+Create two templates, one for the instances and one for the L2, with those properties and types.
 
-Create a template inherited from the instance one inherited (EVENG_Dyn) for each of the nodes available in EveNG. Those fields must be fulfilled:
+**instances**
+
+Inherited from "Orchestration" template.
+
+Group "Cluster":
+- ClusterIP: (Text)
+- ClusterUsername: (Text)
+- ClusterPassword: (Password)
+
+Group "EVE-NG Temporary"
+- eveng_id: (Text)
+- eveng_ipAddress: (Text)
+- eveng_telnetPort: (Text)
+- eveng_topoLeft: (Text)
+- eveng_topoTop: (Text)
+
+Group "Template Body"
+- template: (Text)
+- type: (Text)
+- image: (Text)
+- icon: (Text)
+- idlepc: (Text)
+- nvram: (Text)
+- ram: (Text)
+- slot1: (Text)
+- slot2: (Text)
+- config: (Text)
+- delay: (Text)
+- left: (Text)
+- top: (Text)
+- postfix:(Text)
+
+** L2 **
+
+Inherited from "Layer 2 Switch" template
+
+Group "Credentials"
+- username: (Text)
+- password: (Password)
+
+
+Create a template inherited from the instance one inherited for each of the nodes available in EveNG. Those fields must be fulfilled:
 
 Group Cluster:
 - ClusterIP: EevNG cluster IP
@@ -36,10 +77,17 @@ Group Template Body
 - slot1: What is in slot 1 if applicable (e.g. Empty)
 - slot2: What is in slot 2 if applicable (e.g. Empty)
 - config: Config to be loaded (0=no custom config should be loaded, 1=load saved configuration, string=config to load)
-- delay: Delqy to start the node in seconds (e.g. 0)
+- delay: Delay to start the node in seconds (e.g. 0)
 - left: Left coordinate to place he node in EveNG topology canvas (e.g. 0). nodes can overlap in EveNG visualization with no consequences.
 - top: Top coordinate to place he node in EveNG topology canvas (e.g. 0). nodes can overlap in EveNG visualization with no consequences.
 - postfix: Additional command to be send to QEMU when node is tarted.
+
+Create a template inherited from the L2 one inherited for the associated L2 switches. Those fields must be fulfilled:
+
+- ipAddressP: EevNG cluster IP
+- username: Cluster login credentials (username).
+- password: Cluster login credentials (password).
+
 
 EveNG only allow one session from a single user/pass. That means that the credential used for Velocity must not be used in any other context, as if someone login while velocity is configuring an environment, it will kick our Velocity and so topology instantiation will fail.
 Added to that, Velocity can work in parallel with multiple agents, to deploy several nodes in parallel and speedup the topology deployment. It will cause the same problem as single login session. To solve that, templates restrict agents to those with capabilities "unique: eveng". this must be set in only one agent as a restriction.

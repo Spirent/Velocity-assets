@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ParameterTree version="25.4.0.202512130118">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <call_count>1</call_count>
+            <call_0>initOrchestratedResource true</call_0>
+            <property_Proxmox_IP_address>10.75.237.50</property_Proxmox_IP_address>
+            <property_Proxmox_username>root</property_Proxmox_username>
+            <property_Proxmox_password>Spirent123</property_Proxmox_password>
+            <property_Template>VelocityTest</property_Template>
+            <property_Wait_IP>true</property_Wait_IP>
+            <topologyResourceId>i66983713-d523-43c9-a3d0-b92fc5577b63</topologyResourceId>
+            <reservationID>e265177a-8a21-404c-b9d1-67b8157256d7</reservationID>
+        </parameters>
+    </parameters>
+</ParameterTree>
