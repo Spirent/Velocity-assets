@@ -50,7 +50,7 @@ Group "Template Body"
 - top: (Text)
 - postfix:(Text)
 
-** L2 **
+**L2**
 
 Inherited from "Layer 2 Switch" template
 
