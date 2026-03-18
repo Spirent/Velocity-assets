@@ -3,7 +3,6 @@ Description: EveNG L2 driver that utilizes the L2 interface to build EveNG netwo
 Category: driver    
 Class: Community    
     
-    
 ### Abstract:  
   
 This is an L2 driver used deploy dynamically Velocity topologies in an EveNG server. 
@@ -51,7 +50,7 @@ Group "Template Body"
 - top: (Text)
 - postfix:(Text)
 
-** L2 **
+**L2**
 
 Inherited from "Layer 2 Switch" template
 

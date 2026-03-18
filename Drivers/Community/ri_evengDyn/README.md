@@ -1,14 +1,13 @@
-Project: EveNG L2 Driver  
-Description: EveNG L2 driver that utilizes the L2 interface to build EveNG networks an its connections, that reflect the Velocity one created  
+Project: EveNG Instance Driver  
+Description: EveNG instance driver that utilizes the orchestrated interface to instantiate new EveNG topologies dynamically, that reflect the Velocity one created  
 Category: driver    
 Class: Community    
-    
-    
+  
 ### Abstract:  
   
-This is an L2 driver used deploy dynamically Velocity topologies in an EveNG server. 
+This is an orchestration driver used deploy dynamically Velocity topologies in an EveNG server. 
 
-This driver is meant to be used in conjunction with the EveNG instance driver (ri_EvengDyn), and provided templates, so the installation instructions are written assuming that both the L2 driver and the instance driver are being used in tandem.  
+This driver is meant to be used in conjunction with the EveNG L2 driver (ri_EvengL2Dyn), and provided templates, so the installation instructions are written assuming that both the switch driver and the instance driver are being used in tandem.  
 
   
 ### Installation:  
@@ -51,7 +50,7 @@ Group "Template Body"
 - top: (Text)
 - postfix:(Text)
 
-** L2 **
+**L2**
 
 Inherited from "Layer 2 Switch" template
 
