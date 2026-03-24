@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>
+    <version>1.0.0</version>
+    <vendor>Community</vendor>
+    <language>python</language>
+    <interface>Management</interface>
+    <entryPoint>ixia.chassis.mgmt.driver.py</entryPoint>
+    <resourceProperties>
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>IP address of the Ixia chassis</description>
+        </property>
+        <property optional="false">
+            <name>username</name>
+            <description>SSH username for the Ixia chassis</description>
+        </property>
+        <property optional="false">
+            <name>password</name>
+            <description>SSH password for the Ixia chassis</description>
+        </property>
+        <property optional="true">
+            <name>port</name>
+            <description>SSH port (default: 22)</description>
+        </property>
+    </resourceProperties>
+</resourceDriver>
