@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<SessionTemplate version="25.4.0.202512050652">
+    <baseApplication>com.fnfr.itest.applications.webservices.restful</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="https://clark-vel.velocity-pv.lwd.spirenteng.com" url.inherit="false" acceptAllCookies="true" acceptAllCookies.inherit="false" version="2" version.inherit="false"/>
+    <responseLibrary inherit="false">project://ti_addConsolesOnResourceCreated/</responseLibrary>
+    <formMapLibrary inherit="false">project://ti_addConsolesOnResourceCreated/</formMapLibrary>
+    <language>Python</language>
+</SessionTemplate>
