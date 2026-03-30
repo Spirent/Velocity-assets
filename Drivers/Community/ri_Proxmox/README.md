@@ -1,76 +1,116 @@
-Project: Proxmox Driver  
-Description: Proxmox instance driver that uses the orchestrated interface to instantiate new Proxmox topologies dynamically, that reflect the Velocity one created  
-Category: driver    
-Class: Community    
-  
-### Abstract:  
-  
-This is an orchestration driver used deploy dynamically Velocity topologies in an Proxmox server. 
-
-This driver is meant to be used in conjunction with the Proxmox L2 driver (ri_ProxmoxL2), and provided templates, so the installation instructions are written assuming that both the switch driver and the instance driver are being used in tandem.  
-
-  
-### Installation:  
+### Project Information:
+Project: Proxmox Driver    
+Description: Proxmox instance driver that uses the orchestrated interface to instantiate new Proxmox topologies dynamically, that reflect the Velocity one created    
+Category: driver      
+Class: Community      
     
-Upload the Proxmox instance driver zip to Velocity via "Library / Drivers / Add" and name it something like "Proxmox"  
+### Abstract:    
+    
+This is an orchestration driver used deploy dynamically Velocity topologies in an Proxmox server.   
+  
+This driver is meant to be used in conjunction with the Proxmox L2 driver (ri_ProxmoxL2), and provided templates, so the installation instructions are written assuming that both the switch driver and the instance driver are being used in tandem.    
+  
+    
+### Installation:    
+      
+Upload the Proxmox instance driver zip to Velocity via "Library / Drivers / Add" and name it something like "Proxmox"    
+  
+Upload the Proxmox L2 driver zip to Velocity via "Library / Drivers / Add" and name it something like "ProxmoxL2"    
+  
+Create a template for the proxmox resource and L2, with those properties and types:  
+  
+*** Resource template**  
+  
+Inherited from "Orchestrated". It is recommended to create a session that uses ipAddress, username and password properties to login into the created VM.  
+  
+Group "Proxmox":  
+- Proxmox IP address: (Test)  
+- Proxmox username: (Text)  
+- Proxmox password: (Password)  
+  
+Group "Template"  
+- Template: (Text)  
+- Wait IP: (Boolean Yes/No)  
+  
+Group "VM"  
+- Max memory  
+- ipAddress  
+- CPUs  
+- Max disk memory  
+- VM name  
+- QEMU version  
+  
+Group "Credentials"  
+- username  
+- password  
+  
+** Resource L2**  
+  
+Inherited from "Layer 2 Switch"  
+  
+Group "Proxmox":  
+- Proxmox IP address: (Test)  
+- Proxmox username: (Text)  
+- Proxmox password: (Password)  
+  
+  
+Create a Proxmox template, inherited from previous one, of each Proxmox VM template to be managed. It must fulfil those properties  
+  
+Group "Proxmox":  
+- Proxmox IP address: Proxmox cluster IP  
+- Proxmox username: Proxmox cluster username  
+- Proxmox password: Proxmox cluster password  
+  
+Group "Template"  
+- Template: Template to be deployed (It must exist in the Proxmox cluster)  
+- Wait IP: Yes if Velocity should wait for an IP to be assigned, otherwise, select No  
+  
+Group VM will be filled up by the driver.  
+  
+Create a Proxmox L2 where properties group Proxmox must be filled up.  
+  
+Driver support orchestrated resources added ports. It will attach ports to theVM based on those added in the orchestrated resource. Those ports and connections will be added after the VM is deployed and started form the template.  
+  
+If the VM is connected to a VLAN network, The driver will create a new bridge in the Proxmox server to model this network. One bridge for each network in the topology. The bridge will be destroyed when the reservation ends.  
+  
+If the Network contains a property called "Proxmox_Network", The driver understands the bridge already exists, so it won't create a new one and will connect the required ports to the bridge with the name of the property value. It is used to connect to external networks or others already created by the admin.  
+  
 
-Upload the Proxmox L2 driver zip to Velocity via "Library / Drivers / Add" and name it something like "ProxmoxL2"  
+ ----
+1 quickcall library in project
+## Quickcall Library: velocity_qc.fftc
+### getResourceCredentialsByName
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>name</td><tr></tr></table>
 
-Create a template for the proxmox resource and L2, with those properties and types:
+### getOrchestratedResourceIdInfo
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>resource_id</td><tr></tr>
+<tr><td>reservationId</td><tr></tr></table>
 
-*** Resource template**
+### getTopologyResourcesCoordInfo
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>reservationId</td><tr></tr></table>
 
-Inherited from "Orchestrated". It is recommended to create a session that uses ipAddress, username and password properties to login into the created VM.
+### getOrchestratedResourceIdPorts
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>resource_id</td><tr></tr>
+<tr><td>reservationId</td><tr></tr></table>
 
-Group "Proxmox":
-- Proxmox IP address: (Test)
-- Proxmox username: (Text)
-- Proxmox password: (Password)
+### getReservationConnectionsDetails
+1 test case in project
+## Test Case File: proxmox-driver-1.0.fftc
+### EVE-NG Orchestration Driver
+### getPorts
+### getProperties
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>includePorts</td><tr></tr></table>
 
-Group "Template"
-- Template: (Text)
-- Wait IP: (Boolean Yes/No)
+### initOrchestratedResource
+### termOrchestratedResource
+<table><tr><th>Argument</th><th>Description</th></tr>
+<tr><td>uuid</td><td>If this argument is set, use this rather than from property</tr></td></table>
 
-Group "VM"
-- Max memory
-- ipAddress
-- CPUs
-- Max disk memory
-- VM name
-- QEMU version
-
-Group "Credentials"
-- username
-- password
-
-** Resource L2**
-
-Inherited from "Layer 2 Switch"
-
-Group "Proxmox":
-- Proxmox IP address: (Test)
-- Proxmox username: (Text)
-- Proxmox password: (Password)
-
-
-Create a Proxmox template, inherited from previous one, of each Proxmox VM template to be managed. It must fulfil those properties
-
-Group "Proxmox":
-- Proxmox IP address: Proxmox cluster IP
-- Proxmox username: Proxmox cluster username
-- Proxmox password: Proxmox cluster password
-
-Group "Template"
-- Template: Template to be deployed (It must exist in the Proxmox cluster)
-- Wait IP: Yes if Velocity should wait for an IP to be assigned, otherwise, select No
-
-Group VM will be filled up by the driver.
-
-Create a Proxmox L2 where properties group Proxmox must be filled up.
-
-Driver support orchestrated resources added ports. It will attach ports to theVM based on those added in the orchestrated resource. Those ports and connections will be added after the VM is deployed and started form the template.
-
-If the VM is connected to a VLAN network, The driver will create a new bridge in the Proxmox server to model this network. One bridge for each network in the topology. The bridge will be destroyed when the reservation ends.
-
-If the Network contains a property called "Proxmox_Network", The driver understands the bridge already exists, so it won't create a new one and will connect the required ports to the bridge with the name of the property value. It is used to connect to external networks or others already created by the admin.
-
+2 response maps in project
+## Response Map File: qm_status_--verbose_true.ffrm
+## Response Map File: qm_list.ffrm

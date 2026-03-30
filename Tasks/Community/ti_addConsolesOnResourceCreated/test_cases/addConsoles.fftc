@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<testCase version="25.4.0.202512130118">
+    <general>
+        <language>Python</language>
+        <xPathVersion>XPATH31</xPathVersion>
+    </general>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="25aac8d7-d5e8-4fb0-a260-685cce2f3664" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Determine if this runs local for development purposes or live from Velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="fd61747d-9d46-45d0-bb0c-0d3c0397236c" action="if" useFieldsInCommand="false">
+                            <command>
+                                <body>velocity(&apos;reportId&apos;):</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="e3e119c2-3fb5-42a9-9191-7e1e4b53a555" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>token = velocity(&apos;token&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="5c4b0d71-959f-4470-8353-e73fb2e7864b" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>apiRoot = velocity(&apos;url&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="2deb4811-83ec-472a-94ce-1b4f9f651801" action="else" useFieldsInCommand="false">
+                            <nestedSteps>
+                                <item guid="c684b0bb-b83f-4451-ab61-6d1aeb3df4cd" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>token = param(&apos;token&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="12eb8af4-886c-47a7-a510-6aa4e323ab2c" action="eval" useFieldsInCommand="false">
+                                    <command>
+                                        <body>apiRoot = param(&apos;apiRoot&apos;)</body>
+                                    </command>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="76ec119a-0d89-4839-aa1f-3bed1001744f" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>resourceIds = param(&apos;resourcesIds&apos;).split(&apos;,&apos;)</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                        <item guid="d46fcaa6-358a-40ae-86ef-851cfd9f4bdb" action="eval" useFieldsInCommand="false">
+                            <command>
+                                <body>ipList = []</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="4245352c-920d-486c-832f-a7d0dec61c09" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Open REST Session to Velocity</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="eb7c64e3-9ea4-44b7-afb5-7bd8c6d5735d" action="open" session="t1">
+                            <command>
+                                <body>project://ti_addConsolesOnResourceCreated/test_cases/rest.ffsp</body>
+                            </command>
+                            <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                                <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulSessionProperties" url="[apiRoot]" url.inherit="false" version="2" version.inherit="false"/>
+                                <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </applicationProperties>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="b8ce584e-f898-4b82-b3d8-dd9d876fe74c" action="comment" useFieldsInCommand="false">
+                    <command>
+                        <body>Add consoles for each resource in the comma separated list passed in resourceIds</body>
+                    </command>
+                    <nestedSteps>
+                        <item guid="4f30f60d-acc1-4a85-9266-2aca4aa0619a" action="for" useFieldsInCommand="false">
+                            <command>
+                                <body>resourceId in resourceIds:</body>
+                            </command>
+                            <nestedSteps>
+                                <item guid="64e43fa7-c88a-4aac-9267-ed55df8eb11a" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Get details on the device that has been created and look for ipAddress property value</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="849ded48-e992-4eb2-9123-01429e328201" action="GET" session="t1" normalOffset="23.995" estimatedStepExecutionTime="0.89">
+                                            <command>
+                                                <body>api/inventory/v20/device/[resourceId]</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                <query>mapped/Json/properties/item[name=&quot;ipAddress&quot;]/value</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>ipAddressValue</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>responseLine()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>deviceJson</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="api/inventory/v20/device/[resourceId]" action.inherit="false">
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="[token]" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="6f7b8195-a1af-4175-bcfb-58e615342dee" action="if" useFieldsInCommand="false">
+                                            <command>
+                                                <body>ipAddressValue:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="e2fc5879-2044-4967-a0cc-3ccb0364a92a" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>ipList.append(ipAddressValue)</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="be77221b-5c49-4608-a9fe-9cbe44cd1f31" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Get details on the device&apos;s ports and look for Floating IP property values</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="bf7423eb-0315-4748-88f6-86f54e8e1759" action="GET" session="t1" normalOffset="23.995" estimatedStepExecutionTime="0.89">
+                                            <command>
+                                                <body>api/inventory/v20/device/[resourceId]/ports</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>mapped/Json/ports/item/id</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>portList</storageLocation>
+                                                                <storeInAList>true</storeInAList>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="api/inventory/v20/device/[resourceId]/ports" action.inherit="false">
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="[token]" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="57624457-9678-48c1-bfa0-f9b3fce820ec" action="json" useFieldsInCommand="false">
+                                            <command>
+                                                <body>action=&apos;getJsonNode&apos;, editResponseStructure=false, documentName=&apos;deviceJson&apos;, pathValue=&apos;{&quot;consoleUrls&quot;}&apos;</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>responseLine()</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="store">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                <storageLocation>consoleUrls</storageLocation>
+                                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;consoleUrls&quot;}" pathValue.inherit="false">
+                                                <action inherit="false">getJsonNode</action>
+                                                <documentName inherit="false">deviceJson</documentName>
+                                            </applicationProperties>
+                                        </item>
+                                        <item guid="a2e5abda-5a8f-4903-a635-464574341504" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>portId in portList:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="d5335897-6aeb-4f14-a78d-07d656242ae1" action="GET" session="t1" normalOffset="23.995" estimatedStepExecutionTime="0.89">
+                                                    <command>
+                                                        <body>api/inventory/v20/device/[resourceId]/port/[portId]</body>
+                                                    </command>
+                                                    <postProcessing>
+                                                        <analysisRules>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                        <query>(mapped/Json/properties/item[name=&quot;Floating IP&quot;])/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="assert">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                        <expression>value != &quot;N/A&quot;</expression>
+                                                                        <actionsWhenTrue>
+                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                                    <message>Found a floating IP address</message>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenTrue>
+                                                                        <actionsWhenFalse>
+                                                                            <item actionId="RepeatStep">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="50"/>
+                                                                            </item>
+                                                                            <item actionId="DeclareExecutionIssue">
+                                                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                                                    <message>Waiting for IP address...</message>
+                                                                                </actionProperties>
+                                                                            </item>
+                                                                        </actionsWhenFalse>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                            <item>
+                                                                <extractorInfo extractorType="query">
+                                                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup" declareNoMatchIssue="false">
+                                                                        <query>mapped/Json/properties/item[name=&quot;Floating IP&quot;]/value</query>
+                                                                    </extractorProperties>
+                                                                </extractorInfo>
+                                                                <processorInfo ruleType="store">
+                                                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                                                        <storageLocation>floatingIp</storageLocation>
+                                                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                                                        <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
+                                                                    </ruleProperties>
+                                                                </processorInfo>
+                                                            </item>
+                                                        </analysisRules>
+                                                    </postProcessing>
+                                                    <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="GET" httpMethod.inherit="false" action="api/inventory/v20/device/[resourceId]/port/[portId]" action.inherit="false">
+                                                        <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                            <memberClasses>
+                                                                <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                            </memberClasses>
+                                                            <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="[token]" value.inherit="false"/>
+                                                        </httpHeader>
+                                                    </applicationProperties>
+                                                </item>
+                                                <item guid="c5841456-8cd7-4dff-ac2f-5d3b26c67076" action="if" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>floatingIp:</body>
+                                                    </command>
+                                                    <nestedSteps>
+                                                        <item guid="e1ae3215-cd7b-4091-9525-eaa4a2bb0278" action="eval" useFieldsInCommand="false">
+                                                            <command>
+                                                                <body>ipList.append(floatingIp)</body>
+                                                            </command>
+                                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                        </item>
+                                                    </nestedSteps>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="fae03bd3-fdba-4427-be8f-fa68d9e7138f" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Formulate the console URL(s) to create based on finding IP addresses at the resource and port levels</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="0ccec874-68c6-4d7c-9ac6-3f845869d98b" action="eval" useFieldsInCommand="false">
+                                            <command>
+                                                <body>i = 1</body>
+                                            </command>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                        <item guid="999c9b0f-adc6-444e-b5a5-1e62f87482df" action="for" useFieldsInCommand="false">
+                                            <command>
+                                                <body>ip in ipList:</body>
+                                            </command>
+                                            <nestedSteps>
+                                                <item guid="927cef47-abe3-4446-ba57-98bbc2d5bd41" action="json" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>action=&apos;addJsonNode&apos;, editResponseStructure=false, documentName=&apos;consoleUrls&apos;, pathValue=&apos;{&quot;consoleUrls/\\\\[0]&quot;:\\\\[{&quot;name&quot;:&quot;ssh-[i]&quot;,&quot;url&quot;:&quot;ssh://[ip]&quot;}]}&apos;</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.execution.builtin.json.JsonPropertiesGroup" pathValue="{&quot;consoleUrls/\\[0]&quot;:\\[{&quot;name&quot;:&quot;ssh-[i]&quot;,&quot;url&quot;:&quot;ssh://[ip]&quot;}]}" pathValue.inherit="false" pathValue.sub="true">
+                                                        <action inherit="false">addJsonNode</action>
+                                                        <documentName inherit="false">consoleUrls</documentName>
+                                                    </applicationProperties>
+                                                </item>
+                                                <item guid="75291b2e-95db-4dd8-af15-f2914be39fd5" action="eval" useFieldsInCommand="false">
+                                                    <command>
+                                                        <body>i = i + 1</body>
+                                                    </command>
+                                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                </item>
+                                            </nestedSteps>
+                                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                                <item guid="842dbe5b-0ea3-4646-b9c9-963316afc48c" action="comment" useFieldsInCommand="false">
+                                    <command>
+                                        <body>Update the resource, adding consoles for the IP addresses found</body>
+                                    </command>
+                                    <nestedSteps>
+                                        <item guid="e24c1306-5cd9-451d-a3e3-c75f0988e510" action="PUT" session="t1" normalOffset="9.716" estimatedStepExecutionTime="0.671">
+                                            <command>
+                                                <body>api/inventory/v20/device/[resourceId]</body>
+                                            </command>
+                                            <postProcessing>
+                                                <analysisRules>
+                                                    <item>
+                                                        <extractorInfo extractorType="query">
+                                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                                                <query>statusCode/@value</query>
+                                                            </extractorProperties>
+                                                        </extractorInfo>
+                                                        <processorInfo ruleType="assert">
+                                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                                                <expression>value == &quot;200&quot;</expression>
+                                                                <actionsWhenTrue>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                                            <message>200 OK status code means the REST client&apos;s HTTP request was successful</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="PassTestIfNotAlreadyFailed">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                </actionsWhenTrue>
+                                                                <actionsWhenFalse>
+                                                                    <item actionId="DeclareExecutionIssue">
+                                                                        <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                                            <message>{auto_message_false}</message>
+                                                                        </actionProperties>
+                                                                    </item>
+                                                                    <item actionId="FailTest">
+                                                                        <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                                                    </item>
+                                                                </actionsWhenFalse>
+                                                            </ruleProperties>
+                                                        </processorInfo>
+                                                    </item>
+                                                </analysisRules>
+                                            </postProcessing>
+                                            <applicationProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.restful.RESTfulInvokeProperties" httpMethod="PUT" httpMethod.inherit="false" message="[consoleUrls]" message.inherit="false" action="api/inventory/v20/device/[resourceId]" action.inherit="false" action.sub="false" includeHttpHeaders="true" includeHttpHeaders.inherit="false" includeHttpStatusLine="true" includeHttpStatusLine.inherit="false">
+                                                <httpHeader inherit="false" transferableToolId="com.fnfr.itest.applications.webservices.restful">
+                                                    <memberClasses>
+                                                        <item>com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry</item>
+                                                    </memberClasses>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="X-Auth-Token" header.inherit="false" value="[token]" value.inherit="false"/>
+                                                    <item transferableToolId="com.fnfr.itest.applications.webservices.restful" transferableType="com.fnfr.itest.applications.webservices.properties.HTTPHeaderEntry" header="Content-Type" header.inherit="false" value="application/json" value.inherit="false"/>
+                                                </httpHeader>
+                                            </applicationProperties>
+                                        </item>
+                                    </nestedSteps>
+                                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                </item>
+                            </nestedSteps>
+                            <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        </item>
+                    </nestedSteps>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>
