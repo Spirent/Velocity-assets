@@ -15,12 +15,27 @@
         "language": "python",
         "namespace": "CoreRegression",
         "owner": "Joe Scripter",
+        "customParameterTypes": [
+            {
+                "choices": [
+                    {
+                        "description": "Normal debug level",
+                        "name": "normal"
+                    },
+                    {
+                        "description": "Verbose debug level",
+                        "name": "verbose"
+                    }
+                ],
+                "name": "defaultEnums"
+            }
+        ],
         "parameters": [
             {
                 "description": "for all scripts (from defaultData)",
-                "name": "build",
-                "type": "TEXT",
-                "value": "72e8644"
+                "name": "debug_level",
+                "type": "defaultEnums",
+                "value": "normal"
             }
         ],
         "testCaseId": "TC.CR.%file%",
@@ -38,7 +53,7 @@
         {
             "fileNameMatch": ".*\\.bat",
             "commandSequence": [
-                "%file% %param_build%"
+                "%file% %param_debug_level%"
             ],
             "language": "batch"
         },
@@ -52,17 +67,39 @@
             "timeout": 1
         },
         {
-            "fileNameMatch": "vbot\\.example\\.py",
+            "fileNameMatch": "resourceActionExample\\.py",
             "commandSequence": [
-              "%file% --ipAddress %param_property_ipAddress% --resourceId %param_resourceId%"
+              "%file% --ipAddress %param_property_ipAddress% --resourceId %param_resourceId% --settings %param_reboot_with_these_settings%"
             ],
-            "description": "This vBot will appear in the topology editor of an active reservation and will be associated with each resource whose tag is either foo or bar",
-            "headline": "Example vBot",
-            "tags": ["foo", "bar"],
+            "description": "This resouce action will appear in the topology editor of an active reservation and will be associated with each resource whose tag is Firewall or demo",
+            "headline": "Resource Action Example",
+            "verdictMethod": "EXIT_CODE",
+            "tags": ["Firewall", "demo"],
+            "customParameterTypes": [
+                {
+                    "choices": [
+                        {
+                            "description": "Restore factory defaults and reboot",
+                            "name": "factoryDefaults"
+                        },
+                        {
+                            "description": "Save current settings and reboot",
+                            "name": "current"
+                        }
+                    ],
+                    "name": "mycustomtype"
+                }
+            ],
             "parameters": [
                 {
                     "description": "Name begins with property_ so user is not prompted for value. Value is auto-populated by Velocity",
                     "name": "property_ipAddress"
+                },
+                {
+                    "description": "Reboot device using default or current settings",
+                    "name": "reboot_with_these_settings",
+                    "type": "mycustomtype",
+                    "value": "defaultSettings"
                 }
             ]
         },
@@ -130,7 +167,7 @@
         {
             "fileNameMatch": "parameters_list\\.py",
             "commandSequence": [
-                "%file% --build %param_build% --testCaseSpecificParameter %param_testCaseSpecificParameter%"
+                "%file% --debug_level %param_debug_level% --testCaseSpecificParameter %param_testCaseSpecificParameter%"
             ],
             "parameters": [
                 {
@@ -213,7 +250,7 @@
                 "ok": "^.*(\\| PASS \\|).*",
                 "warning": "^.*(\\[WARNING\\]).*"
             },
-            "tags": ["robot", "example"],
+            "tags": ["robot"],
             "parameters": [
                 {
                     "description": "Message to display",
@@ -255,9 +292,38 @@
         {
             "fileNameMatch": ".*\\.sh",
             "commandSequence": [
-                "%file% %param_build%"
+                "%file% %param_debug_level%"
             ],
             "language": "bash"
+        },
+        {
+            "fileNameMatch": "startupExample\\.py",
+            "commandSequence": [
+                "%file% --resourceList %param_resourceList%"
+            ],
+            "customParameterTypes": [
+                {
+                    "choices": [
+                        {
+                            "description": "Check all resources",
+                            "name": "all"
+                        },
+                        {
+                            "description": "Check just storage devices",
+                            "name": "storage"
+                        }
+                    ],
+                    "name": "mycustomtype"
+                }
+            ],
+            "parameters": [
+                {
+                    "description": "specify which resources to validate readiness",
+                    "name": "resourceList",
+                    "type": "mycustomtype",
+                    "value": "all"
+                }
+            ]
         },
         {
             "fileNameMatch": ".*\\.py",
