@@ -13,7 +13,7 @@ if 'VELOCITY_PARAM_REPORT_ID' in os.environ:
 
 print("[INFO] VELOCITY API ROOT: " + os.environ['VELOCITY_PARAM_VELOCITY_API_ROOT'])
 print("[INFO] VELOCITY TOKEN: " + os.environ['VELOCITY_PARAM_VELOCITY_TOKEN'])
-print("[INFO] BUILD PARAMETER: " + os.environ['VELOCITY_PARAM_build'])
+print("[INFO] DEBUG PARAMETER: " + os.environ['VELOCITY_PARAM_debug_level'])
 
 print("\nGetting current user profile from Velocity...\n")
 

@@ -66,7 +66,7 @@ Velocity.
     timeout.sh - default language and timeout values are over-written. this  
     demonstrates that the agent aborts execution if not completed within 1 minute  
   
-    vbot.example.py - this demonstrates a new feature in 8.1 called vBots. vBots  
+    resourceActionExample.example.py - this demonstrates a new feature in 8.1 called vBots. vBots  
     are resource-specific automation tasks. When a user opens the topology editor  
     of an active reservation and selects a resource, Velocity will display its  
     associated vBots. The association is made upon tag intersection, where a script  
