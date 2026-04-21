@@ -210,7 +210,7 @@
                         <body>Look for VMID</body>
                     </command>
                     <nestedSteps>
-                        <item guid="51d3701f-416e-49e4-a336-1a8ba302d2c7" action="command" session="proxmox">
+                        <item guid="68f6186e-36b7-4371-b4d7-7a326f71b37b" action="command" session="proxmox">
                             <command>
                                 <body>qm list</body>
                             </command>
@@ -231,22 +231,17 @@
                                             </ruleProperties>
                                         </processorInfo>
                                     </item>
-                                    <item>
-                                        <extractorInfo extractorType="query">
-                                            <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
-                                                <query>freeID()</query>
-                                            </extractorProperties>
-                                        </extractorInfo>
-                                        <processorInfo ruleType="store">
-                                            <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
-                                                <storageLocation>vmID</storageLocation>
-                                                <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
-                                                <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
-                                                <secret type="com.fnfr.documents.PropertyBoolean">false</secret>
-                                            </ruleProperties>
-                                        </processorInfo>
-                                    </item>
                                 </analysisRules>
+                            </postProcessing>
+                            <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                        </item>
+                        <item guid="c7162fe8-3c53-40a1-9a6b-36413468ef88" action="command" session="proxmox">
+                            <command>
+                                <body>pvesh get /cluster/nextid</body>
+                            </command>
+                            <postProcessing>
+                                <storeResponseAt>vmID</storeResponseAt>
+                                <storeResponseText>true</storeResponseText>
                             </postProcessing>
                             <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
                         </item>
