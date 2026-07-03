@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>
+    <version>1.3.0</version>
+    <vendor>Community</vendor>
+    <language>python</language>
+    <interface>Management</interface>
+    <entryPoint>ixos.hogan.mgmt.driver.py</entryPoint>
+    <supportCustomArguments>true</supportCustomArguments>
+    <resourceProperties>
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>IP address of the AresONE / IxOS Hogan chassis</description>
+        </property>
+        <property optional="false">
+            <name>username</name>
+            <description>SSH username for the chassis</description>
+        </property>
+        <property optional="false">
+            <name>password</name>
+            <description>SSH password for the chassis</description>
+        </property>
+        <property optional="true">
+            <name>apiUsername</name>
+            <description>Optional REST API username if different from SSH username</description>
+        </property>
+        <property optional="true">
+            <name>apiPassword</name>
+            <description>Optional REST API password if different from SSH password</description>
+        </property>
+        <property optional="true">
+            <name>chassisType</name>
+            <description>aresone | xgs12 | xgs2 — controls SSH chassis CLI prefix</description>
+        </property>
+        <property optional="true">
+            <name>useRestApi</name>
+            <description>true (default) = REST+SSH; false = SSH-only fallback</description>
+        </property>
+        <property optional="true">
+            <name>defaultPorts</name>
+            <description>Comma-separated ports for setup/teardown ownership (optional)</description>
+        </property>
+        <property optional="true">
+            <name>verifyTimeout</name>
+            <description>verifyReady poll timeout seconds (default 120)</description>
+        </property>
+    </resourceProperties>
+</resourceDriver>

@@ -1,5 +1,9 @@
 # UHD Connect Management Driver (Velocity)
 
+Author: rakesh.kumar@keysight.com  
+Written and debugged by rakesh.kumar@keysight.com  
+Co-authored-by: Cursor
+
 Python Management driver for Keysight **UHD Connect** appliances on KCOS.
 
 ## Official API documentation (on-box)
@@ -43,13 +47,13 @@ Replace `{ip}` with the appliance management IP (e.g. `10.36.87.102`).
 
 ## Reservation lifecycle (UHD-AresONE-S)
 
-On **ACTIVE** reservation, Velocity runs **UHD-Connect-Mgmt** `setup` → `verifyReady` on the execution agent (not external scripts).
+Velocity **Configurable** driver + **CONFIGURABLE** inventory. On reserve, Velocity calls `setConfig` → `setup` → `verifyReady` when the template config asset and topology `useDefaultConfig` are wired (see `knowledge-base/UHD_RS_FEC_RESERVATION.md`).
+
+LAAS `reserve-topology` and `uhd-ensure-fec` provide a fallback if UI reserve skips FEC.
 
 **Do not** POST `/connect/api/v1/config` from LAAS/curl while the device is unlocked or during refresh — that locks `tf2-uhdc-e2e` in Velocity.
 
-Unblock only (no L1): `python3 uhd_velocity_up.py` or Jul-2 `PUT {}` + `build-topology` + refresh/discover.
-
-Upload driver v1.1.0 before using lifecycle from Velocity UI:
+Upload driver v1.2.3+ before using lifecycle from Velocity UI:
 
 ```bash
 cd /root/Apps/LAAS/scripts

@@ -3,6 +3,10 @@ Velocity UHD Connect Management Driver.
 
 REST wrapper around uhd_connect_rest.UHDConnectDriver with Velocity JSON shapes.
 Reservation lifecycle: setup (manual RS-FEC), verifyReady (link_up poll), teardown (restore snapshot).
+
+Author: rakesh.kumar@keysight.com
+Written and debugged by rakesh.kumar@keysight.com
+Co-authored-by: Cursor
 """
 from __future__ import annotations
 

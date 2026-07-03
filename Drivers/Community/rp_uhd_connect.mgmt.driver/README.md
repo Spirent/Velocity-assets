@@ -1,5 +1,9 @@
 # UHD Connect Management Driver (Velocity)
 
+Author: rakesh.kumar@keysight.com  
+Written and debugged by rakesh.kumar@keysight.com  
+Co-authored-by: Cursor
+
 Python Management driver for Keysight **UHD Connect** appliances on KCOS.
 
 ## Official API documentation (on-box)

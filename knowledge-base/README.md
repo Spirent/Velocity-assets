@@ -19,6 +19,7 @@ Operational reference for staging, wiring, topology validation, and reservations
 | [TOPOLOGY_CATALOG_SNAPSHOT.md](./TOPOLOGY_CATALOG_SNAPSHOT.md) | Current topology UUIDs, validity status, and hardware scope |
 | [INVENTORY_WIRING_REFERENCE.md](./INVENTORY_WIRING_REFERENCE.md) | Two-layer connection model, OCS/DAC/direct-DAC maps, RL aliases, expected connection counts |
 | [UHD_RS_FEC_RESERVATION.md](./UHD_RS_FEC_RESERVATION.md) | **UHD Connect** — CONFIGURABLE interface, config asset, RS-FEC on reserve, repair commands |
+| [LAB_RESERVATION_LIFECYCLE.md](./LAB_RESERVATION_LIFECYCLE.md) | **SONiC / AresONE / Arista** — optional speed + link-up on reserve, backup-first staging |
 
 ---
 

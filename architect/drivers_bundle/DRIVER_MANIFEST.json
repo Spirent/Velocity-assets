@@ -1,0 +1,48 @@
+{
+  "generated_by": "velocity_export_driver_bundle.sh",
+  "velocity_host": "https://10.36.111.156",
+  "installed_on_velocity": {
+    "IXIA-Chassis-SSH": {
+      "id": "c4b70afe-10d5-4c0b-9b16-185724c5b476",
+      "interface": "MANAGEMENT",
+      "language": "python",
+      "note": "SSH show topology — use for inventory refresh (device online)",
+      "devices": ["ARESONE-M01..M08"]
+    },
+    "IXIA-Chassis-Mgmt": {
+      "id": "39280e52-cbb6-45d8-9d54-1abe4f28ead6",
+      "interface": "MANAGEMENT",
+      "language": "python",
+      "note": "Hogan REST+SSH — optional for takeOwnership/getHealth",
+      "devices": []
+    },
+    "SONiC-RoCE-Mgmt": {
+      "id": "99e03560-02a3-4eb7-8e90-4785db02c179",
+      "interface": "CONFIGURABLE",
+      "language": "python",
+      "devices": ["Arista-01", "Arista-02", "Arista-03 (SONiC spine)"]
+    },
+    "Arista_driver_06_19": {
+      "id": "e4148ae5-ee60-4bd5-a7b1-2df385a91b3e",
+      "interface": "LAYER2_SWITCH",
+      "language": "itest",
+      "devices": ["Arista-03-RL", "Arista-04 (EOS leaf)"]
+    },
+    "calient": {
+      "id": "7bc71015-6dbd-45e8-aad3-2ed014453917",
+      "interface": "LAYER1_SWITCH",
+      "language": "itest",
+      "note": "GXCP bash fork — use for Cobalt Calient-CT-S320",
+      "alternate": "Calient Driver 1.0.11 (68ca4b20-96de-4c72-a1b7-61bddefc424c)"
+    }
+  },
+  "zip_to_driver_name": {
+    "rp_ixia_chassis.mgmt.driver.zip": "IXIA-Chassis-SSH",
+    "rp_ixos_hogan.mgmt.driver.zip": "IXIA-Chassis-Mgmt",
+    "rp_sonic.l2.switch.driver.zip": "SONiC-RoCE-Mgmt",
+    "ri_arista_06_19.zip": "Arista_driver_06_19",
+    "ri_calient_gxcp_bash-driver.zip": "calient"
+  },
+  "import": "Velocity UI → Inventory → Import from Zip (manifest.xml at zip root)",
+  "no_rest_download": "Velocity API lists drivers only; binaries are not exportable via REST"
+}

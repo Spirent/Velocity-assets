@@ -1,0 +1,6 @@
+Capability codes: (R) Router, (B) Bridge, (O) Other
+LocalPort    RemoteDevice    RemotePortID    Capability
+-----------  --------------  --------------  ----------
+Ethernet0    aresone-m05     1.1             BR
+Ethernet4    switch-peer     Et2/1           BR
+Total entries displayed: 2

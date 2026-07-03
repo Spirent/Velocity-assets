@@ -19,9 +19,14 @@ Runtime endpoints (Getting Started + samples; not all listed in OpenAPI):
 
 Ixia-C API (root /, separate from connect) is used for internal BGP services
 when running the with_bgp sample — see /ixiac/redoc.html.
+
+Author: rakesh.kumar@keysight.com
+Written and debugged by rakesh.kumar@keysight.com
+Co-authored-by: Cursor
 """
 from __future__ import annotations
 
+import ipaddress
 import logging
 import re
 from dataclasses import dataclass
@@ -41,11 +46,18 @@ _session_pool: dict[str, requests.Session] = {}
 
 
 def bracket_host(host: str) -> str:
+    """Bracket IPv6 literals for URL/host headers; leave IPv4/FQDN unchanged."""
     raw = (host or '').strip()
     if not raw:
         return ''
     if raw.startswith('['):
         return raw
+    try:
+        addr = ipaddress.ip_address(raw)
+        if isinstance(addr, ipaddress.IPv6Address):
+            return f'[{addr.compressed}]'
+    except ValueError:
+        pass
     return raw
 
 
@@ -246,7 +258,7 @@ class UHDConnectDriver:
         return self._post('/control/operations/switchover', {'enable': bool(enable)})
 
     def doc_urls(self) -> dict[str, str]:
-        host = unbracket_host(self.ip)
+        host = self.ip  # bracketed when IPv6
         return {
             'ui': f'https://{host}/',
             'connect_redoc': f'https://{host}/uhd_connect/redoc.html',

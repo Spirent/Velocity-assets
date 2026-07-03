@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resourceDriver>
+    <manifestVersion>1.4</manifestVersion>
+    <version>1.2.0</version>
+    <vendor>Community</vendor>
+    <language>python</language>
+    <interface>Configurable</interface>
+    <entryPoint>sonic_l2_switch_driver.py</entryPoint>
+    <supportCustomArguments>true</supportCustomArguments>
+    <resourceProperties>
+        <property optional="false">
+            <name>ipAddress</name>
+            <description>Management IP address of the SONiC switch</description>
+        </property>
+        <property optional="false">
+            <name>username</name>
+            <description>SSH username (default admin)</description>
+        </property>
+        <property optional="false">
+            <name>password</name>
+            <description>SSH password</description>
+        </property>
+        <property optional="true">
+            <name>port</name>
+            <description>SSH port (default 22)</description>
+        </property>
+        <property optional="true">
+            <name>baselines_path</name>
+            <description>Path on switch for golden baseline JSON files (default /etc/sonic/baselines)</description>
+        </property>
+        <property optional="true">
+            <name>use_checkpoint</name>
+            <description>Use SONiC config checkpoint/rollback for teardown (default true)</description>
+        </property>
+        <property optional="true">
+            <name>allow_missing_baseline</name>
+            <description>Allow setup when baseline file is missing (lab only, default false)</description>
+        </property>
+        <property optional="true">
+            <name>allow_run_command</name>
+            <description>Enable runCommand custom procedure (default false)</description>
+        </property>
+        <property optional="true">
+            <name>allow_sudo_run_command</name>
+            <description>Run runCommand with sudo when enabled (default false)</description>
+        </property>
+        <property optional="true">
+            <name>connect_timeout</name>
+            <description>SSH connect timeout seconds (default 30)</description>
+        </property>
+        <property optional="true">
+            <name>command_timeout</name>
+            <description>CLI command timeout seconds (default 60)</description>
+        </property>
+        <property optional="true">
+            <name>reload_timeout</name>
+            <description>config reload timeout seconds (default 180)</description>
+        </property>
+        <property optional="true">
+            <name>verify_timeout</name>
+            <description>verifyReady poll timeout seconds (default 120)</description>
+        </property>
+        <property optional="true">
+            <name>checkpoint_name</name>
+            <description>SONiC checkpoint name for rollback (default velocity_pre_reservation)</description>
+        </property>
+        <property optional="true">
+            <name>sudo_password</name>
+            <description>Optional sudo password if required</description>
+        </property>
+        <property optional="true">
+            <name>port_aliases</name>
+            <description>JSON map of Velocity port alias to SONiC EthernetN (e.g. {"Et1/1":"Ethernet0"})</description>
+        </property>
+        <property optional="true">
+            <name>port_aliases_file</name>
+            <description>Path on agent to JSON port alias file</description>
+        </property>
+        <property optional="true">
+            <name>defaultSpeedGbps</name>
+            <description>Default L1 speed (Gbps) for setConfig/setup when topology omits args (default 400)</description>
+        </property>
+        <property optional="true">
+            <name>defaultTemplate</name>
+            <description>Template label for setup audit trail (default RoCE-400G)</description>
+        </property>
+    </resourceProperties>
+</resourceDriver>
