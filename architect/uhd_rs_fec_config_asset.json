@@ -1,0 +1,10 @@
+{
+  "id": "9505696c-52bc-4cdd-ad0c-e13abeaa01ff",
+  "name": "uhd-rs-fec-profile.json",
+  "l1": {
+    "port": 1,
+    "speed_gbps": 400,
+    "fec_mode": "reed_solomon",
+    "verify_timeout_s": 120
+  }
+}
