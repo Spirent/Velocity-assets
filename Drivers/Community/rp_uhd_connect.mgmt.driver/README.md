@@ -8,7 +8,7 @@ Python Management driver for Keysight **UHD Connect** appliances on KCOS.
 
 ## Official API documentation (on-box)
 
-Replace `{ip}` with the appliance management IP (e.g. `10.36.87.102`).
+Replace `{ip}` with the appliance management IP.
 
 | Resource | URL |
 |----------|-----|
@@ -45,20 +45,13 @@ Replace `{ip}` with the appliance management IP (e.g. `10.36.87.102`).
 | `applyLayer1Profile` | `POST …/config` — explicit RS-FEC apply |
 | `probe` | metrics query reachability |
 
-## Reservation lifecycle (UHD-AresONE-S)
+## Reservation lifecycle (Configurable + RS-FEC)
 
-Velocity **Configurable** driver + **CONFIGURABLE** inventory. On reserve, Velocity calls `setConfig` → `setup` → `verifyReady` when the template config asset and topology `useDefaultConfig` are wired (see `knowledge-base/UHD_RS_FEC_RESERVATION.md`).
+For **Configurable** inventory, Velocity calls `setConfig` → `setup` → `verifyReady` when a template config asset and topology `useDefaultConfig` are configured.
 
-LAAS `reserve-topology` and `uhd-ensure-fec` provide a fallback if UI reserve skips FEC.
+**Do not** POST `/connect/api/v1/config` outside an active reservation — that can leave the device locked in Velocity.
 
-**Do not** POST `/connect/api/v1/config` from LAAS/curl while the device is unlocked or during refresh — that locks `tf2-uhdc-e2e` in Velocity.
-
-Upload driver v1.2.3+ before using lifecycle from Velocity UI:
-
-```bash
-cd /root/Apps/LAAS/scripts
-python3 velocity_upload_python_drivers.py --uhd-only --apply
-```
+Import driver v1.2.3+ via Inventory → Drivers → Import before enabling reservation-time FEC.
 
 ## Velocity procedures
 
@@ -74,14 +67,12 @@ Front-panel ports **1–32** (plus internal port 33 on some builds). Velocity `s
 
 Configured logical names (e.g. `vlan_port_1`) come from active `/config` when present.
 
-## Lab devices
+## Example lab registration
 
-| Name | IP | Velocity driver |
-|------|-----|-----------------|
-| `tf2-uhdc-e2e` | 10.36.87.102 | `UHD-Connect-Mgmt` (`deec16db-583e-4740-b471-aec837234244`) |
-| `tf2-o3` | 10.36.70.7 | same |
+After importing the driver zip in Velocity (Inventory → Drivers → Import):
 
-## Velocity registration
+1. Create a **UHD Connect** template (interface **Configurable** or **Management** per your Velocity version).
+2. Set resource properties: `ipAddress`, `defaultPort`, `linkSpeedGbps`, `fecMode`.
+3. For reservation-time RS-FEC, attach a config asset and enable `useDefaultConfig` on the topology resource.
 
-- Driver UUID: `deec16db-583e-4740-b471-aec837234244`
-- Template: `UHD Connect` (`1ddc5167-cff6-4aa0-ba68-cb189de13d2b`) — interface must be **MANAGEMENT**
+Replace `{ip}` in API URLs with your appliance management address.

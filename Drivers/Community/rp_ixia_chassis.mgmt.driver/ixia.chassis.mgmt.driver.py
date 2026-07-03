@@ -204,7 +204,7 @@ if "VELOCITY_PARAM_call_count" not in os.environ:
     # hard-coded credentials for dev
     sshUsername = "admin"
     sshPassword = "admin"
-    sshServer = "10.36.84.37"
+    sshServer = "127.0.0.1"
     sshPort = "22"
 
 else:

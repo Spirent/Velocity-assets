@@ -19,7 +19,7 @@ Custom procedures (supportCustomArguments):
 Dependencies:  
   paramiko (Velocity agent host)  
   
-Test targets:  
-  Arista3 SONiC cycle: 10.36.84.23  
+Test targets:
+  SONiC switch in your lab (set ipAddress in resource properties)
 
  ----

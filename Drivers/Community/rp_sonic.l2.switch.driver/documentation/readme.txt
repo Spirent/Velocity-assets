@@ -19,4 +19,4 @@ Dependencies:
   paramiko (Velocity agent host)
 
 Test targets:
-  Arista3 SONiC cycle: 10.36.84.23
+  SONiC switch in your lab (set ipAddress in resource properties)
