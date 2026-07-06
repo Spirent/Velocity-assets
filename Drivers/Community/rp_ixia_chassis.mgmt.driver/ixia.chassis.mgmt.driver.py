@@ -1,3 +1,12 @@
+"""
+Velocity Ixia Chassis Management Driver (IXIA-Chassis-SSH).
+
+SSH-based chassis discovery for AresONE / Ixia test equipment in Velocity.
+
+Author: rakesh.kumar@keysight.com
+Written and debugged by rakesh.kumar@keysight.com
+Co-authored-by: Cursor
+"""
 import sys
 import os
 import paramiko
@@ -149,9 +158,8 @@ class IxiaChassis:
                 # port_speed = int(speed_m.group(1)) if speed_m else 0
                 port_properties = {
                     "name": port_name,
-                    # "portNumber": speed,
-                    # "Port Type": 'Fast Ethernet',
-                    "status": status,
+                    # Velocity management template expects online/offline (not up/down).
+                    "status": "online" if status == "up" else "offline",
                     # "speed": speed,
                     # "Port Speed": port_speed * 1000,
                     "container": f"{current_rg} {speed}",
@@ -196,7 +204,7 @@ if "VELOCITY_PARAM_call_count" not in os.environ:
     # hard-coded credentials for dev
     sshUsername = "admin"
     sshPassword = "admin"
-    sshServer = "10.36.84.37"
+    sshServer = "127.0.0.1"
     sshPort = "22"
 
 else:

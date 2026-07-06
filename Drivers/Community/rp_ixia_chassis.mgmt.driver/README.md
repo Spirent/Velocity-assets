@@ -4,6 +4,10 @@ Description: Python driver for Ixia chassis management via SSH in Velocity
 Category: driver  
 Class: Community  
 Tags: Driver, Management, Ixia, Chassis  
+CreatedBy: rakesh.kumar@keysight.com  
+Author: rakesh.kumar@keysight.com  
+Written and debugged by rakesh.kumar@keysight.com  
+Co-authored-by: Cursor  
   
 Velocity Ixia Chassis Management Driver  
   
