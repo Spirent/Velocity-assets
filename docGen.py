@@ -6,7 +6,7 @@
 # 8/11/19
 
 
-import os, codecs, re
+import os, re
 from lxml import etree
 
 ### Create title text for a file.
@@ -61,7 +61,7 @@ def main():
     for projectRoot in projectRoots:
         qcLibs, testCases, responseMaps, procLibs = [],[],[],[]
         try:
-            readmeFile = codecs.open(projectRoot + '/documentation/readme.txt', encoding='utf-8')
+            readmeFile = open(projectRoot + '/documentation/readme.txt', encoding='utf-8')
         except Exception as e:
             print("Error opening readme file for project " + projectRoot + ". Project will be ignored")
             print(e)
@@ -152,7 +152,7 @@ def main():
                 output = output + '\n' + rm
 
         try:
-            outputFile = codecs.open(projectRoot + '/README.md', encoding='utf-8', mode='w')
+            outputFile = open(projectRoot + '/README.md', encoding='utf-8', mode='w')
             outputFile.write(output)
         except Exception as e:
             print("Can't create README.md file for project " + projectRoot)
