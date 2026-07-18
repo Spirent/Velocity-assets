@@ -53,6 +53,9 @@ runCommand <command>
 probe  
     Test connectivity. Returns status: ok, auth_failed, or unreachable.  
   
+linkCheck [portName]  
+    Return link_up/link_state for one port or all ports (Velocity inventory polling).  
+  
 ## Resource Properties  
 ipAddress, username, password (required)  
 apiUsername, apiPassword (optional REST credentials)  
@@ -78,6 +81,7 @@ API card.port numbers. Use getLldpNeighbors to validate cabling to adjacent
 switches (e.g. Arista Ethernet17–Ethernet32).  
   
 ## Changelog  
+1.3.0 Reservation lifecycle: setup, verifyReady, teardown, setConfig (rakesh.kumar@keysight.com)  
 1.0.0 Initial release  
 
  ----

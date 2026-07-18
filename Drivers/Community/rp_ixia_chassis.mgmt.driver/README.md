@@ -65,6 +65,7 @@ SSH Prompt
     in the source file if needed.  
   
 ## Changelog  
+1.0.1 Port status maps up/down to online/offline for Velocity templates (rakesh.kumar@keysight.com)  
 1.0.0 Initial release  
 
  ----

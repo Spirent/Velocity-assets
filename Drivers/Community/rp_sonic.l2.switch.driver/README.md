@@ -19,7 +19,7 @@ Custom procedures (supportCustomArguments):
 Dependencies:  
   paramiko (Velocity agent host)  
   
-Test targets:
-  SONiC switch in your lab (set ipAddress in resource properties)
+Test targets:  
+  SONiC switch in your lab (set ipAddress in resource properties)  
 
  ----
