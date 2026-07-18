@@ -1,7 +1,7 @@
 Project: SNMP driver
 Description: A generic SNMP driver that implements the Management interface
 Category: driver
-Class: TestedBySpirent
+Class: Tested by Keysight
 
 A generic SNMP driver that implements the Management interface and requires the following
 resource properties:

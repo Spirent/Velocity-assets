@@ -2,7 +2,7 @@
 Project: Ping6 driver  
 Description: A generic ICMP driver that implements the Management interface.  
 Category: driver  
-Class: TestedBySpirent  
+Class: Tested by Keysight  
   
 Ping6 driver  
   

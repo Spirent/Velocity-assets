@@ -1,7 +1,7 @@
 Project: Lepton ColdFusion Driver
 Description: This is a supported driver for the 1024 port multirate ColdFusion L1 switch
 Category: driver
-Class: TestedBySpirent
+Class: Tested by Keysight
 
 
 1) Import the Lepton ColdFusion driver and template (lepton.template.and.driver.zip) in Velocity from Inventory, Resources, Import, Import from Zip

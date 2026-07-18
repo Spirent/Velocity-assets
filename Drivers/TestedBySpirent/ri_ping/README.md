@@ -2,7 +2,7 @@
 Project: Ping driver  
 Description: A generic ICMP driver that implements the Management interface.  
 Category: driver  
-Class: TestedBySpirent  
+Class: Tested by Keysight  
   
 A generic ICMP driver that implements the Management interface. Can be used only for  
 determine online status of device, port and properties lists always returned empty. The following  
